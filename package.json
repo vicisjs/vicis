@@ -1,0 +1,40 @@
+{
+  "name": "alterme",
+  "version": "0.0.1",
+  "description": "Presentation and transformation layer for data output in RESTful APIs.",
+  "main": "./dist/index.cjs",
+  "scripts": {
+    "test": "jest",
+    "build": "npm run compile",
+    "compile": "terser --compress --mangle --keep-fnames --verbose --warn --output index.js -- alterme.js",
+    "lint": "npx eslint ./alterme.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r37r0m0d3l/alterme.git"
+  },
+  "keywords": [
+    "responder",
+    "transformer",
+    "response",
+    "api",
+    "rest",
+    "json"
+  ],
+  "author": "Anton Trofimenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/r37r0m0d3l/alterme/issues"
+  },
+  "homepage": "https://github.com/r37r0m0d3l/alterme#readme",
+  "devDependencies": {
+    "eslint": "6.7.2",
+    "eslint-config-prettier": "6.7.0",
+    "eslint-plugin-prettier": "3.1.1",
+    "jest": "24.9.0",
+    "prettier": "1.19.1",
+    "terser": "4.4.2"
+  },
+  "dependencies": {},
+  "types": "./index.d.ts"
+}
