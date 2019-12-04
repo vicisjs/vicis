@@ -1,17 +1,17 @@
 {
-  "name": "alterme",
+  "name": "vicis",
   "version": "0.0.1",
   "description": "Presentation and transformation layer for data output in RESTful APIs.",
-  "main": "./dist/index.cjs",
+  "main": "./index.js",
   "scripts": {
     "test": "jest",
     "build": "npm run compile",
-    "compile": "terser --compress --mangle --keep-fnames --verbose --warn --output index.js -- alterme.js",
-    "lint": "npx eslint ./alterme.js"
+    "compile": "terser --compress --mangle --keep-fnames --verbose --warn --output index.js -- vicis.js",
+    "lint": "npx eslint ./vicis.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/r37r0m0d3l/alterme.git"
+    "url": "git+https://github.com/r37r0m0d3l/vicis.git"
   },
   "keywords": [
     "responder",
@@ -24,9 +24,9 @@
   "author": "Anton Trofimenko",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/r37r0m0d3l/alterme/issues"
+    "url": "https://github.com/r37r0m0d3l/vicis/issues"
   },
-  "homepage": "https://github.com/r37r0m0d3l/alterme#readme",
+  "homepage": "https://github.com/r37r0m0d3l/vicis#readme",
   "devDependencies": {
     "eslint": "6.7.2",
     "eslint-config-prettier": "6.7.0",
