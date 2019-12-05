@@ -6,7 +6,7 @@ export enum TYPES_ENUM {
   JSON = "json",
 }
 
-export interface IAlterMeOptions {
+export interface IVicisOptions {
   cast: { [prop: string]: TYPES_ENUM };
   defined: string[];
   omit: string[];
@@ -17,7 +17,7 @@ export interface IAlterMeOptions {
   transform: { [prop: string]: Function };
 }
 
-export declare class AlterMe {
+export declare class Vicis {
   /**
    * @public
    * @constructor
@@ -29,5 +29,5 @@ export declare class AlterMe {
    * @public
    * @return {{}}
    */
-  public getConfig(): IAlterMeOptions;
+  public getConfig(): IVicisOptions;
 }

@@ -16,10 +16,32 @@ function arrayHasSame(a, b) {
  * @returns {*[]}
  */
 function arrayUnique(array) {
-  if (!array.length) {
-    return [];
+  if (array.length < 2) {
+    return array;
   }
-  return [...new Set(array)];
+  let unique = [...new Set(array)];
+  if (unique.includes(0)) {
+    const zeroes = array.filter((value) => value === 0);
+    if (zeroes.length > 1 && zeroes.some((value) => 1 / value === Number.NEGATIVE_INFINITY)) {
+      unique.push(-0);
+    }
+  }
+  if (unique.filter((value) => typeof value === "string").length) {
+    const strings = array.filter((value) => typeof value === "string");
+    if (strings.length > 1) {
+      [...new Set(strings.map((value) => value.normalize()))].forEach((value) => {
+        delete unique[unique.indexOf(value)];
+      });
+      const compacted = [];
+      for (let index = 0; index < unique.length; index += 1) {
+        if (index in unique) {
+          compacted.push(unique[index]);
+        }
+      }
+      unique = compacted;
+    }
+  }
+  return unique;
 }
 
 /**
@@ -87,7 +109,7 @@ const TYPES_ENUM = {
 
 const TYPES_LIST = ["boolean", "numeric", "integer", "string", "json"];
 
-class AlterMe {
+class Vicis {
   /**
    * @public
    * @constructor
@@ -103,7 +125,7 @@ class AlterMe {
    * @protected
    * @throws TypeError
    * @param {Object<string, object>} config
-   * @return {AlterMe}
+   * @return {Vicis}
    */
   setConfig(config = {}) {
     if (!isObjectLike(config)) {
@@ -135,7 +157,7 @@ class AlterMe {
    * @protected
    * @throws TypeError
    * @param {Object<string, string>} config
-   * @return {AlterMe}
+   * @return {Vicis}
    */
   setConfigCast(config = {}) {
     if (!isObjectLike(config)) {
@@ -159,7 +181,7 @@ class AlterMe {
    * @protected
    * @throws TypeError
    * @param {string[]} config
-   * @return {AlterMe}
+   * @return {Vicis}
    */
   setConfigDefined(config = []) {
     if (!Array.isArray(config)) {
@@ -178,7 +200,7 @@ class AlterMe {
    * @protected
    * @throws TypeError
    * @param {string[]} config
-   * @return {AlterMe}
+   * @return {Vicis}
    */
   setConfigOmit(config = []) {
     if (!Array.isArray(config)) {
@@ -197,7 +219,7 @@ class AlterMe {
    * @protected
    * @throws TypeError
    * @param {string[]} config
-   * @return {AlterMe}
+   * @return {Vicis}
    */
   setConfigPick(config = []) {
     if (!Array.isArray(config)) {
@@ -216,7 +238,7 @@ class AlterMe {
    * @protected
    * @throws TypeError
    * @param {Object<string, function>} config
-   * @return {AlterMe}
+   * @return {Vicis}
    */
   setConfigRename(config = {}) {
     if (!isObjectLike(config)) {
@@ -242,7 +264,7 @@ class AlterMe {
    * @protected
    * @throws TypeError
    * @param {Object<string, function>} config
-   * @return {AlterMe}
+   * @return {Vicis}
    */
   setConfigReplace(config = {}) {
     if (!isObjectLike(config)) {
@@ -256,7 +278,7 @@ class AlterMe {
    * @protected
    * @throws TypeError
    * @param {string[]} config
-   * @return {AlterMe}
+   * @return {Vicis}
    */
   setConfigRequired(config = []) {
     if (!Array.isArray(config)) {
@@ -275,7 +297,7 @@ class AlterMe {
    * @protected
    * @throws TypeError
    * @param {Object<string, function>} config
-   * @return {AlterMe}
+   * @return {Vicis}
    */
   setConfigTransform(config = {}) {
     if (!isObjectLike(config)) {
@@ -295,7 +317,7 @@ class AlterMe {
    * @name checkConfig
    * @protected
    * @throws Error
-   * @return {AlterMe}
+   * @return {Vicis}
    */
   checkConfig() {
     if (arrayHasSame(this.config.omit, this.config.cast)) {
@@ -341,7 +363,7 @@ class AlterMe {
    * @protected
    * @throws TypeError
    * @param {Object} data
-   * @return {AlterMe}
+   * @return {Vicis}
    */
   setData(data) {
     if (!isObjectLike(data)) {
@@ -355,7 +377,7 @@ class AlterMe {
    * @name validateData
    * @protected
    * @throws Error
-   * @return {AlterMe}
+   * @return {Vicis}
    */
   validateData() {
     this.cache = {};
@@ -493,4 +515,4 @@ class AlterMe {
 
 module.exports.TYPES_ENUM = TYPES_ENUM;
 module.exports.TYPES_LIST = TYPES_LIST;
-module.exports.AlterMe = AlterMe;
+module.exports.Vicis = Vicis;
