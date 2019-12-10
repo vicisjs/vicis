@@ -41,7 +41,7 @@ function arrayUnique(array) {
       unique = compacted;
     }
   }
-  return unique;
+  return unique.sort();
 }
 
 /**
@@ -117,6 +117,11 @@ class Vicis {
    * @param {object} config
    */
   constructor(data, config = {}) {
+    /**
+     * @protected
+     * @type {string[]}
+     */
+    this.errors = [];
     this.setConfig(config);
     this.setData(data);
   }
@@ -488,6 +493,22 @@ class Vicis {
     return { ...this.config };
   }
   /**
+   * @name getErrors
+   * @public
+   * @return {string[]}
+   */
+  getErrors() {
+    return [...this.errors];
+  }
+  /**
+   * @name hasErrors
+   * @public
+   * @return {boolean}
+   */
+  hasErrors() {
+    return this.errors.length > 0;
+  }
+  /**
    * @name valueOf
    * @public
    * @returns {{}}
@@ -513,6 +534,7 @@ class Vicis {
   }
 }
 
+module.exports.default = Vicis;
+module.exports.Vicis = Vicis;
 module.exports.TYPES_ENUM = TYPES_ENUM;
 module.exports.TYPES_LIST = TYPES_LIST;
-module.exports.Vicis = Vicis;

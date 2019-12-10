@@ -1,32 +1,10 @@
 {
-  "name": "vicis",
-  "version": "0.0.1",
-  "description": "Presentation and transformation layer for data output in RESTful APIs.",
-  "main": "./index.js",
-  "scripts": {
-    "test": "jest",
-    "build": "npm run compile",
-    "compile": "terser --compress --mangle --keep-fnames --verbose --warn --output index.js -- vicis.js",
-    "lint": "npx eslint ./vicis.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/r37r0m0d3l/vicis.git"
-  },
-  "keywords": [
-    "responder",
-    "transformer",
-    "response",
-    "api",
-    "rest",
-    "json"
-  ],
   "author": "Anton Trofimenko",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/r37r0m0d3l/vicis/issues"
   },
-  "homepage": "https://github.com/r37r0m0d3l/vicis#readme",
+  "dependencies": {},
+  "description": "Presentation and transformation layer for data output in RESTful APIs.",
   "devDependencies": {
     "eslint": "6.7.2",
     "eslint-config-prettier": "6.7.0",
@@ -35,6 +13,37 @@
     "prettier": "1.19.1",
     "terser": "4.4.2"
   },
-  "dependencies": {},
-  "types": "./index.d.ts"
+  "exports": {
+    ".": "./dist/vicis.cjs",
+    "./default": "./dist/vicis.cjs",
+    "./es": "./dist/vicis.mjs"
+  },
+  "files": [
+    "dist/vicis.cjs",
+    "dist/vicis.d.ts",
+    "dist/vicis.mjs"
+  ],
+  "homepage": "https://github.com/r37r0m0d3l/vicis#readme",
+  "keywords": [
+    "responder",
+    "transformer",
+    "response",
+    "api",
+    "rest",
+    "json"
+  ],
+  "license": "MIT",
+  "main": "./dist/vicis.cjs",
+  "name": "vicis",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r37r0m0d3l/vicis.git"
+  },
+  "scripts": {
+    "lint": "npx eslint ./src/vicis.js",
+    "test": "jest"
+  },
+  "type": "module",
+  "types": "./dist/vicis.d.ts",
+  "version": "0.0.1"
 }

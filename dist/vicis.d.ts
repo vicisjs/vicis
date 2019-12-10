@@ -30,4 +30,14 @@ export declare class Vicis {
    * @return {{}}
    */
   public getConfig(): IVicisOptions;
+  /**
+   * @public
+   * @return {string[]}
+   */
+  public getErrors(): string[];
+  /**
+   * @public
+   * @return {boolean}
+   */
+  public hasErrors(): boolean;
 }
