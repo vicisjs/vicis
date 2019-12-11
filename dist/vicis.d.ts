@@ -11,6 +11,7 @@ export interface IVicisOptions {
   defined: string[];
   omit: string[];
   pick: string[];
+  sort: boolean;
   rename: { [prop: string]: string };
   replace: { [prop: string]: any };
   required: string[];
@@ -25,19 +26,4 @@ export declare class Vicis {
    * @param {object=} config
    */
   public constructor(data: object, config);
-  /**
-   * @public
-   * @return {{}}
-   */
-  public getConfig(): IVicisOptions;
-  /**
-   * @public
-   * @return {string[]}
-   */
-  public getErrors(): string[];
-  /**
-   * @public
-   * @return {boolean}
-   */
-  public hasErrors(): boolean;
 }

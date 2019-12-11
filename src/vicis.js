@@ -1,4 +1,5 @@
 /**
+ * @name arrayHasSame
  * @param {*[]} a
  * @param {*[]} b
  * @returns {boolean}
@@ -12,6 +13,7 @@ function arrayHasSame(a, b) {
 }
 
 /**
+ * @name arrayUnique
  * @param {*[]} array
  * @returns {*[]}
  */
@@ -45,6 +47,7 @@ function arrayUnique(array) {
 }
 
 /**
+ * @name arrayIntersect
  * @param {*[]} a
  * @param {*[]} b
  * @returns {*[]}
@@ -58,6 +61,45 @@ function arrayIntersect(a, b) {
 }
 
 /**
+ * @name castToJson
+ * @param {*} value
+ * @param {boolean=true} sort
+ * @returns {*}
+ */
+function castToJson(value, sort = true) {
+  if (sort) {
+    return collectionSortKeys(JSON.parse(JSON.stringify(value)), true);
+  } else {
+    return JSON.parse(JSON.stringify(value));
+  }
+}
+
+/**
+ * @name collectionSortKeys
+ * @param {*} value
+ * @param {boolean=true} isDeep
+ * @returns {*}
+ */
+function collectionSortKeys(value, isDeep = true) {
+  if (!isObjectLike(value)) {
+    return value;
+  }
+  const keys = objectKeys(value);
+  if (!keys.length) {
+    return value;
+  }
+  return keys.reduce((sorted, key) => {
+    if (isDeep && isObjectLike(value[key])) {
+      sorted[key] = collectionSortKeys(value[key], isDeep);
+    } else {
+      sorted[key] = value[key];
+    }
+    return sorted;
+  }, {});
+}
+
+/**
+ * @name isFunction
  * @param {*} value
  * @returns {boolean}
  */
@@ -66,19 +108,30 @@ function isFunction(value) {
 }
 
 /**
+ * name isObjectLike
  * @param {*} value
  * @returns {boolean}
  */
 function isObjectLike(value) {
-  return value != null && typeof value == "object";
+  return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
 /**
+ * @name isString
  * @param {*} value
  * @returns {boolean}
  */
 function isString(value) {
   return typeof value === "string";
+}
+
+/**
+ * @name objectKeys
+ * @param {Object} object
+ * @returns {string[]}
+ */
+function objectKeys(object) {
+  return Object.keys(object).sort((a, b) => a.localeCompare(b));
 }
 
 /**
@@ -111,17 +164,13 @@ const TYPES_LIST = ["boolean", "numeric", "integer", "string", "json"];
 
 class Vicis {
   /**
+   * @name constructor
    * @public
    * @constructor
    * @param {object} data
    * @param {object} config
    */
   constructor(data, config = {}) {
-    /**
-     * @protected
-     * @type {string[]}
-     */
-    this.errors = [];
     this.setConfig(config);
     this.setData(data);
   }
@@ -141,6 +190,7 @@ class Vicis {
       defined: [],
       omit: [],
       pick: [],
+      sort: true,
       rename: {},
       replace: {},
       required: [],
@@ -482,31 +532,16 @@ class Vicis {
       });
       this.cache = newCache;
     }
+    this.cache = castToJson(this.cache, this.config.sort);
     return this;
   }
   /**
    * @name getConfig
-   * @public
+   * @protected
    * @return {{}}
    */
   getConfig() {
     return { ...this.config };
-  }
-  /**
-   * @name getErrors
-   * @public
-   * @return {string[]}
-   */
-  getErrors() {
-    return [...this.errors];
-  }
-  /**
-   * @name hasErrors
-   * @public
-   * @return {boolean}
-   */
-  hasErrors() {
-    return this.errors.length > 0;
   }
   /**
    * @name valueOf
