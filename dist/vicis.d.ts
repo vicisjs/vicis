@@ -8,6 +8,7 @@ export enum TYPES_ENUM {
 
 export interface IVicisOptions {
   cast: { [prop: string]: TYPES_ENUM };
+  default: { [prop: string]: any };
   defined: string[];
   omit: string[];
   pick: string[];
@@ -20,10 +21,11 @@ export interface IVicisOptions {
 
 export declare class Vicis {
   /**
+   * @name constructor
    * @public
    * @constructor
-   * @param {object} data
    * @param {object=} config
+   * @param {object=} data
    */
-  public constructor(data: object, config);
+  public constructor(config: IVicisOptions, data: object);
 }

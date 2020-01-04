@@ -1,4 +1,15 @@
 /**
+ * @name arrayDiff
+ * @param {*[]} a
+ * @param {*[]} b
+ * @returns {*[]}
+ */
+function arrayDiff(a, b) {
+  const set = new Set(b);
+  return a.filter((value) => !set.has(value));
+}
+
+/**
  * @name arrayHasSame
  * @param {*[]} a
  * @param {*[]} b
@@ -139,14 +150,14 @@ function objectKeys(object) {
  * @returns string
  */
 function toString(value) {
-  if (!value) {
+  if (value === null || value === undefined) {
     return "";
   }
-  if (typeof value == "string") {
+  if (typeof value === "string") {
     return value;
   }
   const result = value.toString();
-  if (result === "0" && 1 / value === Number.NEGATIVE_INFINITY) {
+  if (result === "0" && Object.is(value, -0)) {
     return "-0";
   }
   return result;
@@ -162,210 +173,292 @@ const TYPES_ENUM = {
 
 const TYPES_LIST = ["boolean", "numeric", "integer", "string", "json"];
 
+const CONFIG_DEFAULT = {
+  cast: {},
+  default: {},
+  defined: [],
+  omit: [],
+  pick: [],
+  sort: true,
+  rename: {},
+  replace: {},
+  required: [],
+  transform: {},
+};
+
+const CONFIG_FIELDS = [
+  "cast",
+  "default",
+  "defined",
+  "omit",
+  "pick",
+  "sort",
+  "rename",
+  "replace",
+  "required",
+  "transform",
+];
+
 class Vicis {
+  /**
+   * @name cache
+   * @private
+   * @type Object
+   */
+  #cache = {};
+  /**
+   * @name config
+   * @private
+   * @type Object
+   */
+  #config = {};
+  /**
+   * @name config
+   * @private
+   * @type Object
+   */
+  #skipValidation = true;
+  /**
+   * @name original
+   * @private
+   * @type Object
+   */
+  #original = {};
+  /**
+   * @name factory
+   * @public
+   * @static
+   * @factory
+   * @param {object=} config
+   * @param {object=} data
+   * @returns {Vicis}
+   */
+  static factory(config = {}, data) {
+    return new Vicis(config, data);
+  }
   /**
    * @name constructor
    * @public
    * @constructor
-   * @param {object} data
-   * @param {object} config
+   * @param {object=} config
+   * @param {object=} data
    */
-  constructor(data, config = {}) {
-    this.setConfig(config);
-    this.setData(data);
+  constructor(config = {}, data) {
+    this.config(config);
+    if (data !== undefined) {
+      this.data(data);
+    }
   }
   /**
-   * @name setConfig
-   * @protected
+   * @name config
+   * @public
    * @throws TypeError
    * @param {Object<string, object>} config
    * @return {Vicis}
    */
-  setConfig(config = {}) {
+  config(config = {}) {
     if (!isObjectLike(config)) {
-      throw new TypeError("'Config' should be an object");
+      throw new TypeError("'config' should be an object");
     }
-    this.config = {
-      cast: {},
-      defined: [],
-      omit: [],
-      pick: [],
-      sort: true,
-      rename: {},
-      replace: {},
-      required: [],
-      transform: {},
-    };
-    this.setConfigOmit(config.omit);
-    this.setConfigCast(config.cast);
-    this.setConfigDefined(config.defined);
-    this.setConfigPick(config.pick);
-    this.setConfigRename(config.rename);
-    this.setConfigReplace(config.replace);
-    this.setConfigRequired(config.required);
-    this.setConfigTransform(config.transform);
+    const diff = arrayDiff(objectKeys(config), CONFIG_FIELDS);
+    if (diff.length) {
+      throw new TypeError(`'config' has unknown fields: '${diff.join("', '")}'.`);
+    }
+    this.#config = JSON.parse(JSON.stringify(CONFIG_DEFAULT));
+    this.#skipValidation = false;
+    this.omit(config.omit);
+    this.#skipValidation = false;
+    this.cast(config.cast);
+    this.#skipValidation = false;
+    this.defined(config.defined);
+    this.#skipValidation = false;
+    this.pick(config.pick);
+    this.#skipValidation = false;
+    this.rename(config.rename);
+    this.#skipValidation = false;
+    this.replace(config.replace);
+    this.#skipValidation = false;
+    this.required(config.required);
+    this.#skipValidation = false;
+    this.transform(config.transform);
+    this.#skipValidation = false;
+    this.default(config.default);
     this.checkConfig();
     return this;
   }
   /**
-   * @name setConfigCast
-   * @protected
+   * @name cast
+   * @public
    * @throws TypeError
    * @param {Object<string, string>} config
    * @return {Vicis}
    */
-  setConfigCast(config = {}) {
+  cast(config = {}) {
     if (!isObjectLike(config)) {
       throw new TypeError("'cast' should be an object");
     }
     const newConfig = {};
     Object.keys(config).forEach((key) => {
       if (!isString(config[key])) {
-        throw new TypeError(`'cast' expect object values to be strings. Not a string at key: <${config[key]}>.`);
+        throw new TypeError(`'cast' expect object values to be strings. Not a string at key: '${config[key]}'.`);
       }
       if (!TYPES_LIST.includes(config[key])) {
         throw new TypeError(`'cast' has unknown type in {${key}: "${config[key]}"}.`);
       }
       newConfig[key] = config[key];
     });
-    this.config.cast = newConfig;
+    this.#config.cast = newConfig;
     return this;
   }
   /**
-   * @name setConfigDefined
+   * @name setConfigDefault
    * @protected
+   * @throws TypeError
+   * @param {Object<string, *>} config
+   * @return {Vicis}
+   */
+  default(config = {}) {
+    if (!isObjectLike(config)) {
+      throw new TypeError("'default' should be an object");
+    }
+    this.#config.default = { ...config };
+    return this;
+  }
+  /**
+   * @name defined
+   * @public
    * @throws TypeError
    * @param {string[]} config
    * @return {Vicis}
    */
-  setConfigDefined(config = []) {
+  defined(config = []) {
     if (!Array.isArray(config)) {
       throw new TypeError("'defined' should be an array");
     }
-    this.config.defined = arrayUnique(config).map((value) => {
+    this.#config.defined = arrayUnique(config).map((value) => {
       if (!isString(value)) {
-        throw new TypeError(`'defined' expect array of strings. Value: <${value.toString()}>.`);
+        throw new TypeError(`'defined' expect array of strings. Value: '${value.toString()}'.`);
       }
       return value;
     });
     return this;
   }
   /**
-   * @name setConfigOmit
-   * @protected
+   * @name omit
+   * @public
    * @throws TypeError
    * @param {string[]} config
    * @return {Vicis}
    */
-  setConfigOmit(config = []) {
+  omit(config = []) {
     if (!Array.isArray(config)) {
       throw new TypeError("'omit' should be an array");
     }
-    this.config.omit = arrayUnique(config).map((value) => {
+    this.#config.omit = arrayUnique(config).map((value) => {
       if (!isString(value)) {
-        throw new TypeError(`'omit' expect array of strings. Value: <${value.toString()}>.`);
+        throw new TypeError(`'omit' expect array of strings. Value: '${value.toString()}'.`);
       }
       return value;
     });
     return this;
   }
   /**
-   * @name setConfigPick
-   * @protected
+   * @name pick
+   * @public
    * @throws TypeError
    * @param {string[]} config
    * @return {Vicis}
    */
-  setConfigPick(config = []) {
+  pick(config = []) {
     if (!Array.isArray(config)) {
       throw new TypeError("'pick' should be an array");
     }
-    this.config.pick = arrayUnique(config).map((value) => {
+    this.#config.pick = arrayUnique(config).map((value) => {
       if (!isString(value)) {
-        throw new TypeError(`'pick' expect array of strings. Value: <${value.toString()}>.`);
+        throw new TypeError(`'pick' expect array of strings. Value: '${value.toString()}'.`);
       }
       return value;
     });
     return this;
   }
   /**
-   * @name setConfigRename
-   * @protected
+   * @name rename
+   * @public
    * @throws TypeError
    * @param {Object<string, function>} config
    * @return {Vicis}
    */
-  setConfigRename(config = {}) {
+  rename(config = {}) {
     if (!isObjectLike(config)) {
       throw new TypeError("'rename' should be an object");
     }
     const newConfig = {};
     Object.keys(config).forEach((key) => {
       if (!isString(key)) {
-        throw new TypeError(`'rename' expect object values to be strings. Not a string at key: <${key}>.`);
+        throw new TypeError(`'rename' expect object values to be strings. Not a string at key: '${key}'.`);
       }
       newConfig[key] = config[key];
     });
-    const rename = Object.values(this.config.rename);
+    const rename = Object.values(this.#config.rename);
     const renameTo = arrayIntersect(rename, arrayUnique(rename));
     if (rename.length !== renameTo.length) {
       throw new Error(`'rename' has similar values: ${renameTo.join(",")}.`);
     }
-    this.config.rename = newConfig;
+    this.#config.rename = newConfig;
     return this;
   }
   /**
-   * @name setConfigReplace
-   * @protected
+   * @name replace
+   * @public
    * @throws TypeError
-   * @param {Object<string, function>} config
+   * @param {Object<string, *>} config
    * @return {Vicis}
    */
-  setConfigReplace(config = {}) {
+  replace(config = {}) {
     if (!isObjectLike(config)) {
       throw new TypeError("'replace' should be an object");
     }
-    this.config.replace = { ...config };
+    this.#config.replace = { ...config };
     return this;
   }
   /**
-   * @name setConfigRequired
-   * @protected
+   * @name required
+   * @public
    * @throws TypeError
    * @param {string[]} config
    * @return {Vicis}
    */
-  setConfigRequired(config = []) {
+  required(config = []) {
     if (!Array.isArray(config)) {
       throw new TypeError("'required' should be an array");
     }
-    this.config.required = arrayUnique(config).map((value) => {
+    this.#config.required = arrayUnique(config).map((value) => {
       if (!isString(value)) {
-        throw new TypeError(`'required' expect array of strings. Value: <${value.toString()}>.`);
+        throw new TypeError(`'required' expect array of strings. Value: '${value.toString()}'.`);
       }
       return value;
     });
     return this;
   }
   /**
-   * @name setConfigTransform
-   * @protected
+   * @name transform
+   * @public
    * @throws TypeError
    * @param {Object<string, function>} config
    * @return {Vicis}
    */
-  setConfigTransform(config = {}) {
+  transform(config = {}) {
     if (!isObjectLike(config)) {
       throw new TypeError("'transform' should be an object");
     }
     const newConfig = {};
     Object.keys(config).forEach((key) => {
       if (!isFunction(config[key])) {
-        throw new TypeError(`'transform' expect object values to be functions. Not a function at key: <${key}>.`);
+        throw new TypeError(`'transform' expect object values to be functions. Not a function at key: '${key}'.`);
       }
       newConfig[key] = config[key];
     });
-    this.config.transform = newConfig;
+    this.#config.transform = newConfig;
     return this;
   }
   /**
@@ -375,56 +468,62 @@ class Vicis {
    * @return {Vicis}
    */
   checkConfig() {
-    if (arrayHasSame(this.config.omit, this.config.cast)) {
-      throw new Error(`'omit' has same keys as 'cast': ${arrayIntersect(this.config.omit, this.config.cast)}.`);
+
+    console.log("checkConfig");
+
+    if (arrayHasSame(this.#config.omit, this.#config.cast)) {
+      throw new Error(`'omit' has same keys as 'cast': ${arrayIntersect(this.#config.omit, this.#config.cast)}.`);
     }
-    if (arrayHasSame(this.config.omit, this.config.defined)) {
-      throw new Error(`'omit' has same keys as 'defined': ${arrayIntersect(this.config.omit, this.config.defined)}.`);
+    if (arrayHasSame(this.#config.omit, this.#config.defined)) {
+      throw new Error(`'omit' has same keys as 'defined': ${arrayIntersect(this.#config.omit, this.#config.defined)}.`);
     }
-    if (arrayHasSame(this.config.omit, this.config.pick)) {
-      throw new Error(`'omit' has same keys as 'pick': ${arrayIntersect(this.config.omit, this.config.pick)}.`);
+    if (arrayHasSame(this.#config.omit, this.#config.pick)) {
+      throw new Error(`'omit' has same keys as 'pick': ${arrayIntersect(this.#config.omit, this.#config.pick)}.`);
     }
-    if (arrayHasSame(this.config.omit, this.config.rename)) {
-      throw new Error(`'omit' has same keys as 'rename': ${arrayIntersect(this.config.omit, this.config.rename)}.`);
+    if (arrayHasSame(this.#config.omit, this.#config.rename)) {
+      throw new Error(`'omit' has same keys as 'rename': ${arrayIntersect(this.#config.omit, this.#config.rename)}.`);
     }
-    if (arrayHasSame(this.config.omit, this.config.replace)) {
-      throw new Error(`'omit' has same keys as 'replace': ${arrayIntersect(this.config.omit, this.config.replace)}.`);
+    if (arrayHasSame(this.#config.omit, this.#config.replace)) {
+      throw new Error(`'omit' has same keys as 'replace': ${arrayIntersect(this.#config.omit, this.#config.replace)}.`);
     }
-    if (arrayHasSame(this.config.omit, this.config.required)) {
-      throw new Error(`'omit' has same keys as 'required': ${arrayIntersect(this.config.omit, this.config.required)}.`);
-    }
-    if (arrayHasSame(this.config.omit, this.config.transform)) {
+    if (arrayHasSame(this.#config.omit, this.#config.required)) {
       throw new Error(
-        `'omit' has same keys as 'transform': ${arrayIntersect(this.config.omit, this.config.transform)}.`,
+        `'omit' has same keys as 'required': ${arrayIntersect(this.#config.omit, this.#config.required)}.`,
       );
     }
-    if (arrayHasSame(this.config.cast, this.config.replace)) {
-      throw new Error(`'cast' has same keys as 'replace': ${arrayIntersect(this.config.cast, this.config.replace)}.`);
-    }
-    if (arrayHasSame(this.config.cast, this.config.transform)) {
+    if (arrayHasSame(this.#config.omit, this.#config.transform)) {
       throw new Error(
-        `'cast' has same keys as 'transform': ${arrayIntersect(this.config.cast, this.config.transform)}.`,
+        `'omit' has same keys as 'transform': ${arrayIntersect(this.#config.omit, this.#config.transform)}.`,
       );
     }
-    if (arrayHasSame(this.config.replace, this.config.transform)) {
+    if (arrayHasSame(this.#config.cast, this.#config.replace)) {
+      throw new Error(`'cast' has same keys as 'replace': ${arrayIntersect(this.#config.cast, this.#config.replace)}.`);
+    }
+    if (arrayHasSame(this.#config.cast, this.#config.transform)) {
       throw new Error(
-        `'replace' has same keys as 'transform': ${arrayIntersect(this.config.replace, this.config.transform)}.`,
+        `'cast' has same keys as 'transform': ${arrayIntersect(this.#config.cast, this.#config.transform)}.`,
+      );
+    }
+    if (arrayHasSame(this.#config.replace, this.#config.transform)) {
+      throw new Error(
+        `'replace' has same keys as 'transform': ${arrayIntersect(this.#config.replace, this.#config.transform)}.`,
       );
     }
     return this;
   }
   /**
-   * @name setData
-   * @protected
+   * @name data
+   * @public
    * @throws TypeError
    * @param {Object} data
    * @return {Vicis}
    */
-  setData(data) {
+  data(data) {
     if (!isObjectLike(data)) {
       throw new TypeError("'data' should be an object");
     }
-    this.original = data; // keep reference
+    this.#original = data; // keep reference
+    this.#skipValidation = false;
     this.validateData();
     return this;
   }
@@ -435,113 +534,119 @@ class Vicis {
    * @return {Vicis}
    */
   validateData() {
-    this.cache = {};
-    Object.keys(this.original).forEach((key) => {
-      if (this.config.omit.includes(key)) {
+
+    console.log("Validate Data");
+
+    if (this.#skipValidation) {
+      this.#skipValidation = false;
+      return this;
+    }
+    this.#cache = {};
+    Object.keys(this.#original).forEach((key) => {
+      if (this.#config.omit.includes(key)) {
         return;
       }
-      this.cache[key] = this.original[key];
+      this.#cache[key] = this.#original[key];
     });
-    this.config.required.forEach((key) => {
-      if (!(key in this.cache)) {
-        throw new Error(`Field <${key}> is required.`);
+    this.#config.required.forEach((key) => {
+      if (!(key in this.#cache)) {
+        throw new Error(`Field '${key}' is required.`);
       }
     });
-    this.config.defined.forEach((key) => {
-      if (!(key in this.cache)) {
-        throw new Error(`Field <${key}> is required.`);
+    this.#config.defined.forEach((key) => {
+      if (!(key in this.#cache)) {
+        throw new Error(`Field '${key}' must be defined.`);
       }
-      if (this.cache[key] === undefined) {
-        throw new Error(`Field <${key}> should have value.`);
+      if (this.#cache[key] === undefined) {
+        throw new Error(`Field '${key}' should have value.`);
       }
     });
-    Object.keys(this.config.cast).forEach((key) => {
-      const to = this.config.cast[key];
-      if (!(key in this.cache)) {
-        throw new Error(`Field <${key}> suppose to be converted to ${to}.`);
+    Object.keys(this.#config.cast).forEach((key) => {
+      const to = this.#config.cast[key];
+      if (!(key in this.#cache)) {
+        throw new Error(`Field '${key}' suppose to be converted to ${to}.`);
       }
       switch (to) {
         case TYPES_ENUM.BOOLEAN:
-          this.cache[key] = Boolean(this.cache[key]);
+          this.#cache[key] = Boolean(this.#cache[key]);
           break;
         case TYPES_ENUM.NUMERIC: {
-          const castedNumber = Number(this.cache[key]);
+          const castedNumber = Number(this.#cache[key]);
           if (Number.isFinite(castedNumber)) {
-            this.cache[key] = castedNumber;
+            this.#cache[key] = castedNumber;
           } else {
-            const parsed = Number.parseFloat(this.cache[key]);
+            const parsed = Number.parseFloat(this.#cache[key]);
             if (Number.isFinite(parsed)) {
-              this.cache[key] = parsed;
+              this.#cache[key] = parsed;
             } else {
-              this.cache[key] = 0;
+              this.#cache[key] = 0;
             }
           }
           break;
         }
         case TYPES_ENUM.INTEGER: {
-          const castedInteger = Number(this.cache[key]);
+          const castedInteger = Number(this.#cache[key]);
           if (Number.isFinite(castedInteger)) {
-            this.cache[key] = Math.trunc(castedInteger);
+            this.#cache[key] = Math.trunc(castedInteger);
           } else {
-            const parsed = Number.parseFloat(this.cache[key]);
+            const parsed = Number.parseFloat(this.#cache[key]);
             if (Number.isFinite(parsed)) {
-              this.cache[key] = Math.trunc(castedInteger);
+              this.#cache[key] = Math.trunc(castedInteger);
             } else {
-              this.cache[key] = 0;
+              this.#cache[key] = 0;
             }
           }
           break;
         }
         case TYPES_ENUM.STRING:
-          this.cache[key] = toString(this.cache[key]);
+          this.#cache[key] = toString(this.#cache[key]);
           break;
         case TYPES_ENUM.JSON:
-          this.cache[key] = JSON.parse(JSON.stringify(this.cache[key]));
+          this.#cache[key] = JSON.parse(JSON.stringify(this.#cache[key]));
           break;
         default:
           throw new Error("Unknown value convert error");
       }
     });
-    Object.keys(this.config.transform).forEach((key) => {
-      if (!(key in this.cache)) {
-        throw new Error(`Field <${key}> suppose to be transformed.`);
+    Object.keys(this.#config.transform).forEach((key) => {
+      if (!(key in this.#cache)) {
+        throw new Error(`Field '${key}' suppose to be transformed.`);
       }
-      this.cache[key] = this.config.transform[key](this.cache[key], key);
+      this.#cache[key] = this.#config.transform[key](this.#cache[key], key);
     });
-    Object.keys(this.config.replace).forEach((key) => {
-      this.cache[key] = this.config.replace[key];
+    Object.keys(this.#config.replace).forEach((key) => {
+      this.#cache[key] = this.#config.replace[key];
     });
-    const renameFrom = Object.keys(this.config.rename).sort((a, b) => a.localeCompare(b));
+    const renameFrom = Object.keys(this.#config.rename).sort((a, b) => a.localeCompare(b));
     const renamedData = {};
     renameFrom.forEach((key) => {
-      if (!(key in this.cache)) {
-        throw new Error(`Field <${key}> suppose to be renamed.`);
+      if (!(key in this.#cache)) {
+        throw new Error(`Field '${key}' suppose to be renamed.`);
       }
-      renamedData[this.config.rename[key]] = this.cache[key];
+      renamedData[this.#config.rename[key]] = this.#cache[key];
     });
     renameFrom.forEach((key) => {
-      delete this.cache[key];
+      delete this.#cache[key];
     });
-    Object.assign(this.cache, renamedData);
-    if (Object.keys(this.config.pick).length > 0) {
+    Object.assign(this.#cache, renamedData);
+    if (Object.keys(this.#config.pick).length > 0) {
       let newCache = {};
-      Object.keys(this.cache).forEach((key) => {
-        if (this.config.pick.includes(key)) {
-          newCache[key] = this.cache[key];
+      Object.keys(this.#cache).forEach((key) => {
+        if (this.#config.pick.includes(key)) {
+          newCache[key] = this.#cache[key];
         }
       });
-      this.cache = newCache;
+      this.#cache = newCache;
     }
-    this.cache = castToJson(this.cache, this.config.sort);
+    if (Object.keys(this.#config.default).length > 0) {
+      Object.keys(this.#config.default).forEach((key) => {
+        if (!(key in this.#cache) || this.#cache[key] === undefined) {
+          this.#cache[key] = this.#config.default[key];
+        }
+      });
+    }
+    this.#cache = castToJson(this.#cache, this.#config.sort);
     return this;
-  }
-  /**
-   * @name getConfig
-   * @protected
-   * @return {{}}
-   */
-  getConfig() {
-    return { ...this.config };
   }
   /**
    * @name valueOf
@@ -549,7 +654,7 @@ class Vicis {
    * @returns {{}}
    */
   valueOf() {
-    return { ...this.cache };
+    return { ...this.#cache };
   }
   /**
    * @name toJSON
@@ -557,7 +662,7 @@ class Vicis {
    * @returns {{}}
    */
   toJSON() {
-    return { ...this.cache };
+    return { ...this.#cache };
   }
   /**
    * @name toString
@@ -565,7 +670,7 @@ class Vicis {
    * @returns {string}
    */
   toString() {
-    return JSON.stringify(this.cache);
+    return JSON.stringify(this.#cache);
   }
 }
 

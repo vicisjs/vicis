@@ -6,6 +6,8 @@
   "dependencies": {},
   "description": "Presentation and transformation layer for data output in RESTful APIs.",
   "devDependencies": {
+    "babel-eslint": "10.0.3",
+    "consono": "1.0.10",
     "eslint": "6.7.2",
     "eslint-config-prettier": "6.7.0",
     "eslint-plugin-prettier": "3.1.1",
@@ -41,9 +43,9 @@
   },
   "scripts": {
     "lint": "npx eslint ./src/vicis.js",
-    "test": "jest"
+    "test": "jest",
+    "type": "module"
   },
-  "type": "module",
   "types": "./dist/vicis.d.ts",
   "version": "0.0.1"
 }
