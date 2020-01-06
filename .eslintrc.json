@@ -9,6 +9,7 @@
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
+  "parser": "babel-eslint",
   "parserOptions": {
     "allowImportExportEverywhere": true,
     "ecmaVersion": 2018,
@@ -16,16 +17,17 @@
   },
   "plugins": ["prettier"],
   "rules": {
+    "eqeqeq": ["error", "always"],
+    "id-length": ["error", { "exceptions": ["x", "y", "z"], "min": 2, "properties": "never" }],
     "linebreak-style": ["error", "unix"],
+    "no-console": "warn",
+    "no-implicit-coercion": "error",
+    "no-multi-assign": "error",
+    "no-param-reassign": "error",
+    "no-ternary": "error",
     "prettier/prettier": "error",
-    "quotes": [
-      "error",
-      "double",
-      {
-        "allowTemplateLiterals": true,
-        "avoidEscape": true
-      }
-    ],
-    "semi": ["error", "always"]
+    "quotes": ["error", "double", { "allowTemplateLiterals": true, "avoidEscape": true }],
+    "semi": ["error", "always"],
+    "yoda": "error"
   }
 }
