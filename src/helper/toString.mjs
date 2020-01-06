@@ -1,6 +1,6 @@
 /**
  * @param {*} value
- * @returns string
+ * @returns String
  */
 export function toString(value) {
   if (!value) {
