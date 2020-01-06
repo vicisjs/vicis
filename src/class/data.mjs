@@ -2,7 +2,7 @@ import VicisConfig from "./config.mjs";
 import { isObjectLike } from "../helper/isObjectLike.mjs";
 import { toString } from "../helper/toString.mjs";
 import { castToJson } from "../helper/castToJson.mjs";
-//
+
 const TYPES_ENUM = {
   BOOLEAN: "boolean",
   NUMERIC: "numeric",
@@ -10,10 +10,10 @@ const TYPES_ENUM = {
   STRING: "string",
   JSON: "json",
 };
-//
+
 export default class VicisData extends VicisConfig {
   /**
-   * @name cache
+   * @name dataCache
    * @private
    * @type Object
    */
@@ -25,6 +25,12 @@ export default class VicisData extends VicisConfig {
    */
   #dataOriginal = {};
   /**
+   * @name skipDataValidation
+   * @private
+   * @type Boolean
+   */
+  #skipDataValidation = false;
+  /**
    * @name constructor
    * @public
    * @constructor
@@ -33,25 +39,34 @@ export default class VicisData extends VicisConfig {
   constructor(config = {}) {
     super(config);
   }
-  set cache(value) {
+
+  set dataCache(value) {
     //
   }
-  get cache() {
-    return this.#dataCache;
+  get dataCache() {
+    return { ...this.#dataCache };
+  }
+  /**
+   * @name getData
+   * @public
+   * @return {{}}
+   */
+  getData() {
+    this.dataCache;
   }
   /**
    * @name setData
    * @public
    * @throws TypeError
    * @param {Object} data
-   * @return {Vicis}
+   * @return {VicisData}
    */
   setData(data) {
     if (!isObjectLike(data)) {
       throw new TypeError("'data' should be an object");
     }
     this.#dataOriginal = data; // keep reference
-    this.skipValidation = false;
+    this.#skipDataValidation = false;
     this.validateData();
     return this;
   }
@@ -59,12 +74,11 @@ export default class VicisData extends VicisConfig {
    * @name validateData
    * @protected
    * @throws Error
-   * @return {Vicis}
+   * @return {VicisData}
    */
   validateData() {
-    console.log("Validate Data");
-    if (this.skipValidation) {
-      this.skipValidation = false;
+    if (this.#skipDataValidation) {
+      this.#skipDataValidation = false;
       return this;
     }
     this.#dataCache = {};

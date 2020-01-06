@@ -95,11 +95,11 @@ export default class VicisConfig {
    */
   #transform = {};
   /**
-   * @name config
+   * @name skipValidation
    * @private
    * @type Boolean
    */
-  #skipValidation = true;
+  #skipConfigValidation = true;
   /**
    * @name constructor
    * @public
@@ -116,7 +116,7 @@ export default class VicisConfig {
    * @type {Boolean}
    */
   set skipValidation(value) {
-    this.#skipValidation = Boolean(value);
+    this.#skipConfigValidation = Boolean(value);
   }
   /**
    * @name skipValidation
@@ -124,8 +124,13 @@ export default class VicisConfig {
    * @type {Boolean}
    */
   get skipValidation() {
-    return this.#skipValidation;
+    return this.#skipConfigValidation;
   }
+  /**
+   * @name config
+   * @public
+   * @type {{}}
+   */
   get config() {
     return {
       cast: this.#cast,
@@ -148,7 +153,6 @@ export default class VicisConfig {
    * @return {VicisConfig}
    */
   setConfig(config = {}) {
-    console.log("Set Config");
     if (!isObjectLike(config)) {
       throw new TypeError("'config' should be an object");
     }
@@ -166,23 +170,25 @@ export default class VicisConfig {
     this.#replace = CONFIG_DEFAULT.replace;
     this.#required = CONFIG_DEFAULT.required;
     this.#transform = CONFIG_DEFAULT.transform;
-    this.#skipValidation = false;
+    this.#skipConfigValidation = false;
+    this.sort(config.sort);
+    this.#skipConfigValidation = false;
     this.omit(config.omit);
-    this.#skipValidation = false;
+    this.#skipConfigValidation = false;
     this.cast(config.cast);
-    this.#skipValidation = false;
+    this.#skipConfigValidation = false;
     this.defined(config.defined);
-    this.#skipValidation = false;
+    this.#skipConfigValidation = false;
     this.pick(config.pick);
-    this.#skipValidation = false;
+    this.#skipConfigValidation = false;
     this.rename(config.rename);
-    this.#skipValidation = false;
+    this.#skipConfigValidation = false;
     this.replace(config.replace);
-    this.#skipValidation = false;
+    this.#skipConfigValidation = false;
     this.required(config.required);
-    this.#skipValidation = false;
+    this.#skipConfigValidation = false;
     this.transform(config.transform);
-    this.#skipValidation = false;
+    this.#skipConfigValidation = false;
     this.default(config.default);
     this.validateConfig();
     return this;
@@ -209,6 +215,8 @@ export default class VicisConfig {
       newConfig[key] = config[key];
     });
     this.#cast = newConfig;
+    this.#skipConfigValidation = false;
+    this.validateConfig();
     return this;
   }
   /**
@@ -223,6 +231,8 @@ export default class VicisConfig {
       throw new TypeError("'default' should be an object");
     }
     this.#default = { ...config };
+    this.#skipConfigValidation = false;
+    this.validateConfig();
     return this;
   }
   /**
@@ -242,6 +252,8 @@ export default class VicisConfig {
       }
       return value;
     });
+    this.#skipConfigValidation = false;
+    this.validateConfig();
     return this;
   }
   /**
@@ -261,6 +273,8 @@ export default class VicisConfig {
       }
       return value;
     });
+    this.#skipConfigValidation = false;
+    this.validateConfig();
     return this;
   }
   /**
@@ -280,6 +294,8 @@ export default class VicisConfig {
       }
       return value;
     });
+    this.#skipConfigValidation = false;
+    this.validateConfig();
     return this;
   }
   /**
@@ -306,6 +322,8 @@ export default class VicisConfig {
       throw new Error(`'rename' has similar values: ${renameTo.join(",")}.`);
     }
     this.#rename = newConfig;
+    this.#skipConfigValidation = false;
+    this.validateConfig();
     return this;
   }
   /**
@@ -320,6 +338,8 @@ export default class VicisConfig {
       throw new TypeError("'replace' should be an object");
     }
     this.#replace = { ...config };
+    this.#skipConfigValidation = false;
+    this.validateConfig();
     return this;
   }
   /**
@@ -339,6 +359,22 @@ export default class VicisConfig {
       }
       return value;
     });
+    this.#skipConfigValidation = false;
+    this.validateConfig();
+    return this;
+  }
+  /**
+   * @name sort
+   * @public
+   * @throws TypeError
+   * @param {Boolean} config
+   * @return {VicisConfig}
+   */
+  sort(config = true) {
+    if (typeof config !== "boolean"){
+      throw new TypeError("'sort' should be a boolean");
+    }
+    this.#sort = config;
     return this;
   }
   /**
@@ -360,6 +396,8 @@ export default class VicisConfig {
       newConfig[key] = config[key];
     });
     this.#transform = newConfig;
+    this.#skipConfigValidation = false;
+    this.validateConfig();
     return this;
   }
   /**
@@ -370,6 +408,7 @@ export default class VicisConfig {
    */
   validateConfig() {
     console.log("Validate Config");
+
     const cast = objectKeys(this.#cast);
     const rename = objectKeys(this.#rename);
     const replace = objectKeys(this.#replace);

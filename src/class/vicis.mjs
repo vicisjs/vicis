@@ -22,20 +22,12 @@ export default class Vicis extends VicisData {
     super(config);
   }
   /**
-   * @name valueOf
-   * @public
-   * @returns {{}}
-   */
-  valueOf() {
-    return { ...this.cache };
-  }
-  /**
    * @name toJSON
    * @public
    * @returns {{}}
    */
   toJSON() {
-    return { ...this.cache };
+    return this.dataCache;
   }
   /**
    * @name toString
@@ -43,6 +35,6 @@ export default class Vicis extends VicisData {
    * @returns {String}
    */
   toString() {
-    return JSON.stringify(this.cache);
+    return JSON.stringify(this.toJSON());
   }
 }
