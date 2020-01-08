@@ -189,6 +189,10 @@ function toString(value) {
 }
 //#endregion
 
+//#region Mixin Functions
+
+//#endregion
+
 class Vicis {
   //#region Config Fields
   /**
@@ -617,7 +621,7 @@ class Vicis {
     return clone(this.#dataCache);
   }
   /**
-   * @name setData
+   * @name data
    * @public
    * @throws TypeError
    * @param {Object} dataToSerialize
@@ -639,19 +643,18 @@ class Vicis {
    */
   validateData() {
     this.#dataCache = {};
-    const config = this.getConfig();
     Object.keys(this.#dataOriginal).forEach((key) => {
-      if (config.omit.includes(key)) {
+      if (this.#omit.includes(key)) {
         return;
       }
       this.#dataCache[key] = this.#dataOriginal[key];
     });
-    config.required.forEach((key) => {
+    this.#required.forEach((key) => {
       if (!(key in this.#dataCache)) {
         throw new Error(`Field '${key}' is required.`);
       }
     });
-    config.defined.forEach((key) => {
+    this.#defined.forEach((key) => {
       if (!(key in this.#dataCache)) {
         throw new Error(`Field '${key}' must be defined.`);
       }
@@ -659,8 +662,8 @@ class Vicis {
         throw new Error(`Field '${key}' should have value.`);
       }
     });
-    Object.keys(config.cast).forEach((key) => {
-      const castTo = config.cast[key];
+    Object.keys(this.#cast).forEach((key) => {
+      const castTo = this.#cast[key];
       if (!(key in this.#dataCache)) {
         throw new Error(`Field '${key}' suppose to be converted to ${castTo}.`);
       }
@@ -706,44 +709,44 @@ class Vicis {
           throw new Error("Unknown value convert error");
       }
     });
-    Object.keys(config.transform).forEach((key) => {
+    Object.keys(this.#transform).forEach((key) => {
       if (!(key in this.#dataCache)) {
         throw new Error(`Field '${key}' suppose to be transformed.`);
       }
-      this.#dataCache[key] = config.transform[key](this.#dataCache[key], key);
+      this.#dataCache[key] = this.#transform[key](this.#dataCache[key], key);
     });
-    Object.keys(config.replace).forEach((key) => {
-      this.#dataCache[key] = config.replace[key];
+    Object.keys(this.#replace).forEach((key) => {
+      this.#dataCache[key] = this.#replace[key];
     });
-    const renameFrom = Object.keys(config.rename).sort((alpha, beta) => alpha.localeCompare(beta));
+    const renameFrom = Object.keys(this.#rename).sort((alpha, beta) => alpha.localeCompare(beta));
     const renamedData = {};
     renameFrom.forEach((key) => {
       if (!(key in this.#dataCache)) {
         throw new Error(`Field '${key}' suppose to be renamed.`);
       }
-      renamedData[config.rename[key]] = this.#dataCache[key];
+      renamedData[this.#rename[key]] = this.#dataCache[key];
     });
     renameFrom.forEach((key) => {
       delete this.#dataCache[key];
     });
     Object.assign(this.#dataCache, renamedData);
-    if (Object.keys(config.pick).length > 0) {
+    if (Object.keys(this.#pick).length > 0) {
       let newCache = {};
       Object.keys(this.#dataCache).forEach((key) => {
-        if (config.pick.includes(key)) {
+        if (this.#pick.includes(key)) {
           newCache[key] = this.#dataCache[key];
         }
       });
       this.#dataCache = newCache;
     }
-    if (Object.keys(config.defaults).length > 0) {
-      Object.keys(config.defaults).forEach((key) => {
+    if (Object.keys(this.#defaults).length > 0) {
+      Object.keys(this.#defaults).forEach((key) => {
         if (!(key in this.#dataCache) || this.#dataCache[key] === undefined) {
-          this.#dataCache[key] = config.defaults[key];
+          this.#dataCache[key] = this.#defaults[key];
         }
       });
     }
-    this.#dataCache = castToJson(this.#dataCache, config.sort);
+    this.#dataCache = castToJson(this.#dataCache, this.#sort);
     return this;
   }
   //#endregion
