@@ -108,7 +108,7 @@ export default class VicisConfig {
   /**
    * @name getConfig
    * @public
-   * @type {{}}
+   * @type {Object}
    */
   getConfig() {
     return clone({
