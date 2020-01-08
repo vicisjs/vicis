@@ -26,9 +26,9 @@ const TYPES_LIST = ["boolean", "numeric", "integer", "string", "json"];
 //#region Helper Functions
 /**
  * @name arrayDiff
- * @param {*[]} alpha
- * @param {*[]} beta
- * @returns {*[]}
+ * @param {Array} alpha
+ * @param {Array} beta
+ * @returns {Array}
  */
 function arrayDiff(alpha, beta) {
   const set = new Set(beta);
@@ -36,8 +36,8 @@ function arrayDiff(alpha, beta) {
 }
 /**
  * @name arrayHasSame
- * @param {*[]} alpha
- * @param {*[]} beta
+ * @param {Array} alpha
+ * @param {Array} beta
  * @returns {Boolean}
  */
 function arrayHasSame(alpha, beta) {
@@ -49,9 +49,9 @@ function arrayHasSame(alpha, beta) {
 }
 /**
  * @name arrayIntersect
- * @param {*[]} alpha
- * @param {*[]} beta
- * @returns {*[]}
+ * @param {Array} alpha
+ * @param {Array} beta
+ * @returns {Array}
  */
 function arrayIntersect(alpha, beta) {
   if (!alpha.length || !beta.length) {
@@ -62,8 +62,8 @@ function arrayIntersect(alpha, beta) {
 }
 /**
  * @name arrayUnique
- * @param {*[]} array
- * @returns {*[]}
+ * @param {Array} array
+ * @returns {Array}
  */
 function arrayUnique(array) {
   if (array.length < 2) {
@@ -340,7 +340,7 @@ class Vicis {
    * @name config
    * @public
    * @throws TypeError
-   * @param {Object<String, Array|Boolean|Object>} config
+   * @param {Object<String, *>} config
    * @return {Vicis}
    */
   config(config = {}) {
@@ -369,22 +369,24 @@ class Vicis {
    * @name cast
    * @public
    * @throws TypeError
-   * @param {Object<String, String>} propToType
+   * @param {Object<String, String>} propertyToType
    * @return {Vicis}
    */
-  cast(propToType = {}) {
-    if (!isObjectLike(propToType)) {
+  cast(propertyToType = {}) {
+    if (!isObjectLike(propertyToType)) {
       throw new TypeError("'cast' should be an object");
     }
     const newConfig = {};
-    Object.keys(propToType).forEach((key) => {
-      if (!isString(propToType[key])) {
-        throw new TypeError(`'cast' expect object values to be strings. Not a string at key: '${propToType[key]}'.`);
+    Object.keys(propertyToType).forEach((key) => {
+      if (!isString(propertyToType[key])) {
+        throw new TypeError(
+          `'cast' expect object values to be strings. Not a string at key: '${propertyToType[key]}'.`,
+        );
       }
-      if (!TYPES_LIST.includes(propToType[key])) {
-        throw new TypeError(`'cast' has unknown type in {${key}: "${propToType[key]}"}.`);
+      if (!TYPES_LIST.includes(propertyToType[key])) {
+        throw new TypeError(`'cast' has unknown type in {${key}: "${propertyToType[key]}"}.`);
       }
-      newConfig[key] = propToType[key];
+      newConfig[key] = propertyToType[key];
     });
     this.#cast = newConfig;
     this.validateConfig();
@@ -394,14 +396,14 @@ class Vicis {
    * @name defaults
    * @public
    * @throws TypeError
-   * @param {Object<String, *>} propDefaultValues
+   * @param {Object<String, *>} propertyDefaultValues
    * @return {Vicis}
    */
-  defaults(propDefaultValues = {}) {
-    if (!isObjectLike(propDefaultValues)) {
+  defaults(propertyDefaultValues = {}) {
+    if (!isObjectLike(propertyDefaultValues)) {
       throw new TypeError("'defaults' should be an object");
     }
-    this.#defaults = { ...propDefaultValues }; // do not deep clone!
+    this.#defaults = { ...propertyDefaultValues }; // do not deep clone!
     this.validateConfig();
     return this;
   }
@@ -409,14 +411,14 @@ class Vicis {
    * @name defined
    * @public
    * @throws TypeError
-   * @param {String[]} propsMustBeDefined
+   * @param {String[]} propertiesMustBeDefined
    * @return {Vicis}
    */
-  defined(propsMustBeDefined = []) {
-    if (!Array.isArray(propsMustBeDefined)) {
+  defined(propertiesMustBeDefined = []) {
+    if (!Array.isArray(propertiesMustBeDefined)) {
       throw new TypeError("'defined' should be an array");
     }
-    this.#defined = arrayUnique(propsMustBeDefined).map((value) => {
+    this.#defined = arrayUnique(propertiesMustBeDefined).map((value) => {
       if (!isString(value)) {
         throw new TypeError(`'defined' expect array of strings. Value: '${value.toString()}'.`);
       }
@@ -429,14 +431,14 @@ class Vicis {
    * @name omit
    * @public
    * @throws TypeError
-   * @param {String[]} propsToOmit
+   * @param {String[]} propertiesToOmit
    * @return {Vicis}
    */
-  omit(propsToOmit = []) {
-    if (!Array.isArray(propsToOmit)) {
+  omit(propertiesToOmit = []) {
+    if (!Array.isArray(propertiesToOmit)) {
       throw new TypeError("'omit' should be an array");
     }
-    this.#omit = arrayUnique(propsToOmit).map((value) => {
+    this.#omit = arrayUnique(propertiesToOmit).map((value) => {
       if (!isString(value)) {
         throw new TypeError(`'omit' expect array of strings. Value: '${value.toString()}'.`);
       }
@@ -449,14 +451,14 @@ class Vicis {
    * @name pick
    * @public
    * @throws TypeError
-   * @param {String[]} propsToPick
+   * @param {String[]} propertiesToPick
    * @return {Vicis}
    */
-  pick(propsToPick = []) {
-    if (!Array.isArray(propsToPick)) {
+  pick(propertiesToPick = []) {
+    if (!Array.isArray(propertiesToPick)) {
       throw new TypeError("'pick' should be an array");
     }
-    this.#pick = arrayUnique(propsToPick).map((value) => {
+    this.#pick = arrayUnique(propertiesToPick).map((value) => {
       if (!isString(value)) {
         throw new TypeError(`'pick' expect array of strings. Value: '${value.toString()}'.`);
       }
@@ -469,19 +471,19 @@ class Vicis {
    * @name rename
    * @public
    * @throws TypeError
-   * @param {Object<String, Function>} renameFromTo
+   * @param {Object<String, Function>} renamePropertyFromTo
    * @return {Vicis}
    */
-  rename(renameFromTo = {}) {
-    if (!isObjectLike(renameFromTo)) {
+  rename(renamePropertyFromTo = {}) {
+    if (!isObjectLike(renamePropertyFromTo)) {
       throw new TypeError("'rename' should be an object");
     }
     const newConfig = {};
-    Object.keys(renameFromTo).forEach((key) => {
+    Object.keys(renamePropertyFromTo).forEach((key) => {
       if (!isString(key)) {
         throw new TypeError(`'rename' expect object values to be strings. Not a string at key: '${key}'.`);
       }
-      newConfig[key] = renameFromTo[key];
+      newConfig[key] = renamePropertyFromTo[key];
     });
     const rename = Object.values(this.#rename);
     const renameTo = arrayIntersect(rename, arrayUnique(rename));
@@ -496,14 +498,14 @@ class Vicis {
    * @name replace
    * @public
    * @throws TypeError
-   * @param {Object<String, *>} overrideValues
+   * @param {Object<String, *>} replacePropertyValues
    * @return {Vicis}
    */
-  replace(overrideValues = {}) {
-    if (!isObjectLike(overrideValues)) {
+  replace(replacePropertyValues = {}) {
+    if (!isObjectLike(replacePropertyValues)) {
       throw new TypeError("'replace' should be an object");
     }
-    this.#replace = { ...overrideValues }; // do not deep clone!
+    this.#replace = { ...replacePropertyValues }; // do not deep clone!
     this.validateConfig();
     return this;
   }
@@ -511,14 +513,14 @@ class Vicis {
    * @name required
    * @public
    * @throws TypeError
-   * @param {String[]} propsRequired
+   * @param {String[]} propertiesRequired
    * @return {Vicis}
    */
-  required(propsRequired = []) {
-    if (!Array.isArray(propsRequired)) {
+  required(propertiesRequired = []) {
+    if (!Array.isArray(propertiesRequired)) {
       throw new TypeError("'required' should be an array");
     }
-    this.#required = arrayUnique(propsRequired).map((value) => {
+    this.#required = arrayUnique(propertiesRequired).map((value) => {
       if (!isString(value)) {
         throw new TypeError(`'required' expect array of strings. Value: '${value.toString()}'.`);
       }
@@ -545,19 +547,19 @@ class Vicis {
    * @name transform
    * @public
    * @throws TypeError
-   * @param {Object<String, Function>} propValueTransform
+   * @param {Object<String, Function>} propertyValueTransformWith
    * @return {Vicis}
    */
-  transform(propValueTransform = {}) {
-    if (!isObjectLike(propValueTransform)) {
+  transform(propertyValueTransformWith = {}) {
+    if (!isObjectLike(propertyValueTransformWith)) {
       throw new TypeError("'transform' should be an object");
     }
     const newConfig = {};
-    Object.keys(propValueTransform).forEach((key) => {
-      if (!isFunction(propValueTransform[key])) {
+    Object.keys(propertyValueTransformWith).forEach((key) => {
+      if (!isFunction(propertyValueTransformWith[key])) {
         throw new TypeError(`'transform' expect object values to be functions. Not a function at key: '${key}'.`);
       }
-      newConfig[key] = propValueTransform[key];
+      newConfig[key] = propertyValueTransformWith[key];
     });
     this.#transform = newConfig;
     this.validateConfig();
