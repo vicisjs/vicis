@@ -8,7 +8,7 @@ export enum TYPES_ENUM {
 
 export interface IVicisOptions {
   cast: { [prop: string]: TYPES_ENUM };
-  default: { [prop: string]: any };
+  defaults: { [prop: string]: any };
   defined: string[];
   omit: string[];
   pick: string[];

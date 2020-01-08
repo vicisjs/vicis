@@ -13,9 +13,10 @@ const config = {};
 
 try {
   const response = Vicis.factory()
-    .setConfig(config)
+    .config(config)
+    .sort(true)
     .cast({ id: "integer" })
-    .default({ ok: true })
+    .defaults({ ok: true })
     .defined(["id"])
     .omit(["hidden"])
     .pick(["id", "ok"])
@@ -25,7 +26,7 @@ try {
     .transform({
       date: (value) => new Date(value),
     })
-    .setData(data);
+    .data(data);
   consono(response.toJSON());
 } catch (error) {
   console.error(error.message);

@@ -2,6 +2,7 @@ import VicisConfig from "./config.mjs";
 import { isObjectLike } from "../helper/isObjectLike.mjs";
 import { toString } from "../helper/toString.mjs";
 import { castToJson } from "../helper/castToJson.mjs";
+import { clone } from "../helper/clone.mjs";
 
 const TYPES_ENUM = {
   BOOLEAN: "boolean",
@@ -25,12 +26,6 @@ export default class VicisData extends VicisConfig {
    */
   #dataOriginal = {};
   /**
-   * @name skipDataValidation
-   * @private
-   * @type Boolean
-   */
-  #skipDataValidation = false;
-  /**
    * @name constructor
    * @public
    * @constructor
@@ -39,34 +34,26 @@ export default class VicisData extends VicisConfig {
   constructor(config = {}) {
     super(config);
   }
-
-  set dataCache(value) {
-    //
-  }
-  get dataCache() {
-    return { ...this.#dataCache };
-  }
   /**
    * @name getData
    * @public
    * @return {{}}
    */
   getData() {
-    this.dataCache;
+    return clone(this.#dataCache);
   }
   /**
    * @name setData
    * @public
    * @throws TypeError
-   * @param {Object} data
+   * @param {Object} dataToSerialize
    * @return {VicisData}
    */
-  setData(data) {
-    if (!isObjectLike(data)) {
-      throw new TypeError("'data' should be an object");
+  data(dataToSerialize) {
+    if (!isObjectLike(dataToSerialize)) {
+      throw new TypeError("Data should be an object");
     }
-    this.#dataOriginal = data; // keep reference
-    this.#skipDataValidation = false;
+    this.#dataOriginal = dataToSerialize; // keep reference
     this.validateData();
     return this;
   }
@@ -77,23 +64,20 @@ export default class VicisData extends VicisConfig {
    * @return {VicisData}
    */
   validateData() {
-    if (this.#skipDataValidation) {
-      this.#skipDataValidation = false;
-      return this;
-    }
     this.#dataCache = {};
+    const config = this.getConfig();
     Object.keys(this.#dataOriginal).forEach((key) => {
-      if (this.config.omit.includes(key)) {
+      if (config.omit.includes(key)) {
         return;
       }
       this.#dataCache[key] = this.#dataOriginal[key];
     });
-    this.config.required.forEach((key) => {
+    config.required.forEach((key) => {
       if (!(key in this.#dataCache)) {
         throw new Error(`Field '${key}' is required.`);
       }
     });
-    this.config.defined.forEach((key) => {
+    config.defined.forEach((key) => {
       if (!(key in this.#dataCache)) {
         throw new Error(`Field '${key}' must be defined.`);
       }
@@ -101,8 +85,8 @@ export default class VicisData extends VicisConfig {
         throw new Error(`Field '${key}' should have value.`);
       }
     });
-    Object.keys(this.config.cast).forEach((key) => {
-      const castTo = this.config.cast[key];
+    Object.keys(config.cast).forEach((key) => {
+      const castTo = config.cast[key];
       if (!(key in this.#dataCache)) {
         throw new Error(`Field '${key}' suppose to be converted to ${castTo}.`);
       }
@@ -148,44 +132,44 @@ export default class VicisData extends VicisConfig {
           throw new Error("Unknown value convert error");
       }
     });
-    Object.keys(this.config.transform).forEach((key) => {
+    Object.keys(config.transform).forEach((key) => {
       if (!(key in this.#dataCache)) {
         throw new Error(`Field '${key}' suppose to be transformed.`);
       }
-      this.#dataCache[key] = this.config.transform[key](this.#dataCache[key], key);
+      this.#dataCache[key] = config.transform[key](this.#dataCache[key], key);
     });
-    Object.keys(this.config.replace).forEach((key) => {
-      this.#dataCache[key] = this.config.replace[key];
+    Object.keys(config.replace).forEach((key) => {
+      this.#dataCache[key] = config.replace[key];
     });
-    const renameFrom = Object.keys(this.config.rename).sort((alpha, beta) => alpha.localeCompare(beta));
+    const renameFrom = Object.keys(config.rename).sort((alpha, beta) => alpha.localeCompare(beta));
     const renamedData = {};
     renameFrom.forEach((key) => {
       if (!(key in this.#dataCache)) {
         throw new Error(`Field '${key}' suppose to be renamed.`);
       }
-      renamedData[this.config.rename[key]] = this.#dataCache[key];
+      renamedData[config.rename[key]] = this.#dataCache[key];
     });
     renameFrom.forEach((key) => {
       delete this.#dataCache[key];
     });
     Object.assign(this.#dataCache, renamedData);
-    if (Object.keys(this.config.pick).length > 0) {
+    if (Object.keys(config.pick).length > 0) {
       let newCache = {};
       Object.keys(this.#dataCache).forEach((key) => {
-        if (this.config.pick.includes(key)) {
+        if (config.pick.includes(key)) {
           newCache[key] = this.#dataCache[key];
         }
       });
       this.#dataCache = newCache;
     }
-    if (Object.keys(this.config.default).length > 0) {
-      Object.keys(this.config.default).forEach((key) => {
+    if (Object.keys(config.defaults).length > 0) {
+      Object.keys(config.defaults).forEach((key) => {
         if (!(key in this.#dataCache) || this.#dataCache[key] === undefined) {
-          this.#dataCache[key] = this.config.default[key];
+          this.#dataCache[key] = config.defaults[key];
         }
       });
     }
-    this.#dataCache = castToJson(this.#dataCache, this.config.sort);
+    this.#dataCache = castToJson(this.#dataCache, config.sort);
     return this;
   }
 }

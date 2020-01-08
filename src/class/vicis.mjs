@@ -1,5 +1,5 @@
 import VicisData from "./data.mjs";
-//
+
 export default class Vicis extends VicisData {
   /**
    * @name factory
@@ -27,7 +27,7 @@ export default class Vicis extends VicisData {
    * @returns {{}}
    */
   toJSON() {
-    return this.dataCache;
+    return this.getData();
   }
   /**
    * @name toString

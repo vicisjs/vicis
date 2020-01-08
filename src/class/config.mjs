@@ -2,15 +2,17 @@ import { arrayDiff } from "../helper/arrayDiff.mjs";
 import { arrayHasSame } from "../helper/arrayHasSame.mjs";
 import { arrayIntersect } from "../helper/arrayIntersect.mjs";
 import { arrayUnique } from "../helper/arrayUnique.mjs";
+import { clone } from "../helper/clone.mjs";
 import { isFunction } from "../helper/isFunction.mjs";
 import { isObjectLike } from "../helper/isObjectLike.mjs";
 import { isString } from "../helper/isString.mjs";
 import { objectKeys } from "../helper/objectKeys.mjs";
-//
+
 const TYPES_LIST = ["boolean", "numeric", "integer", "string", "json"];
+
 const CONFIG_DEFAULT = {
   cast: {},
-  default: {},
+  defaults: {},
   defined: [],
   omit: [],
   pick: [],
@@ -22,7 +24,7 @@ const CONFIG_DEFAULT = {
 };
 const CONFIG_FIELDS = [
   "cast",
-  "default",
+  "defaults",
   "defined",
   "omit",
   "pick",
@@ -41,11 +43,11 @@ export default class VicisConfig {
    */
   #cast = {};
   /**
-   * @name default
+   * @name defaults
    * @private
    * @type Object
    */
-  #default = [];
+  #defaults = [];
   /**
    * @name defined
    * @private
@@ -95,46 +97,23 @@ export default class VicisConfig {
    */
   #transform = {};
   /**
-   * @name skipValidation
-   * @private
-   * @type Boolean
-   */
-  #skipConfigValidation = true;
-  /**
    * @name constructor
    * @public
    * @constructor
    * @param {Object=} config
    */
   constructor(config = {}) {
-    this.setConfig(config);
+    this.config(config);
   }
   /**
-   * @name skipValidation
-   * @public
-   * @param {Boolean} value
-   * @type {Boolean}
-   */
-  set skipValidation(value) {
-    this.#skipConfigValidation = Boolean(value);
-  }
-  /**
-   * @name skipValidation
-   * @public
-   * @type {Boolean}
-   */
-  get skipValidation() {
-    return this.#skipConfigValidation;
-  }
-  /**
-   * @name config
+   * @name getConfig
    * @public
    * @type {{}}
    */
-  get config() {
-    return {
+  getConfig() {
+    return clone({
       cast: this.#cast,
-      default: this.#default,
+      defaults: this.#defaults,
       defined: this.#defined,
       omit: this.#omit,
       pick: this.#pick,
@@ -143,53 +122,52 @@ export default class VicisConfig {
       replace: this.#replace,
       required: this.#required,
       transform: this.#transform,
-    };
+    });
   }
   /**
-   * @name setConfig
+   * @name resetConfig
    * @public
-   * @throws TypeError
-   * @param {Object<String, *>} config
    * @return {VicisConfig}
    */
-  setConfig(config = {}) {
+  resetConfig() {
+    this.#cast = {};
+    this.#defaults = {};
+    this.#defined = [];
+    this.#omit = [];
+    this.#pick = [];
+    this.#sort = [];
+    this.#rename = {};
+    this.#replace = {};
+    this.#required = [];
+    this.#transform = {};
+    return this;
+  }
+  /**
+   * @name config
+   * @public
+   * @throws TypeError
+   * @param {Object<String, Array|Boolean|Object>} config
+   * @return {VicisConfig}
+   */
+  config(config = {}) {
     if (!isObjectLike(config)) {
-      throw new TypeError("'config' should be an object");
+      throw new TypeError("Config should be an object");
     }
     const diff = arrayDiff(objectKeys(config), CONFIG_FIELDS);
     if (diff.length) {
-      throw new TypeError(`'config' has unknown fields: '${diff.join("', '")}'.`);
+      throw new TypeError(`Config has unknown fields: '${diff.join("', '")}'.`);
     }
-    this.#cast = CONFIG_DEFAULT.cast;
-    this.#default = CONFIG_DEFAULT.default;
-    this.#defined = CONFIG_DEFAULT.defined;
-    this.#omit = CONFIG_DEFAULT.omit;
-    this.#pick = CONFIG_DEFAULT.pick;
-    this.#sort = CONFIG_DEFAULT.sort;
-    this.#rename = CONFIG_DEFAULT.rename;
-    this.#replace = CONFIG_DEFAULT.replace;
-    this.#required = CONFIG_DEFAULT.required;
-    this.#transform = CONFIG_DEFAULT.transform;
-    this.#skipConfigValidation = false;
+    this.resetConfig();
     this.sort(config.sort);
-    this.#skipConfigValidation = false;
     this.omit(config.omit);
-    this.#skipConfigValidation = false;
     this.cast(config.cast);
-    this.#skipConfigValidation = false;
     this.defined(config.defined);
-    this.#skipConfigValidation = false;
     this.pick(config.pick);
-    this.#skipConfigValidation = false;
     this.rename(config.rename);
-    this.#skipConfigValidation = false;
     this.replace(config.replace);
-    this.#skipConfigValidation = false;
     this.required(config.required);
-    this.#skipConfigValidation = false;
     this.transform(config.transform);
-    this.#skipConfigValidation = false;
-    this.default(config.default);
+    this.defaults(config.defaults);
     this.validateConfig();
     return this;
   }
@@ -197,41 +175,39 @@ export default class VicisConfig {
    * @name cast
    * @public
    * @throws TypeError
-   * @param {Object<String, String>} config
+   * @param {Object<String, String>} propToType
    * @return {VicisConfig}
    */
-  cast(config = {}) {
-    if (!isObjectLike(config)) {
+  cast(propToType = {}) {
+    if (!isObjectLike(propToType)) {
       throw new TypeError("'cast' should be an object");
     }
     const newConfig = {};
-    Object.keys(config).forEach((key) => {
-      if (!isString(config[key])) {
-        throw new TypeError(`'cast' expect object values to be strings. Not a string at key: '${config[key]}'.`);
+    Object.keys(propToType).forEach((key) => {
+      if (!isString(propToType[key])) {
+        throw new TypeError(`'cast' expect object values to be strings. Not a string at key: '${propToType[key]}'.`);
       }
-      if (!TYPES_LIST.includes(config[key])) {
-        throw new TypeError(`'cast' has unknown type in {${key}: "${config[key]}"}.`);
+      if (!TYPES_LIST.includes(propToType[key])) {
+        throw new TypeError(`'cast' has unknown type in {${key}: "${propToType[key]}"}.`);
       }
-      newConfig[key] = config[key];
+      newConfig[key] = propToType[key];
     });
     this.#cast = newConfig;
-    this.#skipConfigValidation = false;
     this.validateConfig();
     return this;
   }
   /**
-   * @name default
-   * @protected
+   * @name defaults
+   * @public
    * @throws TypeError
-   * @param {Object<String, *>} config
+   * @param {Object<String, *>} propDefaultValues
    * @return {VicisConfig}
    */
-  default(config = {}) {
-    if (!isObjectLike(config)) {
-      throw new TypeError("'default' should be an object");
+  defaults(propDefaultValues = {}) {
+    if (!isObjectLike(propDefaultValues)) {
+      throw new TypeError("'defaults' should be an object");
     }
-    this.#default = { ...config };
-    this.#skipConfigValidation = false;
+    this.#defaults = { ...propDefaultValues }; // do not deep clone!
     this.validateConfig();
     return this;
   }
@@ -239,20 +215,19 @@ export default class VicisConfig {
    * @name defined
    * @public
    * @throws TypeError
-   * @param {String[]} config
+   * @param {String[]} propsMustBeDefined
    * @return {VicisConfig}
    */
-  defined(config = []) {
-    if (!Array.isArray(config)) {
+  defined(propsMustBeDefined = []) {
+    if (!Array.isArray(propsMustBeDefined)) {
       throw new TypeError("'defined' should be an array");
     }
-    this.#defined = arrayUnique(config).map((value) => {
+    this.#defined = arrayUnique(propsMustBeDefined).map((value) => {
       if (!isString(value)) {
         throw new TypeError(`'defined' expect array of strings. Value: '${value.toString()}'.`);
       }
       return value;
     });
-    this.#skipConfigValidation = false;
     this.validateConfig();
     return this;
   }
@@ -260,20 +235,19 @@ export default class VicisConfig {
    * @name omit
    * @public
    * @throws TypeError
-   * @param {String[]} config
+   * @param {String[]} propsToOmit
    * @return {VicisConfig}
    */
-  omit(config = []) {
-    if (!Array.isArray(config)) {
+  omit(propsToOmit = []) {
+    if (!Array.isArray(propsToOmit)) {
       throw new TypeError("'omit' should be an array");
     }
-    this.#omit = arrayUnique(config).map((value) => {
+    this.#omit = arrayUnique(propsToOmit).map((value) => {
       if (!isString(value)) {
         throw new TypeError(`'omit' expect array of strings. Value: '${value.toString()}'.`);
       }
       return value;
     });
-    this.#skipConfigValidation = false;
     this.validateConfig();
     return this;
   }
@@ -281,20 +255,19 @@ export default class VicisConfig {
    * @name pick
    * @public
    * @throws TypeError
-   * @param {String[]} config
+   * @param {String[]} propsToPick
    * @return {VicisConfig}
    */
-  pick(config = []) {
-    if (!Array.isArray(config)) {
+  pick(propsToPick = []) {
+    if (!Array.isArray(propsToPick)) {
       throw new TypeError("'pick' should be an array");
     }
-    this.#pick = arrayUnique(config).map((value) => {
+    this.#pick = arrayUnique(propsToPick).map((value) => {
       if (!isString(value)) {
         throw new TypeError(`'pick' expect array of strings. Value: '${value.toString()}'.`);
       }
       return value;
     });
-    this.#skipConfigValidation = false;
     this.validateConfig();
     return this;
   }
@@ -302,19 +275,19 @@ export default class VicisConfig {
    * @name rename
    * @public
    * @throws TypeError
-   * @param {Object<String, Function>} config
+   * @param {Object<String, Function>} renameFromTo
    * @return {VicisConfig}
    */
-  rename(config = {}) {
-    if (!isObjectLike(config)) {
+  rename(renameFromTo = {}) {
+    if (!isObjectLike(renameFromTo)) {
       throw new TypeError("'rename' should be an object");
     }
     const newConfig = {};
-    Object.keys(config).forEach((key) => {
+    Object.keys(renameFromTo).forEach((key) => {
       if (!isString(key)) {
         throw new TypeError(`'rename' expect object values to be strings. Not a string at key: '${key}'.`);
       }
-      newConfig[key] = config[key];
+      newConfig[key] = renameFromTo[key];
     });
     const rename = Object.values(this.#rename);
     const renameTo = arrayIntersect(rename, arrayUnique(rename));
@@ -322,7 +295,6 @@ export default class VicisConfig {
       throw new Error(`'rename' has similar values: ${renameTo.join(",")}.`);
     }
     this.#rename = newConfig;
-    this.#skipConfigValidation = false;
     this.validateConfig();
     return this;
   }
@@ -330,15 +302,14 @@ export default class VicisConfig {
    * @name replace
    * @public
    * @throws TypeError
-   * @param {Object<String, *>} config
+   * @param {Object<String, *>} overrideValues
    * @return {VicisConfig}
    */
-  replace(config = {}) {
-    if (!isObjectLike(config)) {
+  replace(overrideValues = {}) {
+    if (!isObjectLike(overrideValues)) {
       throw new TypeError("'replace' should be an object");
     }
-    this.#replace = { ...config };
-    this.#skipConfigValidation = false;
+    this.#replace = { ...overrideValues };
     this.validateConfig();
     return this;
   }
@@ -346,20 +317,19 @@ export default class VicisConfig {
    * @name required
    * @public
    * @throws TypeError
-   * @param {String[]} config
+   * @param {String[]} propsRequired
    * @return {VicisConfig}
    */
-  required(config = []) {
-    if (!Array.isArray(config)) {
+  required(propsRequired = []) {
+    if (!Array.isArray(propsRequired)) {
       throw new TypeError("'required' should be an array");
     }
-    this.#required = arrayUnique(config).map((value) => {
+    this.#required = arrayUnique(propsRequired).map((value) => {
       if (!isString(value)) {
         throw new TypeError(`'required' expect array of strings. Value: '${value.toString()}'.`);
       }
       return value;
     });
-    this.#skipConfigValidation = false;
     this.validateConfig();
     return this;
   }
@@ -367,36 +337,35 @@ export default class VicisConfig {
    * @name sort
    * @public
    * @throws TypeError
-   * @param {Boolean} config
+   * @param {Boolean} sortProperties
    * @return {VicisConfig}
    */
-  sort(config = true) {
-    if (typeof config !== "boolean"){
+  sort(sortProperties = true) {
+    if (typeof sortProperties !== "boolean") {
       throw new TypeError("'sort' should be a boolean");
     }
-    this.#sort = config;
+    this.#sort = sortProperties;
     return this;
   }
   /**
    * @name transform
    * @public
    * @throws TypeError
-   * @param {Object<String, Function>} config
+   * @param {Object<String, Function>} propValueTransform
    * @return {VicisConfig}
    */
-  transform(config = {}) {
-    if (!isObjectLike(config)) {
+  transform(propValueTransform = {}) {
+    if (!isObjectLike(propValueTransform)) {
       throw new TypeError("'transform' should be an object");
     }
     const newConfig = {};
-    Object.keys(config).forEach((key) => {
-      if (!isFunction(config[key])) {
+    Object.keys(propValueTransform).forEach((key) => {
+      if (!isFunction(propValueTransform[key])) {
         throw new TypeError(`'transform' expect object values to be functions. Not a function at key: '${key}'.`);
       }
-      newConfig[key] = config[key];
+      newConfig[key] = propValueTransform[key];
     });
     this.#transform = newConfig;
-    this.#skipConfigValidation = false;
     this.validateConfig();
     return this;
   }
@@ -407,8 +376,6 @@ export default class VicisConfig {
    * @return {VicisConfig}
    */
   validateConfig() {
-    console.log("Validate Config");
-
     const cast = objectKeys(this.#cast);
     const rename = objectKeys(this.#rename);
     const replace = objectKeys(this.#replace);
