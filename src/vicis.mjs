@@ -79,7 +79,8 @@ function arrayUnique(array) {
   if (unique.filter((value) => typeof value === "string").length) {
     const strings = array.filter((value) => typeof value === "string");
     if (strings.length > 1) {
-      [...new Set(strings.map((value) => value.normalize()))].forEach((value) => {
+      const normalized = [...new Set(strings.map((value) => value.normalize()))];
+      normalized.forEach((value) => {
         delete unique[unique.indexOf(value)];
       });
       const compacted = [];
@@ -88,7 +89,7 @@ function arrayUnique(array) {
           compacted.push(unique[index]);
         }
       }
-      unique = compacted;
+      unique = compacted.concat(normalized);
     }
   }
   return unique.sort();
@@ -190,9 +191,181 @@ function toString(value) {
 //#endregion
 
 //#region Mixin Functions
-
+/**
+ * @name cast
+ * @throws TypeError
+ * @param {Object<String, String>} propertyToType
+ * @return {Object<String, String>}
+ */
+function cast(propertyToType = {}) {
+  if (!isObjectLike(propertyToType)) {
+    throw new TypeError("'cast' should be an object");
+  }
+  if (Object.keys(propertyToType).length === 0) {
+    return {};
+  }
+  const newConfig = {};
+  Object.keys(propertyToType).forEach((key) => {
+    if (!isString(propertyToType[key])) {
+      throw new TypeError(`'cast' expect object values to be strings. Not a string at key: '${propertyToType[key]}'.`);
+    }
+    if (!TYPES_LIST.includes(propertyToType[key])) {
+      throw new TypeError(`'cast' has unknown type in {${key}: "${propertyToType[key]}"}.`);
+    }
+    newConfig[key] = propertyToType[key];
+  });
+  return newConfig;
+}
+/**
+ * @name defaults
+ * @throws TypeError
+ * @param {Object<String, *>} propertyDefaultValues
+ * @return {Object<String, *>}
+ */
+function defaults(propertyDefaultValues = {}) {
+  if (!isObjectLike(propertyDefaultValues)) {
+    throw new TypeError("'defaults' should be an object");
+  }
+  return propertyDefaultValues;
+}
+/**
+ * @name defined
+ * @throws TypeError
+ * @param {String[]} propertiesMustBeDefined
+ * @return {String[]}
+ */
+function defined(propertiesMustBeDefined = []) {
+  if (!Array.isArray(propertiesMustBeDefined)) {
+    throw new TypeError("'defined' should be an array");
+  }
+  if (propertiesMustBeDefined.length === 0) {
+    return [];
+  }
+  return arrayUnique(propertiesMustBeDefined).map((value) => {
+    if (!isString(value)) {
+      throw new TypeError(`'defined' expect array of strings. Value: '${value.toString()}'.`);
+    }
+    return value;
+  });
+}
+/**
+ * @name omit
+ * @throws TypeError
+ * @param {String[]} propertiesToOmit
+ * @return {String[]}
+ */
+function omit(propertiesToOmit = []) {
+  if (!Array.isArray(propertiesToOmit)) {
+    throw new TypeError("'omit' should be an array");
+  }
+  if (propertiesToOmit.length === 0) {
+    return [];
+  }
+  return arrayUnique(propertiesToOmit).map((value) => {
+    if (!isString(value)) {
+      throw new TypeError(`'omit' expect array of strings. Value: '${value.toString()}'.`);
+    }
+    return value;
+  });
+}
+/**
+ * @name pick
+ * @throws TypeError
+ * @param {String[]} propertiesToPick
+ * @return {String[]}
+ */
+function pick(propertiesToPick = []) {
+  if (!Array.isArray(propertiesToPick)) {
+    throw new TypeError("'pick' should be an array");
+  }
+  if (propertiesToPick.length === 0) {
+    return [];
+  }
+  return arrayUnique(propertiesToPick).map((value) => {
+    if (!isString(value)) {
+      throw new TypeError(`'pick' expect array of strings. Value: '${value.toString()}'.`);
+    }
+    return value;
+  });
+}
+/**
+ * @name rename
+ * @throws TypeError
+ * @param {Object<String, String>} renamePropertyFromTo
+ * @return {Object<String, String>}
+ */
+function rename(renamePropertyFromTo = {}) {
+  if (!isObjectLike(renamePropertyFromTo)) {
+    throw new TypeError("'rename' should be an object");
+  }
+  if (Object.keys(renamePropertyFromTo).length === 0) {
+    return {};
+  }
+  const newConfig = {};
+  Object.keys(renamePropertyFromTo).forEach((key) => {
+    if (!isString(key)) {
+      throw new TypeError(`'rename' expect object values to be strings. Not a string at key: '${key}'.`);
+    }
+    newConfig[key] = renamePropertyFromTo[key];
+  });
+  const to = Object.values(newConfig);
+  const toUnique = arrayUnique(to);
+  if (to.length !== toUnique.length) {
+    throw new TypeError(`'rename' has similar values: '${toUnique.join(", ")}'.`);
+  }
+  return newConfig;
+}
+/**
+ * @name replace
+ * @throws TypeError
+ * @param {Object<String, *>} replacePropertyValues
+ * @return {Object<String, *>}
+ */
+function replace(replacePropertyValues = {}) {
+  if (!isObjectLike(replacePropertyValues)) {
+    throw new TypeError("'replace' should be an object");
+  }
+  return replacePropertyValues;
+}
+/**
+ * @name required
+ * @throws TypeError
+ * @param {String[]} propertiesRequired
+ * @return {String[]}
+ */
+function required(propertiesRequired = []) {
+  if (!Array.isArray(propertiesRequired)) {
+    throw new TypeError("'required' should be an array");
+  }
+  return arrayUnique(propertiesRequired).map((value) => {
+    if (!isString(value)) {
+      throw new TypeError(`'required' expect array of strings. Value: '${value.toString()}'.`);
+    }
+    return value;
+  });
+}
+/**
+ * @name transform
+ * @throws TypeError
+ * @param {Object<String, Function>} propertyValueTransformWith
+ * @return {Object<String, Function>}
+ */
+function transform(propertyValueTransformWith = {}) {
+  if (!isObjectLike(propertyValueTransformWith)) {
+    throw new TypeError("'transform' should be an object");
+  }
+  const newConfig = {};
+  Object.keys(propertyValueTransformWith).forEach((key) => {
+    if (!isFunction(propertyValueTransformWith[key])) {
+      throw new TypeError(`'transform' expect object values to be functions. Not a function at key: '${key}'.`);
+    }
+    newConfig[key] = propertyValueTransformWith[key];
+  });
+  return newConfig;
+}
 //#endregion
 
+//#region Class
 class Vicis {
   //#region Config Fields
   /**
@@ -329,7 +502,7 @@ class Vicis {
     this.#defined = [];
     this.#omit = [];
     this.#pick = [];
-    this.#sort = [];
+    this.#sort = true;
     this.#rename = {};
     this.#replace = {};
     this.#required = [];
@@ -373,22 +546,7 @@ class Vicis {
    * @return {Vicis}
    */
   cast(propertyToType = {}) {
-    if (!isObjectLike(propertyToType)) {
-      throw new TypeError("'cast' should be an object");
-    }
-    const newConfig = {};
-    Object.keys(propertyToType).forEach((key) => {
-      if (!isString(propertyToType[key])) {
-        throw new TypeError(
-          `'cast' expect object values to be strings. Not a string at key: '${propertyToType[key]}'.`,
-        );
-      }
-      if (!TYPES_LIST.includes(propertyToType[key])) {
-        throw new TypeError(`'cast' has unknown type in {${key}: "${propertyToType[key]}"}.`);
-      }
-      newConfig[key] = propertyToType[key];
-    });
-    this.#cast = newConfig;
+    this.#cast = cast(propertyToType);
     this.validateConfig();
     return this;
   }
@@ -400,10 +558,7 @@ class Vicis {
    * @return {Vicis}
    */
   defaults(propertyDefaultValues = {}) {
-    if (!isObjectLike(propertyDefaultValues)) {
-      throw new TypeError("'defaults' should be an object");
-    }
-    this.#defaults = { ...propertyDefaultValues }; // do not deep clone!
+    this.#defaults = defaults(propertyDefaultValues); // do not deep clone!
     this.validateConfig();
     return this;
   }
@@ -415,15 +570,7 @@ class Vicis {
    * @return {Vicis}
    */
   defined(propertiesMustBeDefined = []) {
-    if (!Array.isArray(propertiesMustBeDefined)) {
-      throw new TypeError("'defined' should be an array");
-    }
-    this.#defined = arrayUnique(propertiesMustBeDefined).map((value) => {
-      if (!isString(value)) {
-        throw new TypeError(`'defined' expect array of strings. Value: '${value.toString()}'.`);
-      }
-      return value;
-    });
+    this.#defined = defined(propertiesMustBeDefined);
     this.validateConfig();
     return this;
   }
@@ -435,15 +582,7 @@ class Vicis {
    * @return {Vicis}
    */
   omit(propertiesToOmit = []) {
-    if (!Array.isArray(propertiesToOmit)) {
-      throw new TypeError("'omit' should be an array");
-    }
-    this.#omit = arrayUnique(propertiesToOmit).map((value) => {
-      if (!isString(value)) {
-        throw new TypeError(`'omit' expect array of strings. Value: '${value.toString()}'.`);
-      }
-      return value;
-    });
+    this.#omit = omit(propertiesToOmit);
     this.validateConfig();
     return this;
   }
@@ -455,15 +594,7 @@ class Vicis {
    * @return {Vicis}
    */
   pick(propertiesToPick = []) {
-    if (!Array.isArray(propertiesToPick)) {
-      throw new TypeError("'pick' should be an array");
-    }
-    this.#pick = arrayUnique(propertiesToPick).map((value) => {
-      if (!isString(value)) {
-        throw new TypeError(`'pick' expect array of strings. Value: '${value.toString()}'.`);
-      }
-      return value;
-    });
+    this.#pick = pick(propertiesToPick);
     this.validateConfig();
     return this;
   }
@@ -471,26 +602,11 @@ class Vicis {
    * @name rename
    * @public
    * @throws TypeError
-   * @param {Object<String, Function>} renamePropertyFromTo
+   * @param {Object<String, String>} renamePropertyFromTo
    * @return {Vicis}
    */
   rename(renamePropertyFromTo = {}) {
-    if (!isObjectLike(renamePropertyFromTo)) {
-      throw new TypeError("'rename' should be an object");
-    }
-    const newConfig = {};
-    Object.keys(renamePropertyFromTo).forEach((key) => {
-      if (!isString(key)) {
-        throw new TypeError(`'rename' expect object values to be strings. Not a string at key: '${key}'.`);
-      }
-      newConfig[key] = renamePropertyFromTo[key];
-    });
-    const rename = Object.values(this.#rename);
-    const renameTo = arrayIntersect(rename, arrayUnique(rename));
-    if (rename.length !== renameTo.length) {
-      throw new Error(`'rename' has similar values: ${renameTo.join(",")}.`);
-    }
-    this.#rename = newConfig;
+    this.#rename = rename(renamePropertyFromTo);
     this.validateConfig();
     return this;
   }
@@ -502,10 +618,7 @@ class Vicis {
    * @return {Vicis}
    */
   replace(replacePropertyValues = {}) {
-    if (!isObjectLike(replacePropertyValues)) {
-      throw new TypeError("'replace' should be an object");
-    }
-    this.#replace = { ...replacePropertyValues }; // do not deep clone!
+    this.#replace = replace(replacePropertyValues); // do not deep clone!
     this.validateConfig();
     return this;
   }
@@ -517,15 +630,7 @@ class Vicis {
    * @return {Vicis}
    */
   required(propertiesRequired = []) {
-    if (!Array.isArray(propertiesRequired)) {
-      throw new TypeError("'required' should be an array");
-    }
-    this.#required = arrayUnique(propertiesRequired).map((value) => {
-      if (!isString(value)) {
-        throw new TypeError(`'required' expect array of strings. Value: '${value.toString()}'.`);
-      }
-      return value;
-    });
+    this.#required = required(propertiesRequired);
     this.validateConfig();
     return this;
   }
@@ -551,17 +656,7 @@ class Vicis {
    * @return {Vicis}
    */
   transform(propertyValueTransformWith = {}) {
-    if (!isObjectLike(propertyValueTransformWith)) {
-      throw new TypeError("'transform' should be an object");
-    }
-    const newConfig = {};
-    Object.keys(propertyValueTransformWith).forEach((key) => {
-      if (!isFunction(propertyValueTransformWith[key])) {
-        throw new TypeError(`'transform' expect object values to be functions. Not a function at key: '${key}'.`);
-      }
-      newConfig[key] = propertyValueTransformWith[key];
-    });
-    this.#transform = newConfig;
+    this.#transform = transform(propertyValueTransformWith); // do not deep clone!
     this.validateConfig();
     return this;
   }
@@ -773,6 +868,7 @@ class Vicis {
   }
   //#endregion
 }
+//#endregion
 
 export default Vicis;
-export { Vicis };
+export { TYPES_ENUM, Vicis, cast, defaults, defined, omit, pick, rename, replace, required, transform };
