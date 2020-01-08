@@ -1,6 +1,18 @@
 import VicisData from "./data.mjs";
 
 export default class Vicis extends VicisData {
+  //#region Initialization Methods
+  /**
+   * @name constructor
+   * @public
+   * @constructor
+   * @param {Object=} config
+   */
+  constructor(config = {}) {
+    super(config);
+  }
+  //#endregion
+  //#region Static Methods
   /**
    * @name factory
    * @public
@@ -12,15 +24,8 @@ export default class Vicis extends VicisData {
   static factory(config = {}) {
     return new Vicis(config);
   }
-  /**
-   * @name constructor
-   * @public
-   * @constructor
-   * @param {Object=} config
-   */
-  constructor(config = {}) {
-    super(config);
-  }
+  //#endregion
+  //#region Main Methods
   /**
    * @name toJSON
    * @public
@@ -37,4 +42,5 @@ export default class Vicis extends VicisData {
   toString() {
     return JSON.stringify(this.toJSON());
   }
+  //#endregion
 }
