@@ -337,6 +337,9 @@ function required(propertiesRequired = []) {
   if (!Array.isArray(propertiesRequired)) {
     throw new TypeError("'required' should be an array");
   }
+  if (propertiesRequired.length === 0) {
+    return [];
+  }
   return arrayUnique(propertiesRequired).map((value) => {
     if (!isString(value)) {
       throw new TypeError(`'required' expect array of strings. Value: '${value.toString()}'.`);
@@ -353,6 +356,9 @@ function required(propertiesRequired = []) {
 function transform(propertyValueTransformWith = {}) {
   if (!isObjectLike(propertyValueTransformWith)) {
     throw new TypeError("'transform' should be an object");
+  }
+  if (Object.keys(propertyValueTransformWith).length === 0) {
+    return {};
   }
   const newConfig = {};
   Object.keys(propertyValueTransformWith).forEach((key) => {
