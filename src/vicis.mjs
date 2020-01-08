@@ -1,27 +1,6 @@
-import { arrayDiff } from "../helper/arrayDiff.mjs";
-import { arrayHasSame } from "../helper/arrayHasSame.mjs";
-import { arrayIntersect } from "../helper/arrayIntersect.mjs";
-import { arrayUnique } from "../helper/arrayUnique.mjs";
-import { clone } from "../helper/clone.mjs";
-import { isFunction } from "../helper/isFunction.mjs";
-import { isObjectLike } from "../helper/isObjectLike.mjs";
-import { isString } from "../helper/isString.mjs";
-import { objectKeys } from "../helper/objectKeys.mjs";
+import cloneDeep from "lodash.clonedeep";
 
-const TYPES_LIST = ["boolean", "numeric", "integer", "string", "json"];
-
-const CONFIG_DEFAULT = {
-  cast: {},
-  defaults: {},
-  defined: [],
-  omit: [],
-  pick: [],
-  sort: true,
-  rename: {},
-  replace: {},
-  required: [],
-  transform: {},
-};
+//#region Constants
 const CONFIG_FIELDS = [
   "cast",
   "defaults",
@@ -34,8 +13,184 @@ const CONFIG_FIELDS = [
   "required",
   "transform",
 ];
-//
-export default class VicisConfig {
+const TYPES_ENUM = {
+  BOOLEAN: "boolean",
+  NUMERIC: "numeric",
+  INTEGER: "integer",
+  STRING: "string",
+  JSON: "json",
+};
+const TYPES_LIST = ["boolean", "numeric", "integer", "string", "json"];
+//#endregion
+
+//#region Helper Functions
+/**
+ * @name arrayDiff
+ * @param {*[]} alpha
+ * @param {*[]} beta
+ * @returns {*[]}
+ */
+function arrayDiff(alpha, beta) {
+  const set = new Set(beta);
+  return alpha.filter((value) => !set.has(value));
+}
+/**
+ * @name arrayHasSame
+ * @param {*[]} alpha
+ * @param {*[]} beta
+ * @returns {Boolean}
+ */
+function arrayHasSame(alpha, beta) {
+  if (!alpha.length || !beta.length) {
+    return false;
+  }
+  const setB = new Set(beta);
+  return [...new Set(alpha)].filter((x) => setB.has(x)).length > 0;
+}
+/**
+ * @name arrayIntersect
+ * @param {*[]} alpha
+ * @param {*[]} beta
+ * @returns {*[]}
+ */
+function arrayIntersect(alpha, beta) {
+  if (!alpha.length || !beta.length) {
+    return [];
+  }
+  const setB = new Set(beta);
+  return [...new Set(alpha)].filter((x) => setB.has(x));
+}
+/**
+ * @name arrayUnique
+ * @param {*[]} array
+ * @returns {*[]}
+ */
+function arrayUnique(array) {
+  if (array.length < 2) {
+    return array;
+  }
+  let unique = [...new Set(array)];
+  if (unique.includes(0)) {
+    const zeroes = array.filter((value) => value === 0);
+    if (zeroes.length > 1 && zeroes.some((value) => 1 / value === Number.NEGATIVE_INFINITY)) {
+      unique.push(-0);
+    }
+  }
+  if (unique.filter((value) => typeof value === "string").length) {
+    const strings = array.filter((value) => typeof value === "string");
+    if (strings.length > 1) {
+      [...new Set(strings.map((value) => value.normalize()))].forEach((value) => {
+        delete unique[unique.indexOf(value)];
+      });
+      const compacted = [];
+      for (let index = 0; index < unique.length; index += 1) {
+        if (index in unique) {
+          compacted.push(unique[index]);
+        }
+      }
+      unique = compacted;
+    }
+  }
+  return unique.sort();
+}
+/**
+ * @name castToJson
+ * @param {*} value
+ * @param {Boolean=true} sort
+ * @returns {*}
+ */
+function castToJson(value, sort = true) {
+  if (sort) {
+    return collectionSortKeys(JSON.parse(JSON.stringify(value)), true);
+  } else {
+    return JSON.parse(JSON.stringify(value));
+  }
+}
+/**
+ * @name clone
+ * @param {*} value
+ * @returns {*}
+ */
+function clone(value) {
+  return cloneDeep(value);
+}
+/**
+ * @name collectionSortKeys
+ * @param {*} value
+ * @param {Boolean=true} isDeep
+ * @returns {*}
+ */
+function collectionSortKeys(value, isDeep = true) {
+  if (!isObjectLike(value)) {
+    return value;
+  }
+  const keys = objectKeys(value);
+  if (!keys.length) {
+    return value;
+  }
+  return keys.reduce((sorted, key) => {
+    if (isDeep && isObjectLike(value[key])) {
+      sorted[key] = collectionSortKeys(value[key], isDeep);
+    } else {
+      sorted[key] = value[key];
+    }
+    return sorted;
+  }, {});
+}
+/**
+ * @name isFunction
+ * @param {*} value
+ * @returns {Boolean}
+ */
+function isFunction(value) {
+  return Object.prototype.toString.call(value) === "[object Function]";
+}
+/**
+ * name isObjectLike
+ * @param {*} value
+ * @returns {Boolean}
+ */
+function isObjectLike(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+/**
+ * @name isString
+ * @param {*} value
+ * @returns {Boolean}
+ */
+function isString(value) {
+  return typeof value === "string";
+}
+/**
+ * @name objectKeys
+ * @param {Object} object
+ * @returns {String[]}
+ */
+function objectKeys(object) {
+  return Object.keys(object).sort((alpha, beta) => alpha.localeCompare(beta));
+}
+/**
+ * @name toString
+ * @param {*} value
+ * @returns String
+ */
+function toString(value) {
+  if (!value) {
+    return "";
+  }
+  if (typeof value === "string") {
+    return value;
+  }
+  const result = value.toString();
+  if (result === "0" && 1 / value === Number.NEGATIVE_INFINITY) {
+    return "-0";
+  }
+  return result;
+}
+//#endregion
+
+class Vicis {
+  //#region Config Fields
   /**
    * @name cast
    * @private
@@ -96,6 +251,24 @@ export default class VicisConfig {
    * @type Object
    */
   #transform = {};
+  //#endregion
+
+  //#region Data Fields
+  /**
+   * @name dataCache
+   * @private
+   * @type Object
+   */
+  #dataCache = {};
+  /**
+   * @name dataOriginal
+   * @private
+   * @type Object
+   */
+  #dataOriginal = {};
+  //#endregion
+
+  //#region Initialization Methods
   /**
    * @name constructor
    * @public
@@ -105,6 +278,23 @@ export default class VicisConfig {
   constructor(config = {}) {
     this.config(config);
   }
+  //#endregion
+
+  //#region Static Methods
+  /**
+   * @name factory
+   * @public
+   * @static
+   * @factory
+   * @param {Object=} config
+   * @returns {Vicis}
+   */
+  static factory(config = {}) {
+    return new Vicis(config);
+  }
+  //#endregion
+
+  //#region Public Config Methods
   /**
    * @name getConfig
    * @public
@@ -127,7 +317,7 @@ export default class VicisConfig {
   /**
    * @name resetConfig
    * @public
-   * @return {VicisConfig}
+   * @return {Vicis}
    */
   resetConfig() {
     this.#cast = {};
@@ -147,7 +337,7 @@ export default class VicisConfig {
    * @public
    * @throws TypeError
    * @param {Object<String, Array|Boolean|Object>} config
-   * @return {VicisConfig}
+   * @return {Vicis}
    */
   config(config = {}) {
     if (!isObjectLike(config)) {
@@ -176,7 +366,7 @@ export default class VicisConfig {
    * @public
    * @throws TypeError
    * @param {Object<String, String>} propToType
-   * @return {VicisConfig}
+   * @return {Vicis}
    */
   cast(propToType = {}) {
     if (!isObjectLike(propToType)) {
@@ -201,7 +391,7 @@ export default class VicisConfig {
    * @public
    * @throws TypeError
    * @param {Object<String, *>} propDefaultValues
-   * @return {VicisConfig}
+   * @return {Vicis}
    */
   defaults(propDefaultValues = {}) {
     if (!isObjectLike(propDefaultValues)) {
@@ -216,7 +406,7 @@ export default class VicisConfig {
    * @public
    * @throws TypeError
    * @param {String[]} propsMustBeDefined
-   * @return {VicisConfig}
+   * @return {Vicis}
    */
   defined(propsMustBeDefined = []) {
     if (!Array.isArray(propsMustBeDefined)) {
@@ -236,7 +426,7 @@ export default class VicisConfig {
    * @public
    * @throws TypeError
    * @param {String[]} propsToOmit
-   * @return {VicisConfig}
+   * @return {Vicis}
    */
   omit(propsToOmit = []) {
     if (!Array.isArray(propsToOmit)) {
@@ -256,7 +446,7 @@ export default class VicisConfig {
    * @public
    * @throws TypeError
    * @param {String[]} propsToPick
-   * @return {VicisConfig}
+   * @return {Vicis}
    */
   pick(propsToPick = []) {
     if (!Array.isArray(propsToPick)) {
@@ -276,7 +466,7 @@ export default class VicisConfig {
    * @public
    * @throws TypeError
    * @param {Object<String, Function>} renameFromTo
-   * @return {VicisConfig}
+   * @return {Vicis}
    */
   rename(renameFromTo = {}) {
     if (!isObjectLike(renameFromTo)) {
@@ -303,13 +493,13 @@ export default class VicisConfig {
    * @public
    * @throws TypeError
    * @param {Object<String, *>} overrideValues
-   * @return {VicisConfig}
+   * @return {Vicis}
    */
   replace(overrideValues = {}) {
     if (!isObjectLike(overrideValues)) {
       throw new TypeError("'replace' should be an object");
     }
-    this.#replace = { ...overrideValues };
+    this.#replace = { ...overrideValues }; // do not deep clone!
     this.validateConfig();
     return this;
   }
@@ -318,7 +508,7 @@ export default class VicisConfig {
    * @public
    * @throws TypeError
    * @param {String[]} propsRequired
-   * @return {VicisConfig}
+   * @return {Vicis}
    */
   required(propsRequired = []) {
     if (!Array.isArray(propsRequired)) {
@@ -338,7 +528,7 @@ export default class VicisConfig {
    * @public
    * @throws TypeError
    * @param {Boolean} sortProperties
-   * @return {VicisConfig}
+   * @return {Vicis}
    */
   sort(sortProperties = true) {
     if (typeof sortProperties !== "boolean") {
@@ -352,7 +542,7 @@ export default class VicisConfig {
    * @public
    * @throws TypeError
    * @param {Object<String, Function>} propValueTransform
-   * @return {VicisConfig}
+   * @return {Vicis}
    */
   transform(propValueTransform = {}) {
     if (!isObjectLike(propValueTransform)) {
@@ -373,7 +563,7 @@ export default class VicisConfig {
    * @name validateConfig
    * @protected
    * @throws Error
-   * @return {VicisConfig}
+   * @return {Vicis}
    */
   validateConfig() {
     const cast = objectKeys(this.#cast);
@@ -415,4 +605,169 @@ export default class VicisConfig {
     }
     return this;
   }
+  //#endregion
+
+  //#region Public Data Methods
+  /**
+   * @name getData
+   * @public
+   * @return {Object}
+   */
+  getData() {
+    return clone(this.#dataCache);
+  }
+  /**
+   * @name setData
+   * @public
+   * @throws TypeError
+   * @param {Object} dataToSerialize
+   * @return {Vicis}
+   */
+  data(dataToSerialize) {
+    if (!isObjectLike(dataToSerialize)) {
+      throw new TypeError("Data should be an object");
+    }
+    this.#dataOriginal = dataToSerialize; // keep reference
+    this.validateData();
+    return this;
+  }
+  /**
+   * @name validateData
+   * @protected
+   * @throws Error
+   * @return {Vicis}
+   */
+  validateData() {
+    this.#dataCache = {};
+    const config = this.getConfig();
+    Object.keys(this.#dataOriginal).forEach((key) => {
+      if (config.omit.includes(key)) {
+        return;
+      }
+      this.#dataCache[key] = this.#dataOriginal[key];
+    });
+    config.required.forEach((key) => {
+      if (!(key in this.#dataCache)) {
+        throw new Error(`Field '${key}' is required.`);
+      }
+    });
+    config.defined.forEach((key) => {
+      if (!(key in this.#dataCache)) {
+        throw new Error(`Field '${key}' must be defined.`);
+      }
+      if (this.#dataCache[key] === undefined) {
+        throw new Error(`Field '${key}' should have value.`);
+      }
+    });
+    Object.keys(config.cast).forEach((key) => {
+      const castTo = config.cast[key];
+      if (!(key in this.#dataCache)) {
+        throw new Error(`Field '${key}' suppose to be converted to ${castTo}.`);
+      }
+      switch (castTo) {
+        case TYPES_ENUM.BOOLEAN:
+          this.#dataCache[key] = Boolean(this.#dataCache[key]);
+          break;
+        case TYPES_ENUM.NUMERIC: {
+          const castedNumber = Number(this.#dataCache[key]);
+          if (Number.isFinite(castedNumber)) {
+            this.#dataCache[key] = castedNumber;
+          } else {
+            const parsed = Number.parseFloat(this.#dataCache[key]);
+            if (Number.isFinite(parsed)) {
+              this.#dataCache[key] = parsed;
+            } else {
+              this.#dataCache[key] = 0;
+            }
+          }
+          break;
+        }
+        case TYPES_ENUM.INTEGER: {
+          const castedInteger = Number(this.#dataCache[key]);
+          if (Number.isFinite(castedInteger)) {
+            this.#dataCache[key] = Math.trunc(castedInteger);
+          } else {
+            const parsed = Number.parseFloat(this.#dataCache[key]);
+            if (Number.isFinite(parsed)) {
+              this.#dataCache[key] = Math.trunc(castedInteger);
+            } else {
+              this.#dataCache[key] = 0;
+            }
+          }
+          break;
+        }
+        case TYPES_ENUM.STRING:
+          this.#dataCache[key] = toString(this.#dataCache[key]);
+          break;
+        case TYPES_ENUM.JSON:
+          this.#dataCache[key] = JSON.parse(JSON.stringify(this.#dataCache[key]));
+          break;
+        default:
+          throw new Error("Unknown value convert error");
+      }
+    });
+    Object.keys(config.transform).forEach((key) => {
+      if (!(key in this.#dataCache)) {
+        throw new Error(`Field '${key}' suppose to be transformed.`);
+      }
+      this.#dataCache[key] = config.transform[key](this.#dataCache[key], key);
+    });
+    Object.keys(config.replace).forEach((key) => {
+      this.#dataCache[key] = config.replace[key];
+    });
+    const renameFrom = Object.keys(config.rename).sort((alpha, beta) => alpha.localeCompare(beta));
+    const renamedData = {};
+    renameFrom.forEach((key) => {
+      if (!(key in this.#dataCache)) {
+        throw new Error(`Field '${key}' suppose to be renamed.`);
+      }
+      renamedData[config.rename[key]] = this.#dataCache[key];
+    });
+    renameFrom.forEach((key) => {
+      delete this.#dataCache[key];
+    });
+    Object.assign(this.#dataCache, renamedData);
+    if (Object.keys(config.pick).length > 0) {
+      let newCache = {};
+      Object.keys(this.#dataCache).forEach((key) => {
+        if (config.pick.includes(key)) {
+          newCache[key] = this.#dataCache[key];
+        }
+      });
+      this.#dataCache = newCache;
+    }
+    if (Object.keys(config.defaults).length > 0) {
+      Object.keys(config.defaults).forEach((key) => {
+        if (!(key in this.#dataCache) || this.#dataCache[key] === undefined) {
+          this.#dataCache[key] = config.defaults[key];
+        }
+      });
+    }
+    this.#dataCache = castToJson(this.#dataCache, config.sort);
+    return this;
+  }
+  //#endregion
+
+  //#region Public Main Methods
+  /**
+   * @name toJSON
+   * @public
+   * @returns {Object}
+   */
+  toJSON() {
+    return this.getData();
+  }
+
+  /**
+   * @name toString
+   * @public
+   * @returns {String}
+   */
+  toString() {
+    return JSON.stringify(this.toJSON());
+  }
+  //#endregion
 }
+
+export default Vicis;
+export { Vicis };

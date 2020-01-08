@@ -1,5 +1,5 @@
 import { Consono } from "consono/es";
-import Vicis from "./class/vicis.mjs";
+import Vicis from "./vicis.mjs";
 
 const consono = Consono.factory(null, "light");
 const data = {
