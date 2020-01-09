@@ -258,14 +258,14 @@ function definedConfig(propertiesMustBeDefined = []) {
  */
 function omitConfig(propertiesToOmit = []) {
   if (!Array.isArray(propertiesToOmit)) {
-    throw new TypeError("Omit should be an array");
+    throw new TypeError("'Omit' should be an array");
   }
   if (propertiesToOmit.length === 0) {
     return [];
   }
   return arrayUnique(propertiesToOmit).map((value) => {
     if (!isString(value)) {
-      throw new TypeError(`Omit expect array of strings. Value: '${JSON.stringify(value)}'.`);
+      throw new TypeError(`'Omit' expect array of strings. Value: '${JSON.stringify(value)}'.`);
     }
     return value;
   });
@@ -273,39 +273,39 @@ function omitConfig(propertiesToOmit = []) {
 /**
  * @name omitData
  * @param {String[]} propertiesToOmit
- * @param {Object} dataToSerialize
+ * @param {Object} data
  * @return {Object}
  */
-function omitData(propertiesToOmit = [], dataToSerialize) {
-  const data = {};
-  Object.keys(dataToSerialize).forEach((key) => {
+function omitData(propertiesToOmit = [], data) {
+  const dataToSerialize = {};
+  Object.keys(data).forEach((key) => {
     if (propertiesToOmit.includes(key)) {
       return;
     }
-    data[key] = dataToSerialize[key];
+    dataToSerialize[key] = data[key];
   });
-  return data;
+  return dataToSerialize;
 }
 /**
  * @name omit
  * @throws TypeError
- * @param {Object} dataToSerialize
+ * @param {Object} data
  * @param {String[]} propertiesToOmit
  * @return {Object}
  */
-function omit(dataToSerialize, propertiesToOmit = []) {
+function omit(data, propertiesToOmit = []) {
   const config = omitConfig(propertiesToOmit);
   if (config.length === 0) {
-    return { ...dataToSerialize };
+    return { ...data };
   }
-  const data = {};
-  Object.keys(dataToSerialize).forEach((key) => {
+  const dataToSerialize = {};
+  Object.keys(data).forEach((key) => {
     if (config.includes(key)) {
       return;
     }
-    data[key] = dataToSerialize[key];
+    dataToSerialize[key] = data[key];
   });
-  return data;
+  return dataToSerialize;
 }
 //#endregion
 
@@ -368,6 +368,8 @@ function replaceConfig(replacePropertyValues = {}) {
   }
   return replacePropertyValues;
 }
+
+//#region Required
 /**
  * @name requiredConfig
  * @throws TypeError
@@ -376,18 +378,49 @@ function replaceConfig(replacePropertyValues = {}) {
  */
 function requiredConfig(propertiesRequired = []) {
   if (!Array.isArray(propertiesRequired)) {
-    throw new TypeError("'required' should be an array");
+    throw new TypeError("'Required' should be an array");
   }
   if (propertiesRequired.length === 0) {
     return [];
   }
   return arrayUnique(propertiesRequired).map((value) => {
     if (!isString(value)) {
-      throw new TypeError(`'required' expect array of strings. Value: '${value.toString()}'.`);
+      throw new TypeError(`'Required' expect array of strings. Value: '${JSON.stringify(value)}'.`);
     }
     return value;
   });
 }
+/**
+ * @name required
+ * @throws TypeError
+ * @param {String[]} propertiesRequired
+ * @param {Object} dataToSerialize
+ * @return {Object}
+ */
+function requiredData(propertiesRequired = [], dataToSerialize) {
+  const config = requiredConfig(propertiesRequired);
+  if (config.length === 0) {
+    return dataToSerialize;
+  }
+  config.forEach((key) => {
+    if (!(key in dataToSerialize)) {
+      throw new Error(`Field '${key}' is required.`);
+    }
+  });
+  return dataToSerialize;
+}
+/**
+ * @name required
+ * @throws TypeError
+ * @param {Object} data
+ * @param {String[]} propertiesRequired
+ * @return {Object}
+ */
+function required(data, propertiesRequired = []) {
+  return requiredData(propertiesRequired, data);
+}
+//#endregion
+
 /**
  * @name transformConfig
  * @throws TypeError
@@ -788,11 +821,12 @@ class Vicis {
   validateData() {
     this.#dataCache = {};
     this.#dataCache = omitData(this.#omit, this.#dataOriginal);
-    this.#required.forEach((key) => {
-      if (!(key in this.#dataCache)) {
-        throw new Error(`Field '${key}' is required.`);
-      }
-    });
+    this.#dataCache = requiredData(this.#required, this.#dataCache);
+    // this.#required.forEach((key) => {
+    //   if (!(key in this.#dataCache)) {
+    //     throw new Error(`Field '${key}' is required.`);
+    //   }
+    // });
     this.#defined.forEach((key) => {
       if (!(key in this.#dataCache)) {
         throw new Error(`Field '${key}' must be defined.`);
@@ -923,6 +957,6 @@ export {
   pickConfig,
   renameConfig,
   replaceConfig,
-  requiredConfig,
+  required,
   transformConfig,
 };
