@@ -102,9 +102,9 @@ function arrayUnique(array) {
  */
 function castToJson(value, sort = true) {
   if (sort) {
-    return collectionSortKeys(JSON.parse(JSON.stringify(value)), true);
+    return collectionSortKeys(parse(stringify(value)), true);
   } else {
-    return JSON.parse(JSON.stringify(value));
+    return parse(stringify(value));
   }
 }
 /**
@@ -171,6 +171,22 @@ function objectKeys(object) {
   return Object.keys(object).sort((alpha, beta) => alpha.localeCompare(beta));
 }
 /**
+ * @name parse
+ * @param {String} text
+ * @returns *
+ */
+function parse(text) {
+  return JSON.parse(text);
+}
+/**
+ * @name stringify
+ * @param {*} value
+ * @returns String
+ */
+function stringify(value) {
+  return JSON.stringify(value);
+}
+/**
  * @name toString
  * @param {*} value
  * @returns String
@@ -228,6 +244,8 @@ function defaultsConfig(propertyDefaultValues = {}) {
   }
   return propertyDefaultValues;
 }
+
+//#region Defined
 /**
  * @name definedConfig
  * @throws TypeError
@@ -236,18 +254,51 @@ function defaultsConfig(propertyDefaultValues = {}) {
  */
 function definedConfig(propertiesMustBeDefined = []) {
   if (!Array.isArray(propertiesMustBeDefined)) {
-    throw new TypeError("'defined' should be an array");
+    throw new TypeError("'Defined' should be an array");
   }
   if (propertiesMustBeDefined.length === 0) {
     return [];
   }
   return arrayUnique(propertiesMustBeDefined).map((value) => {
     if (!isString(value)) {
-      throw new TypeError(`'defined' expect array of strings. Value: '${value.toString()}'.`);
+      throw new TypeError(`'Defined' expect array of strings. Value: '${stringify(value)}'.`);
     }
     return value;
   });
 }
+/**
+ * @name definedData
+ * @throws TypeError
+ * @param {String[]} propertiesMustBeDefined
+ * @param {Object} dataToSerialize
+ * @return {Object}
+ */
+function definedData(propertiesMustBeDefined = [], dataToSerialize) {
+  const config = definedConfig(propertiesMustBeDefined);
+  if (config.length === 0) {
+    return dataToSerialize;
+  }
+  config.forEach((key) => {
+    if (!(key in dataToSerialize)) {
+      throw new Error(`Field '${key}' must be defined.`);
+    }
+    if (dataToSerialize[key] === undefined) {
+      throw new Error(`Field '${key}' should have value.`);
+    }
+  });
+  return dataToSerialize;
+}
+/**
+ * @name defined
+ * @throws TypeError
+ * @param {Object} data
+ * @param {String[]} propertiesMustBeDefined
+ * @return {Object}
+ */
+function defined(data, propertiesMustBeDefined = []) {
+  return definedData(propertiesMustBeDefined, data);
+}
+//#endregion
 
 //#region Omit
 /**
@@ -265,7 +316,7 @@ function omitConfig(propertiesToOmit = []) {
   }
   return arrayUnique(propertiesToOmit).map((value) => {
     if (!isString(value)) {
-      throw new TypeError(`'Omit' expect array of strings. Value: '${JSON.stringify(value)}'.`);
+      throw new TypeError(`'Omit' expect array of strings. Value: '${stringify(value)}'.`);
     }
     return value;
   });
@@ -385,7 +436,7 @@ function requiredConfig(propertiesRequired = []) {
   }
   return arrayUnique(propertiesRequired).map((value) => {
     if (!isString(value)) {
-      throw new TypeError(`'Required' expect array of strings. Value: '${JSON.stringify(value)}'.`);
+      throw new TypeError(`'Required' expect array of strings. Value: '${stringify(value)}'.`);
     }
     return value;
   });
@@ -822,19 +873,7 @@ class Vicis {
     this.#dataCache = {};
     this.#dataCache = omitData(this.#omit, this.#dataOriginal);
     this.#dataCache = requiredData(this.#required, this.#dataCache);
-    // this.#required.forEach((key) => {
-    //   if (!(key in this.#dataCache)) {
-    //     throw new Error(`Field '${key}' is required.`);
-    //   }
-    // });
-    this.#defined.forEach((key) => {
-      if (!(key in this.#dataCache)) {
-        throw new Error(`Field '${key}' must be defined.`);
-      }
-      if (this.#dataCache[key] === undefined) {
-        throw new Error(`Field '${key}' should have value.`);
-      }
-    });
+    this.#dataCache = definedData(this.#defined, this.#dataCache);
     Object.keys(this.#cast).forEach((key) => {
       const castTo = this.#cast[key];
       if (!(key in this.#dataCache)) {
@@ -876,7 +915,7 @@ class Vicis {
           this.#dataCache[key] = toString(this.#dataCache[key]);
           break;
         case TYPES_ENUM.JSON:
-          this.#dataCache[key] = JSON.parse(JSON.stringify(this.#dataCache[key]));
+          this.#dataCache[key] = parse(stringify(this.#dataCache[key]));
           break;
         default:
           throw new Error("Unknown value convert error");
@@ -940,7 +979,7 @@ class Vicis {
    * @returns {String}
    */
   toString() {
-    return JSON.stringify(this.toJSON());
+    return stringify(this.toJSON());
   }
   //#endregion
 }
@@ -952,7 +991,7 @@ export {
   Vicis,
   castConfig,
   defaultsConfig,
-  definedConfig,
+  defined,
   omit,
   pickConfig,
   renameConfig,

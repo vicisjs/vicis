@@ -1,5 +1,5 @@
 import { Consono } from "consono/es";
-import { omit, required } from "./vicis.mjs";
+import { defined, omit, required } from "./vicis.mjs";
 
 const consono = Consono.factory(null, "light");
 
@@ -13,5 +13,6 @@ const data = {
 let res = null;
 res = omit(data, ["ok"]);
 res = required(data, ["id"]);
+res = defined(data, ["id"]);
 
 consono(res);
