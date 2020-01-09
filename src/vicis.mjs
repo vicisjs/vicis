@@ -147,6 +147,14 @@ function isFunction(value) {
   return Object.prototype.toString.call(value) === "[object Function]";
 }
 /**
+ * name isObjectEmpty
+ * @param {Object} object
+ * @returns {Boolean}
+ */
+function isObjectEmpty(object) {
+  return Object.keys(object).length === 0;
+}
+/**
  * name isObjectLike
  * @param {*} value
  * @returns {Boolean}
@@ -232,18 +240,52 @@ function castConfig(propertyToType = {}) {
   });
   return newConfig;
 }
+
+//#region Defaults
 /**
  * @name defaultsConfig
  * @throws TypeError
  * @param {Object<String, *>} propertyDefaultValues
  * @return {Object<String, *>}
  */
-function defaultsConfig(propertyDefaultValues = {}) {
+function defaultsConfig(propertyDefaultValues) {
   if (!isObjectLike(propertyDefaultValues)) {
-    throw new TypeError("'defaults' should be an object");
+    throw new TypeError("'Defaults' should be an object");
   }
   return propertyDefaultValues;
 }
+/**
+ * @name defaultsData
+ * @param {Object} propertyDefaultValues
+ * @param {Object} dataToSerialize
+ * @return {Object}
+ */
+function defaultsData(propertyDefaultValues, dataToSerialize) {
+  if (isObjectEmpty(propertyDefaultValues)) {
+    return dataToSerialize;
+  }
+  Object.keys(propertyDefaultValues).forEach((key) => {
+    if (!(key in dataToSerialize) || dataToSerialize[key] === undefined) {
+      dataToSerialize[key] = propertyDefaultValues[key];
+    }
+  });
+  return dataToSerialize;
+}
+/**
+ * @name defaults
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Object=} propertyDefaultValues
+ * @return {Object}
+ */
+function defaults(data, propertyDefaultValues = {}) {
+  const config = defaultsConfig(propertyDefaultValues);
+  if (Object.keys(config).length === 0) {
+    return data;
+  }
+  return defaultsData(propertyDefaultValues, data);
+}
+//#endregion
 
 //#region Defined
 /**
@@ -443,17 +485,15 @@ function requiredConfig(propertiesRequired = []) {
 }
 /**
  * @name required
- * @throws TypeError
  * @param {String[]} propertiesRequired
  * @param {Object} dataToSerialize
  * @return {Object}
  */
 function requiredData(propertiesRequired = [], dataToSerialize) {
-  const config = requiredConfig(propertiesRequired);
-  if (config.length === 0) {
+  if (propertiesRequired.length === 0) {
     return dataToSerialize;
   }
-  config.forEach((key) => {
+  propertiesRequired.forEach((key) => {
     if (!(key in dataToSerialize)) {
       throw new Error(`Field '${key}' is required.`);
     }
@@ -468,7 +508,11 @@ function requiredData(propertiesRequired = [], dataToSerialize) {
  * @return {Object}
  */
 function required(data, propertiesRequired = []) {
-  return requiredData(propertiesRequired, data);
+  const config = requiredConfig(propertiesRequired);
+  if (config.length === 0) {
+    return data;
+  }
+  return requiredData(config, data);
 }
 //#endregion
 
@@ -951,13 +995,7 @@ class Vicis {
       });
       this.#dataCache = newCache;
     }
-    if (Object.keys(this.#defaults).length > 0) {
-      Object.keys(this.#defaults).forEach((key) => {
-        if (!(key in this.#dataCache) || this.#dataCache[key] === undefined) {
-          this.#dataCache[key] = this.#defaults[key];
-        }
-      });
-    }
+    this.#dataCache = defaultsData(this.#defaults, this.#dataCache);
     this.#dataCache = castToJson(this.#dataCache, this.#sort);
     return this;
   }
@@ -990,7 +1028,7 @@ export {
   TYPES_ENUM,
   Vicis,
   castConfig,
-  defaultsConfig,
+  defaults,
   defined,
   omit,
   pickConfig,
