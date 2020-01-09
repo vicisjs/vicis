@@ -11,9 +11,9 @@ const data = {
   date: "2017-10-15",
 };
 let res = null;
-res = omit(data, ["ok"]);
-res = required(data, ["id"]);
-res = defined(data, ["id"]);
-res = defaults(data, { ok: true });
+// res = omit(data, ["ok"]);
+// res = required(data, ["id"]);
+// res = defined(data, ["id"]);
+// res = defaults(data, { ok: true });
 
 consono(res);

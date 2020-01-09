@@ -139,6 +139,14 @@ function collectionSortKeys(value, isDeep = true) {
   }, {});
 }
 /**
+ * name isArrayEmpty
+ * @param {Array} array
+ * @returns {Boolean}
+ */
+function isArrayEmpty(array) {
+  return array.length === 0;
+}
+/**
  * @name isFunction
  * @param {*} value
  * @returns {Boolean}
@@ -225,7 +233,7 @@ function castConfig(propertyToType = {}) {
   if (!isObjectLike(propertyToType)) {
     throw new TypeError("Cast should be an object");
   }
-  if (Object.keys(propertyToType).length === 0) {
+  if (isObjectEmpty(propertyToType)) {
     return {};
   }
   const newConfig = {};
@@ -280,7 +288,7 @@ function defaultsData(propertyDefaultValues, dataToSerialize) {
  */
 function defaults(data, propertyDefaultValues = {}) {
   const config = defaultsConfig(propertyDefaultValues);
-  if (Object.keys(config).length === 0) {
+  if (isObjectEmpty(config)) {
     return data;
   }
   return defaultsData(propertyDefaultValues, data);
@@ -294,11 +302,11 @@ function defaults(data, propertyDefaultValues = {}) {
  * @param {String[]} propertiesMustBeDefined
  * @return {String[]}
  */
-function definedConfig(propertiesMustBeDefined = []) {
+function definedConfig(propertiesMustBeDefined) {
   if (!Array.isArray(propertiesMustBeDefined)) {
     throw new TypeError("'Defined' should be an array");
   }
-  if (propertiesMustBeDefined.length === 0) {
+  if (isArrayEmpty(propertiesMustBeDefined)) {
     return [];
   }
   return arrayUnique(propertiesMustBeDefined).map((value) => {
@@ -315,9 +323,9 @@ function definedConfig(propertiesMustBeDefined = []) {
  * @param {Object} dataToSerialize
  * @return {Object}
  */
-function definedData(propertiesMustBeDefined = [], dataToSerialize) {
+function definedData(propertiesMustBeDefined, dataToSerialize) {
   const config = definedConfig(propertiesMustBeDefined);
-  if (config.length === 0) {
+  if (isArrayEmpty(config)) {
     return dataToSerialize;
   }
   config.forEach((key) => {
@@ -338,6 +346,9 @@ function definedData(propertiesMustBeDefined = [], dataToSerialize) {
  * @return {Object}
  */
 function defined(data, propertiesMustBeDefined = []) {
+  if (isArrayEmpty(propertiesMustBeDefined)) {
+    return data;
+  }
   return definedData(propertiesMustBeDefined, data);
 }
 //#endregion
@@ -349,11 +360,11 @@ function defined(data, propertiesMustBeDefined = []) {
  * @param {String[]} propertiesToOmit
  * @return {String[]}
  */
-function omitConfig(propertiesToOmit = []) {
+function omitConfig(propertiesToOmit) {
   if (!Array.isArray(propertiesToOmit)) {
     throw new TypeError("'Omit' should be an array");
   }
-  if (propertiesToOmit.length === 0) {
+  if (isArrayEmpty(propertiesToOmit)) {
     return [];
   }
   return arrayUnique(propertiesToOmit).map((value) => {
@@ -369,7 +380,10 @@ function omitConfig(propertiesToOmit = []) {
  * @param {Object} data
  * @return {Object}
  */
-function omitData(propertiesToOmit = [], data) {
+function omitData(propertiesToOmit, data) {
+  if (isArrayEmpty(propertiesToOmit)) {
+    return data;
+  }
   const dataToSerialize = {};
   Object.keys(data).forEach((key) => {
     if (propertiesToOmit.includes(key)) {
@@ -388,8 +402,8 @@ function omitData(propertiesToOmit = [], data) {
  */
 function omit(data, propertiesToOmit = []) {
   const config = omitConfig(propertiesToOmit);
-  if (config.length === 0) {
-    return { ...data };
+  if (isArrayEmpty(config)) {
+    return data;
   }
   const dataToSerialize = {};
   Object.keys(data).forEach((key) => {
@@ -412,7 +426,7 @@ function pickConfig(propertiesToPick = []) {
   if (!Array.isArray(propertiesToPick)) {
     throw new TypeError("'pick' should be an array");
   }
-  if (propertiesToPick.length === 0) {
+  if (isArrayEmpty(propertiesToPick)) {
     return [];
   }
   return arrayUnique(propertiesToPick).map((value) => {
@@ -432,7 +446,7 @@ function renameConfig(renamePropertyFromTo = {}) {
   if (!isObjectLike(renamePropertyFromTo)) {
     throw new TypeError("'rename' should be an object");
   }
-  if (Object.keys(renamePropertyFromTo).length === 0) {
+  if (isObjectEmpty(renamePropertyFromTo)) {
     return {};
   }
   const newConfig = {};
@@ -469,11 +483,11 @@ function replaceConfig(replacePropertyValues = {}) {
  * @param {String[]} propertiesRequired
  * @return {String[]}
  */
-function requiredConfig(propertiesRequired = []) {
+function requiredConfig(propertiesRequired) {
   if (!Array.isArray(propertiesRequired)) {
     throw new TypeError("'Required' should be an array");
   }
-  if (propertiesRequired.length === 0) {
+  if (isArrayEmpty(propertiesRequired)) {
     return [];
   }
   return arrayUnique(propertiesRequired).map((value) => {
@@ -484,13 +498,13 @@ function requiredConfig(propertiesRequired = []) {
   });
 }
 /**
- * @name required
+ * @name requiredData
  * @param {String[]} propertiesRequired
  * @param {Object} dataToSerialize
  * @return {Object}
  */
-function requiredData(propertiesRequired = [], dataToSerialize) {
-  if (propertiesRequired.length === 0) {
+function requiredData(propertiesRequired, dataToSerialize) {
+  if (isArrayEmpty(propertiesRequired)) {
     return dataToSerialize;
   }
   propertiesRequired.forEach((key) => {
@@ -509,7 +523,7 @@ function requiredData(propertiesRequired = [], dataToSerialize) {
  */
 function required(data, propertiesRequired = []) {
   const config = requiredConfig(propertiesRequired);
-  if (config.length === 0) {
+  if (isArrayEmpty(config)) {
     return data;
   }
   return requiredData(config, data);
@@ -526,7 +540,7 @@ function transformConfig(propertyValueTransformWith = {}) {
   if (!isObjectLike(propertyValueTransformWith)) {
     throw new TypeError("'transform' should be an object");
   }
-  if (Object.keys(propertyValueTransformWith).length === 0) {
+  if (isObjectEmpty(propertyValueTransformWith)) {
     return {};
   }
   const newConfig = {};
@@ -986,7 +1000,8 @@ class Vicis {
       delete this.#dataCache[key];
     });
     Object.assign(this.#dataCache, renamedData);
-    if (Object.keys(this.#pick).length > 0) {
+    this.#dataCache = defaultsData(this.#defaults, this.#dataCache);
+    if (!isObjectEmpty(this.#pick)) {
       let newCache = {};
       Object.keys(this.#dataCache).forEach((key) => {
         if (this.#pick.includes(key)) {
@@ -995,7 +1010,6 @@ class Vicis {
       });
       this.#dataCache = newCache;
     }
-    this.#dataCache = defaultsData(this.#defaults, this.#dataCache);
     this.#dataCache = castToJson(this.#dataCache, this.#sort);
     return this;
   }
