@@ -38,7 +38,7 @@ function arrayDiff(alpha, beta) {
  * @name arrayHasSame
  * @param {Array} alpha
  * @param {Array} beta
- * @returns {Boolean}
+ * @returns {boolean}
  */
 function arrayHasSame(alpha, beta) {
   if (!alpha.length || !beta.length) {
@@ -97,7 +97,7 @@ function arrayUnique(array) {
 /**
  * @name castToJson
  * @param {*} value
- * @param {Boolean=true} sort
+ * @param {boolean=true} sort
  * @returns {*}
  */
 function castToJson(value, sort = true) {
@@ -118,7 +118,7 @@ function clone(value) {
 /**
  * @name collectionSortKeys
  * @param {*} value
- * @param {Boolean=true} isDeep
+ * @param {boolean=true} isDeep
  * @returns {*}
  */
 function collectionSortKeys(value, isDeep = true) {
@@ -141,7 +141,7 @@ function collectionSortKeys(value, isDeep = true) {
 /**
  * name isArrayEmpty
  * @param {Array} array
- * @returns {Boolean}
+ * @returns {boolean}
  */
 function isArrayEmpty(array) {
   return array.length === 0;
@@ -149,7 +149,7 @@ function isArrayEmpty(array) {
 /**
  * @name isFunction
  * @param {*} value
- * @returns {Boolean}
+ * @returns {boolean}
  */
 function isFunction(value) {
   return Object.prototype.toString.call(value) === "[object Function]";
@@ -157,7 +157,7 @@ function isFunction(value) {
 /**
  * name isObjectEmpty
  * @param {Object} object
- * @returns {Boolean}
+ * @returns {boolean}
  */
 function isObjectEmpty(object) {
   return Object.keys(object).length === 0;
@@ -165,7 +165,7 @@ function isObjectEmpty(object) {
 /**
  * name isObjectLike
  * @param {*} value
- * @returns {Boolean}
+ * @returns {boolean}
  */
 function isObjectLike(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -173,7 +173,7 @@ function isObjectLike(value) {
 /**
  * @name isString
  * @param {*} value
- * @returns {Boolean}
+ * @returns {boolean}
  */
 function isString(value) {
   return typeof value === "string";
@@ -181,14 +181,14 @@ function isString(value) {
 /**
  * @name objectKeys
  * @param {Object} object
- * @returns {String[]}
+ * @returns {Array.<string>}
  */
 function objectKeys(object) {
   return Object.keys(object).sort((alpha, beta) => alpha.localeCompare(beta));
 }
 /**
  * @name parse
- * @param {String} text
+ * @param {string} text
  * @returns *
  */
 function parse(text) {
@@ -197,7 +197,7 @@ function parse(text) {
 /**
  * @name stringify
  * @param {*} value
- * @returns String
+ * @returns string
  */
 function stringify(value) {
   return JSON.stringify(value);
@@ -205,7 +205,7 @@ function stringify(value) {
 /**
  * @name toString
  * @param {*} value
- * @returns String
+ * @returns string
  */
 function toString(value) {
   if (!value) {
@@ -228,8 +228,8 @@ function toString(value) {
 /**
  * @name castConfig
  * @throws TypeError
- * @param {Object<String, String>} propertyToType
- * @return {Object<String, String>}
+ * @param {Object.<string, string>} propertyToType
+ * @returns {Object}
  */
 function castConfig(propertyToType) {
   if (!isObjectLike(propertyToType)) {
@@ -252,9 +252,9 @@ function castConfig(propertyToType) {
 }
 /**
  * @name castData
- * @param {Object<String, String>} propertyToType
+ * @param {Object.<string, string>} propertyToType
  * @param {Object} dataToSerialize
- * @return {Object}
+ * @returns {Object}
  */
 function castData(propertyToType, dataToSerialize) {
   if (isObjectEmpty(propertyToType)) {
@@ -313,8 +313,8 @@ function castData(propertyToType, dataToSerialize) {
  * @name cast
  * @throws TypeError
  * @param {Object} data
- * @param {Object<String, String>} propertyToType
- * @return {Object<String, String>}
+ * @param {Object.<string, string>=} propertyToType
+ * @returns {Object}
  */
 function cast(data, propertyToType = {}) {
   const config = castConfig(propertyToType);
@@ -329,8 +329,8 @@ function cast(data, propertyToType = {}) {
 /**
  * @name defaultsConfig
  * @throws TypeError
- * @param {Object<String, *>} propertyDefaultValues
- * @return {Object<String, *>}
+ * @param {Object.<string, *>} propertyDefaultValues
+ * @returns {Object}
  */
 function defaultsConfig(propertyDefaultValues) {
   if (!isObjectLike(propertyDefaultValues)) {
@@ -340,9 +340,9 @@ function defaultsConfig(propertyDefaultValues) {
 }
 /**
  * @name defaultsData
- * @param {Object} propertyDefaultValues
+ * @param {Object.<string, *>} propertyDefaultValues
  * @param {Object} dataToSerialize
- * @return {Object}
+ * @returns {Object}
  */
 function defaultsData(propertyDefaultValues, dataToSerialize) {
   if (isObjectEmpty(propertyDefaultValues)) {
@@ -359,8 +359,8 @@ function defaultsData(propertyDefaultValues, dataToSerialize) {
  * @name defaults
  * @throws TypeError
  * @param {Object} data
- * @param {Object=} propertyDefaultValues
- * @return {Object}
+ * @param {Object.<string, *>=} propertyDefaultValues
+ * @returns {Object}
  */
 function defaults(data, propertyDefaultValues = {}) {
   const config = defaultsConfig(propertyDefaultValues);
@@ -375,8 +375,8 @@ function defaults(data, propertyDefaultValues = {}) {
 /**
  * @name definedConfig
  * @throws TypeError
- * @param {String[]} propertiesMustBeDefined
- * @return {String[]}
+ * @param {Array.<string>} propertiesMustBeDefined
+ * @returns {Array.<string>}
  */
 function definedConfig(propertiesMustBeDefined) {
   if (!Array.isArray(propertiesMustBeDefined)) {
@@ -395,9 +395,9 @@ function definedConfig(propertiesMustBeDefined) {
 /**
  * @name definedData
  * @throws TypeError
- * @param {String[]} propertiesMustBeDefined
+ * @param {Array.<string>} propertiesMustBeDefined
  * @param {Object} dataToSerialize
- * @return {Object}
+ * @returns {Object}
  */
 function definedData(propertiesMustBeDefined, dataToSerialize) {
   const config = definedConfig(propertiesMustBeDefined);
@@ -418,8 +418,8 @@ function definedData(propertiesMustBeDefined, dataToSerialize) {
  * @name defined
  * @throws TypeError
  * @param {Object} data
- * @param {String[]} propertiesMustBeDefined
- * @return {Object}
+ * @param {Array.<string>=} propertiesMustBeDefined
+ * @returns {Object}
  */
 function defined(data, propertiesMustBeDefined = []) {
   if (isArrayEmpty(propertiesMustBeDefined)) {
@@ -433,8 +433,8 @@ function defined(data, propertiesMustBeDefined = []) {
 /**
  * @name omitConfig
  * @throws TypeError
- * @param {String[]} propertiesToOmit
- * @return {String[]}
+ * @param {Array.<string>} propertiesToOmit
+ * @returns {Array.<string>}
  */
 function omitConfig(propertiesToOmit) {
   if (!Array.isArray(propertiesToOmit)) {
@@ -452,9 +452,9 @@ function omitConfig(propertiesToOmit) {
 }
 /**
  * @name omitData
- * @param {String[]} propertiesToOmit
+ * @param {Array.<string>} propertiesToOmit
  * @param {Object} data
- * @return {Object}
+ * @returns {Object}
  */
 function omitData(propertiesToOmit, data) {
   if (isArrayEmpty(propertiesToOmit)) {
@@ -473,8 +473,8 @@ function omitData(propertiesToOmit, data) {
  * @name omit
  * @throws TypeError
  * @param {Object} data
- * @param {String[]} propertiesToOmit
- * @return {Object}
+ * @param {Array.<string>=} propertiesToOmit
+ * @returns {Object}
  */
 function omit(data, propertiesToOmit = []) {
   const config = omitConfig(propertiesToOmit);
@@ -496,8 +496,8 @@ function omit(data, propertiesToOmit = []) {
 /**
  * @name pickConfig
  * @throws TypeError
- * @param {String[]} propertiesToPick
- * @return {String[]}
+ * @param {Array.<string>} propertiesToPick
+ * @returns {Array.<string>}
  */
 function pickConfig(propertiesToPick) {
   if (!Array.isArray(propertiesToPick)) {
@@ -515,9 +515,9 @@ function pickConfig(propertiesToPick) {
 }
 /**
  * @name pickData
- * @param {String[]} propertiesToPick
+ * @param {Array.<string>} propertiesToPick
  * @param {Object} dataToSerialize
- * @return {Object}
+ * @returns {Object}
  */
 function pickData(propertiesToPick, dataToSerialize) {
   if (isArrayEmpty(propertiesToPick)) {
@@ -535,8 +535,8 @@ function pickData(propertiesToPick, dataToSerialize) {
  * @name pick
  * @throws TypeError
  * @param {Object} data
- * @param {String[]} propertiesToPick
- * @return {Object}
+ * @param {Array.<string>=} propertiesToPick
+ * @returns {Object}
  */
 function pick(data, propertiesToPick = []) {
   const config = pickConfig(propertiesToPick);
@@ -551,8 +551,8 @@ function pick(data, propertiesToPick = []) {
 /**
  * @name renameConfig
  * @throws TypeError
- * @param {Object<String, String>} renamePropertyFromTo
- * @return {Object<String, String>}
+ * @param {Object.<string, string>} renamePropertyFromTo
+ * @returns {Object}
  */
 function renameConfig(renamePropertyFromTo) {
   if (!isObjectLike(renamePropertyFromTo)) {
@@ -575,9 +575,9 @@ function renameConfig(renamePropertyFromTo) {
 }
 /**
  * @name renameData
- * @param {Object<String, String>} renamePropertyFromTo
+ * @param {Object.<string, string>} renamePropertyFromTo
  * @param {Object} dataToSerialize
- * @return {Object}
+ * @returns {Object}
  */
 function renameData(renamePropertyFromTo, dataToSerialize) {
   if (isObjectEmpty(renamePropertyFromTo)) {
@@ -600,8 +600,8 @@ function renameData(renamePropertyFromTo, dataToSerialize) {
 /**
  * @name rename
  * @param {Object} data
- * @param {Object<String, String>} renamePropertyFromTo
- * @return {Object}
+ * @param {Object.<string, string>=} renamePropertyFromTo
+ * @returns {Object}
  */
 function rename(data, renamePropertyFromTo = {}) {
   const config = renameConfig(renamePropertyFromTo);
@@ -616,8 +616,8 @@ function rename(data, renamePropertyFromTo = {}) {
 /**
  * @name replaceConfig
  * @throws TypeError
- * @param {Object<String, *>} replacePropertyValues
- * @return {Object<String, *>}
+ * @param {Object.<string, *>} replacePropertyValues
+ * @returns {Object}
  */
 function replaceConfig(replacePropertyValues) {
   if (!isObjectLike(replacePropertyValues)) {
@@ -627,9 +627,9 @@ function replaceConfig(replacePropertyValues) {
 }
 /**
  * @name replaceData
- * @param {Object<String, *>} replacePropertyValues
+ * @param {Object.<string, *>} replacePropertyValues
  * @param {Object} dataToSerialize
- * @return {Object}
+ * @returns {Object}
  */
 function replaceData(replacePropertyValues, dataToSerialize) {
   if (isObjectEmpty(replacePropertyValues)) {
@@ -644,8 +644,8 @@ function replaceData(replacePropertyValues, dataToSerialize) {
  * @name replace
  * @throws TypeError
  * @param {Object} data
- * @param {Object<String, *>} replacePropertyValues
- * @return {Object}
+ * @param {Object.<string, *>=} replacePropertyValues
+ * @returns {Object}
  */
 function replace(data, replacePropertyValues = {}) {
   const config = replaceConfig(replacePropertyValues);
@@ -660,8 +660,8 @@ function replace(data, replacePropertyValues = {}) {
 /**
  * @name requiredConfig
  * @throws TypeError
- * @param {String[]} propertiesRequired
- * @return {String[]}
+ * @param {Array.<string>} propertiesRequired
+ * @returns {Array.<string>}
  */
 function requiredConfig(propertiesRequired) {
   if (!Array.isArray(propertiesRequired)) {
@@ -679,9 +679,9 @@ function requiredConfig(propertiesRequired) {
 }
 /**
  * @name requiredData
- * @param {String[]} propertiesRequired
+ * @param {Array.<string>} propertiesRequired
  * @param {Object} dataToSerialize
- * @return {Object}
+ * @returns {Object}
  */
 function requiredData(propertiesRequired, dataToSerialize) {
   if (isArrayEmpty(propertiesRequired)) {
@@ -698,8 +698,8 @@ function requiredData(propertiesRequired, dataToSerialize) {
  * @name required
  * @throws TypeError
  * @param {Object} data
- * @param {String[]} propertiesRequired
- * @return {Object}
+ * @param {Array.<string>=} propertiesRequired
+ * @returns {Object}
  */
 function required(data, propertiesRequired = []) {
   const config = requiredConfig(propertiesRequired);
@@ -714,8 +714,8 @@ function required(data, propertiesRequired = []) {
 /**
  * @name transformConfig
  * @throws TypeError
- * @param {Object<String, Function>} propertyValueTransformWith
- * @return {Object<String, Function>}
+ * @param {Object.<string, function>} propertyValueTransformWith
+ * @returns {Object}
  */
 function transformConfig(propertyValueTransformWith) {
   if (!isObjectLike(propertyValueTransformWith)) {
@@ -733,9 +733,9 @@ function transformConfig(propertyValueTransformWith) {
 }
 /**
  * @name transformData
- * @param {Object<String, Function>} propertyValueTransformWith
+ * @param {Object.<string, function>} propertyValueTransformWith
  * @param {Object} dataToSerialize
- * @return {Object}
+ * @returns {Object}
  */
 function transformData(propertyValueTransformWith, dataToSerialize) {
   if (isObjectEmpty(propertyValueTransformWith)) {
@@ -752,8 +752,8 @@ function transformData(propertyValueTransformWith, dataToSerialize) {
 /**
  * @name transform
  * @param {Object} data
- * @param {Object<String, Function>} propertyValueTransformWith
- * @return {Object}
+ * @param {Object.<string, function>=} propertyValueTransformWith
+ * @returns {Object}
  */
 function transform(data, propertyValueTransformWith = {}) {
   const config = transformConfig(propertyValueTransformWith);
@@ -772,61 +772,61 @@ class Vicis {
   /**
    * @name cast
    * @private
-   * @type Object
+   * @type {Object}
    */
   #cast = {};
   /**
    * @name defaults
    * @private
-   * @type Object
+   * @type {Object}
    */
   #defaults = [];
   /**
    * @name defined
    * @private
-   * @type Array
+   * @type {Array.<string>}
    */
   #defined = [];
   /**
    * @name pick
    * @private
-   * @type Array
+   * @type {Array.<string>}
    */
   #omit = [];
   /**
    * @name pick
    * @private
-   * @type Array
+   * @type {Array.<string>}
    */
   #pick = [];
   /**
    * @name sort
    * @private
-   * @type Boolean
+   * @type {boolean}
    */
   #sort = true;
   /**
    * @name rename
    * @private
-   * @type Object
+   * @type {Object}
    */
   #rename = {};
   /**
    * @name replace
    * @private
-   * @type Object
+   * @type {Object}
    */
   #replace = {};
   /**
    * @name required
    * @private
-   * @type Array
+   * @type {Array.<string>}
    */
   #required = [];
   /**
    * @name transform
    * @private
-   * @type Object
+   * @type {Object}
    */
   #transform = {};
   //#endregion
@@ -835,13 +835,13 @@ class Vicis {
   /**
    * @name dataCache
    * @private
-   * @type Object
+   * @type {Object}
    */
   #dataCache = {};
   /**
    * @name dataOriginal
    * @private
-   * @type Object
+   * @type {Object}
    */
   #dataOriginal = {};
   //#endregion
@@ -852,9 +852,13 @@ class Vicis {
    * @public
    * @constructor
    * @param {Object=} config
+   * @param {Object=} data
    */
-  constructor(config = {}) {
+  constructor(config = {}, data) {
     this.config(config);
+    if (data !== undefined) {
+      this.data(data);
+    }
   }
   //#endregion
 
@@ -865,10 +869,11 @@ class Vicis {
    * @static
    * @factory
    * @param {Object=} config
+   * @param {Object=} data
    * @returns {Vicis}
    */
-  static factory(config = {}) {
-    return new Vicis(config);
+  static factory(config = {}, data) {
+    return new Vicis(config, data);
   }
   //#endregion
 
@@ -876,7 +881,7 @@ class Vicis {
   /**
    * @name getConfig
    * @public
-   * @type {Object}
+   * @returns {Object}
    */
   getConfig() {
     return clone({
@@ -895,7 +900,7 @@ class Vicis {
   /**
    * @name resetConfig
    * @public
-   * @return {Vicis}
+   * @returns {Vicis}
    */
   resetConfig() {
     this.#cast = {};
@@ -914,8 +919,8 @@ class Vicis {
    * @name config
    * @public
    * @throws TypeError
-   * @param {Object<String, *>} config
-   * @return {Vicis}
+   * @param {Object=} config
+   * @returns {Vicis}
    */
   config(config = {}) {
     if (!isObjectLike(config)) {
@@ -943,8 +948,8 @@ class Vicis {
    * @name cast
    * @public
    * @throws TypeError
-   * @param {Object<String, String>} propertyToType
-   * @return {Vicis}
+   * @param {Object=} propertyToType
+   * @returns {Vicis}
    */
   cast(propertyToType = {}) {
     this.#cast = castConfig(propertyToType);
@@ -955,8 +960,8 @@ class Vicis {
    * @name defaults
    * @public
    * @throws TypeError
-   * @param {Object<String, *>} propertyDefaultValues
-   * @return {Vicis}
+   * @param {Object=} propertyDefaultValues
+   * @returns {Vicis}
    */
   defaults(propertyDefaultValues = {}) {
     this.#defaults = defaultsConfig(propertyDefaultValues); // do not deep clone!
@@ -967,8 +972,8 @@ class Vicis {
    * @name defined
    * @public
    * @throws TypeError
-   * @param {String[]} propertiesMustBeDefined
-   * @return {Vicis}
+   * @param {Array.<string>=} propertiesMustBeDefined
+   * @returns {Vicis}
    */
   defined(propertiesMustBeDefined = []) {
     this.#defined = definedConfig(propertiesMustBeDefined);
@@ -979,8 +984,8 @@ class Vicis {
    * @name omit
    * @public
    * @throws TypeError
-   * @param {String[]} propertiesToOmit
-   * @return {Vicis}
+   * @param {Array.<string>=} propertiesToOmit
+   * @returns {Vicis}
    */
   omit(propertiesToOmit = []) {
     this.#omit = omitConfig(propertiesToOmit);
@@ -991,8 +996,8 @@ class Vicis {
    * @name pick
    * @public
    * @throws TypeError
-   * @param {String[]} propertiesToPick
-   * @return {Vicis}
+   * @param {Array.<string>=} propertiesToPick
+   * @returns {Vicis}
    */
   pick(propertiesToPick = []) {
     this.#pick = pickConfig(propertiesToPick);
@@ -1003,8 +1008,8 @@ class Vicis {
    * @name rename
    * @public
    * @throws TypeError
-   * @param {Object<String, String>} renamePropertyFromTo
-   * @return {Vicis}
+   * @param {Object=} renamePropertyFromTo
+   * @returns {Vicis}
    */
   rename(renamePropertyFromTo = {}) {
     this.#rename = renameConfig(renamePropertyFromTo);
@@ -1015,8 +1020,8 @@ class Vicis {
    * @name replace
    * @public
    * @throws TypeError
-   * @param {Object<String, *>} replacePropertyValues
-   * @return {Vicis}
+   * @param {Object=} replacePropertyValues
+   * @returns {Vicis}
    */
   replace(replacePropertyValues = {}) {
     this.#replace = replaceConfig(replacePropertyValues); // do not deep clone!
@@ -1027,8 +1032,8 @@ class Vicis {
    * @name required
    * @public
    * @throws TypeError
-   * @param {String[]} propertiesRequired
-   * @return {Vicis}
+   * @param {Array.<string>=} propertiesRequired
+   * @returns {Vicis}
    */
   required(propertiesRequired = []) {
     this.#required = requiredConfig(propertiesRequired);
@@ -1039,8 +1044,8 @@ class Vicis {
    * @name sort
    * @public
    * @throws TypeError
-   * @param {Boolean} sortProperties
-   * @return {Vicis}
+   * @param {boolean=} sortProperties
+   * @returns {Vicis}
    */
   sort(sortProperties = true) {
     if (typeof sortProperties !== "boolean") {
@@ -1053,8 +1058,8 @@ class Vicis {
    * @name transform
    * @public
    * @throws TypeError
-   * @param {Object<String, Function>} propertyValueTransformWith
-   * @return {Vicis}
+   * @param {Object=} propertyValueTransformWith
+   * @returns {Vicis}
    */
   transform(propertyValueTransformWith = {}) {
     this.#transform = transformConfig(propertyValueTransformWith); // do not deep clone!
@@ -1063,9 +1068,9 @@ class Vicis {
   }
   /**
    * @name validateConfig
-   * @protected
+   * @private
    * @throws Error
-   * @return {Vicis}
+   * @returns {Vicis}
    */
   validateConfig() {
     const cast = objectKeys(this.#cast);
@@ -1113,7 +1118,7 @@ class Vicis {
   /**
    * @name getData
    * @public
-   * @return {Object}
+   * @returns {Object}
    */
   getData() {
     return clone(this.#dataCache);
@@ -1123,7 +1128,7 @@ class Vicis {
    * @public
    * @throws TypeError
    * @param {Object} dataToSerialize
-   * @return {Vicis}
+   * @returns {Vicis}
    */
   data(dataToSerialize) {
     if (!isObjectLike(dataToSerialize)) {
@@ -1135,9 +1140,9 @@ class Vicis {
   }
   /**
    * @name validateData
-   * @protected
+   * @private
    * @throws Error
-   * @return {Vicis}
+   * @returns {Vicis}
    */
   validateData() {
     this.#dataCache = {};
@@ -1153,8 +1158,8 @@ class Vicis {
     this.#dataCache = castToJson(this.#dataCache, this.#sort);
     return this;
   }
-  //#endregion
 
+  //#endregion
   //#region Public Main Methods
   /**
    * @name toJSON
@@ -1167,7 +1172,7 @@ class Vicis {
   /**
    * @name toString
    * @public
-   * @returns {String}
+   * @returns {string}
    */
   toString() {
     return stringify(this.toJSON());
@@ -1177,4 +1182,5 @@ class Vicis {
 //#endregion
 
 export default Vicis;
+
 export { TYPES_ENUM, Vicis, cast, defaults, defined, omit, pick, rename, replace, required, transform };

@@ -48,7 +48,7 @@
     "url": "git+https://github.com/r37r0m0d3l/vicis.git"
   },
   "scripts": {
-    "lint": "npx eslint ./src/vicis.js",
+    "lint": "npx eslint ./src/vicis.mjs",
     "test": "jest"
   },
   "type": "module",
