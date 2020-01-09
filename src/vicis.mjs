@@ -192,14 +192,14 @@ function toString(value) {
 
 //#region Mixin Functions
 /**
- * @name cast
+ * @name castConfig
  * @throws TypeError
  * @param {Object<String, String>} propertyToType
  * @return {Object<String, String>}
  */
-function cast(propertyToType = {}) {
+function castConfig(propertyToType = {}) {
   if (!isObjectLike(propertyToType)) {
-    throw new TypeError("'cast' should be an object");
+    throw new TypeError("Cast should be an object");
   }
   if (Object.keys(propertyToType).length === 0) {
     return {};
@@ -207,34 +207,34 @@ function cast(propertyToType = {}) {
   const newConfig = {};
   Object.keys(propertyToType).forEach((key) => {
     if (!isString(propertyToType[key])) {
-      throw new TypeError(`'cast' expect object values to be strings. Not a string at key: '${propertyToType[key]}'.`);
+      throw new TypeError(`Cast expect object values to be strings. Not a string at key: '${propertyToType[key]}'.`);
     }
     if (!TYPES_LIST.includes(propertyToType[key])) {
-      throw new TypeError(`'cast' has unknown type in {${key}: "${propertyToType[key]}"}.`);
+      throw new TypeError(`Cast has unknown type in {${key}: "${propertyToType[key]}"}.`);
     }
     newConfig[key] = propertyToType[key];
   });
   return newConfig;
 }
 /**
- * @name defaults
+ * @name defaultsConfig
  * @throws TypeError
  * @param {Object<String, *>} propertyDefaultValues
  * @return {Object<String, *>}
  */
-function defaults(propertyDefaultValues = {}) {
+function defaultsConfig(propertyDefaultValues = {}) {
   if (!isObjectLike(propertyDefaultValues)) {
     throw new TypeError("'defaults' should be an object");
   }
   return propertyDefaultValues;
 }
 /**
- * @name defined
+ * @name definedConfig
  * @throws TypeError
  * @param {String[]} propertiesMustBeDefined
  * @return {String[]}
  */
-function defined(propertiesMustBeDefined = []) {
+function definedConfig(propertiesMustBeDefined = []) {
   if (!Array.isArray(propertiesMustBeDefined)) {
     throw new TypeError("'defined' should be an array");
   }
@@ -248,33 +248,74 @@ function defined(propertiesMustBeDefined = []) {
     return value;
   });
 }
+
+//#region Omit
 /**
- * @name omit
+ * @name omitConfig
  * @throws TypeError
  * @param {String[]} propertiesToOmit
  * @return {String[]}
  */
-function omit(propertiesToOmit = []) {
+function omitConfig(propertiesToOmit = []) {
   if (!Array.isArray(propertiesToOmit)) {
-    throw new TypeError("'omit' should be an array");
+    throw new TypeError("Omit should be an array");
   }
   if (propertiesToOmit.length === 0) {
     return [];
   }
   return arrayUnique(propertiesToOmit).map((value) => {
     if (!isString(value)) {
-      throw new TypeError(`'omit' expect array of strings. Value: '${value.toString()}'.`);
+      throw new TypeError(`Omit expect array of strings. Value: '${JSON.stringify(value)}'.`);
     }
     return value;
   });
 }
 /**
- * @name pick
+ * @name omitData
+ * @param {String[]} propertiesToOmit
+ * @param {Object} dataToSerialize
+ * @return {Object}
+ */
+function omitData(propertiesToOmit = [], dataToSerialize) {
+  const data = {};
+  Object.keys(dataToSerialize).forEach((key) => {
+    if (propertiesToOmit.includes(key)) {
+      return;
+    }
+    data[key] = dataToSerialize[key];
+  });
+  return data;
+}
+/**
+ * @name omit
+ * @throws TypeError
+ * @param {Object} dataToSerialize
+ * @param {String[]} propertiesToOmit
+ * @return {Object}
+ */
+function omit(dataToSerialize, propertiesToOmit = []) {
+  const config = omitConfig(propertiesToOmit);
+  if (config.length === 0) {
+    return { ...dataToSerialize };
+  }
+  const data = {};
+  Object.keys(dataToSerialize).forEach((key) => {
+    if (config.includes(key)) {
+      return;
+    }
+    data[key] = dataToSerialize[key];
+  });
+  return data;
+}
+//#endregion
+
+/**
+ * @name pickConfig
  * @throws TypeError
  * @param {String[]} propertiesToPick
  * @return {String[]}
  */
-function pick(propertiesToPick = []) {
+function pickConfig(propertiesToPick = []) {
   if (!Array.isArray(propertiesToPick)) {
     throw new TypeError("'pick' should be an array");
   }
@@ -289,12 +330,12 @@ function pick(propertiesToPick = []) {
   });
 }
 /**
- * @name rename
+ * @name renameConfig
  * @throws TypeError
  * @param {Object<String, String>} renamePropertyFromTo
  * @return {Object<String, String>}
  */
-function rename(renamePropertyFromTo = {}) {
+function renameConfig(renamePropertyFromTo = {}) {
   if (!isObjectLike(renamePropertyFromTo)) {
     throw new TypeError("'rename' should be an object");
   }
@@ -316,24 +357,24 @@ function rename(renamePropertyFromTo = {}) {
   return newConfig;
 }
 /**
- * @name replace
+ * @name replaceConfig
  * @throws TypeError
  * @param {Object<String, *>} replacePropertyValues
  * @return {Object<String, *>}
  */
-function replace(replacePropertyValues = {}) {
+function replaceConfig(replacePropertyValues = {}) {
   if (!isObjectLike(replacePropertyValues)) {
     throw new TypeError("'replace' should be an object");
   }
   return replacePropertyValues;
 }
 /**
- * @name required
+ * @name requiredConfig
  * @throws TypeError
  * @param {String[]} propertiesRequired
  * @return {String[]}
  */
-function required(propertiesRequired = []) {
+function requiredConfig(propertiesRequired = []) {
   if (!Array.isArray(propertiesRequired)) {
     throw new TypeError("'required' should be an array");
   }
@@ -348,12 +389,12 @@ function required(propertiesRequired = []) {
   });
 }
 /**
- * @name transform
+ * @name transformConfig
  * @throws TypeError
  * @param {Object<String, Function>} propertyValueTransformWith
  * @return {Object<String, Function>}
  */
-function transform(propertyValueTransformWith = {}) {
+function transformConfig(propertyValueTransformWith = {}) {
   if (!isObjectLike(propertyValueTransformWith)) {
     throw new TypeError("'transform' should be an object");
   }
@@ -552,7 +593,7 @@ class Vicis {
    * @return {Vicis}
    */
   cast(propertyToType = {}) {
-    this.#cast = cast(propertyToType);
+    this.#cast = castConfig(propertyToType);
     this.validateConfig();
     return this;
   }
@@ -564,7 +605,7 @@ class Vicis {
    * @return {Vicis}
    */
   defaults(propertyDefaultValues = {}) {
-    this.#defaults = defaults(propertyDefaultValues); // do not deep clone!
+    this.#defaults = defaultsConfig(propertyDefaultValues); // do not deep clone!
     this.validateConfig();
     return this;
   }
@@ -576,7 +617,7 @@ class Vicis {
    * @return {Vicis}
    */
   defined(propertiesMustBeDefined = []) {
-    this.#defined = defined(propertiesMustBeDefined);
+    this.#defined = definedConfig(propertiesMustBeDefined);
     this.validateConfig();
     return this;
   }
@@ -588,7 +629,7 @@ class Vicis {
    * @return {Vicis}
    */
   omit(propertiesToOmit = []) {
-    this.#omit = omit(propertiesToOmit);
+    this.#omit = omitConfig(propertiesToOmit);
     this.validateConfig();
     return this;
   }
@@ -600,7 +641,7 @@ class Vicis {
    * @return {Vicis}
    */
   pick(propertiesToPick = []) {
-    this.#pick = pick(propertiesToPick);
+    this.#pick = pickConfig(propertiesToPick);
     this.validateConfig();
     return this;
   }
@@ -612,7 +653,7 @@ class Vicis {
    * @return {Vicis}
    */
   rename(renamePropertyFromTo = {}) {
-    this.#rename = rename(renamePropertyFromTo);
+    this.#rename = renameConfig(renamePropertyFromTo);
     this.validateConfig();
     return this;
   }
@@ -624,7 +665,7 @@ class Vicis {
    * @return {Vicis}
    */
   replace(replacePropertyValues = {}) {
-    this.#replace = replace(replacePropertyValues); // do not deep clone!
+    this.#replace = replaceConfig(replacePropertyValues); // do not deep clone!
     this.validateConfig();
     return this;
   }
@@ -636,7 +677,7 @@ class Vicis {
    * @return {Vicis}
    */
   required(propertiesRequired = []) {
-    this.#required = required(propertiesRequired);
+    this.#required = requiredConfig(propertiesRequired);
     this.validateConfig();
     return this;
   }
@@ -662,7 +703,7 @@ class Vicis {
    * @return {Vicis}
    */
   transform(propertyValueTransformWith = {}) {
-    this.#transform = transform(propertyValueTransformWith); // do not deep clone!
+    this.#transform = transformConfig(propertyValueTransformWith); // do not deep clone!
     this.validateConfig();
     return this;
   }
@@ -746,12 +787,7 @@ class Vicis {
    */
   validateData() {
     this.#dataCache = {};
-    Object.keys(this.#dataOriginal).forEach((key) => {
-      if (this.#omit.includes(key)) {
-        return;
-      }
-      this.#dataCache[key] = this.#dataOriginal[key];
-    });
+    this.#dataCache = omitData(this.#omit, this.#dataOriginal);
     this.#required.forEach((key) => {
       if (!(key in this.#dataCache)) {
         throw new Error(`Field '${key}' is required.`);
@@ -877,4 +913,16 @@ class Vicis {
 //#endregion
 
 export default Vicis;
-export { TYPES_ENUM, Vicis, cast, defaults, defined, omit, pick, rename, replace, required, transform };
+export {
+  TYPES_ENUM,
+  Vicis,
+  castConfig,
+  defaultsConfig,
+  definedConfig,
+  omit,
+  pickConfig,
+  renameConfig,
+  replaceConfig,
+  requiredConfig,
+  transformConfig,
+};

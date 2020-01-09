@@ -19,7 +19,7 @@ try {
     .defaults({ ok: true })
     .defined(["id"])
     .omit(["hidden"])
-    .pick(["date", "domain", "ID", "ok"])
+    // .pick(["date", "domain", "ID", "ok", "hidden"])
     .rename({ id: "ID" })
     .replace({ domain: "secondary" })
     .required(["id"])
@@ -30,5 +30,5 @@ try {
   consono(response.toJSON());
   response.getConfig();
 } catch (error) {
-  console.error(error.message);
+  console.error(error);
 }
