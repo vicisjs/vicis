@@ -471,33 +471,70 @@ function pick(data, propertiesToPick = []) {
 }
 //#endregion
 
+//#region Rename
 /**
  * @name renameConfig
  * @throws TypeError
  * @param {Object<String, String>} renamePropertyFromTo
  * @return {Object<String, String>}
  */
-function renameConfig(renamePropertyFromTo = {}) {
+function renameConfig(renamePropertyFromTo) {
   if (!isObjectLike(renamePropertyFromTo)) {
-    throw new TypeError("'rename' should be an object");
+    throw new TypeError("'Rename' should be an object");
   }
   if (isObjectEmpty(renamePropertyFromTo)) {
     return {};
   }
-  const newConfig = {};
   Object.keys(renamePropertyFromTo).forEach((key) => {
     if (!isString(key)) {
-      throw new TypeError(`'rename' expect object values to be strings. Not a string at key: '${key}'.`);
+      throw new TypeError(`'Rename' expect object values to be strings. Not a string at key: '${key}'.`);
     }
-    newConfig[key] = renamePropertyFromTo[key];
   });
-  const to = Object.values(newConfig);
+  const to = Object.values(renamePropertyFromTo);
   const toUnique = arrayUnique(to);
   if (to.length !== toUnique.length) {
-    throw new TypeError(`'rename' has similar values: '${toUnique.join(", ")}'.`);
+    throw new TypeError(`'Rename' has similar values: '${stringify(toUnique)}'.`);
   }
-  return newConfig;
+  return renamePropertyFromTo;
 }
+/**
+ * @name renameData
+ * @param {Object<String, String>} renamePropertyFromTo
+ * @param {Object} dataToSerialize
+ * @return {Object}
+ */
+function renameData(renamePropertyFromTo, dataToSerialize) {
+  if (isObjectEmpty(renamePropertyFromTo)) {
+    return dataToSerialize;
+  }
+  const renameFrom = Object.keys(renamePropertyFromTo).sort((alpha, beta) => alpha.localeCompare(beta));
+  const renamedData = {};
+  renameFrom.forEach((key) => {
+    if (!(key in dataToSerialize)) {
+      throw new Error(`Field '${key}' suppose to be renamed.`);
+    }
+    renamedData[renamePropertyFromTo[key]] = dataToSerialize[key];
+  });
+  renameFrom.forEach((key) => {
+    delete dataToSerialize[key];
+  });
+  Object.assign(dataToSerialize, renamedData);
+  return dataToSerialize;
+}
+/**
+ * @name rename
+ * @param {Object} data
+ * @param {Object<String, String>} renamePropertyFromTo
+ * @return {Object}
+ */
+function rename(data, renamePropertyFromTo = {}) {
+  const config = renameConfig(renamePropertyFromTo);
+  if (isObjectEmpty(config)) {
+    return data;
+  }
+  return renameData(config, data);
+}
+//#endregion
 
 //#region Replace
 /**
@@ -1080,18 +1117,7 @@ class Vicis {
     });
     this.#dataCache = transformData(this.#transform, this.#dataCache);
     this.#dataCache = replaceData(this.#replace, this.#dataCache);
-    const renameFrom = Object.keys(this.#rename).sort((alpha, beta) => alpha.localeCompare(beta));
-    const renamedData = {};
-    renameFrom.forEach((key) => {
-      if (!(key in this.#dataCache)) {
-        throw new Error(`Field '${key}' suppose to be renamed.`);
-      }
-      renamedData[this.#rename[key]] = this.#dataCache[key];
-    });
-    renameFrom.forEach((key) => {
-      delete this.#dataCache[key];
-    });
-    Object.assign(this.#dataCache, renamedData);
+    this.#dataCache = renameData(this.#rename, this.#dataCache);
     this.#dataCache = defaultsData(this.#defaults, this.#dataCache);
     this.#dataCache = pickData(this.#pick, this.#dataCache);
     this.#dataCache = castToJson(this.#dataCache, this.#sort);
@@ -1121,4 +1147,4 @@ class Vicis {
 //#endregion
 
 export default Vicis;
-export { TYPES_ENUM, Vicis, castConfig, defaults, defined, omit, pick, renameConfig, replace, required, transform };
+export { TYPES_ENUM, Vicis, castConfig, defaults, defined, omit, pick, rename, replace, required, transform };

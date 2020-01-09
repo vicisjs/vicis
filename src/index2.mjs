@@ -1,5 +1,5 @@
 import { Consono } from "consono/es";
-import { defaults, defined, omit, pick, replace, required, transform } from "./vicis.mjs";
+import { defaults, defined, omit, pick, rename, replace, required, transform } from "./vicis.mjs";
 
 const consono = Consono.factory(null, "light");
 
@@ -20,5 +20,6 @@ res = replace(data, { domain: "secondary" });
 res = transform(data, {
   date: (value) => new Date(value),
 });
+res = rename(data, { id: "ID" });
 
 consono(res);
