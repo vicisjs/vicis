@@ -1,9 +1,9 @@
-const Vicis = require("../src/vicis.js").default;
+const Vicis = require("../dist/vicis.cjs").default;
 
 describe("calling and printing", () => {
   it("should not crash on call", () => {
     const log = jest.spyOn(console, "log").mockImplementation((any) => any);
     const vicis = new Vicis({});
-    expect(vicis.hasErrors()).toBe(false);
+    expect(vicis.getConfig().sort).toBe(true);
   });
 });
