@@ -597,28 +597,60 @@ function required(data, propertiesRequired = []) {
 }
 //#endregion
 
+//#region Transform
 /**
  * @name transformConfig
  * @throws TypeError
  * @param {Object<String, Function>} propertyValueTransformWith
  * @return {Object<String, Function>}
  */
-function transformConfig(propertyValueTransformWith = {}) {
+function transformConfig(propertyValueTransformWith) {
   if (!isObjectLike(propertyValueTransformWith)) {
-    throw new TypeError("'transform' should be an object");
+    throw new TypeError("'Transform' should be an object");
   }
   if (isObjectEmpty(propertyValueTransformWith)) {
     return {};
   }
-  const newConfig = {};
   Object.keys(propertyValueTransformWith).forEach((key) => {
     if (!isFunction(propertyValueTransformWith[key])) {
-      throw new TypeError(`'transform' expect object values to be functions. Not a function at key: '${key}'.`);
+      throw new TypeError(`'Transform' expect object values to be functions. Not a function at key: '${key}'.`);
     }
-    newConfig[key] = propertyValueTransformWith[key];
   });
-  return newConfig;
+  return propertyValueTransformWith;
 }
+/**
+ * @name transformData
+ * @param {Object<String, Function>} propertyValueTransformWith
+ * @param {Object} dataToSerialize
+ * @return {Object}
+ */
+function transformData(propertyValueTransformWith, dataToSerialize) {
+  if (isObjectEmpty(propertyValueTransformWith)) {
+    return dataToSerialize;
+  }
+  Object.keys(propertyValueTransformWith).forEach((key) => {
+    if (!(key in dataToSerialize)) {
+      throw new Error(`Field '${key}' suppose to be transformed.`);
+    }
+    dataToSerialize[key] = propertyValueTransformWith[key](dataToSerialize[key], key);
+  });
+  return dataToSerialize;
+}
+/**
+ * @name transform
+ * @param {Object} data
+ * @param {Object<String, Function>} propertyValueTransformWith
+ * @return {Object}
+ */
+function transform(data, propertyValueTransformWith = {}) {
+  const config = transformConfig(propertyValueTransformWith);
+  if (isObjectEmpty(config)) {
+    return data;
+  }
+  return transformData(config, data);
+}
+//#endregion
+
 //#endregion
 
 //#region Class
@@ -1046,12 +1078,7 @@ class Vicis {
           throw new Error("Unknown value convert error");
       }
     });
-    Object.keys(this.#transform).forEach((key) => {
-      if (!(key in this.#dataCache)) {
-        throw new Error(`Field '${key}' suppose to be transformed.`);
-      }
-      this.#dataCache[key] = this.#transform[key](this.#dataCache[key], key);
-    });
+    this.#dataCache = transformData(this.#transform, this.#dataCache);
     this.#dataCache = replaceData(this.#replace, this.#dataCache);
     const renameFrom = Object.keys(this.#rename).sort((alpha, beta) => alpha.localeCompare(beta));
     const renamedData = {};
@@ -1081,7 +1108,6 @@ class Vicis {
   toJSON() {
     return this.getData();
   }
-
   /**
    * @name toString
    * @public
@@ -1095,16 +1121,4 @@ class Vicis {
 //#endregion
 
 export default Vicis;
-export {
-  TYPES_ENUM,
-  Vicis,
-  castConfig,
-  defaults,
-  defined,
-  omit,
-  pick,
-  renameConfig,
-  replace,
-  required,
-  transformConfig,
-};
+export { TYPES_ENUM, Vicis, castConfig, defaults, defined, omit, pick, renameConfig, replace, required, transform };
