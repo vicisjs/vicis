@@ -223,31 +223,107 @@ function toString(value) {
 //#endregion
 
 //#region Mixin Functions
+
+//#region Cast
 /**
  * @name castConfig
  * @throws TypeError
  * @param {Object<String, String>} propertyToType
  * @return {Object<String, String>}
  */
-function castConfig(propertyToType = {}) {
+function castConfig(propertyToType) {
   if (!isObjectLike(propertyToType)) {
     throw new TypeError("Cast should be an object");
   }
   if (isObjectEmpty(propertyToType)) {
     return {};
   }
-  const newConfig = {};
   Object.keys(propertyToType).forEach((key) => {
     if (!isString(propertyToType[key])) {
-      throw new TypeError(`Cast expect object values to be strings. Not a string at key: '${propertyToType[key]}'.`);
+      throw new TypeError(
+        `'Cast' expect object values to be strings. Not a string at key: '${stringify(propertyToType[key])}'.`,
+      );
     }
     if (!TYPES_LIST.includes(propertyToType[key])) {
-      throw new TypeError(`Cast has unknown type in {${key}: "${propertyToType[key]}"}.`);
+      throw new TypeError(`'Cast' has unknown type in {${key}: "${propertyToType[key]}"}.`);
     }
-    newConfig[key] = propertyToType[key];
   });
-  return newConfig;
+  return propertyToType;
 }
+/**
+ * @name castData
+ * @param {Object<String, String>} propertyToType
+ * @param {Object} dataToSerialize
+ * @return {Object}
+ */
+function castData(propertyToType, dataToSerialize) {
+  if (isObjectEmpty(propertyToType)) {
+    return dataToSerialize;
+  }
+  Object.keys(propertyToType).forEach((key) => {
+    const castTo = propertyToType[key];
+    if (!(key in dataToSerialize)) {
+      throw new Error(`Field '${key}' suppose to be converted to ${castTo}.`);
+    }
+    switch (castTo) {
+      case TYPES_ENUM.BOOLEAN:
+        dataToSerialize[key] = Boolean(dataToSerialize[key]);
+        break;
+      case TYPES_ENUM.NUMERIC: {
+        const castedNumber = Number(dataToSerialize[key]);
+        if (Number.isFinite(castedNumber)) {
+          dataToSerialize[key] = castedNumber;
+        } else {
+          const parsed = Number.parseFloat(dataToSerialize[key]);
+          if (Number.isFinite(parsed)) {
+            dataToSerialize[key] = parsed;
+          } else {
+            dataToSerialize[key] = 0;
+          }
+        }
+        break;
+      }
+      case TYPES_ENUM.INTEGER: {
+        const castedInteger = Number(dataToSerialize[key]);
+        if (Number.isFinite(castedInteger)) {
+          dataToSerialize[key] = Math.trunc(castedInteger);
+        } else {
+          const parsed = Number.parseFloat(dataToSerialize[key]);
+          if (Number.isFinite(parsed)) {
+            dataToSerialize[key] = Math.trunc(castedInteger);
+          } else {
+            dataToSerialize[key] = 0;
+          }
+        }
+        break;
+      }
+      case TYPES_ENUM.STRING:
+        dataToSerialize[key] = toString(dataToSerialize[key]);
+        break;
+      case TYPES_ENUM.JSON:
+        dataToSerialize[key] = parse(stringify(dataToSerialize[key]));
+        break;
+      default:
+        throw new Error("Unknown value convert error");
+    }
+  });
+  return dataToSerialize;
+}
+/**
+ * @name cast
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Object<String, String>} propertyToType
+ * @return {Object<String, String>}
+ */
+function cast(data, propertyToType = {}) {
+  const config = castConfig(propertyToType);
+  if (isObjectEmpty(config)) {
+    return data;
+  }
+  return castData(config, data);
+}
+//#endregion
 
 //#region Defaults
 /**
@@ -1068,53 +1144,7 @@ class Vicis {
     this.#dataCache = omitData(this.#omit, this.#dataOriginal);
     this.#dataCache = requiredData(this.#required, this.#dataCache);
     this.#dataCache = definedData(this.#defined, this.#dataCache);
-    Object.keys(this.#cast).forEach((key) => {
-      const castTo = this.#cast[key];
-      if (!(key in this.#dataCache)) {
-        throw new Error(`Field '${key}' suppose to be converted to ${castTo}.`);
-      }
-      switch (castTo) {
-        case TYPES_ENUM.BOOLEAN:
-          this.#dataCache[key] = Boolean(this.#dataCache[key]);
-          break;
-        case TYPES_ENUM.NUMERIC: {
-          const castedNumber = Number(this.#dataCache[key]);
-          if (Number.isFinite(castedNumber)) {
-            this.#dataCache[key] = castedNumber;
-          } else {
-            const parsed = Number.parseFloat(this.#dataCache[key]);
-            if (Number.isFinite(parsed)) {
-              this.#dataCache[key] = parsed;
-            } else {
-              this.#dataCache[key] = 0;
-            }
-          }
-          break;
-        }
-        case TYPES_ENUM.INTEGER: {
-          const castedInteger = Number(this.#dataCache[key]);
-          if (Number.isFinite(castedInteger)) {
-            this.#dataCache[key] = Math.trunc(castedInteger);
-          } else {
-            const parsed = Number.parseFloat(this.#dataCache[key]);
-            if (Number.isFinite(parsed)) {
-              this.#dataCache[key] = Math.trunc(castedInteger);
-            } else {
-              this.#dataCache[key] = 0;
-            }
-          }
-          break;
-        }
-        case TYPES_ENUM.STRING:
-          this.#dataCache[key] = toString(this.#dataCache[key]);
-          break;
-        case TYPES_ENUM.JSON:
-          this.#dataCache[key] = parse(stringify(this.#dataCache[key]));
-          break;
-        default:
-          throw new Error("Unknown value convert error");
-      }
-    });
+    this.#dataCache = castData(this.#cast, this.#dataCache);
     this.#dataCache = transformData(this.#transform, this.#dataCache);
     this.#dataCache = replaceData(this.#replace, this.#dataCache);
     this.#dataCache = renameData(this.#rename, this.#dataCache);
@@ -1147,4 +1177,4 @@ class Vicis {
 //#endregion
 
 export default Vicis;
-export { TYPES_ENUM, Vicis, castConfig, defaults, defined, omit, pick, rename, replace, required, transform };
+export { TYPES_ENUM, Vicis, cast, defaults, defined, omit, pick, rename, replace, required, transform };
