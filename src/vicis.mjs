@@ -498,18 +498,50 @@ function renameConfig(renamePropertyFromTo = {}) {
   }
   return newConfig;
 }
+
+//#region Replace
 /**
  * @name replaceConfig
  * @throws TypeError
  * @param {Object<String, *>} replacePropertyValues
  * @return {Object<String, *>}
  */
-function replaceConfig(replacePropertyValues = {}) {
+function replaceConfig(replacePropertyValues) {
   if (!isObjectLike(replacePropertyValues)) {
-    throw new TypeError("'replace' should be an object");
+    throw new TypeError("'Replace' should be an object");
   }
   return replacePropertyValues;
 }
+/**
+ * @name replaceData
+ * @param {Object<String, *>} replacePropertyValues
+ * @param {Object} dataToSerialize
+ * @return {Object}
+ */
+function replaceData(replacePropertyValues, dataToSerialize) {
+  if (isObjectEmpty(replacePropertyValues)) {
+    return dataToSerialize;
+  }
+  Object.keys(replacePropertyValues).forEach((key) => {
+    dataToSerialize[key] = replacePropertyValues[key];
+  });
+  return dataToSerialize;
+}
+/**
+ * @name replace
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Object<String, *>} replacePropertyValues
+ * @return {Object}
+ */
+function replace(data, replacePropertyValues = {}) {
+  const config = replaceConfig(replacePropertyValues);
+  if (isObjectEmpty(config)) {
+    return data;
+  }
+  return replaceData(config, data);
+}
+//#endregion
 
 //#region Required
 /**
@@ -1020,9 +1052,7 @@ class Vicis {
       }
       this.#dataCache[key] = this.#transform[key](this.#dataCache[key], key);
     });
-    Object.keys(this.#replace).forEach((key) => {
-      this.#dataCache[key] = this.#replace[key];
-    });
+    this.#dataCache = replaceData(this.#replace, this.#dataCache);
     const renameFrom = Object.keys(this.#rename).sort((alpha, beta) => alpha.localeCompare(beta));
     const renamedData = {};
     renameFrom.forEach((key) => {
@@ -1074,7 +1104,7 @@ export {
   omit,
   pick,
   renameConfig,
-  replaceConfig,
+  replace,
   required,
   transformConfig,
 };

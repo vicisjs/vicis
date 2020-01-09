@@ -1,5 +1,5 @@
 import { Consono } from "consono/es";
-import { defaults, defined, omit, pick, required } from "./vicis.mjs";
+import { defaults, defined, omit, pick, replace, required } from "./vicis.mjs";
 
 const consono = Consono.factory(null, "light");
 
@@ -16,5 +16,6 @@ res = required(data, ["id"]);
 res = defined(data, ["id"]);
 res = defaults(data, { ok: true });
 res = pick(data, ["date", "domain", "id", "ok"]);
+res = replace(data, { domain: "secondary" });
 
 consono(res);
