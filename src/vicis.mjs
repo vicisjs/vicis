@@ -416,26 +416,61 @@ function omit(data, propertiesToOmit = []) {
 }
 //#endregion
 
+//#region Pick
 /**
  * @name pickConfig
  * @throws TypeError
  * @param {String[]} propertiesToPick
  * @return {String[]}
  */
-function pickConfig(propertiesToPick = []) {
+function pickConfig(propertiesToPick) {
   if (!Array.isArray(propertiesToPick)) {
-    throw new TypeError("'pick' should be an array");
+    throw new TypeError("'Pick' should be an array");
   }
   if (isArrayEmpty(propertiesToPick)) {
     return [];
   }
   return arrayUnique(propertiesToPick).map((value) => {
     if (!isString(value)) {
-      throw new TypeError(`'pick' expect array of strings. Value: '${value.toString()}'.`);
+      throw new TypeError(`'Pick' expect array of strings. Value: '${stringify(value)}'.`);
     }
     return value;
   });
 }
+/**
+ * @name pickData
+ * @param {String[]} propertiesToPick
+ * @param {Object} dataToSerialize
+ * @return {Object}
+ */
+function pickData(propertiesToPick, dataToSerialize) {
+  if (isArrayEmpty(propertiesToPick)) {
+    return dataToSerialize;
+  }
+  const newCache = {};
+  Object.keys(dataToSerialize).forEach((key) => {
+    if (propertiesToPick.includes(key)) {
+      newCache[key] = dataToSerialize[key];
+    }
+  });
+  return newCache;
+}
+/**
+ * @name pick
+ * @throws TypeError
+ * @param {Object} data
+ * @param {String[]} propertiesToPick
+ * @return {Object}
+ */
+function pick(data, propertiesToPick = []) {
+  const config = pickConfig(propertiesToPick);
+  if (isArrayEmpty(config)) {
+    return data;
+  }
+  return pickData(config, data);
+}
+//#endregion
+
 /**
  * @name renameConfig
  * @throws TypeError
@@ -1001,15 +1036,7 @@ class Vicis {
     });
     Object.assign(this.#dataCache, renamedData);
     this.#dataCache = defaultsData(this.#defaults, this.#dataCache);
-    if (!isObjectEmpty(this.#pick)) {
-      let newCache = {};
-      Object.keys(this.#dataCache).forEach((key) => {
-        if (this.#pick.includes(key)) {
-          newCache[key] = this.#dataCache[key];
-        }
-      });
-      this.#dataCache = newCache;
-    }
+    this.#dataCache = pickData(this.#pick, this.#dataCache);
     this.#dataCache = castToJson(this.#dataCache, this.#sort);
     return this;
   }
@@ -1045,7 +1072,7 @@ export {
   defaults,
   defined,
   omit,
-  pickConfig,
+  pick,
   renameConfig,
   replaceConfig,
   required,
