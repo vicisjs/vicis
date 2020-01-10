@@ -39,7 +39,8 @@ Require multiple items.
 ```js
 const {
   Vicis, TYPES_ENUM,
-  cast, defaults, defined, omit, pick, rename, replace, required, transform,
+  cast, defaults, defined, omit, pick,
+  rename, replace, required, transform,
 } = require("vicis");
 ```
 
@@ -54,7 +55,8 @@ Require multiple items.
 ```js
 import {
   Vicis, TYPES_ENUM,
-  cast, defaults, defined, omit, pick, rename, replace, required, transform,
+  cast, defaults, defined, omit, pick,
+  rename, replace, required, transform,
 } from "vicis/es";
 ```
 
@@ -114,7 +116,8 @@ Set configuration.
 ```js
 const configuration = { cast: { id: "integer" }, };
 // pass configuration in constructor
-const serializer = new Vicis(configuration); // Vicis.factory(configuration)
+const serializer = new Vicis(configuration);
+// alternative - Vicis.factory(configuration)
 // do it later
 serializer.config(configuration);
 // get it for later use
@@ -208,6 +211,17 @@ const response = Vicis.factory(/* ...configuration, ...data */)
   .transform({ date: (value) => new Date(value) })
   .data(databaseModel)
   .toJSON();
+// Express framework in example
+app.get("/", (req, res) => res.json(response))
+```
+
+Collection example.
+
+```js
+const arrayOfModels = MongooseUserModel.find({ age: { $gte: 18 }});
+const configuration = { sort: true };
+const serializer = Vicis.factory(configuration);
+const response = serializer.fromArray(arrayOfModels);
 // Express framework in example
 app.get("/", (req, res) => res.json(response))
 ```

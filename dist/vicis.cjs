@@ -1205,7 +1205,7 @@ class Vicis {
    * @returns {Array.<Object>}
    */
   fromArray(collection) {
-    return collection.map((data) => this.data(data).toJSON());
+    return Array.from(collection).map((data) => this.data(data).toJSON());
   }
   //#endregion
 }

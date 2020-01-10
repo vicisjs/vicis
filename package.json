@@ -31,12 +31,15 @@
   ],
   "homepage": "https://github.com/r37r0m0d3l/vicis#readme",
   "keywords": [
-    "responder",
-    "transformer",
-    "response",
     "api",
+    "json",
+    "json-api",
+    "responder",
+    "responder-chain",
+    "response",
     "rest",
-    "json"
+    "serialization",
+    "transformer"
   ],
   "license": "MIT",
   "main": "./dist/vicis.cjs",
@@ -51,5 +54,5 @@
   },
   "type": "module",
   "types": "./dist/vicis.d.ts",
-  "version": "1.0.0"
+  "version": "1.0.1"
 }

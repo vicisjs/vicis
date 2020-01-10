@@ -7,16 +7,16 @@ declare enum TYPES_ENUM {
 }
 
 export interface IVicisConfig {
-  cast: { [prop: string]: TYPES_ENUM };
-  defaults: { [prop: string]: any };
-  defined: string[];
-  omit: string[];
-  pick: string[];
-  sort: boolean;
-  rename: { [prop: string]: string };
-  replace: { [prop: string]: any };
-  required: string[];
-  transform: { [prop: string]: Function };
+  cast?: { [prop: string]: TYPES_ENUM };
+  defaults?: { [prop: string]: any };
+  defined?: string[];
+  omit?: string[];
+  pick?: string[];
+  sort?: boolean;
+  rename?: { [prop: string]: string };
+  replace?: { [prop: string]: any };
+  required?: string[];
+  transform?: { [prop: string]: Function };
 }
 
 declare class Vicis {
@@ -27,7 +27,7 @@ declare class Vicis {
    * @param {Object=} config
    * @param {Object=} data
    */
-  public constructor(config: IVicisConfig, data: object);
+  public constructor(config?: IVicisConfig, data?: object);
   /**
    * @name getConfig
    * @public
@@ -184,7 +184,7 @@ declare class Vicis {
    * @param {Object=} data
    * @returns {Vicis}
    */
-  public static factory(config: IVicisConfig, data: object): Vicis;
+  public static factory(config?: IVicisConfig, data?: object): Vicis;
 }
 
 /**

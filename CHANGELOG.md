@@ -1,11 +1,13 @@
-#### 0.0.1 Jan 10, 2020
+#### 1.0.1 Jan 11, 2020
 
-* Complete documentation
+* 🔨 Refactor method `fromArray`
+* 📚 Update documentation
 
-#### 0.0.1 Dec 05, 2019
+#### 1.0.0 Jan 10, 2020
 
-* Code commit
+* 🎉 Fully working code
+* 📚 Complete documentation
 
 #### 0.0.1 Nov 4, 2019
 
-* Initial commit
+* 🎉 Initial commit
