@@ -19,3 +19,67 @@ Presentation and transformation layer for data output in RESTful APIs.
 [![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l/vicis)
 [![GitHub forks](https://img.shields.io/github/forks/r37r0m0d3l/vicis.svg?style=social&label=Fork)]()
 [![Twitter](https://img.shields.io/twitter/follow/r37r0m0d3l.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=r37r0m0d3l)
+
+## Table of contents
+
+[Examples](#examples)
+
+[Installation](#installation)
+
+[Motivation](#motivation)
+
+## Examples
+
+```js
+const Vicis = require("vicis").default;
+```
+
+Require multiple items.
+
+```js
+const {
+  Vicis,
+  TYPES_ENUM,
+  cast,
+  defaults,
+  defined,
+  omit,
+  pick,
+  rename,
+  replace,
+  required,
+  transform,
+} = require("vicis");
+```
+
+Import as ECMAScript module.
+
+```js
+import Vicis from "vicis/es";
+```
+
+Require multiple items.
+
+```js
+import { Vicis, cast, transform } from "vicis/es";
+```
+
+## Installation
+
+```bash
+npm install vicis
+```
+
+```bash
+yarn add vicis
+```
+
+## Motivation
+
+Creating Node.js analogue to this libraries:
+
+* [Fractal](https://fractal.thephpleague.com/) for PHP
+
+* [Roar](https://github.com/trailblazer/roar) for Ruby
+
+* [Marshmallow](https://marshmallow.readthedocs.io/en/stable/) for Python
