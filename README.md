@@ -72,16 +72,16 @@ Configuration object.
 
 ```js
 const configuration = {
-  cast: {},
-  defaults: {},
-  defined: [],
-  omit: [],
-  pick: [],
-  sort: true,
-  rename: {},
-  replace: {},
-  required: [],
-  transform: {},
+  cast: {}, // typecast property to type: boolean, numeric etc.
+  defaults: {}, // replace properties with undefined value to this
+  defined: [], // properties must be defined and have value
+  omit: [], // omit properties from serialization
+  pick: [], // pick only these properties
+  sort: true, // sorting object by property name
+  rename: {}, // rename property and remove original
+  replace: {}, // override object values
+  required: [], // properties must be defined (can have any value)
+  transform: {}, // transform property value with function
 };
 ```
 
@@ -90,10 +90,10 @@ TypeScript definitions.
 ```typescript
 enum TYPES_ENUM {
   BOOLEAN = "boolean",
-  NUMERIC = "numeric",
+  NUMERIC = "numeric", // only finite numbers
   INTEGER = "integer",
   STRING = "string",
-  JSON = "json",
+  JSON = "json", // call JSON.stringify on value
 }
 interface IVicisConfig {
   cast: { [prop: string]: TYPES_ENUM };
@@ -134,15 +134,32 @@ serializer
 Call functions separately.
 
 ```js
-cast({ id: "12345" }, { id: "integer" }); // { id: 12345 }
-defaults({ login: "guest", active: undefined }, { active: true }); // { login: "guest", active: true }
-defined({ id: 12345 }, ["id"]); // value defined, no error thrown
-omit({ login: "guest", password: "secret" }, ["password"]); // { login: "guest" }
-pick({ id: 12345, login: "guest", active: true }, ["id", "login"]); // { id: 12345, login: "guest" }
-rename({ _id: 12345 }, { _id: "ID" }); // { ID: 12345 } 
-replace({ domain: "primary" }, { domain: "secondary" }); // { domain: "secondary" }
-required({ id: null }, ["id"]); // property defined, no error thrown
-transform({ date: "2017-10-15", }, { date: (value) => new Date(value) }); // { date: "2017-10-15T00:00:00.000Z" } 
+cast({ id: "12345" }, { id: "integer" });
+// { id: 12345 }
+
+defaults({ login: "guest", active: undefined }, { active: true });
+// { login: "guest", active: true }
+
+defined({ id: 12345 }, ["id"]);
+// value defined, no error thrown
+
+omit({ login: "guest", password: "secret" }, ["password"]);
+// { login: "guest" }
+
+pick({ id: 12345, login: "guest", active: true }, ["id", "login"]);
+// { id: 12345, login: "guest" }
+
+rename({ _id: 12345 }, { _id: "ID" });
+// { ID: 12345 } 
+
+replace({ domain: "primary" }, { domain: "secondary" });
+// { domain: "secondary" }
+
+required({ id: null }, ["id"]);
+// property defined, no error thrown
+
+transform({ date: "2017-10-15", }, { date: (value) => new Date(value) });
+// { date: "2017-10-15T00:00:00.000Z" } 
 ```
 
 Set data for serialization.
