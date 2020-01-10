@@ -64,6 +64,90 @@ Require multiple items.
 import { Vicis, cast, transform } from "vicis/es";
 ```
 
+Creating instance.
+
+```js
+const serializer = new Vicis(/* ...configuration, ...data */);
+```
+
+```js
+const serializer = Vicis.factory(/* ...configuration, ...data */);
+```
+
+Configuration object.
+
+```js
+const configuration = {
+  cast: {},
+  defaults: {},
+  defined: [],
+  omit: [],
+  pick: [],
+  sort: true,
+  rename: {},
+  replace: {},
+  required: [],
+  transform: {},
+};
+```
+
+TypeScript definitions.
+
+```typescript
+enum TYPES_ENUM {
+  BOOLEAN = "boolean",
+  NUMERIC = "numeric",
+  INTEGER = "integer",
+  STRING = "string",
+  JSON = "json",
+}
+interface IVicisConfig {
+  cast: { [prop: string]: TYPES_ENUM };
+  defaults: { [prop: string]: any };
+  defined: string[];
+  omit: string[];
+  pick: string[];
+  sort: boolean;
+  rename: { [prop: string]: string };
+  replace: { [prop: string]: any };
+  required: string[];
+  transform: { [prop: string]: Function };
+}
+```
+
+Set configuration.
+
+```js
+const configuration = { cast: { id: "integer" }, };
+// pass configuration in constructor
+const serializer = new Vicis(configuration); // Vicis.factory(configuration);
+// do it later
+serializer.config(configuration);
+// get it for later use
+serializer.getConfig(); // { cast: { id: "integer" } };
+```
+
+Set data for serialization.
+
+```js
+const databaseModel = {
+  id: 10,
+  login: "Guest",
+  password: "bless",
+};
+const serializer = new Vicis(/* ...configuration */, databaseModel);
+// do it later
+serializer.data(databaseModel);
+```
+
+Get serialized data.
+
+```js
+const serializer = new Vicis();
+console.log(serializer.getData());
+console.log(serializer.toJSON());
+```
+
 ## Installation
 
 ```bash
