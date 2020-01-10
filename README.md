@@ -38,17 +38,8 @@ Require multiple items.
 
 ```js
 const {
-  Vicis,
-  TYPES_ENUM,
-  cast,
-  defaults,
-  defined,
-  omit,
-  pick,
-  rename,
-  replace,
-  required,
-  transform,
+  Vicis, TYPES_ENUM,
+  cast, defaults, defined, omit, pick, rename, replace, required, transform,
 } = require("vicis");
 ```
 
@@ -61,7 +52,10 @@ import Vicis from "vicis/es";
 Require multiple items.
 
 ```js
-import { Vicis, cast, transform } from "vicis/es";
+import {
+  Vicis, TYPES_ENUM,
+  cast, defaults, defined, omit, pick, rename, replace, required, transform,
+} from "vicis/es";
 ```
 
 Creating instance.
@@ -120,11 +114,35 @@ Set configuration.
 ```js
 const configuration = { cast: { id: "integer" }, };
 // pass configuration in constructor
-const serializer = new Vicis(configuration); // Vicis.factory(configuration);
+const serializer = new Vicis(configuration); // Vicis.factory(configuration)
 // do it later
 serializer.config(configuration);
 // get it for later use
-serializer.getConfig(); // { cast: { id: "integer" } };
+serializer.getConfig(); // { cast: { id: "integer" } }
+```
+
+Chain configuration calls.
+
+```js
+const serializer = new Vicis();
+serializer
+  .defaults({ registered: true })
+  .omit(["password"])
+  .rename({ _id: "id" });
+```
+
+Call functions separately.
+
+```js
+cast({ id: "12345" }, { id: "integer" }); // { id: 12345 }
+defaults({ login: "guest", active: undefined }, { active: true }); // { login: "guest", active: true }
+defined({ id: 12345 }, ["id"]); // value defined, no error thrown
+omit({ login: "guest", password: "secret" }, ["password"]); // { login: "guest" }
+pick({ id: 12345, login: "guest", active: true }, ["id", "login"]); // { id: 12345, login: "guest" }
+rename({ _id: 12345 }, { _id: "ID" }); // { ID: 12345 } 
+replace({ domain: "primary" }, { domain: "secondary" }); // { domain: "secondary" }
+required({ id: null }, ["id"]); // property defined, no error thrown
+transform({ date: "2017-10-15", }, { date: (value) => new Date(value) }); // { date: "2017-10-15T00:00:00.000Z" } 
 ```
 
 Set data for serialization.
@@ -140,12 +158,41 @@ const serializer = new Vicis(/* ...configuration */, databaseModel);
 serializer.data(databaseModel);
 ```
 
-Get serialized data.
+Get **serialized** data.
 
 ```js
 const serializer = new Vicis();
 console.log(serializer.getData());
 console.log(serializer.toJSON());
+```
+
+**Full example.**
+
+```js
+const genericDefaultConfig = { /* ... */ };
+const databaseModel = {
+  id: "1234",
+  ok: undefined,
+  hidden: "",
+  domain: "main",
+  date: "2017-10-15",
+};
+const response = Vicis.factory(/* ...configuration, ...data */)
+  .config(genericDefaultConfig)
+  .sort(true) // sorting object by property name
+  .cast({ id: "integer" })
+  .defined(["ok"])
+  .defaults({ ok: true })
+  .omit(["hidden"])
+  .pick(["date", "domain", "ID", "ok"])
+  .rename({ id: "ID" })
+  .replace({ domain: "secondary" })
+  .required(["id"])
+  .transform({ date: (value) => new Date(value) })
+  .data(databaseModel)
+  .toJSON();
+// Express framework in example
+app.get("/", (req, res) => res.json(response))
 ```
 
 ## Installation
