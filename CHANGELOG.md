@@ -1,3 +1,7 @@
+#### 0.0.1 Jan 10, 2020
+
+* Complete documentation
+
 #### 0.0.1 Dec 05, 2019
 
 * Code commit

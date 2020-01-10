@@ -846,6 +846,25 @@ class Vicis {
   #dataOriginal = {};
   //#endregion
 
+  //#region Private Methods
+  /**
+   * @name validateConfig
+   * @private
+   * @method
+   * @throws Error
+   * @returns {Vicis}
+   */
+  #validateConfig;
+  /**
+   * @name validateData
+   * @private
+   * @method
+   * @throws Error
+   * @returns {Vicis}
+   */
+  #validateData;
+  //#endregion
+
   //#region Initialization Methods
   /**
    * @name constructor
@@ -855,6 +874,74 @@ class Vicis {
    * @param {Object=} data
    */
   constructor(config = {}, data) {
+    /**
+     * @name validateConfig
+     * @private
+     * @method
+     * @throws Error
+     * @returns {Vicis}
+     */
+    this.#validateConfig = function validateConfig() {
+      const cast = objectKeys(this.#cast);
+      const rename = objectKeys(this.#rename);
+      const replace = objectKeys(this.#replace);
+      const transform = objectKeys(this.#transform);
+      if (arrayHasSame(this.#omit, cast)) {
+        throw new Error(`'omit' has same keys as 'cast': ${arrayIntersect(this.#omit, cast)}.`);
+      }
+      if (arrayHasSame(this.#omit, this.#defined)) {
+        throw new Error(`'omit' has same keys as 'defined': ${arrayIntersect(this.#omit, this.#defined)}.`);
+      }
+      if (arrayHasSame(this.#omit, this.#pick)) {
+        throw new Error(`'omit' has same keys as 'pick': ${arrayIntersect(this.#omit, this.#pick)}.`);
+      }
+      if (arrayHasSame(this.#omit, rename)) {
+        throw new Error(`'omit' has same keys as 'rename': ${arrayIntersect(this.#omit, rename)}.`);
+      }
+      if (arrayHasSame(this.#omit, replace)) {
+        throw new Error(`'omit' has same keys as 'replace': ${arrayIntersect(this.#omit, replace)}.`);
+      }
+      if (arrayHasSame(this.#omit, this.#required)) {
+        throw new Error(`'omit' has same keys as 'required': ${arrayIntersect(this.#omit, this.#required)}.`);
+      }
+      if (arrayHasSame(this.#omit, transform)) {
+        throw new Error(`'omit' has same keys as 'transform': ${arrayIntersect(this.#omit, transform)}.`);
+      }
+      if (arrayHasSame(this.#omit, transform)) {
+        throw new Error(`'omit' has same keys as 'transform': ${arrayIntersect(this.#omit, transform)}.`);
+      }
+      if (arrayHasSame(cast, replace)) {
+        throw new Error(`'cast' has same keys as 'replace': ${arrayIntersect(cast, replace)}.`);
+      }
+      if (arrayHasSame(cast, transform)) {
+        throw new Error(`'cast' has same keys as 'transform': ${arrayIntersect(cast, transform)}.`);
+      }
+      if (arrayHasSame(replace, transform)) {
+        throw new Error(`'replace' has same keys as 'transform': ${arrayIntersect(replace, transform)}.`);
+      }
+      return this;
+    }.bind(this);
+    /**
+     * @name validateData
+     * @private
+     * @method
+     * @throws Error
+     * @returns {Vicis}
+     */
+    this.#validateData = function validateData() {
+      this.#dataCache = {};
+      this.#dataCache = omitData(this.#omit, this.#dataOriginal);
+      this.#dataCache = requiredData(this.#required, this.#dataCache);
+      this.#dataCache = definedData(this.#defined, this.#dataCache);
+      this.#dataCache = castData(this.#cast, this.#dataCache);
+      this.#dataCache = transformData(this.#transform, this.#dataCache);
+      this.#dataCache = replaceData(this.#replace, this.#dataCache);
+      this.#dataCache = renameData(this.#rename, this.#dataCache);
+      this.#dataCache = defaultsData(this.#defaults, this.#dataCache);
+      this.#dataCache = pickData(this.#pick, this.#dataCache);
+      this.#dataCache = castToJson(this.#dataCache, this.#sort);
+      return this;
+    }.bind(this);
     this.config(config);
     if (data !== undefined) {
       this.data(data);
@@ -941,7 +1028,7 @@ class Vicis {
     this.required(config.required);
     this.transform(config.transform);
     this.defaults(config.defaults);
-    this.validateConfig();
+    this.#validateConfig();
     return this;
   }
   /**
@@ -953,7 +1040,7 @@ class Vicis {
    */
   cast(propertyToType = {}) {
     this.#cast = castConfig(propertyToType);
-    this.validateConfig();
+    this.#validateConfig();
     return this;
   }
   /**
@@ -965,7 +1052,7 @@ class Vicis {
    */
   defaults(propertyDefaultValues = {}) {
     this.#defaults = defaultsConfig(propertyDefaultValues); // do not deep clone!
-    this.validateConfig();
+    this.#validateConfig();
     return this;
   }
   /**
@@ -977,7 +1064,7 @@ class Vicis {
    */
   defined(propertiesMustBeDefined = []) {
     this.#defined = definedConfig(propertiesMustBeDefined);
-    this.validateConfig();
+    this.#validateConfig();
     return this;
   }
   /**
@@ -989,7 +1076,7 @@ class Vicis {
    */
   omit(propertiesToOmit = []) {
     this.#omit = omitConfig(propertiesToOmit);
-    this.validateConfig();
+    this.#validateConfig();
     return this;
   }
   /**
@@ -1001,7 +1088,7 @@ class Vicis {
    */
   pick(propertiesToPick = []) {
     this.#pick = pickConfig(propertiesToPick);
-    this.validateConfig();
+    this.#validateConfig();
     return this;
   }
   /**
@@ -1013,7 +1100,7 @@ class Vicis {
    */
   rename(renamePropertyFromTo = {}) {
     this.#rename = renameConfig(renamePropertyFromTo);
-    this.validateConfig();
+    this.#validateConfig();
     return this;
   }
   /**
@@ -1025,7 +1112,7 @@ class Vicis {
    */
   replace(replacePropertyValues = {}) {
     this.#replace = replaceConfig(replacePropertyValues); // do not deep clone!
-    this.validateConfig();
+    this.#validateConfig();
     return this;
   }
   /**
@@ -1037,7 +1124,7 @@ class Vicis {
    */
   required(propertiesRequired = []) {
     this.#required = requiredConfig(propertiesRequired);
-    this.validateConfig();
+    this.#validateConfig();
     return this;
   }
   /**
@@ -1063,53 +1150,7 @@ class Vicis {
    */
   transform(propertyValueTransformWith = {}) {
     this.#transform = transformConfig(propertyValueTransformWith); // do not deep clone!
-    this.validateConfig();
-    return this;
-  }
-  /**
-   * @name validateConfig
-   * @private
-   * @throws Error
-   * @returns {Vicis}
-   */
-  validateConfig() {
-    const cast = objectKeys(this.#cast);
-    const rename = objectKeys(this.#rename);
-    const replace = objectKeys(this.#replace);
-    const transform = objectKeys(this.#transform);
-    if (arrayHasSame(this.#omit, cast)) {
-      throw new Error(`'omit' has same keys as 'cast': ${arrayIntersect(this.#omit, cast)}.`);
-    }
-    if (arrayHasSame(this.#omit, this.#defined)) {
-      throw new Error(`'omit' has same keys as 'defined': ${arrayIntersect(this.#omit, this.#defined)}.`);
-    }
-    if (arrayHasSame(this.#omit, this.#pick)) {
-      throw new Error(`'omit' has same keys as 'pick': ${arrayIntersect(this.#omit, this.#pick)}.`);
-    }
-    if (arrayHasSame(this.#omit, rename)) {
-      throw new Error(`'omit' has same keys as 'rename': ${arrayIntersect(this.#omit, rename)}.`);
-    }
-    if (arrayHasSame(this.#omit, replace)) {
-      throw new Error(`'omit' has same keys as 'replace': ${arrayIntersect(this.#omit, replace)}.`);
-    }
-    if (arrayHasSame(this.#omit, this.#required)) {
-      throw new Error(`'omit' has same keys as 'required': ${arrayIntersect(this.#omit, this.#required)}.`);
-    }
-    if (arrayHasSame(this.#omit, transform)) {
-      throw new Error(`'omit' has same keys as 'transform': ${arrayIntersect(this.#omit, transform)}.`);
-    }
-    if (arrayHasSame(this.#omit, transform)) {
-      throw new Error(`'omit' has same keys as 'transform': ${arrayIntersect(this.#omit, transform)}.`);
-    }
-    if (arrayHasSame(cast, replace)) {
-      throw new Error(`'cast' has same keys as 'replace': ${arrayIntersect(cast, replace)}.`);
-    }
-    if (arrayHasSame(cast, transform)) {
-      throw new Error(`'cast' has same keys as 'transform': ${arrayIntersect(cast, transform)}.`);
-    }
-    if (arrayHasSame(replace, transform)) {
-      throw new Error(`'replace' has same keys as 'transform': ${arrayIntersect(replace, transform)}.`);
-    }
+    this.#validateConfig();
     return this;
   }
   //#endregion
@@ -1135,31 +1176,11 @@ class Vicis {
       throw new TypeError("Data should be an object");
     }
     this.#dataOriginal = dataToSerialize; // keep reference
-    this.validateData();
+    this.#validateData();
     return this;
   }
-  /**
-   * @name validateData
-   * @private
-   * @throws Error
-   * @returns {Vicis}
-   */
-  validateData() {
-    this.#dataCache = {};
-    this.#dataCache = omitData(this.#omit, this.#dataOriginal);
-    this.#dataCache = requiredData(this.#required, this.#dataCache);
-    this.#dataCache = definedData(this.#defined, this.#dataCache);
-    this.#dataCache = castData(this.#cast, this.#dataCache);
-    this.#dataCache = transformData(this.#transform, this.#dataCache);
-    this.#dataCache = replaceData(this.#replace, this.#dataCache);
-    this.#dataCache = renameData(this.#rename, this.#dataCache);
-    this.#dataCache = defaultsData(this.#defaults, this.#dataCache);
-    this.#dataCache = pickData(this.#pick, this.#dataCache);
-    this.#dataCache = castToJson(this.#dataCache, this.#sort);
-    return this;
-  }
-
   //#endregion
+
   //#region Public Main Methods
   /**
    * @name toJSON
@@ -1176,6 +1197,15 @@ class Vicis {
    */
   toString() {
     return stringify(this.toJSON());
+  }
+  /**
+   * @name fromArray
+   * @public
+   * @param {Array.<Object>} collection
+   * @returns {Array.<Object>}
+   */
+  fromArray(collection) {
+    return collection.map((data) => this.data(data).toJSON());
   }
   //#endregion
 }

@@ -169,6 +169,13 @@ declare class Vicis {
    */
   public toString(): string;
   /**
+   * @name fromArray
+   * @public
+   * @param {Array.<Object>} collection
+   * @returns {Array.<Object>}
+   */
+  public fromArray(collection): object[];
+  /**
    * @name factory
    * @public
    * @static
