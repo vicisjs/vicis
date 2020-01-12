@@ -1,11 +1,6 @@
-![Vicis](docs/_media/logo.png?raw=true "Vicis")
-
-Vicis
-===========
+![Vicis](_media/logo.png?raw=true#center "Vicis")
 
 Presentation and transformation layer for data output in RESTful APIs.
-
-[Vicis on github.io](https://r37r0m0d3l.github.io/vicis/)
 
 [![NPM Version](https://img.shields.io/npm/v/vicis.svg?style=flat)]()
 [![NPM Downloads](https://img.shields.io/npm/dt/vicis.svg?style=flat)]()
