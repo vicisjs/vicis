@@ -185,6 +185,41 @@ declare class Vicis {
    * @returns {Vicis}
    */
   public static factory(config?: IVicisConfig, data?: object): Vicis;
+  /**
+   * @name BOOLEAN
+   * @public
+   * @static
+   * @type {String}
+   */
+  public static get BOOLEAN();
+  /**
+   * @name NUMERIC
+   * @public
+   * @static
+   * @type {String}
+   */
+  public static get NUMERIC();
+  /**
+   * @name INTEGER
+   * @public
+   * @static
+   * @type {String}
+   */
+  public static get INTEGER();
+  /**
+   * @name STRING
+   * @public
+   * @static
+   * @type {String}
+   */
+  public static get STRING();
+  /**
+   * @name JSON
+   * @public
+   * @static
+   * @type {String}
+   */
+  public static get JSON();
 }
 
 /**

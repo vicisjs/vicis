@@ -1,20 +1,8 @@
-# Usage
+# Importing
 
 ----------
 
-**Installation**
-
-```bash
-npm install vicis
-```
-
-```bash
-yarn add vicis
-```
-
-----------
-
-**Importing**
+Require default
 
 ```js
 const Vicis = require("vicis").default;
@@ -46,18 +34,6 @@ import {
   cast, defaults, defined, omit, pick,
   rename, replace, required, transform,
 } from "vicis/es";
-```
-
-----------
-
-**Creating instance**
-
-```js
-const serializer = new Vicis(/* ...configuration, ...data */);
-```
-
-```js
-const serializer = Vicis.factory(/* ...configuration, ...data */);
 ```
 
 ----------

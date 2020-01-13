@@ -962,6 +962,51 @@ class Vicis {
   static factory(config = {}, data) {
     return new Vicis(config, data);
   }
+  /**
+   * @name BOOLEAN
+   * @public
+   * @static
+   * @type {String}
+   */
+  static get BOOLEAN() {
+    return "boolean";
+  }
+  /**
+   * @name NUMERIC
+   * @public
+   * @static
+   * @type {String}
+   */
+  static get NUMERIC() {
+    return "numeric";
+  }
+  /**
+   * @name INTEGER
+   * @public
+   * @static
+   * @type {String}
+   */
+  static get INTEGER() {
+    return "integer";
+  }
+  /**
+   * @name STRING
+   * @public
+   * @static
+   * @type {String}
+   */
+  static get STRING() {
+    return "string";
+  }
+  /**
+   * @name JSON
+   * @public
+   * @static
+   * @type {String}
+   */
+  static get JSON() {
+    return "json";
+  }
   //#endregion
 
   //#region Public Config Methods

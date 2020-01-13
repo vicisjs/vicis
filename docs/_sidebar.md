@@ -1,19 +1,45 @@
 [Home](/)
 
-- Getting started
+- Getting Started
 
-  - [Usage](usage.md)
+  - [Installation](Installation.md)
 
-  - [Configuration](configuration.md)
+  - [Importing](Importing.md)
+
+  - [Creating Instance](CreatingInstance.md)
 
 - API
 
-  - [Functions](functions.md)
+  - [Configuration](Configuration.md)
 
-  - [Serialization](serialization.md)
+  - [Data Manipulation](DataManipulation.md)
 
-- [Examples](examples.md)
+- Functions
 
-- [About](about.md)
+  - [Cast](Cast.md)
 
-- [Changelog](changelog.md)
+  - [Defaults](Defaults.md)
+
+  - [Defined](Defined.md)
+
+  - [Omit](Omit.md)
+
+  - [Pick](Pick.md)
+
+  - [Rename](Rename.md)
+
+  - [Replace](Replace.md)
+
+  - [Required](Required.md)
+
+  - [Transform](Transform.md)
+
+- Examples
+
+  - [Serialization](Serialization.md)
+
+  - [Collections](Collections.md)
+
+- [About](About.md)
+
+- [Changelog](Changelog.md)
