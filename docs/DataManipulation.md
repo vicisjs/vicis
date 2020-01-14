@@ -11,7 +11,7 @@ const databaseModel = {
   password: "bless",
 };
 const serializer = new Vicis({}, databaseModel);
-// do some stuff, than set data later
+// Do some stuff, than set data later
 serializer.data(databaseModel);
 ```
 

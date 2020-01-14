@@ -2,6 +2,8 @@
 
 ----------
 
+◀ [Configuration](Configuration.md)
+
 Picks from object only listed properties and ignore all other properties
 
 ```js

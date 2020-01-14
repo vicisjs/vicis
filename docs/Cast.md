@@ -2,6 +2,8 @@
 
 ----------
 
+◀ [Configuration](Configuration.md)
+
 Typecast object value to BOOLEAN, NUMERIC, INTEGER, STRING, JSON
 
 ```js

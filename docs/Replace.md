@@ -2,6 +2,8 @@
 
 ----------
 
+◀ [Configuration](Configuration.md)
+
 Overrides object values
 
 ```js

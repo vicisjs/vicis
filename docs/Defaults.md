@@ -2,6 +2,8 @@
 
 ----------
 
+◀ [Configuration](Configuration.md)
+
 In case of property has undefined value it will be replaced with value from configuration
 
 ```js

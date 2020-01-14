@@ -13,7 +13,7 @@ const databaseModel = {
 };
 const response = Vicis.factory(/* ...configuration, ...data */)
   .config(genericDefaultConfig)
-  .sort(true) // sorting object by property name
+  .sort(true)
   .cast({ id: "integer" })
   .defined(["ok"])
   .defaults({ ok: true })

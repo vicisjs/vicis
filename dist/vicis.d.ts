@@ -16,7 +16,7 @@ export interface IVicisConfig {
   rename?: { [prop: string]: string };
   replace?: { [prop: string]: any };
   required?: string[];
-  transform?: { [prop: string]: Function };
+  transform?: { [prop: string]: (value: any, key: string, data: object) => any };
 }
 
 declare class Vicis {
@@ -127,7 +127,9 @@ declare class Vicis {
    * @param {Object=} propertyValueTransformWith
    * @returns {Vicis}
    */
-  public transform(propertyValueTransformWith: { [prop: string]: Function }): Vicis;
+  public transform(propertyValueTransformWith: {
+    [prop: string]: (value: any, key: string, data: object) => any;
+  }): Vicis;
   /**
    * @name validateConfig
    * @private

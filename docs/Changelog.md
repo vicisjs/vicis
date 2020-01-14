@@ -2,6 +2,16 @@
 
 ----------
 
+#### 1.0.3 Jan 14, 2020
+
+* ♻️ Refactor `transform` function. Now it has `data` as third argument.
+
+* ⬆️ Update dependencies
+
+* 📚 Update documentation
+
+----------
+
 #### 1.0.2 Jan 13, 2020
 
 * ➕ Add static properties for casting types: BOOLEAN, NUMERIC, INTEGER, STRING, JSON

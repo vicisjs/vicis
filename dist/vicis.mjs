@@ -745,7 +745,7 @@ function transformData(propertyValueTransformWith, dataToSerialize) {
     if (!(key in dataToSerialize)) {
       throw new Error(`Field '${key}' suppose to be transformed.`);
     }
-    dataToSerialize[key] = propertyValueTransformWith[key](dataToSerialize[key], key);
+    dataToSerialize[key] = propertyValueTransformWith[key](dataToSerialize[key], key, dataToSerialize);
   });
   return dataToSerialize;
 }

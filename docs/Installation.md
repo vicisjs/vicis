@@ -17,10 +17,10 @@ yarn add vicis
 ```typescript
 enum TYPES_ENUM {
   BOOLEAN = "boolean",
-  NUMERIC = "numeric", // only finite numbers
+  NUMERIC = "numeric", // Only finite numbers
   INTEGER = "integer",
   STRING = "string",
-  JSON = "json", // call JSON.stringify on value
+  JSON = "json", // Call JSON.stringify on value
 }
 interface IVicisConfig {
   cast: { [prop: string]: TYPES_ENUM };

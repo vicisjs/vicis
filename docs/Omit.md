@@ -2,6 +2,8 @@
 
 ----------
 
+◀ [Configuration](Configuration.md)
+
 Remove from object listed properties
 
 ```js
