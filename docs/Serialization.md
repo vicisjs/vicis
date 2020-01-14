@@ -27,10 +27,4 @@ const response = Vicis.factory(/* ...configuration, ...data */)
   .toJSON();
 ```
 
-**Express framework in example**
-
-```js
-app.get("/", (req, res) => res.json(response))
-```
-
 ----------

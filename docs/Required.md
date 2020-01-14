@@ -1,6 +1,6 @@
 # Required
 
----
+----------
 
 ◀ [Configuration](Configuration.md)
 
@@ -31,4 +31,4 @@ try {
 }
 ```
 
----
+----------

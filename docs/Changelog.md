@@ -2,7 +2,7 @@
 
 ----------
 
-#### 1.0.3 Jan 14, 2020
+#### 1.0.3 Jan 15, 2020
 
 * ♻️ Refactor `transform` function. Now it has `data` as third argument.
 

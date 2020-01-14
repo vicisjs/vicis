@@ -1,6 +1,6 @@
 # Creating Instance
 
----
+----------
 
 **Calling a constructor**
 
@@ -23,4 +23,4 @@ const serializer = Vicis.factory()
   .rename({ _id: "id" });
 ```
 
----
+----------

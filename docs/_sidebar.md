@@ -19,5 +19,7 @@
 - Examples
   - [Serialization](Serialization.md)
   - [Collections](Collections.md)
+  - [ExpressJS framework](ExpressJS.md)
+  - [NestJS framework](NestJS.md)
 - [About](About.md)
 - [Changelog](Changelog.md)

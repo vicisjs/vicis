@@ -1,6 +1,6 @@
 # Defined
 
----
+----------
 
 ◀ [Configuration](Configuration.md)
 
@@ -29,4 +29,4 @@ try {
 }
 ```
 
----
+----------
