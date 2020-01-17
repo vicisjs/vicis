@@ -14,15 +14,43 @@ const { defaults } = require("vicis");
 import { defaults } from "vicis/es";
 ```
 
+<table><thead><tr><td colspan="3">
+</td></tr></thead><tbody>
+<tr><td>
+
 ```js
-defaults({ login: "guest", active: undefined }, { active: true });
+defaults(
+  {
+    login: "guest",
+    active: undefined,
+  },
+  {
+    active: true,
+  }
+);
 ```
+
+</td>
+<td>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+</td>
+<td>
 
 ```json
 {
-  "login": "guest",
-  "active": true
+  "active": true,
+  "login": "guest"
 }
 ```
+
+</td></tr>
+</tbody></table>
 
 ----------

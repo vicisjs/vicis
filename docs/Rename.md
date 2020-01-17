@@ -14,14 +14,41 @@ const { rename } = require("vicis");
 import { rename } from "vicis/es";
 ```
 
+<table><thead><tr><td colspan="3">
+</td></tr></thead><tbody>
+<tr><td>
+
 ```js
-rename({ _id: 12345 }, { _id: "ID" });
+rename(
+  {
+    _id: 12345,
+  },
+  {
+    _id: "ID",
+  }
+);
 ```
+
+</td>
+<td>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+</td>
+<td>
 
 ```json
 {
   "ID": 12345
 }
 ```
+
+</td></tr>
+</tbody></table>
 
 ----------

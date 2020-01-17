@@ -2,7 +2,7 @@
 
 ----------
 
-This is future Node.js analogue to this libraries:
+This is Node.js analogue to this libraries:
 
 * 🐘 [Fractal](https://fractal.thephpleague.com/) for PHP
 

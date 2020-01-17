@@ -26,10 +26,28 @@ const databaseModel = {
 const serializer = Vicis.factory().data(databaseModel);
 ```
 
+<table><thead><tr><td colspan="3">
+</td></tr></thead><tbody>
+<tr><td>
+
 ```js
 serializer.getData();
+
 serializer.toJSON();
+
+
+
 ```
+
+</td>
+<td>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+</td>
+<td>
 
 ```json
 {
@@ -38,6 +56,9 @@ serializer.toJSON();
   "password": "bless"
 }
 ```
+
+</td></tr>
+</tbody></table>
 
 ?> "getData" and "toJSON" actually do the same thing
 

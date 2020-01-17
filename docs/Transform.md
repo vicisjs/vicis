@@ -15,9 +15,33 @@ const { transform } = require("vicis");
 import { transform } from "vicis/es";
 ```
 
+<table><thead><tr><td colspan="3">
+</td></tr></thead><tbody>
+<tr><td>
+
 ```js
-transform({ date: "2017-10-15", }, { date: (value) => new Date(value) });
+transform(
+  {
+    date: "2017-10-15",
+  },
+  {
+    date: (value) => new Date(value)
+  }
+);
 ```
+
+</td>
+<td>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+</td>
+<td>
 
 ```json
 {
@@ -25,7 +49,14 @@ transform({ date: "2017-10-15", }, { date: (value) => new Date(value) });
 }
 ```
 
+</td></tr>
+</tbody></table>
+
 **More complex example**
+
+<table><thead><tr><td colspan="3">
+</td></tr></thead><tbody>
+<tr><td>
 
 ```js
 function textToBool(value) {
@@ -57,6 +88,38 @@ const res = transform(
 );
 ```
 
+</td>
+<td>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+</td>
+<td>
+
 ```json
 {
   "female": true,
@@ -66,5 +129,8 @@ const res = transform(
   "date":"2017-10-15T00:00:00.000Z"
 }
 ```
+
+</td></tr>
+</tbody></table>
 
 ----------
