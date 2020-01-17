@@ -1,4 +1,3 @@
-[Home](/)
 - Getting Started
   - [Installation](Installation.md)
   - [Importing](Importing.md)

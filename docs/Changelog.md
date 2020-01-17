@@ -2,6 +2,14 @@
 
 ----------
 
+#### 1.0.4 Jan 18, 2020
+
+* ♻️ Refactor `transform` function. Now `data` argument is cloned. So actual data wont't be changed.
+
+* 📚 Update documentation
+
+----------
+
 #### 1.0.3 Jan 15, 2020
 
 * ♻️ Refactor `transform` function. Now it has `data` as third argument.
