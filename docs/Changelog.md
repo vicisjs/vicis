@@ -2,11 +2,9 @@
 
 ----------
 
-#### 1.0.4 Jan 18, 2020
+#### 1.0.5 Jan 20, 2020
 
-* ♻️ Refactor `transform` function. Now `data` argument is cloned. So actual data wont't be changed.
-
-* 📚 Update documentation
+* ♻️ Refactor `toString` function.
 
 ----------
 

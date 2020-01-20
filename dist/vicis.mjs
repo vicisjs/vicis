@@ -215,7 +215,7 @@ function toString(value) {
     return value;
   }
   const result = value.toString();
-  if (result === "0" && 1 / value === Number.NEGATIVE_INFINITY) {
+  if (result === "0" && Object.is(value, -0)) {
     return "-0";
   }
   return result;
