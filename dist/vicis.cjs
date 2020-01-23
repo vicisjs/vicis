@@ -15,12 +15,13 @@ const CONFIG_FIELDS = [
 ];
 const TYPES_ENUM = {
   BOOLEAN: "boolean",
+  FLAG: "flag",
   NUMERIC: "numeric",
   INTEGER: "integer",
   STRING: "string",
   JSON: "json",
 };
-const TYPES_LIST = ["boolean", "numeric", "integer", "string", "json"];
+const TYPES_LIST = ["boolean", "flag", "numeric", "integer", "string", "json"];
 //#endregion
 
 //#region Helper Functions
@@ -203,6 +204,38 @@ function stringify(value) {
   return JSON.stringify(value);
 }
 /**
+ * @name toFlag
+ * @description
+ * Turns: undefined, null, 0, 0n, "", "false", "FALSE" to boolean false.
+ * Turns: 1, 1n, "1", "true", "TRUE" to boolean true.
+ * @param {*} value
+ * @param {*=false} onEmpty
+ * @param {*=false} onUnParsable
+ * @returns {boolean}
+ */
+function toFlag(value, onEmpty = false, onUnParsable = false) {
+  if (value === undefined || value === null) {
+    return onEmpty;
+  }
+  if (typeof value === "boolean") {
+    return value;
+  }
+  const affirmative = value
+    .toString()
+    .toLocaleLowerCase()
+    .trim();
+  if (affirmative.length === 0) {
+    return onEmpty;
+  }
+  if (affirmative === "true" || affirmative === "1") {
+    return true;
+  }
+  if (affirmative === "false" || affirmative === "0") {
+    return false;
+  }
+  return onUnParsable;
+}
+/**
  * @name toString
  * @param {*} value
  * @returns string
@@ -268,6 +301,9 @@ function castData(propertyToType, dataToSerialize) {
     switch (castTo) {
       case TYPES_ENUM.BOOLEAN:
         dataToSerialize[key] = Boolean(dataToSerialize[key]);
+        break;
+      case TYPES_ENUM.FLAG:
+        dataToSerialize[key] = toFlag(dataToSerialize[key]);
         break;
       case TYPES_ENUM.NUMERIC: {
         const castedNumber = Number(dataToSerialize[key]);
@@ -970,6 +1006,15 @@ class Vicis {
    */
   static get BOOLEAN() {
     return "boolean";
+  }
+  /**
+   * @name FLAG
+   * @public
+   * @static
+   * @type {String}
+   */
+  static get FLAG() {
+    return "flag";
   }
   /**
    * @name NUMERIC

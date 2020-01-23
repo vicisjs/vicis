@@ -48,6 +48,89 @@ cast({ registered: null }, { id: Vicis.BOOLEAN });
 
 <table><thead><tr><td colspan="3">
 
+**Flag**
+
+Turns: `undefined`, `null`, `0`, `0n`, `""`, `"false"`, `"FALSE"` to boolean false.
+
+Turns: `1`, `1n`, `"1"`, `"true"`, `"TRUE"` to boolean true.
+
+</td></tr></thead><tbody>
+<tr><td>
+
+```js
+cast({ check: null }, { check: "flag" });
+cast({ check: null }, { check: TYPES_ENUM.FLAG });
+cast({ check: null }, { check: Vicis.FLAG });
+//
+cast({ check: undefined }, { check: "flag" });
+cast({ check: null }, { check: "flag" });
+cast({ check: 0 }, { check: "flag" });
+cast({ check: 0n }, { check: "flag" });
+cast({ check: "" }, { check: "flag" });
+cast({ check: "false" }, { check: "flag" });
+cast({ check: "FALSE" }, { check: "flag" });
+cast({ check: false }, { check: "flag" });
+//
+cast({ check: 1 }, { check: "flag" });
+cast({ check: 1n }, { check: "flag" });
+cast({ check: "1" }, { check: "flag" });
+cast({ check: "true" }, { check: "flag" });
+cast({ check: "TRUE" }, { check: "flag" });
+cast({ check: true }, { check: "flag" });
+```
+
+</td>
+<td>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+</td>
+<td>
+
+```json
+{
+  "check": false
+}
+//
+
+
+{
+  "check": false
+}
+
+
+
+//
+
+
+{
+  "check": true
+}
+
+
+```
+
+</td></tr>
+</tbody></table>
+
+<table><thead><tr><td colspan="3">
+
 **Integer or Numeric**
 
 ?> Only finite numbers are valid for output.

@@ -1,5 +1,6 @@
 declare enum TYPES_ENUM {
   BOOLEAN = "boolean",
+  FLAG = "flag",
   NUMERIC = "numeric",
   INTEGER = "integer",
   STRING = "string",
@@ -194,6 +195,13 @@ declare class Vicis {
    * @type {String}
    */
   public static get BOOLEAN();
+  /**
+   * @name FLAG
+   * @public
+   * @static
+   * @type {boolean}
+   */
+  public static get FLAG();
   /**
    * @name NUMERIC
    * @public
