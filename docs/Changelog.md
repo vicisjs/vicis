@@ -2,6 +2,12 @@
 
 ---
 
+#### 1.0.7 Jan 25, 2020
+
+- ➕ Add new configuration type `exclude`
+
+---
+
 #### 1.0.6 Jan 24, 2020
 
 - ➕ Add new cast type `FLAG`

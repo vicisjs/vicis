@@ -26,6 +26,7 @@ interface IVicisConfig {
   cast: { [prop: string]: TYPES_ENUM };
   defaults: { [prop: string]: any };
   defined: string[];
+  exclude: Array<string|RegExp>;
   omit: string[];
   pick: string[];
   sort: boolean;

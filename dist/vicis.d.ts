@@ -11,7 +11,8 @@ export interface IVicisConfig {
   cast?: { [prop: string]: TYPES_ENUM };
   defaults?: { [prop: string]: any };
   defined?: string[];
-  omit?: string[];
+  exclude?: Array<string|RegExp>;
+  omit?: string;
   pick?: string[];
   sort?: boolean;
   rename?: { [prop: string]: string };
@@ -73,6 +74,14 @@ declare class Vicis {
    * @returns {Vicis}
    */
   public defined(propertiesMustBeDefined: string[]): Vicis;
+  /**
+   * @name exclude
+   * @public
+   * @throws TypeError
+   * @param {Array.<string|RegExp>=} propertiesToExclude
+   * @returns {Vicis}
+   */
+  public exclude(propertiesToExclude: string[]|RegExp[]): Vicis;
   /**
    * @name omit
    * @public
@@ -258,6 +267,15 @@ declare function defaults(data: object, propertyDefaultValues: { [prop: string]:
  * @returns {Object}
  */
 declare function defined(data: object, propertiesMustBeDefined: string[]): object;
+
+/**
+ * @name exclude
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Array.<string|RegExp>=} propertiesToExclude
+ * @returns {Object}
+ */
+declare function exclude(data: object, propertiesToExclude: string[]|RegExp[]): object;
 
 /**
  * @name omit

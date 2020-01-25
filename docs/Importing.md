@@ -13,8 +13,8 @@ Require multiple items
 ```js
 const {
   Vicis, TYPES_ENUM,
-  cast, defaults, defined, omit, pick,
-  rename, replace, required, transform,
+  cast, defaults, defined, exclude, omit,
+  pick, rename, replace, required, transform,
 } = require("vicis");
 ```
 
@@ -31,8 +31,8 @@ Require multiple items
 ```js
 import {
   Vicis, TYPES_ENUM,
-  cast, defaults, defined, omit, pick,
-  rename, replace, required, transform,
+  cast, defaults, defined, omit, exclude,
+  pick, rename, replace, required, transform,
 } from "vicis/es";
 ```
 

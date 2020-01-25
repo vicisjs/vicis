@@ -17,6 +17,12 @@ Presentation and transformation layer for data output in RESTful APIs.
 [![Dependency Status](https://david-dm.org/r37r0m0d3l/vicis.svg)](https://david-dm.org/r37r0m0d3l/vicis)
 [![devDependencies Status](https://david-dm.org/r37r0m0d3l/vicis/dev-status.svg)](https://david-dm.org/r37r0m0d3l/vicis?type=dev)
 
+[![GitHub stars](https://img.shields.io/github/stars/r37r0m0d3l/vicis.svg?style=social&label=Star)](https://github.com/r37r0m0d3l/vicis)
+[![GitHub watchers](https://img.shields.io/github/watchers/r37r0m0d3l/vicis.svg?style=social&label=Watch)](https://github.com/r37r0m0d3l/vicis)
+[![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l/vicis)
+[![GitHub forks](https://img.shields.io/github/forks/r37r0m0d3l/vicis.svg?style=social&label=Fork)]()
+[![Twitter](https://img.shields.io/twitter/follow/r37r0m0d3l.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=r37r0m0d3l)
+
 This is Node.js analogue to this libraries:
 
 * 🐘 [Fractal](https://fractal.thephpleague.com/) for PHP

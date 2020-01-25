@@ -4,7 +4,7 @@
 
 **Configuration object**
 
-[Cast](Cast.md) [Defaults](Defaults.md) [Defined](Defined.md) [Omit](Omit.md) [Pick](Pick.md) [Rename](Rename.md) [Replace](Replace.md) [Required](Required.md) [Transform](Transform.md)
+[Cast](Cast.md) [Defaults](Defaults.md) [Defined](Defined.md) [Exclude](Exclude.md) [Omit](Omit.md) [Pick](Pick.md) [Rename](Rename.md) [Replace](Replace.md) [Required](Required.md) [Transform](Transform.md)
 
 ```js
 const configuration = {
@@ -14,7 +14,12 @@ const configuration = {
   defaults: {},
   // If value id defined in object - no error thrown
   defined: [],
-  // Remove from object listed properties
+  // Remove from object listed properties.
+  // Applies after all other transformations.
+  // Overrides `pick` configuration.
+  exclude: [],
+  // Remove from object listed properties.
+  // Applies before all other transformations.
   omit: [],
   // Picks from object only listed properties and ignore all other properties
   pick: [],
@@ -66,6 +71,7 @@ const serializer = new Vicis();
 serializer
   .defaults({ registered: true })
   .omit(["password"])
+  .exclude([/^(?:_)(?:_)?/])
   .rename({ _id: "id" });
 ```
 

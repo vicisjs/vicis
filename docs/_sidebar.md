@@ -9,6 +9,7 @@
   - [Cast](Cast.md)
   - [Defaults](Defaults.md)
   - [Defined](Defined.md)
+  - [Exclude](Exclude.md)
   - [Omit](Omit.md)
   - [Pick](Pick.md)
   - [Rename](Rename.md)

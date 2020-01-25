@@ -172,6 +172,14 @@ function isObjectLike(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 /**
+ * @name isRegExp
+ * @param {*} value
+ * @returns {boolean}
+ */
+function isRegExp(value) {
+  return value instanceof RegExp;
+}
+/**
  * @name isString
  * @param {*} value
  * @returns {boolean}
@@ -462,6 +470,99 @@ function defined(data, propertiesMustBeDefined = []) {
     return data;
   }
   return definedData(propertiesMustBeDefined, data);
+}
+//#endregion
+
+//#region Exclude
+/**
+ * @name excludeConfig
+ * @throws TypeError
+ * @param {Array.<string|RegExp>} propertiesToExclude
+ * @returns {Array.<string|RegExp>}
+ */
+function excludeConfig(propertiesToExclude) {
+  if (!Array.isArray(propertiesToExclude)) {
+    throw new TypeError("'Exclude' should be an array");
+  }
+  if (isArrayEmpty(propertiesToExclude)) {
+    return [];
+  }
+  return arrayUnique(propertiesToExclude).map((value) => {
+    if (!isString(value) && !isRegExp(value)) {
+      throw new TypeError(`'Exclude' expect array of strings or regular expressions. Value: '${stringify(value)}'.`);
+    }
+    return value;
+  });
+}
+/**
+ * @name excludeData
+ * @param {Array.<string|RegExp>} propertiesToExclude
+ * @param {Object} data
+ * @returns {Object}
+ */
+function excludeData(propertiesToExclude, data) {
+  if (isArrayEmpty(propertiesToExclude)) {
+    return data;
+  }
+  const excludeString = propertiesToExclude.filter(isString);
+  if (excludeString.length) {
+    Object.keys(data).forEach((key) => {
+      if (excludeString.includes(key)) {
+        delete data[key];
+      }
+    });
+  }
+  const keys = objectKeys(data);
+  if (keys.length === 0) {
+    return data;
+  }
+  const excludeRegExp = propertiesToExclude.filter(isRegExp);
+  if (excludeRegExp.length) {
+    excludeRegExp.forEach((reg) => {
+      Object.keys(data).forEach((key) => {
+        if (reg.test(key)) {
+          delete data[key];
+        }
+      });
+    });
+  }
+  return data;
+}
+/**
+ * @name exclude
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Array.<string|RegExp>=} propertiesToExclude
+ * @returns {Object}
+ */
+function exclude(data, propertiesToExclude = []) {
+  const config = excludeConfig(propertiesToExclude);
+  if (isArrayEmpty(config)) {
+    return data;
+  }
+  const excludeString = config.filter(isString);
+  if (excludeString.length) {
+    Object.keys(data).forEach((key) => {
+      if (excludeString.includes(key)) {
+        delete data[key];
+      }
+    });
+  }
+  const keys = objectKeys(data);
+  if (keys.length === 0) {
+    return data;
+  }
+  const excludeRegExp = config.filter(isRegExp);
+  if (excludeRegExp.length) {
+    excludeRegExp.forEach((reg) => {
+      Object.keys(data).forEach((key) => {
+        if (reg.test(key)) {
+          delete data[key];
+        }
+      });
+    });
+  }
+  return data;
 }
 //#endregion
 
@@ -824,7 +925,13 @@ class Vicis {
    */
   #defined = [];
   /**
-   * @name pick
+   * @name exclude
+   * @private
+   * @type {Array.<string|RegExp>}
+   */
+  #exclude = [];
+  /**
+   * @name omit
    * @private
    * @type {Array.<string>}
    */
@@ -975,6 +1082,7 @@ class Vicis {
       this.#dataCache = renameData(this.#rename, this.#dataCache);
       this.#dataCache = defaultsData(this.#defaults, this.#dataCache);
       this.#dataCache = pickData(this.#pick, this.#dataCache);
+      this.#dataCache = excludeData(this.#exclude, this.#dataCache);
       this.#dataCache = castToJson(this.#dataCache, this.#sort);
       return this;
     }.bind(this);
@@ -1065,6 +1173,7 @@ class Vicis {
       cast: this.#cast,
       defaults: this.#defaults,
       defined: this.#defined,
+      exclude: this.#exclude,
       omit: this.#omit,
       pick: this.#pick,
       sort: this.#sort,
@@ -1083,6 +1192,7 @@ class Vicis {
     this.#cast = {};
     this.#defaults = {};
     this.#defined = [];
+    this.#exclude = [];
     this.#omit = [];
     this.#pick = [];
     this.#sort = true;
@@ -1118,6 +1228,7 @@ class Vicis {
     this.required(config.required);
     this.transform(config.transform);
     this.defaults(config.defaults);
+    this.exclude(config.exclude);
     this.#validateConfig();
     return this;
   }
@@ -1154,6 +1265,18 @@ class Vicis {
    */
   defined(propertiesMustBeDefined = []) {
     this.#defined = definedConfig(propertiesMustBeDefined);
+    this.#validateConfig();
+    return this;
+  }
+  /**
+   * @name exclude
+   * @public
+   * @throws TypeError
+   * @param {Array.<string|RegExp>=} propertiesToExclude
+   * @returns {Vicis}
+   */
+  exclude(propertiesToExclude = []) {
+    this.#exclude = excludeConfig(propertiesToExclude);
     this.#validateConfig();
     return this;
   }
@@ -1303,4 +1426,4 @@ class Vicis {
 
 export default Vicis;
 
-export { TYPES_ENUM, Vicis, cast, defaults, defined, omit, pick, rename, replace, required, transform };
+export { TYPES_ENUM, Vicis, cast, defaults, defined, exclude, omit, pick, rename, replace, required, transform };

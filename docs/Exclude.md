@@ -1,4 +1,4 @@
-# Omit
+# Exclude
 
 ----------
 
@@ -6,14 +6,16 @@
 
 Remove from object listed properties
 
-Applies before all other transformations
+Applies after all other transformations
+
+Overrides `pick` configuration
 
 ```js
-const { omit } = require("vicis");
+const { exclude } = require("vicis");
 ```
 
 ```js
-import { omit } from "vicis/es";
+import { exclude } from "vicis/es";
 ```
 
 <table><thead><tr><td colspan="3">
@@ -21,17 +23,22 @@ import { omit } from "vicis/es";
 <tr><td>
 
 ```js
-omit(
+exclude(
   {
     login: "guest",
-    password: "secret",
+    Password: "secret",
+    active: true,
+    __v: 5,
   },
-  ["password"]
+  [/(?:password)/gi, /^(?:_)(?:_)?/, "active"]
 );
 ```
 
 </td>
 <td>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
