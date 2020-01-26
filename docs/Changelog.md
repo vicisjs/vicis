@@ -2,6 +2,12 @@
 
 ---
 
+#### 1.0.8 Jan 26, 2020
+
+- 📚 Update documentation
+
+---
+
 #### 1.0.7 Jan 25, 2020
 
 - ➕ Add new configuration type `exclude`

@@ -16,4 +16,17 @@ Presentation and transformation layer for data output in RESTful APIs.
 [![GitHub watchers](https://img.shields.io/github/watchers/r37r0m0d3l/vicis.svg?style=social&label=Watch)](https://github.com/r37r0m0d3l/vicis)
 [![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l/vicis)
 [![GitHub forks](https://img.shields.io/github/forks/r37r0m0d3l/vicis.svg?style=social&label=Fork)]()
-[![Twitter](https://img.shields.io/twitter/follow/r37r0m0d3l.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=r37r0m0d3l)
+
+---
+
+You also might be interested in my other repositories:
+
+- [Consono](https://r37r0m0d3l.github.io/consono) - The most informative and correct variable inspector for JavaScript on the web.
+
+- [Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage) - Universal localStorage fallback.
+
+- [Publish Subscribe](https://r37r0m0d3l.github.io/publish_subscribe) - JavaScript implementation of the Publish-Subscribe pattern.
+
+Or find useful these tools:
+
+- [JSON Sorter](https://r37r0m0d3l.github.io/json_sort) - Neat online JSON sorter.
