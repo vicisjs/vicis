@@ -319,7 +319,7 @@ function castData(propertyToType, dataToSerialize) {
         if (Number.isFinite(castedNumber)) {
           dataToSerialize[key] = castedNumber;
         } else {
-          const parsed = Number.parseFloat(dataToSerialize[key]);
+          const parsed = Number.parseFloat(toString(dataToSerialize[key]).trim());
           if (Number.isFinite(parsed)) {
             dataToSerialize[key] = parsed;
           } else {
@@ -333,7 +333,7 @@ function castData(propertyToType, dataToSerialize) {
         if (Number.isFinite(castedInteger)) {
           dataToSerialize[key] = Math.trunc(castedInteger);
         } else {
-          const parsed = Number.parseFloat(dataToSerialize[key]);
+          const parsed = Number.parseFloat(toString(dataToSerialize[key]).trim());
           if (Number.isFinite(parsed)) {
             dataToSerialize[key] = Math.trunc(castedInteger);
           } else {

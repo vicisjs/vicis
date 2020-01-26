@@ -47,7 +47,7 @@ const configuration = {
   replace: { url: null }
 };
 const model = {
-  _id: "5475930903494e2804",
+  _id: "54759309034942804",
   email: "johnwick@gmail.com",
   userPassword: "36e80092ff7f1ed72903cda9409b9d2c",
   registered: "1",
@@ -65,7 +65,7 @@ Output:
 ```json
 {
   "confirmed": false,
-  "id": 0,
+  "id": 54759309034942804,
   "login": "johnwick@gmail.com",
   "registered": true,
   "url": null
