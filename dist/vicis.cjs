@@ -5,6 +5,7 @@ const CONFIG_FIELDS = [
   "cast",
   "defaults",
   "defined",
+  "exclude",
   "omit",
   "pick",
   "sort",

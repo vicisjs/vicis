@@ -30,7 +30,47 @@ This is Node.js analogue to this libraries:
 
 * 🍢 [Marshmallow](https://marshmallow.readthedocs.io/en/stable/) for Python
 
-There is always room for improvement.
+---
+
+## Tl;dr
+
+Code:
+
+```js
+import { Vicis } from "vicis/es";
+const configuration = {
+  cast: { _id: Vicis.INTEGER, registered: Vicis.FLAG },
+  defaults: { confirmed: false },
+  exclude: [/(?:password)/gi, /^(?:_)(?:_)?/],
+  omit: ["createdAt", "updatedAt", "deletedAt"],
+  rename: { _id: "id", email: "login" },
+  replace: { url: null }
+};
+const model = {
+  _id: "5475930903494e2804",
+  email: "johnwick@gmail.com",
+  userPassword: "36e80092ff7f1ed72903cda9409b9d2c",
+  registered: "1",
+  url: "example.com",
+  createdAt: "2020-01-01 01:23:45",
+  __v: 1
+};
+const serializer = new Vicis(configuration);
+serializer.data(model);
+console.log(serializer.getData());
+```
+
+Output:
+
+```json
+{
+  "confirmed": false,
+  "id": 0,
+  "login": "johnwick@gmail.com",
+  "registered": true,
+  "url": null
+}
+```
 
 ---
 
