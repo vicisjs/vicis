@@ -74,14 +74,16 @@ Output:
 
 ---
 
-You also might be interested in my other repositories:
+Discover more:
 
-- [Consono](https://r37r0m0d3l.github.io/consono) - The most informative and correct variable inspector for JavaScript on the web.
+- 🔎[Consono](https://r37r0m0d3l.github.io/consono)🔎 - The most informative and correct variable inspector for JavaScript on the web.
 
-- [Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage) - Universal localStorage fallback.
+- 🌠[OF](https://r37r0m0d3l.github.io/of/)🌠 - Promise wrapper with some sugar.
 
-- [Publish Subscribe](https://r37r0m0d3l.github.io/publish_subscribe) - JavaScript implementation of the Publish-Subscribe pattern.
+- 🔩[Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage)🔩 - Universal localStorage fallback.
+
+- 🔄[Publish Subscribe](https://r37r0m0d3l.github.io/publish_subscribe)🔄 - JavaScript implementation of the Publish-Subscribe pattern.
 
 Or find useful these tools:
 
-- [JSON Sorter](https://r37r0m0d3l.github.io/json_sort) - Neat online JSON sorter.
+- 🧾[JSON Sorter](https://r37r0m0d3l.github.io/json_sort)🧾 - Neat online JSON sorter.
