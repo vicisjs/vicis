@@ -5,7 +5,7 @@ Vicis
 
 Presentation and transformation layer for data output in RESTful APIs.
 
-[Vicis Documentation](https://r37r0m0d3l.github.io/vicis/)
+[Vicis Documentation](https://vicis.js.org)
 
 [![NPM Version](https://img.shields.io/npm/v/vicis.svg?style=flat)]()
 [![NPM Downloads](https://img.shields.io/npm/dt/vicis.svg?style=flat)]()
@@ -77,13 +77,13 @@ Output:
 
 Discover more:
 
--   🔎[Consono](https://r37r0m0d3l.github.io/consono)🔎 - The most informative and correct variable inspector for JavaScript on the web.
+-   🔎[Consono](https://consono.js.org)🔎 - The most informative and correct variable inspector for JavaScript on the web.
 
--   🌠[OF](https://r37r0m0d3l.github.io/of/)🌠 - Promise wrapper with some sugar.
+-   🌠[OF](https://of.js.org)🌠 - Promise wrapper with some sugar.
 
 -   🔩[Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage)🔩 - Universal localStorage fallback.
 
--   🔄[Publish Subscribe](https://r37r0m0d3l.github.io/publish_subscribe)🔄 - JavaScript implementation of the Publish-Subscribe pattern.
+-   🔄[Publish Subscribe](https://publish-subscribe.js.org)🔄 - JavaScript implementation of the Publish-Subscribe pattern.
 
 Or find useful these tools:
 

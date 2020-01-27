@@ -2,6 +2,12 @@
 
 ---
 
+#### 1.0.10 Jan 26, 2020
+
+-   📚 Update documentation
+
+---
+
 #### 1.0.9 Jan 26, 2020
 
 -   ♻️ Refactor cast type `INTEGER` and `NUMERIC`
