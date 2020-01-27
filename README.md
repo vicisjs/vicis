@@ -14,6 +14,7 @@ Presentation and transformation layer for data output in RESTful APIs.
 [![Known Vulnerabilities](https://snyk.io/test/github/r37r0m0d3l/vicis/badge.svg?targetFile=package.json)](https://snyk.io/test/github/r37r0m0d3l/vicis?targetFile=package.json)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/272b5247f8b777c75360/maintainability)](https://codeclimate.com/github/r37r0m0d3l/vicis/maintainability)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e4e2ebf8e0914668866536a898370ad2)](https://www.codacy.com/manual/r37r0m0d3l/vicis?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=r37r0m0d3l/vicis&amp;utm_campaign=Badge_Grade)
 [![Dependency Status](https://david-dm.org/r37r0m0d3l/vicis.svg)](https://david-dm.org/r37r0m0d3l/vicis)
 [![devDependencies Status](https://david-dm.org/r37r0m0d3l/vicis/dev-status.svg)](https://david-dm.org/r37r0m0d3l/vicis?type=dev)
 
@@ -24,11 +25,11 @@ Presentation and transformation layer for data output in RESTful APIs.
 
 This is Node.js analogue to this libraries:
 
-* 🐘 [Fractal](https://fractal.thephpleague.com/) for PHP
+-   🐘 [Fractal](https://fractal.thephpleague.com/) for PHP
 
-* 💎 [Roar](https://github.com/trailblazer/roar) for Ruby
+-   💎 [Roar](https://github.com/trailblazer/roar) for Ruby
 
-* 🍢 [Marshmallow](https://marshmallow.readthedocs.io/en/stable/) for Python
+-   🍢 [Marshmallow](https://marshmallow.readthedocs.io/en/stable/) for Python
 
 ---
 
@@ -76,14 +77,14 @@ Output:
 
 Discover more:
 
-- 🔎[Consono](https://r37r0m0d3l.github.io/consono)🔎 - The most informative and correct variable inspector for JavaScript on the web.
+-   🔎[Consono](https://r37r0m0d3l.github.io/consono)🔎 - The most informative and correct variable inspector for JavaScript on the web.
 
-- 🌠[OF](https://r37r0m0d3l.github.io/of/)🌠 - Promise wrapper with some sugar.
+-   🌠[OF](https://r37r0m0d3l.github.io/of/)🌠 - Promise wrapper with some sugar.
 
-- 🔩[Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage)🔩 - Universal localStorage fallback.
+-   🔩[Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage)🔩 - Universal localStorage fallback.
 
-- 🔄[Publish Subscribe](https://r37r0m0d3l.github.io/publish_subscribe)🔄 - JavaScript implementation of the Publish-Subscribe pattern.
+-   🔄[Publish Subscribe](https://r37r0m0d3l.github.io/publish_subscribe)🔄 - JavaScript implementation of the Publish-Subscribe pattern.
 
 Or find useful these tools:
 
-- 🧾[JSON Sorter](https://r37r0m0d3l.github.io/json_sort)🧾 - Neat online JSON sorter.
+-   🧾[JSON Sorter](https://r37r0m0d3l.github.io/json_sort)🧾 - Neat online JSON sorter.
