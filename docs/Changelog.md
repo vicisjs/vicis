@@ -2,6 +2,20 @@
 
 ---
 
+#### 1.0.12 Jan 28, 2020
+
+-   ⬆️ Update dependencies
+
+-   📚 Update documentation
+
+---
+
+#### 1.0.11 Jan 27, 2020
+
+-   📚 Update documentation
+
+---
+
 #### 1.0.10 Jan 26, 2020
 
 -   📚 Update documentation
