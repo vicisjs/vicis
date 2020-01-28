@@ -1,4 +1,4 @@
-import cloneDeep from "lodash.clonedeep";
+const cloneDeep = require("lodash.clonedeep");
 
 //#region Constants
 const CONFIG_FIELDS = [
@@ -1425,6 +1425,16 @@ class Vicis {
 }
 //#endregion
 
-export default Vicis;
-
-export { TYPES_ENUM, Vicis, cast, defaults, defined, exclude, omit, pick, rename, replace, required, transform };
+module.exports.default = Vicis;
+module.exports.Vicis = Vicis;
+module.exports.TYPES_ENUM = TYPES_ENUM;
+module.exports.cast = cast;
+module.exports.defaults = defaults;
+module.exports.defined = defined;
+module.exports.exclude = exclude;
+module.exports.omit = omit;
+module.exports.pick = pick;
+module.exports.rename = rename;
+module.exports.replace = replace;
+module.exports.required = required;
+module.exports.transform = transform;
