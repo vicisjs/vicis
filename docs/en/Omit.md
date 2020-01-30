@@ -1,17 +1,19 @@
-# Defaults
+# Omit
 
 ----------
 
-◀ [Configuration](Configuration.md)
+◀ [Configuration](/en/Configuration.md)
 
-In case of property has undefined value it will be replaced with value from configuration
+Remove from object listed properties
+
+Applies before all other transformations
 
 ```js
-const { defaults } = require("vicis");
+const { omit } = require("vicis");
 ```
 
 ```js
-import { defaults } from "vicis/es";
+import { omit } from "vicis/es";
 ```
 
 <table><thead><tr><td colspan="3">
@@ -19,14 +21,12 @@ import { defaults } from "vicis/es";
 <tr><td>
 
 ```js
-defaults(
+omit(
   {
     login: "guest",
-    active: undefined,
+    password: "secret",
   },
-  {
-    active: true,
-  }
+  ["password"]
 );
 ```
 
@@ -38,14 +38,11 @@ defaults(
 <strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
-<strong>&#x21E5;</strong><br>
-<strong>&#x21E5;</strong><br>
 </td>
 <td>
 
 ```json
 {
-  "active": true,
   "login": "guest"
 }
 ```

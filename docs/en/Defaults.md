@@ -1,17 +1,17 @@
-# Pick
+# Defaults
 
 ----------
 
-◀ [Configuration](Configuration.md)
+◀ [Configuration](/en/Configuration.md)
 
-Picks from object only listed properties and ignore all other properties
+In case of property has undefined value it will be replaced with value from configuration
 
 ```js
-const { pick } = require("vicis");
+const { defaults } = require("vicis");
 ```
 
 ```js
-import { pick } from "vicis/es";
+import { defaults } from "vicis/es";
 ```
 
 <table><thead><tr><td colspan="3">
@@ -19,13 +19,14 @@ import { pick } from "vicis/es";
 <tr><td>
 
 ```js
-pick(
+defaults(
   {
-    id: 12345,
     login: "guest",
-    active: true,
+    active: undefined,
   },
-  ["id", "login"],
+  {
+    active: true,
+  }
 );
 ```
 
@@ -38,12 +39,13 @@ pick(
 <strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
 </td>
 <td>
 
 ```json
 {
-  "id": 12345,
+  "active": true,
   "login": "guest"
 }
 ```

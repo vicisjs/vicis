@@ -2,7 +2,7 @@
 
 ----------
 
-◀ [Configuration](Configuration.md)
+◀ [Configuration](/en/Configuration.md)
 
 Typecast object value to BOOLEAN, NUMERIC, INTEGER, STRING, JSON
 
@@ -18,7 +18,7 @@ import { cast } from "vicis/es";
 
 **Boolean**
 
-?> Almost everything in JavaScript casts to *TRUE*. [Transform](Transform.md) is better suited for that.
+?> Almost everything in JavaScript casts to *TRUE*. [Transform](/en/Transform.md) is better suited for that.
 
 </td></tr></thead><tbody>
 <tr><td>

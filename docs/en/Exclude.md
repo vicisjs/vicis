@@ -1,17 +1,21 @@
-# Replace
+# Exclude
 
 ----------
 
-◀ [Configuration](Configuration.md)
+◀ [Configuration](/en/Configuration.md)
 
-Overrides object values
+Remove from object listed properties
+
+Applies after all other transformations
+
+Overrides `pick` configuration
 
 ```js
-const { replace } = require("vicis");
+const { exclude } = require("vicis");
 ```
 
 ```js
-import { replace } from "vicis/es";
+import { exclude } from "vicis/es";
 ```
 
 <table><thead><tr><td colspan="3">
@@ -19,13 +23,14 @@ import { replace } from "vicis/es";
 <tr><td>
 
 ```js
-replace(
+exclude(
   {
-    domain: "primary",
+    login: "guest",
+    Password: "secret",
+    active: true,
+    __v: 5,
   },
-  {
-    domain: "secondary",
-  }
+  [/(?:password)/gi, /^(?:_)(?:_)?/, "active"]
 );
 ```
 
@@ -39,12 +44,13 @@ replace(
 <strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
 </td>
 <td>
 
 ```json
 {
-  "domain": "secondary"
+  "login": "guest"
 }
 ```
 

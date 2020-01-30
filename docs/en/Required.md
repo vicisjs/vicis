@@ -2,7 +2,7 @@
 
 ----------
 
-◀ [Configuration](Configuration.md)
+◀ [Configuration](/en/Configuration.md)
 
 If property defined in object - no error thrown
 

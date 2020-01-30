@@ -4,7 +4,7 @@
 
 **Configuration object**
 
-[Cast](Cast.md) [Defaults](Defaults.md) [Defined](Defined.md) [Exclude](Exclude.md) [Omit](Omit.md) [Pick](Pick.md) [Rename](Rename.md) [Replace](Replace.md) [Required](Required.md) [Transform](Transform.md)
+[Cast](/en/Cast.md) [Defaults](/en/Defaults.md) [Defined](/en/Defined.md) [Exclude](/en/Exclude.md) [Omit](/en/Omit.md) [Pick](/en/Pick.md) [Rename](/en/Rename.md) [Replace](/en/Replace.md) [Required](/en/Required.md) [Transform](/en/Transform.md)
 
 ```js
 const configuration = {

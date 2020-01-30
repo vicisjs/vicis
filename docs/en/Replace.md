@@ -1,19 +1,17 @@
-# Omit
+# Replace
 
 ----------
 
-◀ [Configuration](Configuration.md)
+◀ [Configuration](/en/Configuration.md)
 
-Remove from object listed properties
-
-Applies before all other transformations
+Overrides object values
 
 ```js
-const { omit } = require("vicis");
+const { replace } = require("vicis");
 ```
 
 ```js
-import { omit } from "vicis/es";
+import { replace } from "vicis/es";
 ```
 
 <table><thead><tr><td colspan="3">
@@ -21,12 +19,13 @@ import { omit } from "vicis/es";
 <tr><td>
 
 ```js
-omit(
+replace(
   {
-    login: "guest",
-    password: "secret",
+    domain: "primary",
   },
-  ["password"]
+  {
+    domain: "secondary",
+  }
 );
 ```
 
@@ -38,12 +37,14 @@ omit(
 <strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
 </td>
 <td>
 
 ```json
 {
-  "login": "guest"
+  "domain": "secondary"
 }
 ```
 

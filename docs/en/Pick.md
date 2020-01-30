@@ -1,17 +1,17 @@
-# Rename
+# Pick
 
 ----------
 
-◀ [Configuration](Configuration.md)
+◀ [Configuration](/en/Configuration.md)
 
-Renames properties to another name and remove original
+Picks from object only listed properties and ignore all other properties
 
 ```js
-const { rename } = require("vicis");
+const { pick } = require("vicis");
 ```
 
 ```js
-import { rename } from "vicis/es";
+import { pick } from "vicis/es";
 ```
 
 <table><thead><tr><td colspan="3">
@@ -19,13 +19,13 @@ import { rename } from "vicis/es";
 <tr><td>
 
 ```js
-rename(
+pick(
   {
-    _id: 12345,
+    id: 12345,
+    login: "guest",
+    active: true,
   },
-  {
-    _id: "ID",
-  }
+  ["id", "login"],
 );
 ```
 
@@ -38,13 +38,13 @@ rename(
 <strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
-<strong>&#x21E5;</strong><br>
 </td>
 <td>
 
 ```json
 {
-  "ID": 12345
+  "id": 12345,
+  "login": "guest"
 }
 ```
 

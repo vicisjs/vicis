@@ -1,21 +1,17 @@
-# Exclude
+# Rename
 
 ----------
 
-◀ [Configuration](Configuration.md)
+◀ [Configuration](/en/Configuration.md)
 
-Remove from object listed properties
-
-Applies after all other transformations
-
-Overrides `pick` configuration
+Renames properties to another name and remove original
 
 ```js
-const { exclude } = require("vicis");
+const { rename } = require("vicis");
 ```
 
 ```js
-import { exclude } from "vicis/es";
+import { rename } from "vicis/es";
 ```
 
 <table><thead><tr><td colspan="3">
@@ -23,14 +19,13 @@ import { exclude } from "vicis/es";
 <tr><td>
 
 ```js
-exclude(
+rename(
   {
-    login: "guest",
-    Password: "secret",
-    active: true,
-    __v: 5,
+    _id: 12345,
   },
-  [/(?:password)/gi, /^(?:_)(?:_)?/, "active"]
+  {
+    _id: "ID",
+  }
 );
 ```
 
@@ -44,13 +39,12 @@ exclude(
 <strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
-<strong>&#x21E5;</strong><br>
 </td>
 <td>
 
 ```json
 {
-  "login": "guest"
+  "ID": 12345
 }
 ```
 
