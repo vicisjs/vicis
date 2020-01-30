@@ -1,6 +1,6 @@
 ![Vicis](../_media/logo.png?raw=true#center "Vicis")
 
-Сериализация данных для REST API.
+Серіалізация даних для REST API.
 
 [![NPM Version](https://img.shields.io/npm/v/vicis.svg?style=flat)]()
 [![NPM Downloads](https://img.shields.io/npm/dt/vicis.svg?style=flat)]()
@@ -22,16 +22,16 @@
 
 ---
 
-Ещё интересные проекты:
+Ще цікаві проекти:
 
--   🔎[Consono](https://consono.js.org)🔎 - Самый правильный, информативный, привлекательный и настраиваемый инспектор переменных для Node.js.
+-   🔎[Consono](https://consono.js.org)🔎 - Найправильніший, інформативний, привабливий і налаштовуємий інспектор змінних для Node.js.
 
--   🌠[OF](https://of.js.org)🌠 - Обертка над Promise с плюшками.
+-   🌠[OF](https://of.js.org)🌠 - Обгортка над Promise з плюшками.
 
--   🔩[Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage)🔩 - Универсальный localStorage.
+-   🔩[Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage)🔩 - Універсальний localStorage.
 
--   🔄[Publish Subscribe](https://publish-subscribe.js.org)🔄 - Реализация шаблона «Publish Subscribe» на JavaScript.
+-   🔄[Publish Subscribe](https://publish-subscribe.js.org)🔄 - Реалізація шаблону «Publish Subscribe» на JavaScript.
 
-Или ещё один инструмент:
+Або ще один інструмент:
 
--   🧾[JSON Sorter](https://r37r0m0d3l.github.io/json_sort)🧾 - Онлайн-сортировщик JSON.
+-   🧾[JSON Sorter](https://r37r0m0d3l.github.io/json_sort)🧾 - Онлайн-сортувальник JSON.

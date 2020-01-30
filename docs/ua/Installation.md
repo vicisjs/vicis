@@ -17,10 +17,10 @@ yarn add vicis
 ```typescript
 enum TYPES_ENUM {
   BOOLEAN = "boolean",
-  NUMERIC = "numeric", // Только конечные числа
+  NUMERIC = "numeric", // Тільки кінцеві числа
   INTEGER = "integer",
   STRING = "string",
-  JSON = "json", // Преобразует в JSON
+  JSON = "json", // Перетворює в JSON
 }
 interface IVicisConfig {
   cast: { [prop: string]: TYPES_ENUM };
@@ -37,6 +37,6 @@ interface IVicisConfig {
 }
 ```
 
-?> TypeScript definition находиться в npm пакете
+?> TypeScript definition перебуває в npm пакеті
 
 ----------
