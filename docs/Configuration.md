@@ -12,7 +12,7 @@ const configuration = {
   cast: {},
   // In case of property has undefined value it will be replaced with value from configuration
   defaults: {},
-  // If value id defined in object - no error thrown
+  // If value is defined in object - no error thrown
   defined: [],
   // Remove from object listed properties.
   // Applies after all other transformations.

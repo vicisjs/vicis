@@ -1,8 +1,8 @@
-# Data Manipulation
+# Работа с Данными
 
 ----------
 
-**Set data for serialization**
+**Установить данные для сериализации**
 
 ```js
 const databaseModel = {
@@ -11,11 +11,11 @@ const databaseModel = {
   password: "bless",
 };
 const serializer = new Vicis({}, databaseModel);
-// Do some stuff, than set data later
+// Ещё код, потом можно перезаписать ещё раз
 serializer.data(databaseModel);
 ```
 
-**Get serialized data**
+**Получить сериализованные данные**
 
 ```js
 const databaseModel = {
@@ -60,6 +60,6 @@ serializer.toJSON();
 </td></tr>
 </tbody></table>
 
-?> "getData" and "toJSON" actually do the same thing
+?> "getData" и "toJSON" на самом деле делают одно и то же
 
 ----------

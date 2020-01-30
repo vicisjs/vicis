@@ -1,10 +1,10 @@
-# Defined
+# Defined - Существует
 
 ----------
 
-◀ [Configuration](Configuration.md)
+◀ [Конфигурация](/ru/Configuration.md)
 
-If value is defined in object - no error thrown
+Если в объекте определено свойство - ошибка не выдается
 
 ```js
 const { defined } = require("vicis");
@@ -18,14 +18,14 @@ import { defined } from "vicis/es";
 defined({ id: 12345 }, ["id"]);
 ```
 
-!> This is error
+!> Здесь будет ошибка
 
 ```js
 try {
   defined({ id: 12345 }, ["login"]);
 } catch (error) {
   console.warn(error.message); // Field 'login' must be defined.
-  // Throw 500 Internal Server Error etc.
+  // Здесь можно бросить 500 Internal Server Error и т.п.
 }
 ```
 

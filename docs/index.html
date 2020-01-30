@@ -28,6 +28,10 @@
         /*--sidebar-nav-link-color: #ff0;*/
         --sidebar-nav-link-color--active: #000;
         /*--sidebar-nav-link-text-decoration-color: #0f0;*/
+        --sidebar-width: 370px;
+      }
+      a, a:visited {
+        color: #000000;
       }
     </style>
   </head>
@@ -39,6 +43,7 @@
         name: "Vicis",
         repo: "https://github.com/r37r0m0d3l/vicis",
         auto2top: true,
+        loadNavbar: true,
         loadSidebar: true,
         logo: "_media/icon.png",
         copyCode: {
@@ -56,7 +61,7 @@
     <script src="https://unpkg.com/prismjs/components/prism-typescript.min.js"></script>
     <script>
       if (typeof navigator.serviceWorker !== "undefined") {
-        navigator.serviceWorker.register("sw.js");
+        // navigator.serviceWorker.register("sw.js");
       }
     </script>
   </body>
