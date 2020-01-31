@@ -2,4 +2,4 @@
 
 -   [Ru :ru:](/ru/ "Russian")
 
--   [Ua :ua:](/ua/ "Ukrainian")
+-   [Ua 🇺🇦](/ua/ "Ukrainian")
