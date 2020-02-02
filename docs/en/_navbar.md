@@ -1,5 +1,5 @@
--   [En :us:](/en/ "English")
+-   [En 🇺🇸](/en/ "English")
 
--   [Ru :ru:](/ru/ "Russian")
+-   [Ru 🇷🇺](/ru/ "Russian")
 
 -   [Ua 🇺🇦](/ua/ "Ukrainian")

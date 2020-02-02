@@ -77,6 +77,10 @@ Output:
 
 ---
 
+_If you use this project don't forget to give a ⭐ [star](https://github.com/r37r0m0d3l/vicis) ⭐ to it on GitHub!_
+
+---
+
 Discover more:
 
 -   🔎[Consono](https://consono.js.org)🔎 - The most informative and correct variable inspector for JavaScript on the web.
