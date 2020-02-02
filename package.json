@@ -58,6 +58,7 @@
     "url": "git+https://github.com/r37r0m0d3l/vicis.git"
   },
   "scripts": {
+    "docs-serve": "docsify serve docs",
     "lint": "npx eslint ./src/vicis.js",
     "lint-md": "remark .",
     "test": "jest"
