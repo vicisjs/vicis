@@ -2,6 +2,12 @@
 
 ---
 
+#### 1.0.15 Feb 03, 2020
+
+-   📚 Update documentation
+
+---
+
 #### 1.0.14 Feb 02, 2020
 
 -   📚 Update documentation
