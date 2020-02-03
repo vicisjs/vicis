@@ -20,6 +20,7 @@
 /README.md
 /_config.yml
 /docs/
+/renovate.json
 /src/
 /temp/
 /test/
