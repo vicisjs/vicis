@@ -13,3 +13,9 @@
 -   [ ] Collect data errors during serialization instead of throwing only first one.
 
 -   [ ] Test coverage 100%.
+
+-   [ ] Generate configuration from JSON-schema
+
+-   [ ] Generate TypeScript interface from config
+
+-   [ ] Generate Swagger/Postman configuration
