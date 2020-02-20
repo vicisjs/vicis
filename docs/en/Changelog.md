@@ -2,6 +2,12 @@
 
 ---
 
+#### 1.1.1 Feb 20, 2020
+
+-   📚 Update documentation
+
+---
+
 #### 1.1.0 Feb 20, 2020
 
 -   ♻️ Refactor method `data`. Now it try to call `toObject` or `toJSON` methods before serialization.

@@ -38,7 +38,8 @@ app.get("/superadmin", async (req, res) => {
   res.json(serializer.data(
     user.toObject()).toJSON()
   );
-  // або дозвольте Vicis спробувати подбати про це автоматично
+  // або дозвольте Vicis спробувати
+  // подбати про це автоматично
   res.json(serializer.data(user));
 });
 ```
@@ -104,7 +105,8 @@ app.get("/users", async (req, res) => {
   res.json(serializer.fromArray(
     users.map((model) => model.toObject()))
   );
-  // або дозвольте Vicis спробувати подбати про це автоматично
+  // або дозвольте Vicis спробувати
+  // подбати про це автоматично
   res.json(serializer.fromArray(users));
 });
 ```
