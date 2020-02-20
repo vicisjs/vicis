@@ -1073,8 +1073,14 @@ class Vicis {
      * @returns {Vicis}
      */
     this.#validateData = function validateData() {
-      this.#dataCache = {};
-      this.#dataCache = omitData(this.#omit, this.#dataOriginal);
+      if ("toObject" in this.#dataOriginal && isFunction(this.#dataOriginal.toObject)) {
+        this.#dataCache = this.#dataOriginal.toObject();
+      } else if ("toJSON" in this.#dataOriginal && isFunction(this.#dataOriginal.toJSON)) {
+        this.#dataCache = this.#dataOriginal.toJSON();
+      } else {
+        this.#dataCache = this.#dataOriginal;
+      }
+      this.#dataCache = omitData(this.#omit, this.#dataCache);
       this.#dataCache = requiredData(this.#required, this.#dataCache);
       this.#dataCache = definedData(this.#defined, this.#dataCache);
       this.#dataCache = castData(this.#cast, this.#dataCache);
