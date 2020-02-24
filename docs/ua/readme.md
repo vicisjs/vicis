@@ -1,10 +1,6 @@
-![Vicis](docs/_media/logo.png?raw=true "Vicis")
+![Vicis](../_media/logo.png?raw=true#center "Vicis")
 
-# Vicis
-
-Presentation and transformation layer for data output in RESTful APIs.
-
-[🗎 Vicis Documentation 🗎](https://vicis.js.org)
+Серіалізація даних для REST API.
 
 [![NPM Version](https://img.shields.io/npm/v/vicis.svg?style=flat)]()
 [![NPM Downloads](https://img.shields.io/npm/dt/vicis.svg?style=flat)]()
@@ -24,76 +20,28 @@ Presentation and transformation layer for data output in RESTful APIs.
 [![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l/vicis)
 [![GitHub forks](https://img.shields.io/github/forks/r37r0m0d3l/vicis.svg?style=social&label=Fork)]()
 
-This is Node.js analogue to this libraries:
+---
 
--   🐘 [Fractal](https://fractal.thephpleague.com/) for PHP
-
--   💎 [Roar](https://github.com/trailblazer/roar) for Ruby
-
--   🍢 [Marshmallow](https://marshmallow.readthedocs.io/en/stable/) for Python
+*Якщо ви використовуєте цей проект, не забудьте поставити йому ⭐
+[зірку](https://github.com/r37r0m0d3l/vicis) ⭐ на GitHub!*
 
 ---
 
-## Tl;dr
-
-Code:
-
-```js
-import { Vicis } from "vicis/es";
-const configuration = {
-  cast: { _id: Vicis.INTEGER, registered: Vicis.FLAG },
-  defaults: { confirmed: false },
-  exclude: [/(?:password)/gi, /^(?:_)(?:_)?/],
-  omit: ["createdAt", "updatedAt", "deletedAt"],
-  rename: { _id: "id", email: "login" },
-  replace: { url: null }
-};
-const model = {
-  _id: "54759309034942804",
-  email: "johnwick@gmail.com",
-  userPassword: "36e80092ff7f1ed72903cda9409b9d2c",
-  registered: "1",
-  url: "example.com",
-  createdAt: "2020-01-01 01:23:45",
-  __v: 1
-};
-const serializer = new Vicis(configuration);
-serializer.data(model);
-console.log(serializer.getData());
-```
-
-Output:
-
-```json
-{
-  "confirmed": false,
-  "id": 54759309034942804,
-  "login": "johnwick@gmail.com",
-  "registered": true,
-  "url": null
-}
-```
-
----
-
-*If you use this project don't forget to give a ⭐
-[star](https://github.com/r37r0m0d3l/vicis) ⭐ to it on GitHub!*
-
----
-
-Discover more:
+Ще цікаві проекти:
 
 -   🔎[Consono](https://consono.js.org)🔎 -
-The most informative and correct variable inspector for JavaScript on the web.
+Найбільш правильний, інформативний, привабливий і конфігурований інспектор змінних для Node.js.
 
--   🌠[OF](https://of.js.org)🌠 - Promise wrapper with some sugar.
+-   🌠[OF](https://of.js.org)🌠 -
+Обгортка над Promise з фішечками.
 
 -   🔩[Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage)🔩 -
-Universal localStorage fallback.
+Універсальний localStorage.
 
 -   🔄[Publish Subscribe](https://publish-subscribe.js.org)🔄 -
-JavaScript implementation of the Publish-Subscribe pattern.
+Реалізація шаблону «Publish Subscribe» на JavaScript.
 
-Or find useful these tools:
+Або ще один інструмент:
 
--   🧾[JSON Sorter](https://r37r0m0d3l.github.io/json_sort)🧾 - Neat online JSON sorter.
+-   🧾[JSON Sorter](https://r37r0m0d3l.github.io/json_sort)🧾 -
+Онлайн-сортувальник JSON.
