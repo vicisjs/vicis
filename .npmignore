@@ -13,11 +13,13 @@
 /.prettierignore
 /.prettierrc
 /.remarkrc
+/.sonarcloud.properties
 /.travis.yml
 /.yarnrc
 /CHANGELOG.md
 /CNAME
 /README.md
+/ROADMAP.md
 /_config.yml
 /docs/
 /renovate.json
