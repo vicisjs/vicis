@@ -4,7 +4,7 @@
 
 ◀ [Конфігурація](/ua/Configuration.md)
 
-Якщо властивість має невизначене значення, воно буде замінено значенням з конфігурації
+Якщо властивість має невизначене значення, воно буде замінено значенням з конфігурації.
 
 ```js
 const { defined } = require("vicis");
@@ -24,7 +24,7 @@ defined({ id: 12345 }, ["id"]);
 try {
   defined({ id: 12345 }, ["login"]);
 } catch (error) {
-  console.warn(error.message); // Field 'login' must be defined.
+  console.warn(error.message); // Поле 'login' мусить бути визначеним.
   // Тут можна кинути 500 Internal Server Error і т.п.
 }
 ```

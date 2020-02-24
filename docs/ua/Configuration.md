@@ -10,7 +10,7 @@
 const configuration = {
   // Приведення типу об'єкта до BOOLEAN, NUMERIC, INTEGER, STRING, JSON
   cast: {},
-  // Якщо властивість має невизначене значення, воно буде замінено значенням з конфігурації
+  // Якщо властивість не має визначеного значення, воно буде замінено значенням з конфігурації
   defaults: {},
   // Якщо в об'єкті визначено властивість - помилка не видається
   defined: [],
@@ -25,7 +25,7 @@ const configuration = {
   pick: [],
   // Сортування об’єкта за назвою властивості
   sort: true,
-  // Перейменовує властивості в інше ім'я і видаляє оригінал
+  // Перейменовує властивості і видаляє оригінали
   rename: {},
   // Перевизначає властивості об'єкта
   replace: {},
@@ -50,7 +50,7 @@ serializer.config(configuration);
 **Приклад декількох версій API**
 
 ```js
-// ПочатковийREST API
+// Початковий REST API
 const configRestApiVer1 = { cast: { id: "integer" }, };
 const serializerRestApiVer1 = new Vicis(configRestApiVer1);
 // REST API версії 2

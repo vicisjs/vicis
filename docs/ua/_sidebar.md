@@ -1,5 +1,5 @@
 -   Вступ
-    -   [Установка](/ua/Installation.md)
+    -   [Встановлення](/ua/Installation.md)
     -   [Імпорт](/ua/Importing.md)
     -   [Створення Екземпляра](/ua/CreatingInstance.md)
 -   Інтерфейс
@@ -17,7 +17,7 @@
     -   [Required - Обов'язковий](/ua/Required.md)
     -   [Transform - Трансформувати](/ua/Transform.md)
 -   Приклади
-    -   [Серіалізация](/ua/Serialization.md)
+    -   [Серіалізація](/ua/Serialization.md)
     -   [Колекції](/ua/Collections.md)
     -   [Фреймворк ExpressJS](/ua/ExpressJS.md)
     -   [Фреймворк NestJS](/ua/NestJS.md)
