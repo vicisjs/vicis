@@ -2,9 +2,17 @@
 
 ---
 
+## 1.1.2 Feb 24, 2020
+
+-   ⬆️ Dependencies updated
+
+-   📚 Documentation updated
+
+---
+
 ## 1.1.1 Feb 20, 2020
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 ---
 
@@ -16,39 +24,39 @@
 
 ## 1.0.15 Feb 03, 2020
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 ---
 
 ## 1.0.14 Feb 02, 2020
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 ---
 
 ## 1.0.13 Jan 31, 2020
 
--   ⬆️ Update dependencies
+-   ⬆️ Dependencies updated
 
 ---
 
 ## 1.0.12 Jan 28, 2020
 
--   ⬆️ Update dependencies
+-   ⬆️ Dependencies updated
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 ---
 
 ## 1.0.11 Jan 27, 2020
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 ---
 
 ## 1.0.10 Jan 26, 2020
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 ---
 
@@ -60,7 +68,7 @@
 
 ## 1.0.8 Jan 26, 2020
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 ---
 
@@ -86,7 +94,7 @@
 
 -   ♻️ Refactor `transform` function. Now `data` argument is cloned. So actual data wont't be changed.
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 ---
 
@@ -94,9 +102,9 @@
 
 -   ♻️ Refactor `transform` function. Now it has `data` as third argument.
 
--   ⬆️ Update dependencies
+-   ⬆️ Dependencies updated
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 ---
 
@@ -104,9 +112,9 @@
 
 -   ➕ Add static properties for casting types: BOOLEAN, NUMERIC, INTEGER, STRING, JSON
 
--   ⬆️ Update dependencies
+-   ⬆️ Dependencies updated
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 ---
 
@@ -114,7 +122,7 @@
 
 -   🔨 Refactor method `fromArray`
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 ---
 
