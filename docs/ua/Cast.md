@@ -1,6 +1,6 @@
 # Cast - Приведення Типів
 
-----------
+---
 
 ◀ [Конфігурація](/ua/Configuration.md)
 
@@ -16,9 +16,9 @@ import { cast } from "vicis/es";
 
 <table><thead><tr><td colspan="3">
 
-**Булевые**
+**Булеві**
 
-?> Майже всі в JavaScript приводиться до *TRUE*. [Transform](/ua/Transform.md) краще підходить для цього.
+?> Майже все в JavaScript приводиться до _TRUE_. [Transform](/ua/Transform.md) найкраще підходить для цього.
 
 </td></tr></thead><tbody>
 <tr><td>
@@ -50,9 +50,9 @@ cast({ registered: null }, { id: Vicis.BOOLEAN });
 
 **Прапорець**
 
-Призводить: `undefined`, `null`, `0`, `0n`, `""`, `"false"`, `"FALSE"` до булевої false.
+Приводить `undefined`, `null`, `0`, `0n`, `""`, `"false"`, `"FALSE"` до булевого false.
 
-Призводить: `1`, `1n`, `"1"`, `"true"`, `"TRUE"` до булевої true.
+Приводить `1`, `1n`, `"1"`, `"true"`, `"TRUE"` до булевого true.
 
 </td></tr></thead><tbody>
 <tr><td>
@@ -133,7 +133,7 @@ cast({ check: true }, { check: "flag" });
 
 **Ціле або Число**
 
-?> Тільки кінцеві числа вважаються придатними.
+?> Тільки скінченні числа вважаються придатними.
 
 </td></tr></thead><tbody>
 <tr><td>
@@ -251,4 +251,4 @@ cast(
 </td></tr>
 </tbody></table>
 
-----------
+---

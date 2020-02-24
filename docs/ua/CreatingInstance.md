@@ -14,7 +14,7 @@ const serializer = new Vicis(/* configuration, data */);
 const serializer = Vicis.factory(/* configuration, data */);
 ```
 
-?> Виклик фабрики нічим не відрізняється від виклику конструктора, він використовується тільки для зручної ланцюжки викликів.
+?> Виклик фабрики нічим не відрізняється від виклику конструктора, він зручний для використання ланцюжка викликів.
 
 ```js
 const serializer = Vicis.factory()

@@ -52,7 +52,7 @@ transform(
 </td></tr>
 </tbody></table>
 
-**Більш складний приклад**
+**Складніший приклад**
 
 <table><thead><tr><td colspan="3">
 </td></tr></thead><tbody>
