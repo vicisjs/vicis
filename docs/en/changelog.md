@@ -74,13 +74,13 @@
 
 ## 1.0.7 Jan 25, 2020
 
--   ➕ Add new configuration type `exclude`
+-   ➕ Added new configuration type `exclude`
 
 ---
 
 ## 1.0.6 Jan 24, 2020
 
--   ➕ Add new cast type `FLAG`
+-   ➕ Added new cast type `FLAG`
 
 ---
 
@@ -110,7 +110,7 @@
 
 ## 1.0.2 Jan 13, 2020
 
--   ➕ Add static properties for casting types: BOOLEAN, NUMERIC, INTEGER, STRING, JSON
+-   ➕ Added static properties for casting types: BOOLEAN, NUMERIC, INTEGER, STRING, JSON
 
 -   ⬆️ Dependencies updated
 
