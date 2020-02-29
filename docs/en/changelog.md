@@ -2,6 +2,13 @@
 
 ---
 
+## 1.2.0 Feb 29, 2020
+
+-   ♻️ Refactor cast type `JSON`
+-   💥 Configuration value `sort` now always `false`
+
+---
+
 ## 1.1.3 Feb 26, 2020
 
 -   ⬆️ Dependencies updated

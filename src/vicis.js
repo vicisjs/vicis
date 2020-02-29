@@ -23,6 +23,7 @@ const TYPES_ENUM = {
   JSON: "json",
 };
 const TYPES_LIST = ["boolean", "flag", "numeric", "integer", "string", "json"];
+const CONFIG_SORT = false;
 //#endregion
 
 //#region Helper Functions
@@ -99,14 +100,14 @@ function arrayUnique(array) {
 /**
  * @name castToJson
  * @param {*} value
- * @param {boolean=true} sort
+ * @param {boolean=} sort
  * @returns {*}
  */
-function castToJson(value, sort = true) {
+function castToJson(value, sort = CONFIG_SORT) {
   if (sort) {
-    return collectionSortKeys(parse(stringify(value)), true);
+    return collectionSortKeys(jsonParse(jsonStringify(value)), true);
   } else {
-    return parse(stringify(value));
+    return jsonParse(jsonStringify(value));
   }
 }
 /**
@@ -197,20 +198,59 @@ function objectKeys(object) {
   return Object.keys(object).sort((alpha, beta) => alpha.localeCompare(beta));
 }
 /**
- * @name parse
+ * @name jsonParse
  * @param {string} text
  * @returns *
  */
-function parse(text) {
+function jsonParse(text) {
   return JSON.parse(text);
 }
 /**
- * @name stringify
+ * @name jsonStringify
  * @param {*} value
  * @returns string
  */
-function stringify(value) {
+function jsonStringify(value) {
   return JSON.stringify(value);
+}
+/**
+ * @name objectDeserialize
+ * @param {string} value
+ * @returns {*}
+ */
+function objectDeserialize(value) {
+  if (isString(value)) {
+    return jsonParse(value);
+  }
+  return value;
+}
+/**
+ * @name objectSerialize
+ * @param {object|string} value
+ * @returns {string}
+ */
+function objectSerialize(value) {
+  let data;
+  const { toJSON, toObject } = value;
+  if (isFunction(toObject)) {
+    data = value.toObject();
+  } else if (isFunction(toJSON)) {
+    data = value.toJSON();
+  } else {
+    data = value;
+  }
+  if (isString(data)) {
+    return data;
+  }
+  return jsonStringify(data);
+}
+/**
+ * @name objectToPlain
+ * @param {object|string} value
+ * @returns {*}
+ */
+function objectToPlain(value) {
+  return objectDeserialize(objectSerialize(value));
 }
 /**
  * @name toFlag
@@ -283,7 +323,7 @@ function castConfig(propertyToType) {
   Object.keys(propertyToType).forEach((key) => {
     if (!isString(propertyToType[key])) {
       throw new TypeError(
-        `'Cast' expect object values to be strings. Not a string at key: '${stringify(propertyToType[key])}'.`,
+        `'Cast' expect object values to be strings. Not a string at key: '${jsonStringify(propertyToType[key])}'.`,
       );
     }
     if (!TYPES_LIST.includes(propertyToType[key])) {
@@ -346,7 +386,7 @@ function castData(propertyToType, dataToSerialize) {
         dataToSerialize[key] = toString(dataToSerialize[key]);
         break;
       case TYPES_ENUM.JSON:
-        dataToSerialize[key] = parse(stringify(dataToSerialize[key]));
+        dataToSerialize[key] = objectToPlain(dataToSerialize[key]);
         break;
       default:
         throw new Error("Unknown value convert error");
@@ -432,7 +472,7 @@ function definedConfig(propertiesMustBeDefined) {
   }
   return arrayUnique(propertiesMustBeDefined).map((value) => {
     if (!isString(value)) {
-      throw new TypeError(`'Defined' expect array of strings. Value: '${stringify(value)}'.`);
+      throw new TypeError(`'Defined' expect array of strings. Value: '${jsonStringify(value)}'.`);
     }
     return value;
   });
@@ -490,7 +530,9 @@ function excludeConfig(propertiesToExclude) {
   }
   return arrayUnique(propertiesToExclude).map((value) => {
     if (!isString(value) && !isRegExp(value)) {
-      throw new TypeError(`'Exclude' expect array of strings or regular expressions. Value: '${stringify(value)}'.`);
+      throw new TypeError(
+        `'Exclude' expect array of strings or regular expressions. Value: '${jsonStringify(value)}'.`,
+      );
     }
     return value;
   });
@@ -583,7 +625,7 @@ function omitConfig(propertiesToOmit) {
   }
   return arrayUnique(propertiesToOmit).map((value) => {
     if (!isString(value)) {
-      throw new TypeError(`'Omit' expect array of strings. Value: '${stringify(value)}'.`);
+      throw new TypeError(`'Omit' expect array of strings. Value: '${jsonStringify(value)}'.`);
     }
     return value;
   });
@@ -646,7 +688,7 @@ function pickConfig(propertiesToPick) {
   }
   return arrayUnique(propertiesToPick).map((value) => {
     if (!isString(value)) {
-      throw new TypeError(`'Pick' expect array of strings. Value: '${stringify(value)}'.`);
+      throw new TypeError(`'Pick' expect array of strings. Value: '${jsonStringify(value)}'.`);
     }
     return value;
   });
@@ -707,7 +749,7 @@ function renameConfig(renamePropertyFromTo) {
   const to = Object.values(renamePropertyFromTo);
   const toUnique = arrayUnique(to);
   if (to.length !== toUnique.length) {
-    throw new TypeError(`'Rename' has similar values: '${stringify(toUnique)}'.`);
+    throw new TypeError(`'Rename' has similar values: '${jsonStringify(toUnique)}'.`);
   }
   return renamePropertyFromTo;
 }
@@ -810,7 +852,7 @@ function requiredConfig(propertiesRequired) {
   }
   return arrayUnique(propertiesRequired).map((value) => {
     if (!isString(value)) {
-      throw new TypeError(`'Required' expect array of strings. Value: '${stringify(value)}'.`);
+      throw new TypeError(`'Required' expect array of strings. Value: '${jsonStringify(value)}'.`);
     }
     return value;
   });
@@ -948,7 +990,7 @@ class Vicis {
    * @private
    * @type {boolean}
    */
-  #sort = true;
+  #sort = CONFIG_SORT;
   /**
    * @name rename
    * @private
@@ -1202,7 +1244,7 @@ class Vicis {
     this.#exclude = [];
     this.#omit = [];
     this.#pick = [];
-    this.#sort = true;
+    this.#sort = CONFIG_SORT;
     this.#rename = {};
     this.#replace = {};
     this.#required = [];
@@ -1354,7 +1396,7 @@ class Vicis {
    * @param {boolean=} sortProperties
    * @returns {Vicis}
    */
-  sort(sortProperties = true) {
+  sort(sortProperties = CONFIG_SORT) {
     if (typeof sortProperties !== "boolean") {
       throw new TypeError("'sort' should be a boolean");
     }
@@ -1416,7 +1458,7 @@ class Vicis {
    * @returns {string}
    */
   toString() {
-    return stringify(this.toJSON());
+    return jsonStringify(this.toJSON());
   }
   /**
    * @name fromArray

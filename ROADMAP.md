@@ -1,4 +1,4 @@
-## Roadmap
+# RoadMap
 
 -   [x] Basic chained calls.
 
@@ -19,3 +19,9 @@
 -   [ ] Generate TypeScript interface from config
 
 -   [ ] Generate Swagger/Postman configuration
+
+-   [ ] Implement method `getOriginalData`
+
+-   [ ] Implement method `clearData`
+
+-   [ ] Add options `orderKeys`

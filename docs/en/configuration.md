@@ -24,7 +24,7 @@ const configuration = {
   // Picks from object only listed properties and ignore all other properties
   pick: [],
   // Sorting object by property name
-  sort: true,
+  sort: false,
   // Renames properties to another name and remove original
   rename: {},
   // Overrides object values
