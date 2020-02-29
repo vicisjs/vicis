@@ -1,7 +1,5 @@
 # RoadMap
 
--   [x] Basic chained calls.
-
 -   [ ] Advanced chained calls for collections.
 
 -   [ ] Async transformations.
@@ -20,8 +18,4 @@
 
 -   [ ] Generate Swagger/Postman configuration
 
--   [ ] Implement method `getOriginalData`
-
--   [ ] Implement method `clearData`
-
--   [ ] Add options `orderKeys`
+-   [ ] Add options `order`

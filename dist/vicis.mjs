@@ -1441,6 +1441,17 @@ class Vicis {
     this.#validateData();
     return this;
   }
+  /**
+   * @name clear
+   * @description Clear any data references and cached values
+   * @public
+   * @returns {Vicis}
+   */
+  clear() {
+    this.#dataCache = {};
+    this.#dataOriginal = {};
+    return this;
+  }
   //#endregion
 
   //#region Public Main Methods

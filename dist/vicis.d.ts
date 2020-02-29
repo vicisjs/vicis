@@ -148,6 +148,13 @@ declare class Vicis {
    */
   private validateConfig(): Vicis;
   /**
+   * @name clear
+   * @description Clear any data references and cached values
+   * @public
+   * @returns {Vicis}
+   */
+  public clear(): Vicis;
+  /**
    * @name getData
    * @public
    * @returns {Object}

@@ -4,8 +4,11 @@
 
 ## 1.2.0 Feb 29, 2020
 
--   ♻️ Refactor cast type `JSON`
+-   ➕ Added method `clear`
+
 -   💥 Configuration value `sort` now always `false`
+
+-   ♻️ Refactor cast type `JSON`
 
 ---
 

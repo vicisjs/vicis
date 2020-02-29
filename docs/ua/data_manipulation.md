@@ -63,3 +63,18 @@ serializer.toJSON();
 ?> "getData" та "toJSON" насправді роблять одне і те ж
 
 ---
+
+## Очистить любые ссылки на данные и кэшированные значения
+
+```js
+const databaseModel = {
+  id: 10,
+  login: "Guest",
+  password: "bless",
+};
+const serializer = Vicis.factory().data(databaseModel);
+// Ще код
+serializer.clear();
+```
+
+---
