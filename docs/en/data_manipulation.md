@@ -64,7 +64,7 @@ serializer.toJSON();
 
 ---
 
-## Очистіть будь-які посилання на дані та кешовані значення
+## Clear any data references and cached values
 
 ```js
 const databaseModel = {
