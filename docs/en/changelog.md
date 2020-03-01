@@ -2,6 +2,12 @@
 
 ---
 
+## 1.3.0 Mar 01, 2020
+
+-   ➕ Added method `order`
+
+---
+
 ## 1.2.0 Feb 29, 2020
 
 -   ➕ Added method `clear`

@@ -4,7 +4,7 @@
 
 ## Конфигурационный объект
 
-[Cast](/ru/cast.md) [Defaults](/ru/defaults.md) [Defined](/ru/defined.md) [Exclude](/ru/exclude.md) [Omit](/ru/omit.md) [Pick](/ru/pick.md) [Rename](/ru/rename.md) [Replace](/ru/replace.md) [Required](/ru/required.md) [Transform](/ru/transform.md)
+[Cast](/ru/cast.md) [Defaults](/ru/defaults.md) [Defined](/ru/defined.md) [Exclude](/ru/exclude.md) [Omit](/ru/omit.md) [Order](/ru/order.md) [Pick](/ru/pick.md) [Rename](/ru/rename.md) [Replace](/ru/replace.md) [Required](/ru/required.md) [Transform](/ru/transform.md)
 
 ```js
 const configuration = {
@@ -21,6 +21,8 @@ const configuration = {
   // Удалить из объекта перечисленные свойства.
   // Применяется перед всеми другими преобразованиями.
   omit: [],
+  // Устанавливает порядок свойств в объекте
+  order: [],
   // Выбирает из объекта только перечисленные свойства и игнорирует все остальные свойства
   pick: [],
   // Сортировка объекта по имени свойства

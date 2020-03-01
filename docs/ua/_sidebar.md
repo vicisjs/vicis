@@ -11,6 +11,7 @@
     -   [Defined - Існує](/ua/defined.md)
     -   [Exclude - Виключити](/ua/exclude.md)
     -   [Omit - Прибрати](/ua/omit.md)
+    -   [Order - Порядок](/ua/order.md)
     -   [Pick - Вибрати](/ua/pick.md)
     -   [Rename - Перейменувати](/ua/rename.md)
     -   [Replace - Замінити](/ua/replace.md)

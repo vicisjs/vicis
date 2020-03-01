@@ -13,6 +13,7 @@ export interface IVicisConfig {
   defined?: string[];
   exclude?: Array<string|RegExp>;
   omit?: string;
+  order?: string[];
   pick?: string[];
   sort?: boolean;
   rename?: { [prop: string]: string };
@@ -294,6 +295,16 @@ declare function exclude(data: object, propertiesToExclude: string[]|RegExp[]): 
 declare function omit(data: object, propertiesToOmit: string[]): object;
 
 /**
+ * @name order
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Array.<string>=} propertiesToStreamline
+ * @param {boolean=} sort
+ * @returns {Object}
+ */
+declare function order(data: object, propertiesToStreamline: string[], sort: boolean): object;
+
+/**
  * @name pick
  * @throws TypeError
  * @param {Object} data
@@ -338,4 +349,4 @@ declare function transform(data: object, propertyValueTransformWith: { [prop: st
 
 export default Vicis;
 
-export { TYPES_ENUM, Vicis, cast, defaults, defined, omit, pick, rename, replace, required, transform };
+export { TYPES_ENUM, Vicis, cast, defaults, defined, omit, order, pick, rename, replace, required, transform };

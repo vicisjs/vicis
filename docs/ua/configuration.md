@@ -4,7 +4,7 @@
 
 ## Конфігураційний об'єкт
 
-[Cast](/ua/cast.md) [Defaults](/ua/defaults.md) [Defined](/ua/defined.md) [Exclude](/ua/exclude.md) [Omit](/ua/omit.md) [Pick](/ua/pick.md) [Rename](/ua/rename.md) [Replace](/ua/replace.md) [Required](/ua/required.md) [Transform](/ua/transform.md)
+[Cast](/ua/cast.md) [Defaults](/ua/defaults.md) [Defined](/ua/defined.md) [Exclude](/ua/exclude.md) [Omit](/ua/omit.md) [Order](/ua/order.md) [Pick](/ua/pick.md) [Rename](/ua/rename.md) [Replace](/ua/replace.md) [Required](/ua/required.md) [Transform](/ua/transform.md)
 
 ```js
 const configuration = {
@@ -21,6 +21,8 @@ const configuration = {
   // Видалити з об'єкта вказані властивості.
   // Застосовується перед усіма іншими перетвореннями.
   omit: [],
+  // Встановлює порядок властивостей в об'єкті
+  order: [],
   // Вибирає з об'єкта тільки вказані властивості і ігнорує всі інші властивості
   pick: [],
   // Сортування об’єкта за назвою властивості

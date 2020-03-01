@@ -17,5 +17,3 @@
 -   [ ] Generate TypeScript interface from config
 
 -   [ ] Generate Swagger/Postman configuration
-
--   [ ] Add options `order`

@@ -7,6 +7,7 @@ const CONFIG_FIELDS = [
   "defined",
   "exclude",
   "omit",
+  "order",
   "pick",
   "sort",
   "rename",
@@ -66,9 +67,10 @@ function arrayIntersect(alpha, beta) {
 /**
  * @name arrayUnique
  * @param {Array} array
+ * @param {boolean=} sort
  * @returns {Array}
  */
-function arrayUnique(array) {
+function arrayUnique(array, sort = true) {
   if (array.length < 2) {
     return array;
   }
@@ -95,7 +97,10 @@ function arrayUnique(array) {
       unique = compacted.concat(normalized);
     }
   }
-  return unique.sort();
+  if (sort) {
+    return unique.sort();
+  }
+  return unique;
 }
 /**
  * @name castToJson
@@ -223,6 +228,33 @@ function objectDeserialize(value) {
     return jsonParse(value);
   }
   return value;
+}
+/**
+ * @name objectOrderKeys
+ * @param {Object} object
+ * @param {Array.<string>} keys
+ * @param {boolean=} sortAlphabetically
+ * @returns {{}|*}
+ */
+function objectOrderKeys(object, keys = [], sortAlphabetically = CONFIG_SORT) {
+  if (!Array.isArray(keys) || keys.length === 0) {
+    return object;
+  }
+  const orderKeys = keys.filter((key) => typeof key === "string");
+  let objectKeys = new Set(Object.keys(object));
+  const newObject = {};
+  orderKeys.forEach((key) => {
+    objectKeys.delete(key);
+    if (key in object) {
+      newObject[key] = object[key];
+    }
+  });
+  objectKeys = [...objectKeys];
+  if (sortAlphabetically) {
+    objectKeys = objectKeys.sort((alpha, beta) => alpha.localeCompare(beta));
+  }
+  objectKeys.forEach((key) => (newObject[key] = object[key]));
+  return newObject;
 }
 /**
  * @name objectSerialize
@@ -672,6 +704,57 @@ function omit(data, propertiesToOmit = []) {
 }
 //#endregion
 
+//#region Order
+/**
+ * @name orderConfig
+ * @throws TypeError
+ * @param {Array.<string>} propertiesToStreamline
+ * @returns {Array.<string>}
+ */
+function orderConfig(propertiesToStreamline) {
+  if (!Array.isArray(propertiesToStreamline)) {
+    throw new TypeError("'Order' should be an array");
+  }
+  if (isArrayEmpty(propertiesToStreamline)) {
+    return [];
+  }
+  return arrayUnique(propertiesToStreamline, false).map((value) => {
+    if (!isString(value)) {
+      throw new TypeError(`'Order' expect array of strings. Value: '${jsonStringify(value)}'.`);
+    }
+    return value;
+  });
+}
+/**
+ * @name orderData
+ * @param {Array.<string>} propertiesToStreamline
+ * @param {Object} data
+ * @param {boolean=} sort
+ * @returns {Object}
+ */
+function orderData(propertiesToStreamline, data, sort = CONFIG_SORT) {
+  if (isArrayEmpty(propertiesToStreamline)) {
+    return data;
+  }
+  return objectOrderKeys(data, propertiesToStreamline, sort);
+}
+/**
+ * @name order
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Array.<string>=} propertiesToStreamline
+ * @param {boolean=} sort
+ * @returns {Object}
+ */
+function order(data, propertiesToStreamline = [], sort = CONFIG_SORT) {
+  const config = orderConfig(propertiesToStreamline);
+  if (isArrayEmpty(config)) {
+    return data;
+  }
+  return objectOrderKeys(data, propertiesToStreamline, sort);
+}
+//#endregion
+
 //#region Pick
 /**
  * @name pickConfig
@@ -980,6 +1063,12 @@ class Vicis {
    */
   #omit = [];
   /**
+   * @name order
+   * @private
+   * @type {Array.<string>}
+   */
+  #order = [];
+  /**
    * @name pick
    * @private
    * @type {Array.<string>}
@@ -1133,6 +1222,7 @@ class Vicis {
       this.#dataCache = pickData(this.#pick, this.#dataCache);
       this.#dataCache = excludeData(this.#exclude, this.#dataCache);
       this.#dataCache = castToJson(this.#dataCache, this.#sort);
+      this.#dataCache = orderData(this.#order, this.#dataCache, this.#sort);
       return this;
     }.bind(this);
     this.config(config);
@@ -1224,6 +1314,7 @@ class Vicis {
       defined: this.#defined,
       exclude: this.#exclude,
       omit: this.#omit,
+      order: this.#order,
       pick: this.#pick,
       sort: this.#sort,
       rename: this.#rename,
@@ -1243,6 +1334,7 @@ class Vicis {
     this.#defined = [];
     this.#exclude = [];
     this.#omit = [];
+    this.#order = [];
     this.#pick = [];
     this.#sort = CONFIG_SORT;
     this.#rename = {};
@@ -1278,6 +1370,7 @@ class Vicis {
     this.transform(config.transform);
     this.defaults(config.defaults);
     this.exclude(config.exclude);
+    this.order(config.order);
     this.#validateConfig();
     return this;
   }
@@ -1338,6 +1431,18 @@ class Vicis {
    */
   omit(propertiesToOmit = []) {
     this.#omit = omitConfig(propertiesToOmit);
+    this.#validateConfig();
+    return this;
+  }
+  /**
+   * @name order
+   * @public
+   * @throws TypeError
+   * @param {Array.<string>=} propertiesToStreamline
+   * @returns {Vicis}
+   */
+  order(propertiesToStreamline = []) {
+    this.#order = orderConfig(propertiesToStreamline);
     this.#validateConfig();
     return this;
   }
@@ -1486,4 +1591,4 @@ class Vicis {
 
 export default Vicis;
 
-export { TYPES_ENUM, Vicis, cast, defaults, defined, exclude, omit, pick, rename, replace, required, transform };
+export { TYPES_ENUM, Vicis, cast, defaults, defined, exclude, omit, order, pick, rename, replace, required, transform };

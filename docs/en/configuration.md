@@ -4,7 +4,7 @@
 
 ## Configuration object
 
-[Cast](/en/cast.md) [Defaults](/en/defaults.md) [Defined](/en/defined.md) [Exclude](/en/exclude.md) [Omit](/en/omit.md) [Pick](/en/pick.md) [Rename](/en/rename.md) [Replace](/en/replace.md) [Required](/en/required.md) [Transform](/en/transform.md)
+[Cast](/en/cast.md) [Defaults](/en/defaults.md) [Defined](/en/defined.md) [Exclude](/en/exclude.md) [Omit](/en/omit.md) [Order](/en/order.md) [Pick](/en/pick.md) [Rename](/en/rename.md) [Replace](/en/replace.md) [Required](/en/required.md) [Transform](/en/transform.md)
 
 ```js
 const configuration = {
@@ -21,6 +21,8 @@ const configuration = {
   // Remove from object listed properties.
   // Applies before all other transformations.
   omit: [],
+  // Set order of object property names
+  order: [],
   // Picks from object only listed properties and ignore all other properties
   pick: [],
   // Sorting object by property name

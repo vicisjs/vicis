@@ -11,6 +11,7 @@
     -   [Defined - Существует](/ru/defined.md)
     -   [Exclude - Исключить](/ru/exclude.md)
     -   [Omit - Убрать](/ru/omit.md)
+    -   [Order - Порядок](/ru/order.md)
     -   [Pick - Выбрать](/ru/pick.md)
     -   [Rename - Переименовать](/ru/rename.md)
     -   [Replace - Заменить](/ru/replace.md)

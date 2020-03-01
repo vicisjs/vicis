@@ -11,6 +11,7 @@
     -   [Defined](/en/defined.md)
     -   [Exclude](/en/exclude.md)
     -   [Omit](/en/omit.md)
+    -   [Order](/en/order.md)
     -   [Pick](/en/pick.md)
     -   [Rename](/en/rename.md)
     -   [Replace](/en/replace.md)
