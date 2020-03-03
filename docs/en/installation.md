@@ -23,17 +23,18 @@ enum TYPES_ENUM {
   JSON = "json", // Call JSON.stringify on value
 }
 interface IVicisConfig {
-  cast: { [prop: string]: TYPES_ENUM };
-  defaults: { [prop: string]: any };
-  defined: string[];
-  exclude: Array<string|RegExp>;
-  omit: string[];
-  pick: string[];
-  sort: boolean;
-  rename: { [prop: string]: string };
-  replace: { [prop: string]: any };
-  required: string[];
-  transform: { [prop: string]: Function };
+  cast?: { [prop: string]: TYPES_ENUM };
+  defaults?: { [prop: string]: any };
+  defined?: string[];
+  exclude?: Array<string|RegExp>;
+  omit?: string;
+  order?: string[];
+  pick?: string[];
+  sort?: boolean;
+  rename?: { [prop: string]: string };
+  replace?: { [prop: string]: any };
+  required?: string[];
+  transform?: { [prop: string]: (value: any, key: string, data: object) => any };
 }
 ```
 

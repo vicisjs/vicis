@@ -61,7 +61,7 @@
   },
   "scripts": {
     "docs-serve": "docsify serve docs",
-    "lint": "npx eslint ./src/vicis.js",
+    "lint": "eslint ./src/vicis.js",
     "lint-md": "remark .",
     "test": "jest",
     "upgrade": "yarn upgrade-interactive --latest"
