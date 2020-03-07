@@ -2,6 +2,12 @@
 
 ---
 
+## 1.3.1 Mar 07, 2020
+
+-   ➖ Default exports removed
+
+---
+
 ## 1.3.0 Mar 01, 2020
 
 -   ➕ Added method `order`

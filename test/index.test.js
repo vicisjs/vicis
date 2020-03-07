@@ -1,4 +1,4 @@
-const Vicis = require("../dist/vicis.cjs").default;
+const { Vicis } = require("../dist/vicis.cjs");
 
 describe("calling and printing", () => {
   it("should not crash on call", () => {
