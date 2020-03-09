@@ -9,9 +9,7 @@
       "name": "Anton Trofimenko"
     }
   ],
-  "dependencies": {
-    "lodash.clonedeep": "latest"
-  },
+  "dependencies": {},
   "description": "Presentation and transformation layer for data output in RESTful APIs.",
   "devDependencies": {
     "@babel/core": "7.8.7",
@@ -34,7 +32,8 @@
     "remark-preset-lint-recommended": "3.0.3",
     "rollup": "2.0.2",
     "rollup-plugin-auto-external": "2.0.0",
-    "rollup-plugin-babel": "4.4.0"
+    "rollup-plugin-babel": "4.4.0",
+    "rollup-plugin-terser": "5.2.0"
   },
   "exports": {
     ".": "./dist/vicis.cjs",
@@ -43,8 +42,12 @@
   },
   "files": [
     "dist/vicis.cjs",
+    "dist/vicis.cjs.map",
     "dist/vicis.d.ts",
-    "dist/vicis.mjs"
+    "dist/vicis.js",
+    "dist/vicis.js.map",
+    "dist/vicis.mjs",
+    "dist/vicis.mjs.map"
   ],
   "homepage": "https://vicis.js.org",
   "keywords": [
@@ -66,14 +69,15 @@
     "url": "git+https://github.com/r37r0m0d3l/vicis.git"
   },
   "scripts": {
-    "build": "rollup --config rollup.config.js",
+    "build-cli": "rollup --config rollup.config.cli.js",
+    "build-web": "rollup --config rollup.config.web.js",
     "docs-serve": "docsify serve docs",
-    "lint": "eslint ./src/vicis.js",
+    "lint": "eslint ./src/**/*.mjs",
     "lint-md": "remark .",
     "test": "jest",
     "upgrade": "yarn upgrade-interactive --latest"
   },
   "type": "module",
   "types": "./dist/vicis.d.ts",
-  "version": "1.3.1"
+  "version": "1.3.2"
 }

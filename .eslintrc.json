@@ -24,7 +24,7 @@
     "no-implicit-coercion": "error",
     "no-multi-assign": "error",
     "no-param-reassign": "error",
-    "no-ternary": "error",
+    "no-ternary": "warn",
     "prettier/prettier": "error",
     "quotes": ["error", "double", { "allowTemplateLiterals": true, "avoidEscape": true }],
     "semi": ["error", "always"],

@@ -2,6 +2,12 @@
 
 ---
 
+## 1.3.2 Mar 09, 2020
+
+-   ➖ Removed a dependency `lodash.clonedeep`
+
+---
+
 ## 1.3.1 Mar 07, 2020
 
 -   ➖ Default exports removed
