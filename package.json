@@ -69,8 +69,8 @@
     "url": "git+https://github.com/r37r0m0d3l/vicis.git"
   },
   "scripts": {
-    "build-cli": "rollup --config rollup.config.cli.js",
-    "build-web": "rollup --config rollup.config.web.js",
+    "build-cli": "rollup --config rollup.config.cli.mjs",
+    "build-web": "rollup --config rollup.config.web.mjs",
     "docs-serve": "docsify serve docs",
     "lint": "eslint ./src/**/*.mjs",
     "lint-md": "remark .",
