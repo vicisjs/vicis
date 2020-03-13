@@ -2,6 +2,12 @@
 
 ---
 
+## 1.3.4 Mar 14, 2020
+
+-   🐛 Fix empty data error
+
+---
+
 ## 1.3.3 Mar 14, 2020
 
 -   ♻️ Refactored internal caching

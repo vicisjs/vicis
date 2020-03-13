@@ -120,7 +120,7 @@ export default class Vicis {
    * @private
    * @type {Object}
    */
-  #dataOriginal = {};
+  #dataOriginal = undefined;
   //#endregion
 
   //#region Private Methods
@@ -206,6 +206,9 @@ export default class Vicis {
      * @returns {Vicis}
      */
     this.#validateData = function validateData() {
+      if (this.#dataOriginal === undefined) {
+        return this;
+      }
       if ("toObject" in this.#dataOriginal && isFunction(this.#dataOriginal.toObject)) {
         this.#dataCache = this.#dataOriginal.toObject();
       } else if ("toJSON" in this.#dataOriginal && isFunction(this.#dataOriginal.toJSON)) {
@@ -569,7 +572,7 @@ export default class Vicis {
    */
   clear() {
     this.#dataCache = {};
-    this.#dataOriginal = {};
+    this.#dataOriginal = undefined;
     return this;
   }
   //#endregion
