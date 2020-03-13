@@ -374,6 +374,7 @@ export default class Vicis {
     this.exclude(config.exclude);
     this.order(config.order);
     this.#validateConfig();
+    this.#validateData();
     return this;
   }
   /**
@@ -386,6 +387,7 @@ export default class Vicis {
   cast(propertyToType = {}) {
     this.#cast = castConfig(propertyToType);
     this.#validateConfig();
+    this.#validateData();
     return this;
   }
   /**
@@ -398,6 +400,7 @@ export default class Vicis {
   defaults(propertyDefaultValues = {}) {
     this.#defaults = defaultsConfig(propertyDefaultValues); // do not deep clone!
     this.#validateConfig();
+    this.#validateData();
     return this;
   }
   /**
@@ -410,6 +413,7 @@ export default class Vicis {
   defined(propertiesMustBeDefined = []) {
     this.#defined = definedConfig(propertiesMustBeDefined);
     this.#validateConfig();
+    this.#validateData();
     return this;
   }
   /**
@@ -422,6 +426,7 @@ export default class Vicis {
   exclude(propertiesToExclude = []) {
     this.#exclude = excludeConfig(propertiesToExclude);
     this.#validateConfig();
+    this.#validateData();
     return this;
   }
   /**
@@ -434,6 +439,7 @@ export default class Vicis {
   omit(propertiesToOmit = []) {
     this.#omit = omitConfig(propertiesToOmit);
     this.#validateConfig();
+    this.#validateData();
     return this;
   }
   /**
@@ -446,6 +452,7 @@ export default class Vicis {
   order(propertiesToStreamline = []) {
     this.#order = orderConfig(propertiesToStreamline);
     this.#validateConfig();
+    this.#validateData();
     return this;
   }
   /**
@@ -458,6 +465,7 @@ export default class Vicis {
   pick(propertiesToPick = []) {
     this.#pick = pickConfig(propertiesToPick);
     this.#validateConfig();
+    this.#validateData();
     return this;
   }
   /**
@@ -470,6 +478,7 @@ export default class Vicis {
   rename(renamePropertyFromTo = {}) {
     this.#rename = renameConfig(renamePropertyFromTo);
     this.#validateConfig();
+    this.#validateData();
     return this;
   }
   /**
@@ -482,6 +491,7 @@ export default class Vicis {
   replace(replacePropertyValues = {}) {
     this.#replace = replaceConfig(replacePropertyValues); // do not deep clone!
     this.#validateConfig();
+    this.#validateData();
     return this;
   }
   /**
@@ -494,6 +504,7 @@ export default class Vicis {
   required(propertiesRequired = []) {
     this.#required = requiredConfig(propertiesRequired);
     this.#validateConfig();
+    this.#validateData();
     return this;
   }
   /**
@@ -508,6 +519,7 @@ export default class Vicis {
       throw new TypeError("'sort' should be a boolean");
     }
     this.#sort = sortProperties;
+    this.#validateData();
     return this;
   }
   /**
@@ -520,6 +532,7 @@ export default class Vicis {
   transform(propertyValueTransformWith = {}) {
     this.#transform = transformConfig(propertyValueTransformWith); // do not deep clone!
     this.#validateConfig();
+    this.#validateData();
     return this;
   }
   //#endregion

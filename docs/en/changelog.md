@@ -2,6 +2,12 @@
 
 ---
 
+## 1.3.3 Mar 14, 2020
+
+-   ♻️ Refactored internal caching
+
+---
+
 ## 1.3.2 Mar 09, 2020
 
 -   ➖ Removed a dependency `lodash.clonedeep`
