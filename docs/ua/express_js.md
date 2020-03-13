@@ -5,7 +5,7 @@
 Приклад використання з ["mongoose"](https://github.com/Automattic/mongoose)
 
 ```js
-const Vicis = require("vicis").default;
+const { Vicis } = require("vicis");
 
 const userSchema = mongoose.Schema({ name: String, password: String });
 const UserModel = mongoose.model("user", userSchema);

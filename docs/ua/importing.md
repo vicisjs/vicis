@@ -5,7 +5,7 @@
 Підключення через require()
 
 ```js
-const Vicis = require("vicis").default;
+const { Vicis } = require("vicis");
 ```
 
 Підключення декількох змінних

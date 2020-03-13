@@ -5,7 +5,7 @@
 Require default
 
 ```js
-const Vicis = require("vicis").default;
+const { Vicis } = require("vicis");
 ```
 
 Require multiple items
