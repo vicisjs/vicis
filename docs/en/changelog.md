@@ -2,6 +2,12 @@
 
 ---
 
+## 1.3.6 Mar 14, 2020
+
+-   📚 Documentation updated
+
+---
+
 ## 1.3.5 Mar 14, 2020
 
 -   🐛 Fix TypeScript errors

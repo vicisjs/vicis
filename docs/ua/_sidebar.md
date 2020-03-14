@@ -22,5 +22,7 @@
     -   [Колекції](/ua/collections.md)
     -   [Фреймворк ExpressJS](/ua/express_js.md)
     -   [Фреймворк NestJS](/ua/nest_js.md)
+-   Модулі
+    -   [Дата і Час](/ua/transform_date.md)
 -   [Про Проект](/ua/about.md)
 -   [Історія](/ua/changelog.md)
