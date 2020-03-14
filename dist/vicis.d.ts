@@ -139,7 +139,7 @@ declare class Vicis {
    * @returns {Vicis}
    */
   public transform(propertyValueTransformWith: {
-    [prop: string]: (value: any, key: string, data: object) => any | Function;
+    [prop: string]: ((value: any, key: string, data: object) => any) | Function;
   }): Vicis;
   /**
    * @name validateConfig
@@ -348,7 +348,7 @@ declare function required(data: object, propertiesRequired: string[]): object;
 declare function transform(
   data: object,
   propertyValueTransformWith: {
-    [prop: string]: (value: any, key: string, data: object) => any | Function,
+    [prop: string]: ((value: any, key: string, data: object) => any) | Function,
   },
 ): object;
 
