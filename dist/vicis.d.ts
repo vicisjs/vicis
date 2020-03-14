@@ -11,7 +11,7 @@ export interface IVicisConfig {
   cast?: { [prop: string]: TYPES_ENUM };
   defaults?: { [prop: string]: any };
   defined?: string[];
-  exclude?: Array<string|RegExp>;
+  exclude?: Array<string | RegExp>;
   omit?: string;
   order?: string[];
   pick?: string[];
@@ -82,7 +82,7 @@ declare class Vicis {
    * @param {Array.<string|RegExp>=} propertiesToExclude
    * @returns {Vicis}
    */
-  public exclude(propertiesToExclude: string[]|RegExp[]): Vicis;
+  public exclude(propertiesToExclude: string[] | RegExp[]): Vicis;
   /**
    * @name omit
    * @public
@@ -139,7 +139,7 @@ declare class Vicis {
    * @returns {Vicis}
    */
   public transform(propertyValueTransformWith: {
-    [prop: string]: (value: any, key: string, data: object) => any;
+    [prop: string]: (value: any, key: string, data: object) => any | Function;
   }): Vicis;
   /**
    * @name validateConfig
@@ -283,7 +283,7 @@ declare function defined(data: object, propertiesMustBeDefined: string[]): objec
  * @param {Array.<string|RegExp>=} propertiesToExclude
  * @returns {Object}
  */
-declare function exclude(data: object, propertiesToExclude: string[]|RegExp[]): object;
+declare function exclude(data: object, propertiesToExclude: string[] | RegExp[]): object;
 
 /**
  * @name omit
@@ -345,6 +345,11 @@ declare function required(data: object, propertiesRequired: string[]): object;
  * @param {Object.<string, function>=} propertyValueTransformWith
  * @returns {Object}
  */
-declare function transform(data: object, propertyValueTransformWith: { [prop: string]: Function }): object;
+declare function transform(
+  data: object,
+  propertyValueTransformWith: {
+    [prop: string]: (value: any, key: string, data: object) => any | Function,
+  },
+): object;
 
 export { TYPES_ENUM, Vicis, cast, defaults, defined, omit, order, pick, rename, replace, required, transform };

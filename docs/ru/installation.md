@@ -34,7 +34,7 @@ interface IVicisConfig {
   rename?: { [prop: string]: string };
   replace?: { [prop: string]: any };
   required?: string[];
-  transform?: { [prop: string]: (value: any, key: string, data: object) => any };
+  transform?: { [prop: string]: (value: any, key: string, data: object) => any | Function };
 }
 ```
 
