@@ -347,6 +347,4 @@ declare function required(data: object, propertiesRequired: string[]): object;
  */
 declare function transform(data: object, propertyValueTransformWith: { [prop: string]: Function }): object;
 
-export default Vicis;
-
 export { TYPES_ENUM, Vicis, cast, defaults, defined, omit, order, pick, rename, replace, required, transform };
