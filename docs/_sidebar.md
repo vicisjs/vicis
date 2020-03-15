@@ -11,6 +11,7 @@
     -   [Defined](/en/defined.md)
     -   [Exclude](/en/exclude.md)
     -   [Omit](/en/omit.md)
+    -   [Order](/en/order.md)
     -   [Pick](/en/pick.md)
     -   [Rename](/en/rename.md)
     -   [Replace](/en/replace.md)
@@ -21,5 +22,7 @@
     -   [Collections](/en/collections.md)
     -   [ExpressJS framework](/en/express_js.md)
     -   [NestJS framework](/en/nest_js.md)
+-   Plugins
+    -   [Transform Date](/en/transform_date.md)
 -   [About](/en/about.md)
 -   [Changelog](/en/changelog.md)
