@@ -12,12 +12,7 @@ export default function isCallable(value) {
   if (isFunction(value)) {
     return true;
   }
-  if (
-    typeof value === "object" &&
-    "toFunction" in value &&
-    isFunction(value.toFunction) &&
-    isFunction(value.toFunction())
-  ) {
+  if ("toFunction" in value && isFunction(value.toFunction) && isFunction(value.toFunction())) {
     return true;
   }
   return false;

@@ -2,6 +2,12 @@
 
 ---
 
+## 1.3.8 Mar 16, 2020
+
+-   🐛 Fix error when transform accepts a class not a function
+
+---
+
 ## 1.3.7 Mar 16, 2020
 
 -   ♻️ Refactored transformation options
