@@ -2,6 +2,12 @@
 
 ---
 
+## 1.3.7 Mar 16, 2020
+
+-   ♻️ Refactored transformation options
+
+---
+
 ## 1.3.6 Mar 14, 2020
 
 -   📚 Documentation updated

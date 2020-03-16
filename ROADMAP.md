@@ -4,6 +4,8 @@
 
 -   [ ] Async transformations.
 
+-   [ ] Allow thenable objects.
+
 -   [ ] Typed errors.
 
 -   [ ] Marshalling transformations instead of serialization. Do not change or create a new object if it's instance.

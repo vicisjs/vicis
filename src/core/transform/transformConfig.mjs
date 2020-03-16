@@ -1,4 +1,4 @@
-import isFunction from "../../util/is/isFunction";
+import isCallable from "../../util/is/isCallable";
 import isObjectEmpty from "../../util/check/isObjectEmpty";
 import isObjectLike from "../../util/check/isObjectLike";
 
@@ -16,7 +16,7 @@ export default function transformConfig(propertyValueTransformWith) {
     return {};
   }
   Object.keys(propertyValueTransformWith).forEach((key) => {
-    if (!isFunction(propertyValueTransformWith[key])) {
+    if (!isCallable(propertyValueTransformWith[key])) {
       throw new TypeError(`'Transform' expect object values to be functions. Not a function at key: '${key}'.`);
     }
   });

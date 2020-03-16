@@ -1,4 +1,5 @@
 import clone from "../../util/variable/clone";
+import isFunction from "../../util/is/isFunction";
 import isObjectEmpty from "../../util/check/isObjectEmpty";
 
 /**
@@ -15,7 +16,16 @@ export default function transformData(propertyValueTransformWith, dataToSerializ
     if (!(key in dataToSerialize)) {
       throw new Error(`Field '${key}' suppose to be transformed.`);
     }
-    dataToSerialize[key] = propertyValueTransformWith[key](dataToSerialize[key], key, clone(dataToSerialize));
+    if (isFunction(propertyValueTransformWith[key])) {
+      dataToSerialize[key] = propertyValueTransformWith[key](dataToSerialize[key], key, clone(dataToSerialize));
+    } else {
+      // noinspection JSUnresolvedFunction
+      dataToSerialize[key] = propertyValueTransformWith[key].toFunction()(
+        dataToSerialize[key],
+        key,
+        clone(dataToSerialize),
+      );
+    }
   });
   return dataToSerialize;
 }
