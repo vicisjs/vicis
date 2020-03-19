@@ -1,4 +1,5 @@
-import arrayUnique from "../../util/array/unique";
+import arrayGetUnique from "@corefunc/corefunc/array/get/unique.mjs";
+
 import isArrayEmpty from "../../util/check/isArrayEmpty";
 import isString from "../../util/is/isString";
 import jsonStringify from "../../util/json/stringify";
@@ -16,7 +17,7 @@ export default function omitConfig(propertiesToOmit) {
   if (isArrayEmpty(propertiesToOmit)) {
     return [];
   }
-  return arrayUnique(propertiesToOmit).map((value) => {
+  return arrayGetUnique(propertiesToOmit).map((value) => {
     if (!isString(value)) {
       throw new TypeError(`'Omit' expect array of strings. Value: '${jsonStringify(value)}'.`);
     }

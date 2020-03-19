@@ -1,4 +1,4 @@
-import isObjectEmpty from "../../util/check/isObjectEmpty";
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
 
 /**
  * @name replaceData
@@ -7,7 +7,7 @@ import isObjectEmpty from "../../util/check/isObjectEmpty";
  * @returns {Object}
  */
 export default function replaceData(replacePropertyValues, dataToSerialize) {
-  if (isObjectEmpty(replacePropertyValues)) {
+  if (objectIsEmpty(replacePropertyValues)) {
     return dataToSerialize;
   }
   Object.keys(replacePropertyValues).forEach((key) => {

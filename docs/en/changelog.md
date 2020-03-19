@@ -2,6 +2,12 @@
 
 ---
 
+## 1.3.9 Mar 19, 2020
+
+-   📚 Documentation updated
+
+---
+
 ## 1.3.8 Mar 16, 2020
 
 -   🐛 Fix error when transform accepts a class not a function

@@ -1,5 +1,6 @@
+import isPrimitive from "@corefunc/corefunc/check/isPrimitive";
+
 import cloneDeep from "./cloneDeep";
-import isPrimitive from "../check/isPrimitive";
 
 /**
  * @name clone

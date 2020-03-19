@@ -1,7 +1,10 @@
+import castToString from "@corefunc/corefunc/cast/to/string.mjs";
+import convertToFlag from "@corefunc/corefunc/convert/to/flag.mjs";
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
+
 import TYPES_ENUM from "../../const/typesEnum";
-import isObjectEmpty from "../../util/check/isObjectEmpty";
+
 import objectToPlain from "../../util/object/toPlain";
-import toFlag from "../../util/to/flag";
 
 /**
  * @name castData
@@ -10,7 +13,7 @@ import toFlag from "../../util/to/flag";
  * @returns {Object}
  */
 export default function castData(propertyToType, dataToSerialize) {
-  if (isObjectEmpty(propertyToType)) {
+  if (objectIsEmpty(propertyToType)) {
     return dataToSerialize;
   }
   Object.keys(propertyToType).forEach((key) => {
@@ -23,14 +26,14 @@ export default function castData(propertyToType, dataToSerialize) {
         dataToSerialize[key] = Boolean(dataToSerialize[key]);
         break;
       case TYPES_ENUM.FLAG:
-        dataToSerialize[key] = toFlag(dataToSerialize[key]);
+        dataToSerialize[key] = convertToFlag(dataToSerialize[key]);
         break;
       case TYPES_ENUM.NUMERIC: {
         const castedNumber = Number(dataToSerialize[key]);
         if (Number.isFinite(castedNumber)) {
           dataToSerialize[key] = castedNumber;
         } else {
-          const parsed = Number.parseFloat(toString(dataToSerialize[key]).trim());
+          const parsed = Number.parseFloat(castToString(dataToSerialize[key]).trim());
           if (Number.isFinite(parsed)) {
             dataToSerialize[key] = parsed;
           } else {
@@ -44,7 +47,7 @@ export default function castData(propertyToType, dataToSerialize) {
         if (Number.isFinite(castedInteger)) {
           dataToSerialize[key] = Math.trunc(castedInteger);
         } else {
-          const parsed = Number.parseFloat(toString(dataToSerialize[key]).trim());
+          const parsed = Number.parseFloat(castToString(dataToSerialize[key]).trim());
           if (Number.isFinite(parsed)) {
             dataToSerialize[key] = Math.trunc(castedInteger);
           } else {
@@ -54,7 +57,7 @@ export default function castData(propertyToType, dataToSerialize) {
         break;
       }
       case TYPES_ENUM.STRING:
-        dataToSerialize[key] = toString(dataToSerialize[key]);
+        dataToSerialize[key] = castToString(dataToSerialize[key]);
         break;
       case TYPES_ENUM.JSON:
         dataToSerialize[key] = objectToPlain(dataToSerialize[key]);

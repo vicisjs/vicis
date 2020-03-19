@@ -1,4 +1,4 @@
-import isObjectEmpty from "../../util/check/isObjectEmpty";
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
 
 /**
  * @name defaultsData
@@ -7,7 +7,7 @@ import isObjectEmpty from "../../util/check/isObjectEmpty";
  * @returns {Object}
  */
 export default function defaultsData(propertyDefaultValues, dataToSerialize) {
-  if (isObjectEmpty(propertyDefaultValues)) {
+  if (objectIsEmpty(propertyDefaultValues)) {
     return dataToSerialize;
   }
   Object.keys(propertyDefaultValues).forEach((key) => {

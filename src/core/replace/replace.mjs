@@ -1,4 +1,5 @@
-import isObjectEmpty from "../../util/check/isObjectEmpty";
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
+
 import replaceConfig from "./replaceConfig";
 import replaceData from "./replaceData";
 
@@ -11,7 +12,7 @@ import replaceData from "./replaceData";
  */
 export default function replace(data, replacePropertyValues = {}) {
   const config = replaceConfig(replacePropertyValues);
-  if (isObjectEmpty(config)) {
+  if (objectIsEmpty(config)) {
     return data;
   }
   return replaceData(config, data);

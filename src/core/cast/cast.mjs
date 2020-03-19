@@ -1,6 +1,7 @@
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
+
 import castConfig from "./castConfig";
 import castData from "./castData";
-import isObjectEmpty from "../../util/check/isObjectEmpty";
 
 /**
  * @name cast
@@ -11,7 +12,7 @@ import isObjectEmpty from "../../util/check/isObjectEmpty";
  */
 export default function cast(data, propertyToType = {}) {
   const config = castConfig(propertyToType);
-  if (isObjectEmpty(config)) {
+  if (objectIsEmpty(config)) {
     return data;
   }
   return castData(config, data);

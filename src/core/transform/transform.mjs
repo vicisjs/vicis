@@ -1,4 +1,5 @@
-import isObjectEmpty from "../../util/check/isObjectEmpty";
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
+
 import transformConfig from "./transformConfig";
 import transformData from "./transformData";
 
@@ -10,7 +11,7 @@ import transformData from "./transformData";
  */
 export default function transform(data, propertyValueTransformWith = {}) {
   const config = transformConfig(propertyValueTransformWith);
-  if (isObjectEmpty(config)) {
+  if (objectIsEmpty(config)) {
     return data;
   }
   return transformData(config, data);

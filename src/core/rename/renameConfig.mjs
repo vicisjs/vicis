@@ -1,5 +1,6 @@
-import arrayUnique from "../../util/array/unique";
-import isObjectEmpty from "../../util/check/isObjectEmpty";
+import arrayGetUnique from "@corefunc/corefunc/array/get/unique.mjs";
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
+
 import isObjectLike from "../../util/check/isObjectLike";
 import isString from "../../util/is/isString";
 import jsonStringify from "../../util/json/stringify";
@@ -14,7 +15,7 @@ export default function renameConfig(renamePropertyFromTo) {
   if (!isObjectLike(renamePropertyFromTo)) {
     throw new TypeError("'Rename' should be an object");
   }
-  if (isObjectEmpty(renamePropertyFromTo)) {
+  if (objectIsEmpty(renamePropertyFromTo)) {
     return {};
   }
   Object.keys(renamePropertyFromTo).forEach((key) => {
@@ -23,7 +24,7 @@ export default function renameConfig(renamePropertyFromTo) {
     }
   });
   const to = Object.values(renamePropertyFromTo);
-  const toUnique = arrayUnique(to);
+  const toUnique = arrayGetUnique(to);
   if (to.length !== toUnique.length) {
     throw new TypeError(`'Rename' has similar values: '${jsonStringify(toUnique)}'.`);
   }

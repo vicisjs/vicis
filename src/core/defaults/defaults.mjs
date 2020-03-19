@@ -1,7 +1,7 @@
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
+
 import defaultsConfig from "./defaultsConfig";
 import defaultsData from "./defaultsData";
-import isObjectEmpty from "../../util/check/isObjectEmpty";
-
 /**
  * @name defaults
  * @throws TypeError
@@ -11,7 +11,7 @@ import isObjectEmpty from "../../util/check/isObjectEmpty";
  */
 export default function defaults(data, propertyDefaultValues = {}) {
   const config = defaultsConfig(propertyDefaultValues);
-  if (isObjectEmpty(config)) {
+  if (objectIsEmpty(config)) {
     return data;
   }
   return defaultsData(propertyDefaultValues, data);

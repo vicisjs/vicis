@@ -1,6 +1,7 @@
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
+
 import clone from "../../util/variable/clone";
 import isFunction from "../../util/is/isFunction";
-import isObjectEmpty from "../../util/check/isObjectEmpty";
 
 /**
  * @name transformData
@@ -9,7 +10,7 @@ import isObjectEmpty from "../../util/check/isObjectEmpty";
  * @returns {Object}
  */
 export default function transformData(propertyValueTransformWith, dataToSerialize) {
-  if (isObjectEmpty(propertyValueTransformWith)) {
+  if (objectIsEmpty(propertyValueTransformWith)) {
     return dataToSerialize;
   }
   Object.keys(propertyValueTransformWith).forEach((key) => {

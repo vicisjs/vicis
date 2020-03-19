@@ -1,8 +1,10 @@
+import arrayBasicIntersect from "@corefunc/corefunc/array/basic/intersect.mjs";
+import arrayGetDifference from "@corefunc/corefunc/array/get/difference.mjs";
+import arrayHasSame from "@corefunc/corefunc/array/basic/hasSame.mjs";
+
 import CONFIG_FIELDS from "../const/configFields";
 import CONFIG_SORT from "../const/configSort";
-import arrayDiff from "../util/array/diff";
-import arrayHasSame from "../util/array/hasSame";
-import arrayIntersect from "../util/array/intersect";
+
 import castConfig from "./cast/castConfig";
 import castData from "./cast/castData";
 import castToJson from "../util/cast/toJson";
@@ -164,37 +166,37 @@ export default class Vicis {
       const replace = objectKeys(this.#replace);
       const transform = objectKeys(this.#transform);
       if (arrayHasSame(this.#omit, cast)) {
-        throw new Error(`'omit' has same keys as 'cast': ${arrayIntersect(this.#omit, cast)}.`);
+        throw new Error(`'omit' has same keys as 'cast': ${arrayBasicIntersect(this.#omit, cast)}.`);
       }
       if (arrayHasSame(this.#omit, this.#defined)) {
-        throw new Error(`'omit' has same keys as 'defined': ${arrayIntersect(this.#omit, this.#defined)}.`);
+        throw new Error(`'omit' has same keys as 'defined': ${arrayBasicIntersect(this.#omit, this.#defined)}.`);
       }
       if (arrayHasSame(this.#omit, this.#pick)) {
-        throw new Error(`'omit' has same keys as 'pick': ${arrayIntersect(this.#omit, this.#pick)}.`);
+        throw new Error(`'omit' has same keys as 'pick': ${arrayBasicIntersect(this.#omit, this.#pick)}.`);
       }
       if (arrayHasSame(this.#omit, rename)) {
-        throw new Error(`'omit' has same keys as 'rename': ${arrayIntersect(this.#omit, rename)}.`);
+        throw new Error(`'omit' has same keys as 'rename': ${arrayBasicIntersect(this.#omit, rename)}.`);
       }
       if (arrayHasSame(this.#omit, replace)) {
-        throw new Error(`'omit' has same keys as 'replace': ${arrayIntersect(this.#omit, replace)}.`);
+        throw new Error(`'omit' has same keys as 'replace': ${arrayBasicIntersect(this.#omit, replace)}.`);
       }
       if (arrayHasSame(this.#omit, this.#required)) {
-        throw new Error(`'omit' has same keys as 'required': ${arrayIntersect(this.#omit, this.#required)}.`);
+        throw new Error(`'omit' has same keys as 'required': ${arrayBasicIntersect(this.#omit, this.#required)}.`);
       }
       if (arrayHasSame(this.#omit, transform)) {
-        throw new Error(`'omit' has same keys as 'transform': ${arrayIntersect(this.#omit, transform)}.`);
+        throw new Error(`'omit' has same keys as 'transform': ${arrayBasicIntersect(this.#omit, transform)}.`);
       }
       if (arrayHasSame(this.#omit, transform)) {
-        throw new Error(`'omit' has same keys as 'transform': ${arrayIntersect(this.#omit, transform)}.`);
+        throw new Error(`'omit' has same keys as 'transform': ${arrayBasicIntersect(this.#omit, transform)}.`);
       }
       if (arrayHasSame(cast, replace)) {
-        throw new Error(`'cast' has same keys as 'replace': ${arrayIntersect(cast, replace)}.`);
+        throw new Error(`'cast' has same keys as 'replace': ${arrayBasicIntersect(cast, replace)}.`);
       }
       if (arrayHasSame(cast, transform)) {
-        throw new Error(`'cast' has same keys as 'transform': ${arrayIntersect(cast, transform)}.`);
+        throw new Error(`'cast' has same keys as 'transform': ${arrayBasicIntersect(cast, transform)}.`);
       }
       if (arrayHasSame(replace, transform)) {
-        throw new Error(`'replace' has same keys as 'transform': ${arrayIntersect(replace, transform)}.`);
+        throw new Error(`'replace' has same keys as 'transform': ${arrayBasicIntersect(replace, transform)}.`);
       }
       return this;
     }.bind(this);
@@ -359,7 +361,7 @@ export default class Vicis {
     if (!isObjectLike(config)) {
       throw new TypeError("Config should be an object");
     }
-    const diff = arrayDiff(objectKeys(config), CONFIG_FIELDS);
+    const diff = arrayGetDifference(objectKeys(config), CONFIG_FIELDS);
     if (diff.length) {
       throw new TypeError(`Config has unknown fields: '${diff.join("', '")}'.`);
     }

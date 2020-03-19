@@ -24,9 +24,9 @@ import { cast } from "vicis/es";
 <tr><td>
 
 ```js
-cast({ registered: null }, { id: "boolean" });
-cast({ registered: null }, { id: TYPES_ENUM.BOOLEAN });
-cast({ registered: null }, { id: Vicis.BOOLEAN });
+cast({ registered: null }, { registered: "boolean" });
+cast({ registered: null }, { registered: TYPES_ENUM.BOOLEAN });
+cast({ registered: null }, { registered: Vicis.BOOLEAN });
 ```
 
 </td>
@@ -174,9 +174,9 @@ cast({ id: "12345" }, { id: Vicis.NUMERIC });
 <tr><td>
 
 ```js
-cast({ active: true }, { id: "string" });
-cast({ active: true }, { id: TYPES_ENUM.STRING });
-cast({ active: true }, { id: Vicis.STRING });
+cast({ active: true }, { active: "string" });
+cast({ active: true }, { active: TYPES_ENUM.STRING });
+cast({ active: true }, { active: Vicis.STRING });
 ```
 
 </td>

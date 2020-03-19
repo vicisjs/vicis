@@ -1,4 +1,5 @@
-import arrayUnique from "../../util/array/unique";
+import arrayGetUnique from "@corefunc/corefunc/array/get/unique.mjs";
+
 import isArrayEmpty from "../../util/check/isArrayEmpty";
 import isString from "../../util/is/isString";
 import jsonStringify from "../../util/json/stringify";
@@ -16,7 +17,7 @@ export default function definedConfig(propertiesMustBeDefined) {
   if (isArrayEmpty(propertiesMustBeDefined)) {
     return [];
   }
-  return arrayUnique(propertiesMustBeDefined).map((value) => {
+  return arrayGetUnique(propertiesMustBeDefined).map((value) => {
     if (!isString(value)) {
       throw new TypeError(`'Defined' expect array of strings. Value: '${jsonStringify(value)}'.`);
     }

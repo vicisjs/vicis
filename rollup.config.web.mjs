@@ -24,10 +24,13 @@ export default {
     resolve(),
     commonjs(),
     terser({
+      output: {
+        comments: false,
+      },
       sourcemap: true,
       warnings: true,
-      keep_classnames: true,
-      keep_fnames: true,
+      keep_classnames: false,
+      keep_fnames: false,
     }),
   ],
 };

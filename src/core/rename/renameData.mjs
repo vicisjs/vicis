@@ -1,4 +1,4 @@
-import isObjectEmpty from "../../util/check/isObjectEmpty";
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
 
 /**
  * @name renameData
@@ -7,7 +7,7 @@ import isObjectEmpty from "../../util/check/isObjectEmpty";
  * @returns {Object}
  */
 export default function renameData(renamePropertyFromTo, dataToSerialize) {
-  if (isObjectEmpty(renamePropertyFromTo)) {
+  if (objectIsEmpty(renamePropertyFromTo)) {
     return dataToSerialize;
   }
   const renameFrom = Object.keys(renamePropertyFromTo).sort((alpha, beta) => alpha.localeCompare(beta));

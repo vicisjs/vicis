@@ -1,4 +1,5 @@
-import isObjectEmpty from "../../util/check/isObjectEmpty";
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
+
 import renameConfig from "./renameConfig";
 import renameData from "./renameData";
 
@@ -10,7 +11,7 @@ import renameData from "./renameData";
  */
 export default function rename(data, renamePropertyFromTo = {}) {
   const config = renameConfig(renamePropertyFromTo);
-  if (isObjectEmpty(config)) {
+  if (objectIsEmpty(config)) {
     return data;
   }
   return renameData(config, data);

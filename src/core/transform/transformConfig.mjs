@@ -1,5 +1,6 @@
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
+
 import isCallable from "../../util/is/isCallable";
-import isObjectEmpty from "../../util/check/isObjectEmpty";
 import isObjectLike from "../../util/check/isObjectLike";
 
 /**
@@ -12,7 +13,7 @@ export default function transformConfig(propertyValueTransformWith) {
   if (!isObjectLike(propertyValueTransformWith)) {
     throw new TypeError("'Transform' should be an object");
   }
-  if (isObjectEmpty(propertyValueTransformWith)) {
+  if (objectIsEmpty(propertyValueTransformWith)) {
     return {};
   }
   Object.keys(propertyValueTransformWith).forEach((key) => {
