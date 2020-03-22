@@ -12,10 +12,10 @@
   "dependencies": {},
   "description": "Presentation and transformation layer for data output in RESTful APIs.",
   "devDependencies": {
-    "@babel/core": "7.8.7",
+    "@babel/core": "7.9.0",
     "@babel/plugin-proposal-class-properties": "7.8.3",
     "@babel/plugin-proposal-private-methods": "7.8.3",
-    "@babel/preset-env": "7.8.7",
+    "@babel/preset-env": "7.9.0",
     "@corefunc/corefunc": "0.0.37",
     "@rollup/plugin-commonjs": "11.0.2",
     "@rollup/plugin-node-resolve": "7.1.1",
