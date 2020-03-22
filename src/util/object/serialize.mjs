@@ -1,5 +1,6 @@
-import isFunction from "../is/isFunction";
-import isString from "../is/isString";
+import isFunction from "@corefunc/corefunc/is/function.mjs";
+import isString from "@corefunc/corefunc/is/string.mjs";
+
 import jsonStringify from "../json/stringify";
 
 /**

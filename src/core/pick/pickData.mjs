@@ -1,4 +1,4 @@
-import isArrayEmpty from "../../util/check/isArrayEmpty";
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
 
 /**
  * @name pickData
@@ -7,7 +7,7 @@ import isArrayEmpty from "../../util/check/isArrayEmpty";
  * @returns {Object}
  */
 export default function pickData(propertiesToPick, dataToSerialize) {
-  if (isArrayEmpty(propertiesToPick)) {
+  if (arrayIsEmpty(propertiesToPick)) {
     return dataToSerialize;
   }
   const newCache = {};

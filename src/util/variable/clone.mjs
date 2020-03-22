@@ -1,4 +1,4 @@
-import isPrimitive from "@corefunc/corefunc/check/isPrimitive";
+import checkIsPrimitive from "@corefunc/corefunc/check/isPrimitive";
 
 import cloneDeep from "./cloneDeep";
 
@@ -8,7 +8,7 @@ import cloneDeep from "./cloneDeep";
  * @returns {*}
  */
 export default function clone(value) {
-  if (isPrimitive(value)) {
+  if (checkIsPrimitive(value)) {
     return value;
   }
   return cloneDeep(value);

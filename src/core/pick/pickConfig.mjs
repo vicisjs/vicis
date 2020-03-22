@@ -1,7 +1,7 @@
 import arrayGetUnique from "@corefunc/corefunc/array/get/unique.mjs";
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
+import isString from "@corefunc/corefunc/is/string.mjs";
 
-import isArrayEmpty from "../../util/check/isArrayEmpty";
-import isString from "../../util/is/isString";
 import jsonStringify from "../../util/json/stringify";
 
 /**
@@ -14,7 +14,7 @@ export default function pickConfig(propertiesToPick) {
   if (!Array.isArray(propertiesToPick)) {
     throw new TypeError("'Pick' should be an array");
   }
-  if (isArrayEmpty(propertiesToPick)) {
+  if (arrayIsEmpty(propertiesToPick)) {
     return [];
   }
   return arrayGetUnique(propertiesToPick).map((value) => {

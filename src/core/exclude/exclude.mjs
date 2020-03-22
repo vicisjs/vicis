@@ -1,7 +1,8 @@
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
+import isRegExp from "@corefunc/corefunc/is/regexp.mjs";
+import isString from "@corefunc/corefunc/is/string.mjs";
+
 import excludeConfig from "./excludeConfig";
-import isArrayEmpty from "../../util/check/isArrayEmpty";
-import isRegExp from "../../util/is/isRegExp";
-import isString from "../../util/is/isString";
 import objectKeys from "../../util/object/keys";
 
 /**
@@ -13,7 +14,7 @@ import objectKeys from "../../util/object/keys";
  */
 export default function exclude(data, propertiesToExclude = []) {
   const config = excludeConfig(propertiesToExclude);
-  if (isArrayEmpty(config)) {
+  if (arrayIsEmpty(config)) {
     return data;
   }
   const excludeString = config.filter(isString);

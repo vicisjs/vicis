@@ -1,4 +1,5 @@
-import isArrayEmpty from "../../util/check/isArrayEmpty";
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
+
 import pickConfig from "./pickConfig";
 import pickData from "./pickData";
 
@@ -11,7 +12,7 @@ import pickData from "./pickData";
  */
 export default function pick(data, propertiesToPick = []) {
   const config = pickConfig(propertiesToPick);
-  if (isArrayEmpty(config)) {
+  if (arrayIsEmpty(config)) {
     return data;
   }
   return pickData(config, data);

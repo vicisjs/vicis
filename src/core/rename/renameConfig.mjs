@@ -1,8 +1,8 @@
 import arrayGetUnique from "@corefunc/corefunc/array/get/unique.mjs";
 import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
+import isString from "@corefunc/corefunc/is/string.mjs";
 
 import isObjectLike from "../../util/check/isObjectLike";
-import isString from "../../util/is/isString";
 import jsonStringify from "../../util/json/stringify";
 
 /**

@@ -1,4 +1,5 @@
-import isArrayEmpty from "../../util/check/isArrayEmpty";
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
+
 import omitConfig from "./omitConfig";
 
 /**
@@ -10,7 +11,7 @@ import omitConfig from "./omitConfig";
  */
 export default function omit(data, propertiesToOmit = []) {
   const config = omitConfig(propertiesToOmit);
-  if (isArrayEmpty(config)) {
+  if (arrayIsEmpty(config)) {
     return data;
   }
   const dataToSerialize = {};

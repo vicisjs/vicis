@@ -1,5 +1,6 @@
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
+
 import definedConfig from "./definedConfig";
-import isArrayEmpty from "../../util/check/isArrayEmpty";
 
 /**
  * @name definedData
@@ -10,7 +11,7 @@ import isArrayEmpty from "../../util/check/isArrayEmpty";
  */
 export default function definedData(propertiesMustBeDefined, dataToSerialize) {
   const config = definedConfig(propertiesMustBeDefined);
-  if (isArrayEmpty(config)) {
+  if (arrayIsEmpty(config)) {
     return dataToSerialize;
   }
   config.forEach((key) => {

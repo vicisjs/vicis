@@ -1,8 +1,8 @@
 import arrayGetUnique from "@corefunc/corefunc/array/get/unique.mjs";
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
+import isRegExp from "@corefunc/corefunc/is/regexp.mjs";
+import isString from "@corefunc/corefunc/is/string.mjs";
 
-import isArrayEmpty from "../../util/check/isArrayEmpty";
-import isRegExp from "../../util/is/isRegExp";
-import isString from "../../util/is/isString";
 import jsonStringify from "../../util/json/stringify";
 
 /**
@@ -15,7 +15,7 @@ export default function excludeConfig(propertiesToExclude) {
   if (!Array.isArray(propertiesToExclude)) {
     throw new TypeError("'Exclude' should be an array");
   }
-  if (isArrayEmpty(propertiesToExclude)) {
+  if (arrayIsEmpty(propertiesToExclude)) {
     return [];
   }
   return arrayGetUnique(propertiesToExclude).map((value) => {

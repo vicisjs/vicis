@@ -1,4 +1,5 @@
-import isString from "../is/isString";
+import isString from "@corefunc/corefunc/is/string.mjs";
+
 import jsonParse from "../json/parse";
 
 /**

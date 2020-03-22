@@ -1,9 +1,9 @@
+import isString from "@corefunc/corefunc/is/string.mjs";
 import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
 
 import TYPES_LIST from "../../const/typesList";
 
 import isObjectLike from "../../util/check/isObjectLike";
-import isString from "../../util/is/isString";
 import jsonStringify from "../../util/json/stringify";
 
 /**

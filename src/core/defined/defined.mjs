@@ -1,4 +1,5 @@
-import isArrayEmpty from "../../util/check/isArrayEmpty";
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
+
 import definedData from "./definedData";
 
 /**
@@ -9,7 +10,7 @@ import definedData from "./definedData";
  * @returns {Object}
  */
 export default function defined(data, propertiesMustBeDefined = []) {
-  if (isArrayEmpty(propertiesMustBeDefined)) {
+  if (arrayIsEmpty(propertiesMustBeDefined)) {
     return data;
   }
   return definedData(propertiesMustBeDefined, data);

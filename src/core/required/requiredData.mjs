@@ -1,4 +1,4 @@
-import isArrayEmpty from "../../util/check/isArrayEmpty";
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
 
 /**
  * @name requiredData
@@ -7,7 +7,7 @@ import isArrayEmpty from "../../util/check/isArrayEmpty";
  * @returns {Object}
  */
 export default function requiredData(propertiesRequired, dataToSerialize) {
-  if (isArrayEmpty(propertiesRequired)) {
+  if (arrayIsEmpty(propertiesRequired)) {
     return dataToSerialize;
   }
   propertiesRequired.forEach((key) => {

@@ -1,4 +1,4 @@
-const { Vicis, cast } = require("../dist/vicis.cjs");
+const { Vicis, cast, defaults } = require("../dist/vicis.cjs");
 
 describe("calling and printing", () => {
   it("should not crash on call", () => {
@@ -11,5 +11,11 @@ describe("calling and printing", () => {
     expect(cast({ check: null }, { check: Vicis.FLAG }).check).toEqual(false);
     expect(cast({ id: "12345" }, { id: Vicis.INTEGER }).id).toEqual(12345);
     expect(cast({ active: true }, { active: Vicis.STRING }).active).toEqual("true");
+  });
+  it("defaults()", () => {
+    expect(defaults({ login: "guest", active: undefined }, { active: true })).toEqual({
+      login: "guest",
+      active: true,
+    });
   });
 });

@@ -1,6 +1,6 @@
+import checkIsCallable from "@corefunc/corefunc/check/isCallable.mjs";
 import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
 
-import isCallable from "../../util/is/isCallable";
 import isObjectLike from "../../util/check/isObjectLike";
 
 /**
@@ -17,7 +17,7 @@ export default function transformConfig(propertyValueTransformWith) {
     return {};
   }
   Object.keys(propertyValueTransformWith).forEach((key) => {
-    if (!isCallable(propertyValueTransformWith[key])) {
+    if (!checkIsCallable(propertyValueTransformWith[key])) {
       throw new TypeError(`'Transform' expect object values to be functions. Not a function at key: '${key}'.`);
     }
   });

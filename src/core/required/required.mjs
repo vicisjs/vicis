@@ -1,4 +1,5 @@
-import isArrayEmpty from "../../util/check/isArrayEmpty";
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
+
 import requiredConfig from "./requiredConfig";
 import requiredData from "./requiredData";
 
@@ -11,7 +12,7 @@ import requiredData from "./requiredData";
  */
 export default function required(data, propertiesRequired = []) {
   const config = requiredConfig(propertiesRequired);
-  if (isArrayEmpty(config)) {
+  if (arrayIsEmpty(config)) {
     return data;
   }
   return requiredData(config, data);

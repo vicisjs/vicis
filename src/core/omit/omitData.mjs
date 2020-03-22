@@ -1,4 +1,4 @@
-import isArrayEmpty from "../../util/check/isArrayEmpty";
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
 
 /**
  * @name omitData
@@ -7,7 +7,7 @@ import isArrayEmpty from "../../util/check/isArrayEmpty";
  * @returns {Object}
  */
 export default function omitData(propertiesToOmit, data) {
-  if (isArrayEmpty(propertiesToOmit)) {
+  if (arrayIsEmpty(propertiesToOmit)) {
     return data;
   }
   const dataToSerialize = {};

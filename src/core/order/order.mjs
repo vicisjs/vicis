@@ -1,5 +1,7 @@
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
+
 import CONFIG_SORT from "../../const/configSort";
-import isArrayEmpty from "../../util/check/isArrayEmpty";
+
 import objectOrderKeys from "../../util/object/orderKeys";
 import orderConfig from "./orderConfig";
 
@@ -13,7 +15,7 @@ import orderConfig from "./orderConfig";
  */
 export default function order(data, propertiesToStreamline = [], sort = CONFIG_SORT) {
   const config = orderConfig(propertiesToStreamline);
-  if (isArrayEmpty(config)) {
+  if (arrayIsEmpty(config)) {
     return data;
   }
   return objectOrderKeys(data, propertiesToStreamline, sort);

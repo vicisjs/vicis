@@ -1,6 +1,7 @@
 import arrayBasicIntersect from "@corefunc/corefunc/array/basic/intersect.mjs";
 import arrayGetDifference from "@corefunc/corefunc/array/get/difference.mjs";
 import arrayHasSame from "@corefunc/corefunc/array/basic/hasSame.mjs";
+import isFunction from "@corefunc/corefunc/is/function.mjs";
 
 import CONFIG_FIELDS from "../const/configFields";
 import CONFIG_SORT from "../const/configSort";
@@ -15,7 +16,6 @@ import definedConfig from "./defined/definedConfig";
 import definedData from "./defined/definedData";
 import excludeConfig from "./exclude/excludeConfig";
 import excludeData from "./exclude/excludeData";
-import isFunction from "../util/is/isFunction";
 import isObjectLike from "../util/check/isObjectLike";
 import jsonStringify from "../util/json/stringify";
 import objectKeys from "../util/object/keys";
