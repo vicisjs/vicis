@@ -1,4 +1,17 @@
-const { Vicis, cast, defaults } = require("../dist/vicis.cjs");
+const {
+  Vicis,
+  cast,
+  defaults,
+  defined,
+  exclude,
+  omit,
+  order,
+  pick,
+  rename,
+  replace,
+  required,
+  transform,
+} = require("../dist/vicis.cjs");
 
 describe("calling and printing", () => {
   it("should not crash on call", () => {
@@ -17,5 +30,48 @@ describe("calling and printing", () => {
       login: "guest",
       active: true,
     });
+  });
+  it("defined()", () => {
+    expect(defined({ id: 12345 }, ["id"])).toEqual({ id: 12345 });
+  });
+  it("exclude()", () => {
+    expect(
+      exclude(
+        {
+          login: "guest",
+          Password: "secret",
+          active: true,
+          __v: 5,
+        },
+        [/(?:password)/gi, /^(?:_)(?:_)?/, "active"],
+      ),
+    ).toEqual({
+      login: "guest",
+    });
+  });
+  it("omit()", () => {
+    expect(omit({ login: "guest", password: "secret" }, ["password"])).toEqual({ login: "guest" });
+  });
+  it("order()", () => {
+    expect(Object.keys(order({ active: true, id: 1, login: "guest" }, ["id", "login"]))).toEqual([
+      "id",
+      "login",
+      "active",
+    ]);
+  });
+  it("pick()", () => {
+    expect(pick({ id: 12345, login: "guest", active: true }, ["id", "login"])).toEqual({ id: 12345, login: "guest" });
+  });
+  it("rename()", () => {
+    expect(rename({ _id: 12345 }, { _id: "ID" })).toEqual({ ID: 12345 });
+  });
+  it("replace()", () => {
+    expect(replace({ domain: "primary" }, { domain: "secondary" })).toEqual({ domain: "secondary" });
+  });
+  it("required()", () => {
+    expect(required({ id: 12345, username: "Vicis" }, ["id", "username"])).toEqual({ id: 12345, username: "Vicis" });
+  });
+  it("transform()", () => {
+    expect(transform({ date: "12345" }, { date: (value) => +value })).toEqual({ date: 12345 });
   });
 });

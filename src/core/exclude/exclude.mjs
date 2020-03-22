@@ -1,9 +1,9 @@
 import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
 import isRegExp from "@corefunc/corefunc/is/regexp.mjs";
 import isString from "@corefunc/corefunc/is/string.mjs";
+import objectGetKeys from "@corefunc/corefunc/object/get/keys.mjs";
 
 import excludeConfig from "./excludeConfig";
-import objectKeys from "../../util/object/keys";
 
 /**
  * @name exclude
@@ -25,7 +25,7 @@ export default function exclude(data, propertiesToExclude = []) {
       }
     });
   }
-  const keys = objectKeys(data);
+  const keys = objectGetKeys(data);
   if (keys.length === 0) {
     return data;
   }

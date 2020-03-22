@@ -1,7 +1,9 @@
 import arrayBasicIntersect from "@corefunc/corefunc/array/basic/intersect.mjs";
 import arrayGetDifference from "@corefunc/corefunc/array/get/difference.mjs";
 import arrayHasSame from "@corefunc/corefunc/array/basic/hasSame.mjs";
+import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike.mjs";
 import isFunction from "@corefunc/corefunc/is/function.mjs";
+import objectGetKeys from "@corefunc/corefunc/object/get/keys.mjs";
 
 import CONFIG_FIELDS from "../const/configFields";
 import CONFIG_SORT from "../const/configSort";
@@ -16,9 +18,7 @@ import definedConfig from "./defined/definedConfig";
 import definedData from "./defined/definedData";
 import excludeConfig from "./exclude/excludeConfig";
 import excludeData from "./exclude/excludeData";
-import isObjectLike from "../util/check/isObjectLike";
 import jsonStringify from "../util/json/stringify";
-import objectKeys from "../util/object/keys";
 import omitConfig from "./omit/omitConfig";
 import omitData from "./omit/omitData";
 import orderConfig from "./order/orderConfig";
@@ -161,10 +161,10 @@ export default class Vicis {
      * @returns {Vicis}
      */
     this.#validateConfig = function validateConfig() {
-      const cast = objectKeys(this.#cast);
-      const rename = objectKeys(this.#rename);
-      const replace = objectKeys(this.#replace);
-      const transform = objectKeys(this.#transform);
+      const cast = objectGetKeys(this.#cast);
+      const rename = objectGetKeys(this.#rename);
+      const replace = objectGetKeys(this.#replace);
+      const transform = objectGetKeys(this.#transform);
       if (arrayHasSame(this.#omit, cast)) {
         throw new Error(`'omit' has same keys as 'cast': ${arrayBasicIntersect(this.#omit, cast)}.`);
       }
@@ -358,10 +358,10 @@ export default class Vicis {
    * @returns {Vicis}
    */
   config(config = {}) {
-    if (!isObjectLike(config)) {
+    if (!checkIsObjectLike(config)) {
       throw new TypeError("Config should be an object");
     }
-    const diff = arrayGetDifference(objectKeys(config), CONFIG_FIELDS);
+    const diff = arrayGetDifference(objectGetKeys(config), CONFIG_FIELDS);
     if (diff.length) {
       throw new TypeError(`Config has unknown fields: '${diff.join("', '")}'.`);
     }
@@ -559,7 +559,7 @@ export default class Vicis {
    * @returns {Vicis}
    */
   data(dataToSerialize) {
-    if (!isObjectLike(dataToSerialize)) {
+    if (!checkIsObjectLike(dataToSerialize)) {
       throw new TypeError("Data should be an object");
     }
     this.#dataOriginal = dataToSerialize; // keep reference

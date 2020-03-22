@@ -1,8 +1,8 @@
 import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
+import objectKeysOrder from "@corefunc/corefunc/object/keys/order.mjs";
 
 import CONFIG_SORT from "../../const/configSort";
 
-import objectOrderKeys from "../../util/object/orderKeys";
 import orderConfig from "./orderConfig";
 
 /**
@@ -18,5 +18,5 @@ export default function order(data, propertiesToStreamline = [], sort = CONFIG_S
   if (arrayIsEmpty(config)) {
     return data;
   }
-  return objectOrderKeys(data, propertiesToStreamline, sort);
+  return objectKeysOrder(data, propertiesToStreamline, sort);
 }

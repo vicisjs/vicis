@@ -1,8 +1,8 @@
 import arrayGetUnique from "@corefunc/corefunc/array/get/unique.mjs";
+import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike.mjs";
 import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
 import isString from "@corefunc/corefunc/is/string.mjs";
 
-import isObjectLike from "../../util/check/isObjectLike";
 import jsonStringify from "../../util/json/stringify";
 
 /**
@@ -12,7 +12,7 @@ import jsonStringify from "../../util/json/stringify";
  * @returns {Object}
  */
 export default function renameConfig(renamePropertyFromTo) {
-  if (!isObjectLike(renamePropertyFromTo)) {
+  if (!checkIsObjectLike(renamePropertyFromTo)) {
     throw new TypeError("'Rename' should be an object");
   }
   if (objectIsEmpty(renamePropertyFromTo)) {

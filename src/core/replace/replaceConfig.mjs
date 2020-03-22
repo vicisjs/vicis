@@ -1,4 +1,4 @@
-import isObjectLike from "../../util/check/isObjectLike";
+import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike.mjs";
 
 /**
  * @name replaceConfig
@@ -7,7 +7,7 @@ import isObjectLike from "../../util/check/isObjectLike";
  * @returns {Object}
  */
 export default function replaceConfig(replacePropertyValues) {
-  if (!isObjectLike(replacePropertyValues)) {
+  if (!checkIsObjectLike(replacePropertyValues)) {
     throw new TypeError("'Replace' should be an object");
   }
   return replacePropertyValues;

@@ -1,7 +1,6 @@
 import checkIsCallable from "@corefunc/corefunc/check/isCallable.mjs";
+import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike.mjs";
 import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
-
-import isObjectLike from "../../util/check/isObjectLike";
 
 /**
  * @name transformConfig
@@ -10,7 +9,7 @@ import isObjectLike from "../../util/check/isObjectLike";
  * @returns {Object}
  */
 export default function transformConfig(propertyValueTransformWith) {
-  if (!isObjectLike(propertyValueTransformWith)) {
+  if (!checkIsObjectLike(propertyValueTransformWith)) {
     throw new TypeError("'Transform' should be an object");
   }
   if (objectIsEmpty(propertyValueTransformWith)) {

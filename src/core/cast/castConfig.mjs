@@ -1,9 +1,9 @@
+import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike.mjs";
 import isString from "@corefunc/corefunc/is/string.mjs";
 import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
 
 import TYPES_LIST from "../../const/typesList";
 
-import isObjectLike from "../../util/check/isObjectLike";
 import jsonStringify from "../../util/json/stringify";
 
 /**
@@ -13,7 +13,7 @@ import jsonStringify from "../../util/json/stringify";
  * @returns {Object}
  */
 export default function castConfig(propertyToType) {
-  if (!isObjectLike(propertyToType)) {
+  if (!checkIsObjectLike(propertyToType)) {
     throw new TypeError("Cast should be an object");
   }
   if (objectIsEmpty(propertyToType)) {
