@@ -1,4 +1,4 @@
-![Vicis](../_media/256.png?raw=true#center "Vicis")
+![Vicis](../_media/128.png?raw=true#center "Vicis")
 
 Сериализация данных для REST API.
 
