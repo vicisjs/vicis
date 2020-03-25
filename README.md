@@ -1,4 +1,4 @@
-![Vicis](docs/_media/logo.png?raw=true "Vicis")
+![Vicis](docs/_media/128.png?raw=true "Vicis")
 
 # Vicis
 

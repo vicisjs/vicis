@@ -1,4 +1,4 @@
-![Vicis](../_media/logo.png?raw=true#center "Vicis")
+![Vicis](../_media/256.png?raw=true#center "Vicis")
 
 Серіалізація даних для REST API.
 
