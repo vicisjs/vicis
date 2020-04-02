@@ -2,6 +2,12 @@
 
 ---
 
+## 1.4.0 Apr 03, 2020
+
+-   ➕ Added static methods `from` and `fromArray`
+
+---
+
 ## 1.3.12 Mar 30, 2020
 
 -   ⬆️ Dependencies updated
