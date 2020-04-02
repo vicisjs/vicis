@@ -206,6 +206,25 @@ declare class Vicis {
    */
   public static factory(config?: IVicisConfig, data?: object): Vicis;
   /**
+   * @name from
+   * @public
+   * @static
+   * @throws TypeError
+   * @param {Object} data
+   * @param {Object=} config
+   * @returns {Object}
+   */
+  static from(data: object, config?: IVicisConfig): object;
+  /**
+   * @name fromArray
+   * @static
+   * @public
+   * @param {Array.<Object>} collection
+   * @param {Object=} config
+   * @returns {Array.<Object>}
+   */
+  static fromArray(collection: object[], config?: IVicisConfig): object[];
+  /**
    * @name BOOLEAN
    * @public
    * @static

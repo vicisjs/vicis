@@ -5,6 +5,7 @@
 -   API
     -   [Configuration](/en/configuration.md)
     -   [Data Manipulation](/en/data_manipulation.md)
+    -   [Static Methods](/en/static_methods.md)
 -   Functions
     -   [Cast](/en/cast.md)
     -   [Defaults](/en/defaults.md)

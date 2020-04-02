@@ -5,6 +5,7 @@
 -   Інтерфейс
     -   [Конфігурація](/ua/configuration.md)
     -   [Робота з Даними](/ua/data_manipulation.md)
+    -   [Статичні Методи](/ua/static_methods.md)
 -   Функції
     -   [Cast - Приведення Типів](/ua/cast.md)
     -   [Defaults - За Замовчуванням](/ua/defaults.md)

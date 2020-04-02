@@ -5,6 +5,7 @@
 -   Интерфейс
     -   [Конфигурация](/ru/configuration.md)
     -   [Работа с Данными](/ru/data_manipulation.md)
+    -   [Статические Методы](/ru/static_methods.md)
 -   Функции
     -   [Cast - Приведение Типов](/ru/cast.md)
     -   [Defaults - По Умолчанию](/ru/defaults.md)

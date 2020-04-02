@@ -253,6 +253,30 @@ export default class Vicis {
     return new Vicis(config, data);
   }
   /**
+   * @name from
+   * @public
+   * @static
+   * @throws TypeError
+   * @param {Object} data
+   * @param {Object=} config
+   * @returns {Object}
+   */
+  static from(data, config = {}) {
+    return Vicis.factory(config, data).getData();
+  }
+  /**
+   * @name fromArray
+   * @static
+   * @public
+   * @param {Array.<Object>} collection
+   * @param {Object=} config
+   * @returns {Array.<Object>}
+   */
+  static fromArray(collection, config = {}) {
+    const serializer = Vicis.factory(config);
+    return Array.from(collection).map((data) => serializer.data(data).getData());
+  }
+  /**
    * @name BOOLEAN
    * @public
    * @static
