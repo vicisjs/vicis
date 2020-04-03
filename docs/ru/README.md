@@ -6,7 +6,7 @@
 [![downloads](https://badgen.net/npm/dt/vicis?&icon=terminal&label=downloads&color=009688)](https://github.com/r37r0m0d3l/vicis)
 [![stars](https://badgen.net/github/stars/r37r0m0d3l/vicis?&icon=github&label=stars&color=ffcc33)](https://github.com/r37r0m0d3l/vicis)
 [![types](https://badgen.net/npm/types/vicis?&icon=typescript&label=types&color=1E90FF)](https://github.com/r37r0m0d3l/vicis)
-[![build](https://badgen.net/travis/babel/babel?&icon=travis&label=build)](https://github.com/r37r0m0d3l/vicis)
+[![build](https://badgen.net/travis/r37r0m0d3l/vicis?&icon=travis&label=build)](https://github.com/r37r0m0d3l/vicis)
 
 ---
 
