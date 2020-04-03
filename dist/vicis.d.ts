@@ -7,7 +7,7 @@ declare enum TYPES_ENUM {
   JSON = "json",
 }
 
-export interface IVicisConfig {
+export interface IVicisConfigObject {
   cast?: { [prop: string]: TYPES_ENUM };
   defaults?: { [prop: string]: any };
   defined?: string[];
@@ -21,6 +21,12 @@ export interface IVicisConfig {
   required?: string[];
   transform?: { [prop: string]: (value: any, key: string, data: object) => any };
 }
+
+export interface IVicisConfigCallback {
+  [key: string]: any,
+}
+
+export type IVicisConfig = IVicisConfigObject | IVicisConfigCallback;
 
 declare class Vicis {
   /**
@@ -50,7 +56,7 @@ declare class Vicis {
    * @param {Function|Object=} config
    * @returns {Vicis}
    */
-  public config(config: IVicisConfig | Function): Vicis;
+  public config(config: IVicisConfig): Vicis;
   /**
    * @name cast
    * @public
@@ -204,7 +210,7 @@ declare class Vicis {
    * @param {Object=} data
    * @returns {Vicis}
    */
-  public static factory(config?: IVicisConfig | Function, data?: object): Vicis;
+  public static factory(config?: IVicisConfig, data?: object): Vicis;
   /**
    * @name from
    * @public
