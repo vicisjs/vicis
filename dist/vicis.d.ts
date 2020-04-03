@@ -12,7 +12,7 @@ export interface IVicisConfigObject {
   defaults?: { [prop: string]: any };
   defined?: string[];
   exclude?: Array<string | RegExp>;
-  omit?: string;
+  omit?: string[];
   order?: string[];
   pick?: string[];
   sort?: boolean;
@@ -23,7 +23,7 @@ export interface IVicisConfigObject {
 }
 
 export interface IVicisConfigCallback {
-  [key: string]: any,
+  (model: object): { [key: string]: any };
 }
 
 export type IVicisConfig = IVicisConfigObject | IVicisConfigCallback;
@@ -373,8 +373,8 @@ declare function required(data: object, propertiesRequired: string[]): object;
 declare function transform(
   data: object,
   propertyValueTransformWith: {
-    [prop: string]: ((value: any, key: string, data: object) => any) | Function,
+    [prop: string]: ((value: any, key: string, data: object) => any) | Function;
   },
 ): object;
 
-export { TYPES_ENUM, Vicis, cast, defaults, defined, omit, order, pick, rename, replace, required, transform };
+export { TYPES_ENUM, Vicis, cast, defaults, defined, exclude, omit, order, pick, rename, replace, required, transform };
