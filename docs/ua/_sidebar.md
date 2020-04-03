@@ -3,7 +3,8 @@
     -   [Імпорт](/ua/importing.md)
     -   [Створення Екземпляра](/ua/creating_instance.md)
 -   Інтерфейс
-    -   [Конфігурація](/ua/configuration.md)
+    -   [Конфігурація Об'єктом](/ua/configuration_object.md)
+    -   [Конфігурація Функцією](/ua/configuration_function.md)
     -   [Робота з Даними](/ua/data_manipulation.md)
     -   [Статичні Методи](/ua/static_methods.md)
 -   Функції

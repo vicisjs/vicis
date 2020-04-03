@@ -3,7 +3,8 @@
     -   [Импортирование](/ru/importing.md)
     -   [Создание Экземпляра](/ru/creating_instance.md)
 -   Интерфейс
-    -   [Конфигурация](/ru/configuration.md)
+    -   [Конфигурация Объектом](/ru/configuration_object.md)
+    -   [Конфигурация Функцией](/ru/configuration_function.md)
     -   [Работа с Данными](/ru/data_manipulation.md)
     -   [Статические Методы](/ru/static_methods.md)
 -   Функции

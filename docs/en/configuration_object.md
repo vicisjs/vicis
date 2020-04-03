@@ -1,8 +1,8 @@
-# Configuration
+# Configuration Object
 
 ---
 
-## Configuration object
+## Configuration object properties
 
 [Cast](/en/cast.md) [Defaults](/en/defaults.md) [Defined](/en/defined.md) [Exclude](/en/exclude.md) [Omit](/en/omit.md) [Order](/en/order.md) [Pick](/en/pick.md) [Rename](/en/rename.md) [Replace](/en/replace.md) [Required](/en/required.md) [Transform](/en/transform.md)
 

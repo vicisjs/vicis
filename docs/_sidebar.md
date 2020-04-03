@@ -3,7 +3,8 @@
     -   [Importing](/en/importing.md)
     -   [Creating Instance](/en/creating_instance.md)
 -   API
-    -   [Configuration](/en/configuration.md)
+    -   [Configuration Object](/en/configuration_object.md)
+    -   [Configuration Function](/en/configuration_function.md)
     -   [Data Manipulation](/en/data_manipulation.md)
     -   [Static Methods](/en/static_methods.md)
 -   Functions

@@ -2,9 +2,11 @@
 
 ---
 
-## 1.4.0 Apr 03, 2020
+## 1.4.0 Apr 04, 2020
 
 -   ➕ Added static methods `from` and `fromArray`
+
+-   ➕ Added configuration from function
 
 ---
 
