@@ -1,6 +1,6 @@
 import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
 
-import omitConfig from "./omitConfig";
+import omitConfig from "./omitConfig.mjs";
 
 /**
  * @name omit

@@ -1,7 +1,7 @@
 import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
 
-import transformConfig from "./transformConfig";
-import transformData from "./transformData";
+import transformConfig from "./transformConfig.mjs";
+import transformData from "./transformData.mjs";
 
 /**
  * @name transform

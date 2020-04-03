@@ -2,7 +2,7 @@ import arrayGetUnique from "@corefunc/corefunc/array/get/unique.mjs";
 import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
 import isString from "@corefunc/corefunc/is/string.mjs";
 
-import jsonStringify from "../../util/json/stringify";
+import jsonStringify from "../../util/json/stringify.mjs";
 
 /**
  * @name omitConfig

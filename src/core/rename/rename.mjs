@@ -1,7 +1,7 @@
 import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
 
-import renameConfig from "./renameConfig";
-import renameData from "./renameData";
+import renameConfig from "./renameConfig.mjs";
+import renameData from "./renameData.mjs";
 
 /**
  * @name rename

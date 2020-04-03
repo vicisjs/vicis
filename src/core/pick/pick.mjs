@@ -1,7 +1,7 @@
 import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
 
-import pickConfig from "./pickConfig";
-import pickData from "./pickData";
+import pickConfig from "./pickConfig.mjs";
+import pickData from "./pickData.mjs";
 
 /**
  * @name pick

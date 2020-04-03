@@ -3,7 +3,7 @@ import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
 import isRegExp from "@corefunc/corefunc/is/regexp.mjs";
 import isString from "@corefunc/corefunc/is/string.mjs";
 
-import jsonStringify from "../../util/json/stringify";
+import jsonStringify from "../../util/json/stringify.mjs";
 
 /**
  * @name excludeConfig

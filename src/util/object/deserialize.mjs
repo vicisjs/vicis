@@ -1,6 +1,6 @@
 import isString from "@corefunc/corefunc/is/string.mjs";
 
-import jsonParse from "../json/parse";
+import jsonParse from "../json/parse.mjs";
 
 /**
  * @name objectDeserialize

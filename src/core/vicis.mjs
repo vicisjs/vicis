@@ -5,34 +5,35 @@ import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike.mjs";
 import isFunction from "@corefunc/corefunc/is/function.mjs";
 import objectGetKeys from "@corefunc/corefunc/object/get/keys.mjs";
 
-import CONFIG_FIELDS from "../const/configFields";
-import CONFIG_SORT from "../const/configSort";
+import CONFIG_FIELDS from "../const/configFields.mjs";
+import CONFIG_SORT from "../const/configSort.mjs";
 
-import castConfig from "./cast/castConfig";
-import castData from "./cast/castData";
-import castToJson from "../util/cast/toJson";
-import clone from "../util/variable/clone";
-import defaultsConfig from "./defaults/defaultsConfig";
-import defaultsData from "./defaults/defaultsData";
-import definedConfig from "./defined/definedConfig";
-import definedData from "./defined/definedData";
-import excludeConfig from "./exclude/excludeConfig";
-import excludeData from "./exclude/excludeData";
-import jsonStringify from "../util/json/stringify";
-import omitConfig from "./omit/omitConfig";
-import omitData from "./omit/omitData";
-import orderConfig from "./order/orderConfig";
-import orderData from "./order/orderData";
-import pickConfig from "./pick/pickConfig";
-import pickData from "./pick/pickData";
-import renameConfig from "./rename/renameConfig";
-import renameData from "./rename/renameData";
-import replaceConfig from "./replace/replaceConfig";
-import replaceData from "./replace/replaceData";
-import requiredConfig from "./required/requiredConfig";
-import requiredData from "./required/requiredData";
-import transformConfig from "./transform/transformConfig";
-import transformData from "./transform/transformData";
+import castConfig from "./cast/castConfig.mjs";
+import castData from "./cast/castData.mjs";
+import castToJson from "../util/cast/toJson.mjs";
+import clone from "../util/variable/clone.mjs";
+import defaultsConfig from "./defaults/defaultsConfig.mjs";
+import defaultsData from "./defaults/defaultsData.mjs";
+import definedConfig from "./defined/definedConfig.mjs";
+import definedData from "./defined/definedData.mjs";
+import excludeConfig from "./exclude/excludeConfig.mjs";
+import excludeData from "./exclude/excludeData.mjs";
+import jsonStringify from "../util/json/stringify.mjs";
+import omitConfig from "./omit/omitConfig.mjs";
+import omitData from "./omit/omitData.mjs";
+import orderConfig from "./order/orderConfig.mjs";
+import orderData from "./order/orderData.mjs";
+import pickConfig from "./pick/pickConfig.mjs";
+import pickData from "./pick/pickData.mjs";
+import renameConfig from "./rename/renameConfig.mjs";
+import renameData from "./rename/renameData.mjs";
+import replaceConfig from "./replace/replaceConfig.mjs";
+import replaceData from "./replace/replaceData.mjs";
+import requiredConfig from "./required/requiredConfig.mjs";
+import requiredData from "./required/requiredData.mjs";
+import transformConfig from "./transform/transformConfig.mjs";
+import transformData from "./transform/transformData.mjs";
+import convertFunctionToConfig from "./functionToConfig.mjs";
 
 export default class Vicis {
   //#region Config Fields
@@ -149,7 +150,7 @@ export default class Vicis {
    * @name constructor
    * @public
    * @constructor
-   * @param {Object=} config
+   * @param {Function|Object=} config
    * @param {Object=} data
    */
   constructor(config = {}, data) {
@@ -245,7 +246,7 @@ export default class Vicis {
    * @public
    * @static
    * @factory
-   * @param {Object=} config
+   * @param {Function|Object=} config
    * @param {Object=} data
    * @returns {Vicis}
    */
@@ -378,10 +379,14 @@ export default class Vicis {
    * @name config
    * @public
    * @throws TypeError
-   * @param {Object=} config
+   * @param {Function|Object=} config
    * @returns {Vicis}
    */
   config(config = {}) {
+    if (isFunction(config)) {
+      // eslint-disable-next-line no-param-reassign
+      config = convertFunctionToConfig(config);
+    }
     if (!checkIsObjectLike(config)) {
       throw new TypeError("Config should be an object");
     }

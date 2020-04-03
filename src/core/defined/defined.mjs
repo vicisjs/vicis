@@ -1,6 +1,6 @@
 import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
 
-import definedData from "./definedData";
+import definedData from "./definedData.mjs";
 
 /**
  * @name defined

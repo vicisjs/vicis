@@ -1,7 +1,7 @@
 import isFunction from "@corefunc/corefunc/is/function.mjs";
 import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
 
-import clone from "../../util/variable/clone";
+import clone from "../../util/variable/clone.mjs";
 
 /**
  * @name transformData

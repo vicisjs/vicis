@@ -3,7 +3,7 @@ import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike.mjs";
 import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
 import isString from "@corefunc/corefunc/is/string.mjs";
 
-import jsonStringify from "../../util/json/stringify";
+import jsonStringify from "../../util/json/stringify.mjs";
 
 /**
  * @name renameConfig

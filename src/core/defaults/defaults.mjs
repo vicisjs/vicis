@@ -1,7 +1,7 @@
 import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
 
-import defaultsConfig from "./defaultsConfig";
-import defaultsData from "./defaultsData";
+import defaultsConfig from "./defaultsConfig.mjs";
+import defaultsData from "./defaultsData.mjs";
 /**
  * @name defaults
  * @throws TypeError

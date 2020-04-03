@@ -1,7 +1,7 @@
 import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
 
-import replaceConfig from "./replaceConfig";
-import replaceData from "./replaceData";
+import replaceConfig from "./replaceConfig.mjs";
+import replaceData from "./replaceData.mjs";
 
 /**
  * @name replace

@@ -27,7 +27,7 @@ declare class Vicis {
    * @name constructor
    * @public
    * @constructor
-   * @param {Object=} config
+   * @param {Function|Object=} config
    * @param {Object=} data
    */
   public constructor(config?: IVicisConfig, data?: object);
@@ -47,10 +47,10 @@ declare class Vicis {
    * @name config
    * @public
    * @throws TypeError
-   * @param {Object=} config
+   * @param {Function|Object=} config
    * @returns {Vicis}
    */
-  public config(config: IVicisConfig): Vicis;
+  public config(config: IVicisConfig | Function): Vicis;
   /**
    * @name cast
    * @public
@@ -200,11 +200,11 @@ declare class Vicis {
    * @public
    * @static
    * @factory
-   * @param {Object=} config
+   * @param {Function|Object=} config
    * @param {Object=} data
    * @returns {Vicis}
    */
-  public static factory(config?: IVicisConfig, data?: object): Vicis;
+  public static factory(config?: IVicisConfig | Function, data?: object): Vicis;
   /**
    * @name from
    * @public

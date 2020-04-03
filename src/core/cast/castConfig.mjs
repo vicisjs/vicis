@@ -2,9 +2,9 @@ import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike.mjs";
 import isString from "@corefunc/corefunc/is/string.mjs";
 import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
 
-import TYPES_LIST from "../../const/typesList";
+import TYPES_LIST from "../../const/typesList.mjs";
 
-import jsonStringify from "../../util/json/stringify";
+import jsonStringify from "../../util/json/stringify.mjs";
 
 /**
  * @name castConfig

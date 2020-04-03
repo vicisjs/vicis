@@ -2,9 +2,9 @@ import castToString from "@corefunc/corefunc/cast/to/string.mjs";
 import convertToFlag from "@corefunc/corefunc/convert/to/flag.mjs";
 import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
 
-import TYPES_ENUM from "../../const/typesEnum";
+import TYPES_ENUM from "../../const/typesEnum.mjs";
 
-import objectToPlain from "../../util/object/toPlain";
+import objectToPlain from "../../util/object/toPlain.mjs";
 
 /**
  * @name castData

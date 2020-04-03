@@ -3,7 +3,7 @@ import isRegExp from "@corefunc/corefunc/is/regexp.mjs";
 import isString from "@corefunc/corefunc/is/string.mjs";
 import objectGetKeys from "@corefunc/corefunc/object/get/keys.mjs";
 
-import excludeConfig from "./excludeConfig";
+import excludeConfig from "./excludeConfig.mjs";
 
 /**
  * @name exclude

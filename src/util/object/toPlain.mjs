@@ -1,5 +1,5 @@
-import objectDeserialize from "./deserialize";
-import objectSerialize from "./serialize";
+import objectDeserialize from "./deserialize.mjs";
+import objectSerialize from "./serialize.mjs";
 
 /**
  * @name objectToPlain
