@@ -13,7 +13,7 @@ const { omit } = require("vicis");
 ```
 
 ```js
-import { omit } from "vicis/es";
+import { omit } from "vicis";
 ```
 
 <table><thead><tr><td colspan="3">

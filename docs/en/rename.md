@@ -11,7 +11,7 @@ const { rename } = require("vicis");
 ```
 
 ```js
-import { rename } from "vicis/es";
+import { rename } from "vicis";
 ```
 
 <table><thead><tr><td colspan="3">

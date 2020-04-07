@@ -15,7 +15,7 @@ const { exclude } = require("vicis");
 ```
 
 ```js
-import { exclude } from "vicis/es";
+import { exclude } from "vicis";
 ```
 
 <table><thead><tr><td colspan="3">

@@ -11,7 +11,7 @@ const { pick } = require("vicis");
 ```
 
 ```js
-import { pick } from "vicis/es";
+import { pick } from "vicis";
 ```
 
 <table><thead><tr><td colspan="3">

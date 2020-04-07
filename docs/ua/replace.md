@@ -11,7 +11,7 @@ const { replace } = require("vicis");
 ```
 
 ```js
-import { replace } from "vicis/es";
+import { replace } from "vicis";
 ```
 
 <table><thead><tr><td colspan="3">

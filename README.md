@@ -6,11 +6,12 @@ Presentation and transformation layer for data output in RESTful APIs.
 
 [🗎 Vicis Documentation 🗎](https://vicis.js.org)
 
-[![npm](https://badgen.net/npm/v/vicis?&icon=npm&label=npm&color=DD3636)](https://www.npmjs.com/package/vicis)
-[![downloads](https://badgen.net/npm/dt/vicis?&icon=terminal&label=downloads&color=009688)](https://github.com/r37r0m0d3l/vicis)
-[![stars](https://badgen.net/github/stars/r37r0m0d3l/vicis?&icon=github&label=stars&color=ffcc33)](https://github.com/r37r0m0d3l/vicis)
-[![types](https://badgen.net/npm/types/vicis?&icon=typescript&label=types&color=1E90FF)](https://github.com/r37r0m0d3l/vicis)
-[![build](https://badgen.net/travis/r37r0m0d3l/vicis?&icon=travis&label=build)](https://github.com/r37r0m0d3l/vicis)
+[![npm](https://badgen.net/npm/v/vicis?&icon=npm&label=npm&color=DD3636&v=1.5.0)](https://www.npmjs.com/package/vicis)
+[![downloads](https://badgen.net/npm/dt/vicis?&icon=terminal&label=downloads&color=009688&v=1.5.0)](https://github.com/r37r0m0d3l/vicis)
+[![stars](https://badgen.net/github/stars/r37r0m0d3l/vicis?&icon=github&label=stars&color=ffcc33&v=1.5.0)](https://github.com/r37r0m0d3l/vicis)
+[![types](https://badgen.net/npm/types/vicis?&icon=typescript&label=types&color=1E90FF&v=1.5.0)](https://github.com/r37r0m0d3l/vicis)
+[![build](https://badgen.net/travis/r37r0m0d3l/vicis?&icon=travis&label=build&v=1.5.0)](https://github.com/r37r0m0d3l/vicis)
+[![lgtm](https://badgen.net/lgtm/grade/g/r37r0m0d3l/vicis?&icon=lgtm&label=lgtm:js/ts&color=00C853&v=1.5.0)](https://github.com/r37r0m0d3l/vicis)
 
 This is Node.js analogue to these libraries:
 
@@ -27,7 +28,7 @@ This is Node.js analogue to these libraries:
 Code:
 
 ```js
-import { Vicis } from "vicis/es";
+import { Vicis } from "vicis";
 const configuration = {
   cast: { _id: Vicis.INTEGER, registered: Vicis.FLAG },
   defaults: { confirmed: false },

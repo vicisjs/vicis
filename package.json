@@ -16,7 +16,7 @@
     "@babel/plugin-proposal-class-properties": "7.8.3",
     "@babel/plugin-proposal-private-methods": "7.8.3",
     "@babel/preset-env": "7.9.0",
-    "@corefunc/corefunc": "0.0.51",
+    "@corefunc/corefunc": "0.0.52",
     "@rollup/plugin-commonjs": "11.0.2",
     "@rollup/plugin-node-resolve": "7.1.1",
     "babel-core": "7.0.0-bridge.0",
@@ -25,21 +25,31 @@
     "eslint-config-prettier": "6.10.1",
     "eslint-plugin-prettier": "3.1.2",
     "jest": "25.2.7",
-    "prettier": "2.0.2",
+    "prettier": "2.0.4",
     "remark-cli": "8.0.0",
     "remark-lint": "7.0.0",
     "remark-preset-lint-consistent": "3.0.0",
     "remark-preset-lint-markdown-style-guide": "3.0.0",
     "remark-preset-lint-recommended": "4.0.0",
-    "rollup": "2.3.2",
+    "rollup": "2.3.3",
     "rollup-plugin-auto-external": "2.0.0",
     "rollup-plugin-babel": "4.4.0",
     "rollup-plugin-terser": "5.3.0"
   },
   "exports": {
-    ".": "./dist/vicis.cjs",
-    "./default": "./dist/vicis.cjs",
-    "./es": "./dist/vicis.mjs"
+    ".": {
+      "browser": {
+        "import": "./dist/vicis.mjs",
+        "require": "./dist/vicis.cjs"
+      },
+      "node": {
+        "import": "./dist/vicis.mjs",
+        "require": "./dist/vicis.cjs"
+      },
+      "import": "./dist/vicis.mjs",
+      "require": "./dist/vicis.cjs",
+      "default": "./dist/vicis.min.js"
+    }
   },
   "files": [
     "dist/vicis.cjs",
@@ -64,6 +74,7 @@
   ],
   "license": "MIT",
   "main": "./dist/vicis.cjs",
+  "module": "./dist/vicis.mjs",
   "name": "vicis",
   "repository": {
     "type": "git",
@@ -80,5 +91,5 @@
   },
   "type": "module",
   "types": "./dist/vicis.d.ts",
-  "version": "1.4.0"
+  "version": "1.5.0"
 }

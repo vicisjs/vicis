@@ -2,6 +2,12 @@
 
 ---
 
+## 1.5.0 Apr 07, 2020
+
+-   ⚡️ Change default export format
+
+---
+
 ## 1.4.0 Apr 04, 2020
 
 -   ➕ Added static methods `from` and `fromArray`

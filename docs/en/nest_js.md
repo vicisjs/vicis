@@ -8,7 +8,7 @@ Replaces or complements ["class-transformer"](https://github.com/typestack/class
 
 ```typescript
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { Vicis } from "vicis/es";
+import { Vicis } from "vicis";
 
 const serializer = Vicis.factory({ omit: ["password"] });
 

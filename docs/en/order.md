@@ -11,7 +11,7 @@ const { order } = require("vicis");
 ```
 
 ```js
-import { order } from "vicis/es";
+import { order } from "vicis";
 ```
 
 <table><thead><tr><td colspan="3">

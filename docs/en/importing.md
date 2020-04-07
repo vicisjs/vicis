@@ -21,7 +21,7 @@ const {
 Import as ECMAScript module
 
 ```js
-import Vicis from "vicis/es";
+import Vicis from "vicis";
 ```
 
 !> Importing as ES module is recommended way if you using bundler
@@ -33,7 +33,7 @@ import {
   Vicis, TYPES_ENUM,
   cast, defaults, defined, omit, exclude,
   pick, rename, replace, required, transform,
-} from "vicis/es";
+} from "vicis";
 ```
 
 ---

@@ -11,7 +11,7 @@ const { defaults } = require("vicis");
 ```
 
 ```js
-import { defaults } from "vicis/es";
+import { defaults } from "vicis";
 ```
 
 <table><thead><tr><td colspan="3">

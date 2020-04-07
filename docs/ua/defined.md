@@ -11,7 +11,7 @@ const { defined } = require("vicis");
 ```
 
 ```js
-import { defined } from "vicis/es";
+import { defined } from "vicis";
 ```
 
 ```js

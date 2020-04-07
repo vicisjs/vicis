@@ -21,7 +21,7 @@ const {
 Імпортування як ECMAScript–модуль
 
 ```js
-import Vicis from "vicis/es";
+import Vicis from "vicis";
 ```
 
 !> Імпортування як ES–module рекомендується, якщо ви використовуєте який-небудь бандлер
@@ -33,7 +33,7 @@ import {
   Vicis, TYPES_ENUM,
   cast, defaults, defined, omit, exclude,
   pick, rename, replace, required, transform,
-} from "vicis/es";
+} from "vicis";
 ```
 
 ---

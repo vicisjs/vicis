@@ -11,7 +11,7 @@ const { required } = require("vicis");
 ```
 
 ```js
-import { required } from "vicis/es";
+import { required } from "vicis";
 ```
 
 ```js

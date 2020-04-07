@@ -11,7 +11,7 @@ const { transform } = require("vicis");
 ```
 
 ```js
-import { transform } from "vicis/es";
+import { transform } from "vicis";
 ```
 
 <table><thead><tr><td colspan="3">

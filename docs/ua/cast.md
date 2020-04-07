@@ -11,7 +11,7 @@ const { cast } = require("vicis");
 ```
 
 ```js
-import { cast } from "vicis/es";
+import { cast } from "vicis";
 ```
 
 <table><thead><tr><td colspan="3">
