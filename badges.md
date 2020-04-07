@@ -47,6 +47,10 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=r37r0m0d3l_vicis&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=r37r0m0d3l_vicis)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=r37r0m0d3l_vicis&metric=alert_status)](https://sonarcloud.io/dashboard?id=r37r0m0d3l_vicis)
 
+#### Snyk
+
+[![Known Vulnerabilities](https://snyk.io/test/github/r37r0m0d3l/vicis/badge.svg)](https://snyk.io/test/github/r37r0m0d3l/vicis)
+
 #### Travis CI
 
 [![Build Status](https://badgen.net/travis/r37r0m0d3l/vicis?&icon=travis)](https://travis-ci.org/r37r0m0d3l/vicis)
