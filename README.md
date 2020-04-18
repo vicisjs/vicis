@@ -4,7 +4,7 @@
 
 Presentation and transformation layer for data output in RESTful APIs.
 
-[🗎 Vicis Documentation 🗎](https://vicis.js.org)
+[📃 Vicis Documentation 📃](https://vicis.js.org)
 
 [![npm](https://badgen.net/npm/v/vicis?&icon=npm&label=npm&color=DD3636)](https://www.npmjs.com/package/vicis)
 [![downloads](https://badgen.net/npm/dt/vicis?&icon=terminal&label=downloads&color=009688)](https://www.npmjs.com/package/vicis)
