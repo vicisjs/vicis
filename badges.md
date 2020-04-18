@@ -20,8 +20,8 @@
 
 [![Combined Checks](https://badgen.net/github/checks/r37r0m0d3l/vicis?&icon=github)](https://github.com/r37r0m0d3l/vicis)
 [![Combined Status](https://badgen.net/github/status/r37r0m0d3l/vicis?&icon=github)](https://github.com/r37r0m0d3l/vicis)
-[![Types](https://badgen.net/npm/types/vicis?&icon=typescript)](https://github.com/r37r0m0d3l/vicis)
-[![Stars](https://badgen.net/github/stars/r37r0m0d3l/vicis?&icon=github&label=stars&color=ffcc33&v=1.4.0)](https://github.com/r37r0m0d3l/vicis)
+[![Types](https://badgen.net/npm/types/vicis?&icon=typescript)](https://github.com/r37r0m0d3l/vicis/blob/master/dist/vicis.d.ts)
+[![Stars](https://badgen.net/github/stars/r37r0m0d3l/vicis?&icon=github&label=stars&color=ffcc33)](https://github.com/r37r0m0d3l/vicis)
 
 [![GitHub stars](https://img.shields.io/github/stars/r37r0m0d3l/vicis.svg?style=social&label=Star)](https://github.com/r37r0m0d3l/vicis)
 [![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l)
@@ -36,8 +36,8 @@
 
 #### LGTM
 
-[![lgtm](https://badgen.net/lgtm/langs/g/r37r0m0d3l/vicis?&icon=lgtm)](https://github.com/r37r0m0d3l/vicis)
-[![lgtm](https://badgen.net/lgtm/grade/g/r37r0m0d3l/vicis?&icon=lgtm)](https://github.com/r37r0m0d3l/vicis)
+[![lgtm](https://badgen.net/lgtm/langs/g/r37r0m0d3l/vicis?&icon=lgtm)](https://lgtm.com/projects/g/r37r0m0d3l/vicis/alerts/)
+[![lgtm](https://badgen.net/lgtm/grade/g/r37r0m0d3l/vicis?&icon=lgtm)](https://lgtm.com/projects/g/r37r0m0d3l/vicis/context:javascript)
 
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/r37r0m0d3l/vicis.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/r37r0m0d3l/vicis/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/r37r0m0d3l/vicis.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/r37r0m0d3l/vicis/context:javascript)

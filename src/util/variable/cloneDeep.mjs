@@ -107,7 +107,7 @@ function typeOf(val) {
   if (val instanceof Date) {
     return "date";
   }
-  var type = toString.call(val);
+  const type = toString.call(val);
   if (type === "[object RegExp]") {
     return "regexp";
   }
