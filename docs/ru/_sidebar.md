@@ -25,6 +25,7 @@
     -   [Фреймворк ExpressJS](/ru/express_js.md)
     -   [Фреймворк NestJS](/ru/nest_js.md)
 -   Плагины
-    -   [Дата и Время](/ru/transform_date.md)
+    -   [🖌️ Декораторы](/ru/decorators.md)
+    -   [📆 Дата и Время](/ru/transform_date.md)
 -   [О Проекте](/ru/about.md)
 -   [История](/ru/changelog.md)
