@@ -29,6 +29,32 @@ export class User {
 }
 ```
 
+Alternative with decorators.
+
+```typescript
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Vicis } from "vicis";
+import { omit, serializable, serialize } from "@vicis/decorators";
+
+const serializer = Vicis.factory({ omit: ["password"] });
+
+@Entity({ name: "user" })
+@serializable
+export class User {
+  @PrimaryGeneratedColumn("uuid")
+  @serialize()
+  id: string;
+
+  @Column({ length: 50 })
+  @serialize()
+  name: string;
+
+  @Column({ type: "text" })
+  @omit
+  password: string;
+}
+```
+
 ## Service
 
 ```typescript
