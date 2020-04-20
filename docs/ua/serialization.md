@@ -29,4 +29,28 @@ const response = Vicis.factory(/* ...configuration, ...data */)
   .toJSON();
 ```
 
+Декоратори
+
+[Vicis Decorators Plugin](https://github.com/r37r0m0d3l/vicis-decorators)
+
+```typescript
+import { Vicis } from "vicis";
+import { defined, exclude, serializable, serialize } from "@vicis/decorators";
+
+@serializable({
+  pick: ["id", "login"]
+})
+class MyClass {
+  @serialize({
+    cast: Vicis.INTEGER,
+    required: true,
+  })
+  protected id: number | string;
+  @defined
+  protected login: string;
+  @exclude
+  protected password: string;
+}
+```
+
 ---
