@@ -11,7 +11,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { omit, Serialize, serialize } from "@vicis/decorators";
 
 @Entity({ name: "user" })
-@Serialize
+@Serialize()
 export class User {
   @PrimaryGeneratedColumn("uuid")
   @serialize()
