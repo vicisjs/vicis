@@ -35,9 +35,9 @@ const response = Vicis.factory(/* ...configuration, ...data */)
 
 ```typescript
 import { Vicis } from "vicis";
-import { defined, exclude, serializable, serialize } from "@vicis/decorators";
+import { defined, exclude, Serialize, serialize } from "@vicis/decorators";
 
-@serializable({
+@Serialize({
   pick: ["id", "login"]
 })
 class MyClass {

@@ -33,13 +33,10 @@ export class User {
 
 ```typescript
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { Vicis } from "vicis";
-import { omit, serializable, serialize } from "@vicis/decorators";
-
-const serializer = Vicis.factory({ omit: ["password"] });
+import { omit, Serialize, serialize } from "@vicis/decorators";
 
 @Entity({ name: "user" })
-@serializable
+@Serialize
 export class User {
   @PrimaryGeneratedColumn("uuid")
   @serialize()

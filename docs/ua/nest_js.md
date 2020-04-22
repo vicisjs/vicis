@@ -8,24 +8,22 @@
 
 ```typescript
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { Vicis } from "vicis";
-
-const serializer = Vicis.factory({ omit: ["password"] });
+import { omit, Serialize, serialize } from "@vicis/decorators";
 
 @Entity({ name: "user" })
+@Serialize
 export class User {
   @PrimaryGeneratedColumn("uuid")
+  @serialize()
   id: string;
 
   @Column({ length: 50 })
+  @serialize()
   name: string;
 
   @Column({ type: "text" })
+  @omit
   password: string;
-
-  public toJSON(): Partial<UserEntity> {
-    return serializer.data(this).toJSON();
-  }
 }
 ```
 
