@@ -53,67 +53,6 @@ export class User {
 }
 ```
 
-## Сервіс
-
-```typescript
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
-import { User } from "./user.entity";
-
-@Injectable()
-export class UserService {
-  constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
-  ) {}
-
-  async findAll(): Promise<User[]> {
-    return this.userRepository.find();
-  }
-}
-```
-
-## Модуль
-
-```typescript
-import { Module } from "@nestjs/common";
-import { UserService } from "./user.service";
-import { UserController } from "./user.controller";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { User } from "./user.entity";
-
-@Module({
-  imports: [TypeOrmModule.forFeature([User])],
-  providers: [UserService],
-  controllers: [UserController],
-})
-export class UserModule {}
-```
-
-## Контролер
-
-```typescript
-import { Controller, Get } from "@nestjs/common";
-import { UserService } from "./user.service";
-import { User } from "./user.entity";
-
-@Controller("user")
-export class UserController {
-  constructor(private readonly userService: UserService) {}
-
-  @Get("superadmin")
-  findOne(): Promise<User> {
-    return this.userService.findOne({ name: "Sir Mullich" });
-  }
-
-  @Get()
-  findAll(): Promise<User[]> {
-    return this.userService.findAll();
-  }
-}
-```
-
 <table>
 <thead>
 <tr><td colspan="3">

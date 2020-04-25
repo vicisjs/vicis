@@ -82,13 +82,15 @@
     "url": "git+https://github.com/r37r0m0d3l/vicis.git"
   },
   "scripts": {
-    "build-cli": "rollup --config rollup.config.cli.mjs",
-    "build-web": "rollup --config rollup.config.web.mjs",
-    "docs-serve": "docsify serve docs",
+    "build": "npm run build:cli && npm run build:web",
+    "build:cli": "rollup --config rollup.config.cli.mjs",
+    "build:web": "rollup --config rollup.config.web.mjs",
+    "docs:serve": "docsify serve docs",
     "lint": "eslint ./src/**/*.mjs",
-    "lint-md": "remark .",
+    "lint:md": "remark .",
+    "package:upgrade": "npm-check --update",
     "test": "jest",
-    "upgrade": "npm-check --update"
+    "test:cov": "jest --coverage"
   },
   "type": "module",
   "types": "./dist/vicis.d.ts",
