@@ -16,21 +16,8 @@
 
 ---
 
-Ще цікаві проекти:
+[Ще цікаві проекти](https://r37r0m0d3l.icu/open_source_map)
 
--   🔎[Consono](https://consono.js.org)🔎 -
-Найбільш правильний, інформативний, привабливий і конфігурований інспектор змінних для Node.js.
+<img src="https://raw.githubusercontent.com/r37r0m0d3l/r37r0m0d3l/master/osmap.svg" width="960" height="520" style="display:block;height:auto;margin-left:auto;margin-right:auto;min-height:520px;min-width:960px;width:100%;">
 
--   🌠[OF](https://of.js.org)🌠 -
-Обгортка над Promise з фішечками.
-
--   🔩[Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage)🔩 -
-Універсальний localStorage.
-
--   🔄[Publish Subscribe](https://publish-subscribe.js.org)🔄 -
-Реалізація шаблону «Publish Subscribe» на JavaScript.
-
-Або ще один інструмент:
-
--   🧾[JSON Sorter](https://r37r0m0d3l.github.io/json_sort)🧾 -
-Онлайн-сортувальник JSON.
+---

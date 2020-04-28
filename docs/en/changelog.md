@@ -2,6 +2,12 @@
 
 ---
 
+## 1.5.2
+
+-   ⬆️ Dependencies updated
+
+---
+
 ## 1.5.1
 
 -   ⬆️ Dependencies updated

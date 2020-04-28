@@ -35,6 +35,8 @@ import transformConfig from "./transform/transformConfig.mjs";
 import transformData from "./transform/transformData.mjs";
 import convertFunctionToConfig from "./functionToConfig.mjs";
 
+import { ValidationError } from "./errors/ValidationError";
+
 export default class Vicis {
   //#region Config Fields
   /**
@@ -167,37 +169,47 @@ export default class Vicis {
       const replace = objectGetKeys(this.#replace);
       const transform = objectGetKeys(this.#transform);
       if (arrayHasSame(this.#omit, cast)) {
-        throw new Error(`'omit' has same keys as 'cast': ${arrayBasicIntersect(this.#omit, cast)}.`);
+        throw new ValidationError(`'omit' has same keys as 'cast': ${arrayBasicIntersect(this.#omit, cast)}.`);
       }
       if (arrayHasSame(this.#omit, this.#defined)) {
-        throw new Error(`'omit' has same keys as 'defined': ${arrayBasicIntersect(this.#omit, this.#defined)}.`);
+        throw new ValidationError(
+          `'omit' has same keys as 'defined': ${arrayBasicIntersect(this.#omit, this.#defined)}.`,
+        );
       }
       if (arrayHasSame(this.#omit, this.#pick)) {
-        throw new Error(`'omit' has same keys as 'pick': ${arrayBasicIntersect(this.#omit, this.#pick)}.`);
+        throw new ValidationError(`'omit' has same keys as 'pick': ${arrayBasicIntersect(this.#omit, this.#pick)}.`);
       }
       if (arrayHasSame(this.#omit, rename)) {
-        throw new Error(`'omit' has same keys as 'rename': ${arrayBasicIntersect(this.#omit, rename)}.`);
+        throw new ValidationError(`'omit' has same keys as 'rename': ${arrayBasicIntersect(this.#omit, rename)}.`);
       }
       if (arrayHasSame(this.#omit, replace)) {
-        throw new Error(`'omit' has same keys as 'replace': ${arrayBasicIntersect(this.#omit, replace)}.`);
+        throw new ValidationError(`'omit' has same keys as 'replace': ${arrayBasicIntersect(this.#omit, replace)}.`);
       }
       if (arrayHasSame(this.#omit, this.#required)) {
-        throw new Error(`'omit' has same keys as 'required': ${arrayBasicIntersect(this.#omit, this.#required)}.`);
+        throw new ValidationError(
+          `'omit' has same keys as 'required': ${arrayBasicIntersect(this.#omit, this.#required)}.`,
+        );
       }
       if (arrayHasSame(this.#omit, transform)) {
-        throw new Error(`'omit' has same keys as 'transform': ${arrayBasicIntersect(this.#omit, transform)}.`);
+        throw new ValidationError(
+          `'omit' has same keys as 'transform': ${arrayBasicIntersect(this.#omit, transform)}.`,
+        );
       }
       if (arrayHasSame(this.#omit, transform)) {
-        throw new Error(`'omit' has same keys as 'transform': ${arrayBasicIntersect(this.#omit, transform)}.`);
+        throw new ValidationError(
+          `'omit' has same keys as 'transform': ${arrayBasicIntersect(this.#omit, transform)}.`,
+        );
       }
       if (arrayHasSame(cast, replace)) {
-        throw new Error(`'cast' has same keys as 'replace': ${arrayBasicIntersect(cast, replace)}.`);
+        throw new ValidationError(`'cast' has same keys as 'replace': ${arrayBasicIntersect(cast, replace)}.`);
       }
       if (arrayHasSame(cast, transform)) {
-        throw new Error(`'cast' has same keys as 'transform': ${arrayBasicIntersect(cast, transform)}.`);
+        throw new ValidationError(`'cast' has same keys as 'transform': ${arrayBasicIntersect(cast, transform)}.`);
       }
       if (arrayHasSame(replace, transform)) {
-        throw new Error(`'replace' has same keys as 'transform': ${arrayBasicIntersect(replace, transform)}.`);
+        throw new ValidationError(
+          `'replace' has same keys as 'transform': ${arrayBasicIntersect(replace, transform)}.`,
+        );
       }
       return this;
     }.bind(this);
