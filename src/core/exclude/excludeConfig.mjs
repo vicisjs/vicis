@@ -1,9 +1,9 @@
-import arrayGetUnique from "@corefunc/corefunc/array/get/unique.mjs";
-import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
-import isRegExp from "@corefunc/corefunc/is/regexp.mjs";
-import isString from "@corefunc/corefunc/is/string.mjs";
+import arrayGetUnique from "@corefunc/corefunc/array/get/unique";
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty";
+import isRegExp from "@corefunc/corefunc/is/regexp";
+import isString from "@corefunc/corefunc/is/string";
 
-import jsonStringify from "../../util/json/stringify.mjs";
+import jsonStringify from "../../util/json/stringify";
 
 /**
  * @name excludeConfig

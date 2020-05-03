@@ -2,6 +2,14 @@
 
 ---
 
+## 1.6.0
+
+-   ➕ Added static method `testConfig`
+
+-   ♻️ Refactored exception handling. `Vicis.constructor` and `Vicis.config` now throws an `AggregateError` instead of `ValidationError`.
+
+---
+
 ## 1.5.2
 
 -   ⬆️ Dependencies updated

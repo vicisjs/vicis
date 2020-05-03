@@ -1,6 +1,6 @@
-import checkIsCallable from "@corefunc/corefunc/check/isCallable.mjs";
-import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike.mjs";
-import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
+import checkIsCallable from "@corefunc/corefunc/check/isCallable";
+import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike";
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty";
 
 /**
  * @name transformConfig

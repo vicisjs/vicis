@@ -1,7 +1,7 @@
-import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty";
 
-import requiredConfig from "./requiredConfig.mjs";
-import requiredData from "./requiredData.mjs";
+import requiredConfig from "./requiredConfig";
+import requiredData from "./requiredData";
 
 /**
  * @name required

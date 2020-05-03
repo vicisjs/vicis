@@ -1,9 +1,9 @@
-import objectKeysSort from "@corefunc/corefunc/object/keys/sort.mjs";
+import objectKeysSort from "@corefunc/corefunc/object/keys/sort";
 
-import CONFIG_SORT from "../../const/configSort.mjs";
+import CONFIG_SORT from "../../const/configSort";
 
-import jsonParse from "../json/parse.mjs";
-import jsonStringify from "../json/stringify.mjs";
+import jsonParse from "../json/parse";
+import jsonStringify from "../json/stringify";
 
 /**
  * @name castToJson

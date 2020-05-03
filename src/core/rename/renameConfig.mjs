@@ -1,9 +1,9 @@
-import arrayGetUnique from "@corefunc/corefunc/array/get/unique.mjs";
-import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike.mjs";
-import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
-import isString from "@corefunc/corefunc/is/string.mjs";
+import arrayGetUnique from "@corefunc/corefunc/array/get/unique";
+import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike";
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty";
+import isString from "@corefunc/corefunc/is/string";
 
-import jsonStringify from "../../util/json/stringify.mjs";
+import jsonStringify from "../../util/json/stringify";
 
 /**
  * @name renameConfig

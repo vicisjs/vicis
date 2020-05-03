@@ -1,10 +1,10 @@
-import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike.mjs";
-import isString from "@corefunc/corefunc/is/string.mjs";
-import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
+import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike";
+import isString from "@corefunc/corefunc/is/string";
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty";
 
-import TYPES_LIST from "../../const/typesList.mjs";
+import TYPES_LIST from "../../const/typesList";
 
-import jsonStringify from "../../util/json/stringify.mjs";
+import jsonStringify from "../../util/json/stringify";
 
 /**
  * @name castConfig

@@ -1,9 +1,9 @@
-import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
-import objectKeysOrder from "@corefunc/corefunc/object/keys/order.mjs";
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty";
+import objectKeysOrder from "@corefunc/corefunc/object/keys/order";
 
-import CONFIG_SORT from "../../const/configSort.mjs";
+import CONFIG_SORT from "../../const/configSort";
 
-import orderConfig from "./orderConfig.mjs";
+import orderConfig from "./orderConfig";
 
 /**
  * @name order

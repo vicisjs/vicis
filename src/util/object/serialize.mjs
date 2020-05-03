@@ -1,7 +1,7 @@
-import isFunction from "@corefunc/corefunc/is/function.mjs";
-import isString from "@corefunc/corefunc/is/string.mjs";
+import isFunction from "@corefunc/corefunc/is/function";
+import isString from "@corefunc/corefunc/is/string";
 
-import jsonStringify from "../json/stringify.mjs";
+import jsonStringify from "../json/stringify";
 
 /**
  * @name objectSerialize

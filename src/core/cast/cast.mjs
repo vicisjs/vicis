@@ -1,7 +1,7 @@
-import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty";
 
-import castConfig from "./castConfig.mjs";
-import castData from "./castData.mjs";
+import castConfig from "./castConfig";
+import castData from "./castData";
 
 /**
  * @name cast

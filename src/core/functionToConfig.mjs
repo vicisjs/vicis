@@ -1,6 +1,6 @@
-import isFunction from "@corefunc/corefunc/is/function.mjs";
+import isFunction from "@corefunc/corefunc/is/function";
 
-import VicisParameter from "./parameter.mjs";
+import VicisParameter from "./parameter";
 
 export default function convertFunctionToConfig(callable) {
   if (!isFunction(callable)) {

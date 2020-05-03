@@ -1,6 +1,6 @@
-import checkIsPrimitive from "@corefunc/corefunc/check/isPrimitive.mjs";
+import checkIsPrimitive from "@corefunc/corefunc/check/isPrimitive";
 
-import cloneDeep from "./cloneDeep.mjs";
+import cloneDeep from "./cloneDeep";
 
 /**
  * @name clone

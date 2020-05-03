@@ -1,40 +1,42 @@
-import arrayBasicIntersect from "@corefunc/corefunc/array/basic/intersect.mjs";
-import arrayGetDifference from "@corefunc/corefunc/array/get/difference.mjs";
-import arrayHasSame from "@corefunc/corefunc/array/basic/hasSame.mjs";
-import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike.mjs";
-import isFunction from "@corefunc/corefunc/is/function.mjs";
-import objectGetKeys from "@corefunc/corefunc/object/get/keys.mjs";
+import arrayBasicIntersect from "@corefunc/corefunc/array/basic/intersect";
+import arrayGetDifference from "@corefunc/corefunc/array/get/difference";
+import arrayHasSame from "@corefunc/corefunc/array/basic/hasSame";
+import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike";
+import isFunction from "@corefunc/corefunc/is/function";
+import objectGetKeys from "@corefunc/corefunc/object/get/keys";
+import objectGetProperty from "@corefunc/corefunc/object/get/property";
 
-import CONFIG_FIELDS from "../const/configFields.mjs";
-import CONFIG_SORT from "../const/configSort.mjs";
+import CONFIG_FIELDS from "../const/configFields";
+import CONFIG_SORT from "../const/configSort";
 
-import castConfig from "./cast/castConfig.mjs";
-import castData from "./cast/castData.mjs";
-import castToJson from "../util/cast/toJson.mjs";
-import clone from "../util/variable/clone.mjs";
-import defaultsConfig from "./defaults/defaultsConfig.mjs";
-import defaultsData from "./defaults/defaultsData.mjs";
-import definedConfig from "./defined/definedConfig.mjs";
-import definedData from "./defined/definedData.mjs";
-import excludeConfig from "./exclude/excludeConfig.mjs";
-import excludeData from "./exclude/excludeData.mjs";
-import jsonStringify from "../util/json/stringify.mjs";
-import omitConfig from "./omit/omitConfig.mjs";
-import omitData from "./omit/omitData.mjs";
-import orderConfig from "./order/orderConfig.mjs";
-import orderData from "./order/orderData.mjs";
-import pickConfig from "./pick/pickConfig.mjs";
-import pickData from "./pick/pickData.mjs";
-import renameConfig from "./rename/renameConfig.mjs";
-import renameData from "./rename/renameData.mjs";
-import replaceConfig from "./replace/replaceConfig.mjs";
-import replaceData from "./replace/replaceData.mjs";
-import requiredConfig from "./required/requiredConfig.mjs";
-import requiredData from "./required/requiredData.mjs";
-import transformConfig from "./transform/transformConfig.mjs";
-import transformData from "./transform/transformData.mjs";
-import convertFunctionToConfig from "./functionToConfig.mjs";
+import castConfig from "./cast/castConfig";
+import castData from "./cast/castData";
+import castToJson from "../util/cast/toJson";
+import clone from "../util/variable/clone";
+import defaultsConfig from "./defaults/defaultsConfig";
+import defaultsData from "./defaults/defaultsData";
+import definedConfig from "./defined/definedConfig";
+import definedData from "./defined/definedData";
+import excludeConfig from "./exclude/excludeConfig";
+import excludeData from "./exclude/excludeData";
+import jsonStringify from "../util/json/stringify";
+import omitConfig from "./omit/omitConfig";
+import omitData from "./omit/omitData";
+import orderConfig from "./order/orderConfig";
+import orderData from "./order/orderData";
+import pickConfig from "./pick/pickConfig";
+import pickData from "./pick/pickData";
+import renameConfig from "./rename/renameConfig";
+import renameData from "./rename/renameData";
+import replaceConfig from "./replace/replaceConfig";
+import replaceData from "./replace/replaceData";
+import requiredConfig from "./required/requiredConfig";
+import requiredData from "./required/requiredData";
+import transformConfig from "./transform/transformConfig";
+import transformData from "./transform/transformData";
+import convertFunctionToConfig from "./functionToConfig";
 
+import { AggregateError } from "./errors/AggregateError";
 import { ValidationError } from "./errors/ValidationError";
 
 export default class Vicis {
@@ -154,6 +156,7 @@ export default class Vicis {
    * @constructor
    * @param {Function|Object=} config
    * @param {Object=} data
+   * @throws AggregateError
    */
   constructor(config = {}, data) {
     /**
@@ -188,11 +191,6 @@ export default class Vicis {
       if (arrayHasSame(this.#omit, this.#required)) {
         throw new ValidationError(
           `'omit' has same keys as 'required': ${arrayBasicIntersect(this.#omit, this.#required)}.`,
-        );
-      }
-      if (arrayHasSame(this.#omit, transform)) {
-        throw new ValidationError(
-          `'omit' has same keys as 'transform': ${arrayBasicIntersect(this.#omit, transform)}.`,
         );
       }
       if (arrayHasSame(this.#omit, transform)) {
@@ -388,9 +386,92 @@ export default class Vicis {
     return this;
   }
   /**
+   * @name testConfig
+   * @public
+   * @static
+   * @throws AggregateError
+   * @param {Function|Object=} config
+   * @returns {Object}
+   * @since 1.6.0
+   */
+  static testConfig(config = {}) {
+    if (isFunction(config)) {
+      // eslint-disable-next-line no-param-reassign
+      config = convertFunctionToConfig(config);
+    }
+    if (!checkIsObjectLike(config)) {
+      throw new AggregateError([new TypeError("Config should be an object")], "Configuration has errors");
+    }
+    const diff = arrayGetDifference(objectGetKeys(config), CONFIG_FIELDS);
+    if (diff.length) {
+      throw new AggregateError(
+        [new TypeError(`Config has unknown fields: '${diff.join("', '")}'.`)],
+        "Configuration has errors",
+      );
+    }
+    const cast = objectGetKeys(objectGetProperty(config, "cast", {}));
+    const rename = objectGetKeys(objectGetProperty(config, "rename", {}));
+    const replace = objectGetKeys(objectGetProperty(config, "replace", {}));
+    const transform = objectGetKeys(objectGetProperty(config, "transform", {}));
+    const errors = [];
+    if ("omit" in config && arrayHasSame(config.omit, cast)) {
+      errors.push(new ValidationError(`'omit' has same keys as 'cast': ${arrayBasicIntersect(config.omit, cast)}.`));
+    }
+    if ("omit" in config && "defined" in config && arrayHasSame(config.omit, config.defined)) {
+      errors.push(
+        new ValidationError(`'omit' has same keys as 'defined': ${arrayBasicIntersect(config.omit, config.defined)}.`),
+      );
+    }
+    if ("omit" in config && "pick" in config && arrayHasSame(config.omit, config.pick)) {
+      errors.push(
+        new ValidationError(`'omit' has same keys as 'pick': ${arrayBasicIntersect(config.omit, config.pick)}.`),
+      );
+    }
+    if ("omit" in config && arrayHasSame(config.omit, rename)) {
+      errors.push(
+        new ValidationError(`'omit' has same keys as 'rename': ${arrayBasicIntersect(config.omit, rename)}.`),
+      );
+    }
+    if ("omit" in config && arrayHasSame(config.omit, replace)) {
+      errors.push(
+        new ValidationError(`'omit' has same keys as 'replace': ${arrayBasicIntersect(config.omit, replace)}.`),
+      );
+    }
+    if ("omit" in config && "required" in config && arrayHasSame(config.omit, config.required)) {
+      errors.push(
+        new ValidationError(
+          `'omit' has same keys as 'required': ${arrayBasicIntersect(config.omit, config.required)}.`,
+        ),
+      );
+    }
+    if ("omit" in config && arrayHasSame(config.omit, transform)) {
+      errors.push(
+        new ValidationError(`'omit' has same keys as 'transform': ${arrayBasicIntersect(config.omit, transform)}.`),
+      );
+    }
+    if (arrayHasSame(cast, replace)) {
+      errors.push(new ValidationError(`'cast' has same keys as 'replace': ${arrayBasicIntersect(cast, replace)}.`));
+    }
+    if (arrayHasSame(cast, transform)) {
+      errors.push(new ValidationError(`'cast' has same keys as 'transform': ${arrayBasicIntersect(cast, transform)}.`));
+    }
+    if (arrayHasSame(replace, transform)) {
+      errors.push(
+        new ValidationError(`'replace' has same keys as 'transform': ${arrayBasicIntersect(replace, transform)}.`),
+      );
+    }
+    if (errors.length) {
+      throw new AggregateError(
+        errors,
+        ["Configuration has errors.", ...errors.map((error, index) => `${index + 1}). ${error.message}`)].join("\n"),
+      );
+    }
+    return { ...config };
+  }
+  /**
    * @name config
    * @public
-   * @throws TypeError
+   * @throws AggregateError|TypeError
    * @param {Function|Object=} config
    * @returns {Vicis}
    */
@@ -406,6 +487,7 @@ export default class Vicis {
     if (diff.length) {
       throw new TypeError(`Config has unknown fields: '${diff.join("', '")}'.`);
     }
+    Vicis.testConfig(config);
     this.resetConfig();
     this.sort(config.sort);
     this.omit(config.omit);

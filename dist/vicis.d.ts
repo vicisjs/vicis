@@ -35,6 +35,7 @@ declare class Vicis {
    * @constructor
    * @param {Function|Object=} config
    * @param {Object=} data
+   * @throws AggregateError
    */
   public constructor(config?: IVicisConfig, data?: object);
   /**
@@ -49,6 +50,15 @@ declare class Vicis {
    * @returns {Vicis}
    */
   public resetConfig(): void;
+  /**
+   * @name testConfig
+   * @public
+   * @static
+   * @throws AggregateError
+   * @param {Function|Object=} config
+   * @returns {Object}
+   */
+  public static testConfig(config?: IVicisConfig);
   /**
    * @name config
    * @public

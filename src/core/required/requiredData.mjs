@@ -1,4 +1,4 @@
-import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty";
 
 /**
  * @name requiredData

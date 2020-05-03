@@ -1,4 +1,4 @@
-import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike.mjs";
+import checkIsObjectLike from "@corefunc/corefunc/check/isObjectLike";
 
 /**
  * @name replaceConfig

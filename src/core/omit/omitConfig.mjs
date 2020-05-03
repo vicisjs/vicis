@@ -1,8 +1,8 @@
-import arrayGetUnique from "@corefunc/corefunc/array/get/unique.mjs";
-import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
-import isString from "@corefunc/corefunc/is/string.mjs";
+import arrayGetUnique from "@corefunc/corefunc/array/get/unique";
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty";
+import isString from "@corefunc/corefunc/is/string";
 
-import jsonStringify from "../../util/json/stringify.mjs";
+import jsonStringify from "../../util/json/stringify";
 
 /**
  * @name omitConfig

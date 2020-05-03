@@ -1,6 +1,6 @@
-import arrayIsEmpty from "@corefunc/corefunc/array/is/empty.mjs";
+import arrayIsEmpty from "@corefunc/corefunc/array/is/empty";
 
-import definedConfig from "./definedConfig.mjs";
+import definedConfig from "./definedConfig";
 
 /**
  * @name definedData

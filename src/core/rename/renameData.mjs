@@ -1,4 +1,4 @@
-import objectIsEmpty from "@corefunc/corefunc/object/is/empty.mjs";
+import objectIsEmpty from "@corefunc/corefunc/object/is/empty";
 
 /**
  * @name renameData
