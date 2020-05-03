@@ -2,6 +2,14 @@
 
 ---
 
+## 1.6.0
+
+-   ➕ Доданий статичний метод `testConfig`
+
+-   ♻️ Зроблено рефакторинг винятків. `Vicis.constructor` та `Vicis.config` тепер викидають `AggregateError` замість `ValidationError`.
+
+---
+
 ## 1.5.2
 
 -   ⬆️ Оновлені залежності

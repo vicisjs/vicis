@@ -4,7 +4,7 @@
 
 Presentation and transformation layer for data output in RESTful APIs.
 
-[📃 Vicis Documentation 📃](https://vicis.js.org)
+[Vicis Documentation](https://vicis.js.org)
 
 [![npm](https://badgen.net/npm/v/vicis?&icon=npm&label=npm&color=DD3636)](https://www.npmjs.com/package/vicis)
 [![downloads](https://badgen.net/npm/dt/vicis?&icon=terminal&label=downloads&color=009688)](https://www.npmjs.com/package/vicis)
@@ -73,5 +73,3 @@ Output:
 [My other projects](https://r37r0m0d3l.icu/open_source_map)
 
 <img src="https://raw.githubusercontent.com/r37r0m0d3l/r37r0m0d3l/master/osmap.svg" width="960" height="520" style="display:block;height:auto;margin-left:auto;margin-right:auto;min-height:520px;min-width:960px;width:100%;">
-
----

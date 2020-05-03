@@ -2,6 +2,40 @@
 
 ---
 
+## Тест Конфігурації
+
+```js
+const config = {
+  cast: { _id: Vicis.INTEGER, },
+  omit: ["_id"],
+  required: ["_id"],
+  transform: { _id: (value) => Number.parseInt(value), },
+};
+try {
+  const config = Vicis.testConfig(config);
+  // має ту ж помилку, що і конструктор
+  const serializerFromConstructor = new Vicis(config);
+  // або заводський метод
+  const serializerFromFactory = Vicis.factory(config);
+} catch (aggregateError) {
+  console.warn(aggregateError.message); // строка з усіма помилками
+  // Configuration has errors.
+  // 1). 'omit' has same keys as 'cast': _id.
+  // 2). 'omit' has same keys as 'required': _id.
+  // 3). 'omit' has same keys as 'transform': _id.
+  // 4). 'cast' has same keys as 'transform': _id.
+  aggregateError.errors.forEach((validationError) => {
+    console.warn(validationError.message); // одна з помилок перевірки
+    // 'omit' has same keys as 'cast': _id.
+    // 'omit' has same keys as 'required': _id.
+    // 'omit' has same keys as 'transform': _id.
+    // 'cast' has same keys as 'transform': _id.
+  });
+}
+```
+
+---
+
 ## Серіалізувати один об'єкт
 
 ```js
