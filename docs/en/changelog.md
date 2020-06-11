@@ -2,6 +2,12 @@
 
 ---
 
+## 1.6.1
+
+-   ⬆️ Dependencies updated
+
+---
+
 ## 1.6.0
 
 -   ➕ Added static method `testConfig`
