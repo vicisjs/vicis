@@ -18,4 +18,4 @@
 
 -   [ ] Generate TypeScript interface from config
 
--   [ ] Generate Swagger/Postman configuration
+-   [ ] Generate Swagger/Postman/OpenAPI configuration
