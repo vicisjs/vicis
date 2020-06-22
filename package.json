@@ -18,7 +18,7 @@
     "@r37r0m0d3l/rollup-config-pkg": "git+https://github.com/r37r0m0d3l/rollup-config-pkg.git",
     "argh": "1.0.0",
     "babel-eslint": "10.1.0",
-    "eslint": "7.2.0",
+    "eslint": "7.3.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-prettier": "3.1.3",
     "jest": "26.0.1",
