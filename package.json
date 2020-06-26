@@ -14,45 +14,48 @@
   },
   "description": "Presentation and transformation layer for data output in RESTful APIs.",
   "devDependencies": {
-    "@corefunc/corefunc": "0.0.73",
+    "@corefunc/corefunc": "0.0.74",
     "@r37r0m0d3l/rollup-config-pkg": "git+https://github.com/r37r0m0d3l/rollup-config-pkg.git",
     "argh": "1.0.0",
     "babel-eslint": "10.1.0",
-    "eslint": "7.2.0",
+    "eslint": "7.3.1",
     "eslint-config-prettier": "6.11.0",
-    "eslint-plugin-prettier": "3.1.3",
-    "jest": "26.0.1",
+    "eslint-plugin-prettier": "3.1.4",
+    "jest": "26.1.0",
     "npm-check": "5.9.2",
     "prettier": "2.0.5",
     "remark-cli": "8.0.0",
     "remark-lint": "7.0.0",
     "remark-preset-lint-consistent": "3.0.0",
     "remark-preset-lint-markdown-style-guide": "3.0.0",
-    "remark-preset-lint-recommended": "4.0.0"
+    "remark-preset-lint-recommended": "4.0.0",
+    "rollup-plugin-typescript2": "0.27.1",
+    "typescript": "3.9.5",
+    "typescript-deno-plugin": "1.31.0"
   },
   "exports": {
     ".": {
       "browser": {
-        "import": "./dist/vicis.mjs",
-        "require": "./dist/vicis.cjs"
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.cjs"
       },
       "node": {
-        "import": "./dist/vicis.mjs",
-        "require": "./dist/vicis.cjs"
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.cjs"
       },
-      "import": "./dist/vicis.mjs",
-      "require": "./dist/vicis.cjs",
-      "default": "./dist/vicis.min.js"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.min.js"
     }
   },
   "files": [
-    "dist/vicis.cjs",
-    "dist/vicis.cjs.map",
-    "dist/vicis.d.ts",
-    "dist/vicis.js",
-    "dist/vicis.js.map",
-    "dist/vicis.mjs",
-    "dist/vicis.mjs.map"
+    "dist/index.cjs",
+    "dist/index.cjs.map",
+    "dist/index.d.ts",
+    "dist/index.js",
+    "dist/index.js.map",
+    "dist/index.mjs",
+    "dist/index.mjs.map"
   ],
   "homepage": "https://vicis.js.org",
   "keywords": [
@@ -67,8 +70,8 @@
     "transformer"
   ],
   "license": "MIT",
-  "main": "./dist/vicis.cjs",
-  "module": "./dist/vicis.mjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
   "name": "vicis",
   "repository": {
     "type": "git",
@@ -78,13 +81,13 @@
     "build": "rollup --config rollup.config.mjs",
     "build:dev": "rollup --config rollup.config.mjs --config-dev",
     "docs:serve": "docsify serve docs",
-    "lint": "eslint ./src/**/*.mjs",
+    "lint": "eslint ./src/**/*.ts",
     "lint:md": "remark .",
     "package:upgrade": "npm-check --update",
     "test": "jest",
     "test:coverage": "jest --collect-coverage"
   },
   "type": "module",
-  "types": "./dist/vicis.d.ts",
-  "version": "1.6.1"
+  "types": "./dist/index.d.ts",
+  "version": "2.0.0"
 }
