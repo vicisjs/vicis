@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "declaration": true,
+    "module": "ESNext",
+    "resolveJsonModule": false,
+    "target": "ES2020",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "plugins": [
+      {
+        "name": "typescript-deno-plugin",
+        "enable": true,
+        "importmap": "import_map.json"
+      }
+    ],
+    "types": ["node"],
+    "typeRoots": ["node_modules/@types"],
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "strict": true,
+    "noUnusedLocals": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "build", "dist", "example", "docs", "test", "rollup.config.js"]
+}
