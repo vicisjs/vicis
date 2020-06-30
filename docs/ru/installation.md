@@ -6,10 +6,6 @@
 npm install vicis
 ```
 
-```bash
-yarn add vicis
-```
-
 ---
 
 ## TypeScript definitions
@@ -17,10 +13,11 @@ yarn add vicis
 ```typescript
 enum CAST_TYPE {
   BOOLEAN = "boolean",
-  NUMERIC = "numeric", // Только конечные числа
+  FLAG = "flag",
+  NUMERIC = "numeric", // Only finite numbers
   INTEGER = "integer",
   STRING = "string",
-  JSON = "json", // Преобразует в JSON
+  JSON = "json", // Call JSON.stringify on value
 }
 interface IVicisConfig {
   cast?: { [prop: string]: CAST_TYPE };

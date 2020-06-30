@@ -6,10 +6,6 @@
 npm install vicis
 ```
 
-```bash
-yarn add vicis
-```
-
 ---
 
 ## TypeScript definitions
@@ -17,6 +13,7 @@ yarn add vicis
 ```typescript
 enum CAST_TYPE {
   BOOLEAN = "boolean",
+  FLAG = "flag",
   NUMERIC = "numeric", // Only finite numbers
   INTEGER = "integer",
   STRING = "string",
