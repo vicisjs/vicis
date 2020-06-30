@@ -12,7 +12,7 @@ import { omitConfig } from "./omitConfig";
  * @param {Array.<string>=} propertiesToOmit
  * @returns {Object}
  */
-function omit(data: IObject, propertiesToOmit: IOmit = []): IObject {
+export function omit(data: IObject, propertiesToOmit: IOmit = []): IObject {
   const config = omitConfig(propertiesToOmit);
   if (arrayIsEmpty(config)) {
     return data;
@@ -26,5 +26,3 @@ function omit(data: IObject, propertiesToOmit: IOmit = []): IObject {
   });
   return dataToSerialize;
 }
-
-export { omit };

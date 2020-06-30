@@ -1,7 +1,7 @@
 // import AggregateError from "es-aggregate-error";
 // AggregateError.shim(); // will be a no-op if not needed
 
-class AggregateError extends Error {
+export class AggregateError extends Error {
   public readonly name = "AggregateError";
   public errors: Error[] = [];
   /**
@@ -14,5 +14,3 @@ class AggregateError extends Error {
     this.message = message;
   }
 }
-
-export { AggregateError };

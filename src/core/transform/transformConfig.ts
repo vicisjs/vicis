@@ -10,7 +10,9 @@ import { objectIsEmpty } from "../../util/object/is/empty";
  * @param {Object.<string, function>} propertyValueTransformWith
  * @returns {Object}
  */
-function transformConfig(propertyValueTransformWith: ITransform): ITransform {
+export function transformConfig(
+  propertyValueTransformWith: ITransform,
+): ITransform {
   if (!checkIsObjectLike(propertyValueTransformWith)) {
     throw new TypeError("'Transform' should be an object");
   }
@@ -26,5 +28,3 @@ function transformConfig(propertyValueTransformWith: ITransform): ITransform {
   });
   return propertyValueTransformWith;
 }
-
-export { transformConfig };

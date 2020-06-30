@@ -8,11 +8,9 @@ import { checkIsObjectLike } from "../../util/check/isObjectLike";
  * @param {Object.<string, *>} replacePropertyValues
  * @returns {Object}
  */
-function replaceConfig(replacePropertyValues: IReplace): IReplace {
+export function replaceConfig(replacePropertyValues: IReplace): IReplace {
   if (!checkIsObjectLike(replacePropertyValues)) {
     throw new TypeError("'Replace' should be an object");
   }
   return replacePropertyValues;
 }
-
-export { replaceConfig };

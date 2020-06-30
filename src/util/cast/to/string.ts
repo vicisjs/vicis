@@ -2,7 +2,7 @@
  * @param {*} value
  * @returns string
  */
-function castToString(value: any): string {
+export function castToString(value: any): string {
   if (value === null || value === undefined) {
     return "";
   }
@@ -15,5 +15,3 @@ function castToString(value: any): string {
   }
   return result;
 }
-
-export { castToString };

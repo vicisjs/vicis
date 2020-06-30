@@ -11,11 +11,10 @@ const {
   replace,
   required,
   transform,
-} = require("../dist/vicis.cjs");
+} = require("../dist/index.cjs");
 
 describe("calling and printing", () => {
   it("should not crash on call", () => {
-    const log = jest.spyOn(console, "log").mockImplementation((any) => any);
     const vicis = new Vicis({});
     expect(vicis.getConfig().sort).toBe("asc");
   });

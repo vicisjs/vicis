@@ -12,7 +12,7 @@ import { renameData } from "./renameData";
  * @param {Object.<string, string>=} renamePropertyFromTo
  * @returns {Object}
  */
-function rename(
+export function rename(
   data: IObject,
   renamePropertyFromTo: IRename = {},
 ): IObject {
@@ -22,5 +22,3 @@ function rename(
   }
   return renameData(config, data);
 }
-
-export { rename };

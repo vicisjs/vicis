@@ -8,7 +8,7 @@
  * @param {*=false} onUnParsable
  * @returns {boolean}
  */
-function convertToFlag(
+export function convertToFlag(
   value: any,
   onEmpty = false,
   onUnParsable = false,
@@ -31,5 +31,3 @@ function convertToFlag(
   }
   return onUnParsable;
 }
-
-export { convertToFlag };

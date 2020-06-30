@@ -11,7 +11,7 @@ import { objectIsEmpty } from "../../util/object/is/empty";
  * @param {Object} dataToSerialize
  * @returns {Object}
  */
-function transformData(
+export function transformData(
   propertyValueTransformWith: ITransform,
   dataToSerialize: IObject,
 ): IObject {
@@ -39,5 +39,3 @@ function transformData(
   });
   return dataToSerialize;
 }
-
-export { transformData };

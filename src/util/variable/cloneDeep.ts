@@ -1,7 +1,7 @@
-declare const Buffer: {
-  allocUnsafe: (arg0: any) => any;
-  from: (arg0: any) => any;
-};
+// declare const Buffer: {
+//   allocUnsafe: (arg0: any) => any;
+//   from: (arg0: any) => any;
+// };
 
 function clone(val: any) {
   switch (typeOf(val)) {
@@ -218,7 +218,8 @@ function cloneArrayDeep(val: any, instanceClone: any) {
   }
   return res;
 }
-function cloneDeep<T extends any>(value: T, instanceClone?: T): T {
+
+export function cloneDeep<T extends any>(value: T, instanceClone?: T): T {
   switch (typeOf(value)) {
     case "object":
       return cloneObjectDeep(value, instanceClone);
@@ -229,4 +230,3 @@ function cloneDeep<T extends any>(value: T, instanceClone?: T): T {
     }
   }
 }
-export { cloneDeep };

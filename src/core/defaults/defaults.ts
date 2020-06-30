@@ -13,7 +13,7 @@ import { IDefaults } from "../../interface/config/IDefaults";
  * @param {Object.<string, *>=} propertyDefaultValues
  * @returns {Object}
  */
-function defaults(
+export function defaults(
   data: IObject,
   propertyDefaultValues: IDefaults = {},
 ): IObject {
@@ -23,5 +23,3 @@ function defaults(
   }
   return defaultsData(propertyDefaultValues, data);
 }
-
-export { defaults };

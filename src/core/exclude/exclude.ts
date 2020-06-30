@@ -15,7 +15,7 @@ import { excludeConfig } from "./excludeConfig";
  * @param {Array.<string|RegExp>=} propertiesToExclude
  * @returns {Object}
  */
-function exclude(
+export function exclude(
   data: IObject,
   propertiesToExclude: IExclude = [],
 ): IObject {
@@ -47,5 +47,3 @@ function exclude(
   }
   return data;
 }
-
-export { exclude };

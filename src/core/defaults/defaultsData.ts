@@ -8,7 +8,7 @@ import { objectIsEmpty } from "../../util/object/is/empty";
  * @param {Object} dataToSerialize
  * @returns {Object}
  */
-function defaultsData(
+export function defaultsData(
   propertyDefaultValues: IObject,
   dataToSerialize: IObject,
 ): IObject {
@@ -22,5 +22,3 @@ function defaultsData(
   });
   return dataToSerialize;
 }
-
-export { defaultsData };

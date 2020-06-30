@@ -1,5 +1,3 @@
-interface IDefaults {
+export interface IDefaults {
   [key: string]: unknown;
 }
-
-export { IDefaults };

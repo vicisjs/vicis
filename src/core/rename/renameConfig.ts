@@ -12,7 +12,7 @@ import { objectIsEmpty } from "../../util/object/is/empty";
  * @param {Object.<string, string>} renamePropertyFromTo
  * @returns {Object}
  */
-function renameConfig(renamePropertyFromTo: IRename): IRename {
+export function renameConfig(renamePropertyFromTo: IRename): IRename {
   if (!checkIsObjectLike(renamePropertyFromTo)) {
     throw new TypeError("'Rename' should be an object");
   }
@@ -35,5 +35,3 @@ function renameConfig(renamePropertyFromTo: IRename): IRename {
   }
   return renamePropertyFromTo;
 }
-
-export { renameConfig };

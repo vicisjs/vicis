@@ -12,7 +12,7 @@ import { objectGetKeys } from "../../util/object/get/keys";
  * @param {Object} data
  * @returns {Object}
  */
-function excludeData(
+export function excludeData(
   propertiesToExclude: IExclude,
   data: IObject,
 ): IObject {
@@ -43,5 +43,3 @@ function excludeData(
   }
   return data;
 }
-
-export { excludeData };

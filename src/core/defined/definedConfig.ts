@@ -11,7 +11,7 @@ import { jsonStringify } from "../../util/json/stringify";
  * @param {Array.<string>} propertiesMustBeDefined
  * @returns {Array.<string>}
  */
-function definedConfig(propertiesMustBeDefined: IDefined): IDefined {
+export function definedConfig(propertiesMustBeDefined: IDefined): IDefined {
   if (!Array.isArray(propertiesMustBeDefined)) {
     throw new TypeError("'Defined' should be an array");
   }
@@ -27,5 +27,3 @@ function definedConfig(propertiesMustBeDefined: IDefined): IDefined {
     return value;
   });
 }
-
-export { definedConfig };

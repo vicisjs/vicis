@@ -15,7 +15,7 @@ import { objectKeysOrder } from "../../util/object/keys/order";
  * @param {boolean=} sort
  * @returns {Object}
  */
-function orderData(
+export function orderData(
   propertiesToStreamline: IOrder,
   data: IObject,
   sort: ESort = ESort.Default,
@@ -25,5 +25,3 @@ function orderData(
   }
   return objectKeysOrder(data, propertiesToStreamline, sortAsBoolean(sort));
 }
-
-export { orderData };

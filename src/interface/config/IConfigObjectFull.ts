@@ -12,7 +12,7 @@ import { ITransform } from "./ITransform";
 
 import { ESort } from "../../const/ESort";
 
-interface IConfigObjectFull {
+export interface IConfigObjectFull {
   cast: ICast;
   defaults: IDefaults;
   defined: IDefined;
@@ -26,5 +26,3 @@ interface IConfigObjectFull {
   required: IRequired;
   transform: ITransform;
 }
-
-export { IConfigObjectFull };

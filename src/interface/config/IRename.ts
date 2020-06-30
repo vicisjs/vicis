@@ -1,5 +1,3 @@
-interface IRename {
+export interface IRename {
   [key: string]: string;
 }
-
-export { IRename };

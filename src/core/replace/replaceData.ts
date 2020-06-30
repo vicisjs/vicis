@@ -9,7 +9,7 @@ import { objectIsEmpty } from "../../util/object/is/empty";
  * @param {Object} dataToSerialize
  * @returns {Object}
  */
-function replaceData(
+export function replaceData(
   replacePropertyValues: IReplace,
   dataToSerialize: IObject,
 ): IObject {
@@ -21,5 +21,3 @@ function replaceData(
   });
   return dataToSerialize;
 }
-
-export { replaceData };

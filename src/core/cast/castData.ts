@@ -13,7 +13,10 @@ import { ECastType } from "../../const/ECastType";
  * @param {Object} dataToSerialize
  * @returns {Object}
  */
-function castData(propertyToType: ICast, dataToSerialize: IObject): IObject {
+export function castData(
+  propertyToType: ICast,
+  dataToSerialize: IObject,
+): IObject {
   if (objectIsEmpty(propertyToType)) {
     return dataToSerialize;
   }
@@ -73,5 +76,3 @@ function castData(propertyToType: ICast, dataToSerialize: IObject): IObject {
   });
   return dataToSerialize;
 }
-
-export { castData };

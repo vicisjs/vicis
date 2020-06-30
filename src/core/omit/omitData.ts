@@ -9,7 +9,7 @@ import { arrayIsEmpty } from "../../util/array/is/empty";
  * @param {Object} data
  * @returns {Object}
  */
-function omitData(propertiesToOmit: IOmit, data: IObject): IObject {
+export function omitData(propertiesToOmit: IOmit, data: IObject): IObject {
   if (arrayIsEmpty(propertiesToOmit)) {
     return data;
   }
@@ -22,5 +22,3 @@ function omitData(propertiesToOmit: IOmit, data: IObject): IObject {
   });
   return dataToSerialize;
 }
-
-export { omitData };

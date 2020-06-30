@@ -8,11 +8,9 @@ import { checkIsObjectLike } from "../../util/check/isObjectLike";
  * @param {Object.<string, *>} propertyDefaultValues
  * @returns {Object}
  */
-function defaultsConfig(propertyDefaultValues: IDefaults): IDefaults {
+export function defaultsConfig(propertyDefaultValues: IDefaults): IDefaults {
   if (!checkIsObjectLike(propertyDefaultValues)) {
     throw new TypeError("'Defaults' should be an object");
   }
   return propertyDefaultValues;
 }
-
-export { defaultsConfig };

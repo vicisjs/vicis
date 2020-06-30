@@ -13,12 +13,10 @@ import { pickData } from "./pickData";
  * @param {Array.<string>=} propertiesToPick
  * @returns {Object}
  */
-function pick(data: IObject, propertiesToPick: IPick = []): IObject {
+export function pick(data: IObject, propertiesToPick: IPick = []): IObject {
   const config = pickConfig(propertiesToPick);
   if (arrayIsEmpty(config)) {
     return data;
   }
   return pickData(config, data);
 }
-
-export { pick };

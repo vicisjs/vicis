@@ -10,7 +10,7 @@ import { arrayIsEmpty } from "../../util/array/is/empty";
  * @returns {Object}
  */
 
-function pickData(
+export function pickData(
   propertiesToPick: IPick,
   dataToSerialize: IObject,
 ): IObject {
@@ -25,5 +25,3 @@ function pickData(
   });
   return newCache;
 }
-
-export { pickData };

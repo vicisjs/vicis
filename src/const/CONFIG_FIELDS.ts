@@ -1,4 +1,4 @@
-const CONFIG_FIELDS: string[] = [
+export const CONFIG_FIELDS: string[] = [
   "cast",
   "defaults",
   "defined",
@@ -12,5 +12,3 @@ const CONFIG_FIELDS: string[] = [
   "required",
   "transform",
 ];
-
-export { CONFIG_FIELDS };

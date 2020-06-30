@@ -13,12 +13,13 @@ import { replaceData } from "./replaceData";
  * @param {Object.<string, *>=} replacePropertyValues
  * @returns {Object}
  */
-function replace(data: IObject, replacePropertyValues: IReplace = {}): IObject {
+export function replace(
+  data: IObject,
+  replacePropertyValues: IReplace = {},
+): IObject {
   const config = replaceConfig(replacePropertyValues);
   if (objectIsEmpty(config)) {
     return data;
   }
   return replaceData(config, data);
 }
-
-export { replace };

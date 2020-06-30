@@ -8,8 +8,6 @@ import { objectSerialize } from "../serialize";
  * @param {object} value
  * @returns {object}
  */
-function objectToPlain(value: IObject): IObject {
+export function objectToPlain(value: IObject): IObject {
   return objectDeserialize(objectSerialize(value));
 }
-
-export { objectToPlain };

@@ -13,7 +13,7 @@ import { requiredData } from "./requiredData";
  * @param {Array.<string>=} propertiesRequired
  * @returns {Object}
  */
-function required(
+export function required(
   data: IObject,
   propertiesRequired: IRequired = [],
 ): IObject {
@@ -23,5 +23,3 @@ function required(
   }
   return requiredData(config, data);
 }
-
-export { required };

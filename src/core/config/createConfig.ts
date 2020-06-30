@@ -9,7 +9,7 @@ import { ESort } from "../../const/ESort";
 
 import { objectCreateEmpty } from "../../util/object/createEmpty";
 
-function createConfig(): IConfigObjectFull {
+export function createConfig(): IConfigObjectFull {
   return {
     cast: objectCreateEmpty() as ICast,
     defaults: objectCreateEmpty() as IDefaults,
@@ -25,5 +25,3 @@ function createConfig(): IConfigObjectFull {
     transform: objectCreateEmpty() as ITransform,
   };
 }
-
-export { createConfig };

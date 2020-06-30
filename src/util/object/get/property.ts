@@ -1,4 +1,4 @@
-function objectGetProperty(
+export function objectGetProperty(
   object: { [key: string]: any },
   key: string,
   defaultValue?: any,
@@ -8,5 +8,3 @@ function objectGetProperty(
   }
   return defaultValue;
 }
-
-export { objectGetProperty };

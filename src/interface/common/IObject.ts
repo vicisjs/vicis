@@ -1,5 +1,3 @@
-interface IObject extends Object {
+export interface IObject extends Object {
   [key: string]: any;
 }
-
-export { IObject };

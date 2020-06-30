@@ -1,4 +1,4 @@
-enum ECastType {
+export enum ECastType {
   BOOLEAN = "boolean",
   FLAG = "flag",
   INTEGER = "integer",
@@ -6,5 +6,3 @@ enum ECastType {
   NUMERIC = "numeric",
   STRING = "string",
 }
-
-export { ECastType };

@@ -13,7 +13,7 @@ import { objectIsEmpty } from "../../util/object/is/empty";
  * @param {Object.<string, string>} propertyToType
  * @returns {Object}
  */
-function castConfig(propertyToType: ICast): ICast {
+export function castConfig(propertyToType: ICast): ICast {
   if (!checkIsObjectLike(propertyToType)) {
     throw new TypeError("Cast should be an object");
   }
@@ -36,5 +36,3 @@ function castConfig(propertyToType: ICast): ICast {
   });
   return propertyToType;
 }
-
-export { castConfig };

@@ -2,7 +2,7 @@ import { IFunction } from "../../interface/common/IFunction";
 
 import { ECastType } from "../../const/ECastType";
 
-class VicisParameter {
+export class VicisParameter {
   #cast?: string;
   #defaults?: any;
   #defined?: boolean;
@@ -79,5 +79,3 @@ class VicisParameter {
     };
   }
 }
-
-export { VicisParameter };

@@ -1,7 +1,5 @@
 import { IObject } from "../common/IObject";
 
-interface IConfigCallback {
+export interface IConfigCallback {
   (model: IObject): IObject;
 }
-
-export { IConfigCallback };

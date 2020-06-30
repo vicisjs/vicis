@@ -11,7 +11,7 @@ import { jsonStringify } from "../../util/json/stringify";
  * @param {Array.<string>} propertiesRequired
  * @returns {Array.<string>}
  */
-function requiredConfig(propertiesRequired: IRequired = []): IRequired {
+export function requiredConfig(propertiesRequired: IRequired = []): IRequired {
   if (!Array.isArray(propertiesRequired)) {
     throw new TypeError("'Required' should be an array");
   }
@@ -27,5 +27,3 @@ function requiredConfig(propertiesRequired: IRequired = []): IRequired {
     return value;
   });
 }
-
-export { requiredConfig };

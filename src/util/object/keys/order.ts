@@ -5,7 +5,7 @@
  * @param {boolean=} alphabetize
  * @returns {Object}
  */
-function objectKeysOrder<T extends { [key: string]: any }>(
+export function objectKeysOrder<T extends { [key: string]: any }>(
   instance: T,
   keys: string[] = [],
   alphabetize = false,
@@ -30,5 +30,3 @@ function objectKeysOrder<T extends { [key: string]: any }>(
   objectKeys.forEach((key) => (newObject[key] = instance[key]));
   return newObject as T;
 }
-
-export { objectKeysOrder };

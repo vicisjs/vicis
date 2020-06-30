@@ -13,12 +13,10 @@ import { castData } from "./castData";
  * @param {Object.<string, string>=} propertyToType
  * @returns {Object}
  */
-function cast(data: IObject, propertyToType: ICast): IObject {
+export function cast(data: IObject, propertyToType: ICast): IObject {
   const config = castConfig(propertyToType);
   if (objectIsEmpty(config)) {
     return data;
   }
   return castData(config, data);
 }
-
-export { cast };

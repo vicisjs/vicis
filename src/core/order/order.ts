@@ -17,7 +17,7 @@ import { sortAsBoolean } from "../config/sortAsBoolean";
  * @param {boolean=} sort
  * @returns {Object}
  */
-function order(
+export function order(
   data: IObject,
   propertiesToStreamline: IOrder = [],
   sort: boolean | ESort = ESort.Default,
@@ -28,5 +28,3 @@ function order(
   }
   return objectKeysOrder(data, propertiesToStreamline, sortAsBoolean(sort));
 }
-
-export { order };

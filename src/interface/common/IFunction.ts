@@ -1,5 +1,3 @@
-interface IFunction {
+export interface IFunction {
   (...args: unknown[]): unknown;
 }
-
-export { IFunction };

@@ -4,8 +4,6 @@
  * @param {*} value
  * @return {boolean}
  */
-function checkIsPrimitive(value: any): boolean {
+export function checkIsPrimitive(value: any): boolean {
   return Object(value) !== value;
 }
-
-export { checkIsPrimitive };

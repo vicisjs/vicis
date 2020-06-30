@@ -9,8 +9,7 @@ import { arrayIsEmpty } from "../../util/array/is/empty";
  * @param {Object} dataToSerialize
  * @returns {Object}
  */
-
-function requiredData(
+export function requiredData(
   propertiesRequired: IRequired,
   dataToSerialize: IObject,
 ): IObject {
@@ -24,5 +23,3 @@ function requiredData(
   });
   return dataToSerialize;
 }
-
-export { requiredData };

@@ -7,7 +7,7 @@ import { isString } from "../is/string";
  * @param {object|string} value
  * @returns {string}
  */
-function objectSerialize(value: any): string {
+export function objectSerialize(value: any): string {
   let data;
   const { toJSON, toObject } = value;
   if (isFunction(toObject)) {
@@ -22,5 +22,3 @@ function objectSerialize(value: any): string {
   }
   return jsonStringify(data);
 }
-
-export { objectSerialize };

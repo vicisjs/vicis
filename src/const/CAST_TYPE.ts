@@ -1,12 +1,12 @@
 import { ECastType } from "./ECastType";
 
-const CAST_TYPE: {
-  BOOLEAN: string,
-  FLAG: string,
-  INTEGER: string,
-  JSON: string,
-  NUMERIC: string,
-  STRING: string,
+export const CAST_TYPE: {
+  BOOLEAN: string;
+  FLAG: string;
+  INTEGER: string;
+  JSON: string;
+  NUMERIC: string;
+  STRING: string;
 } = {
   BOOLEAN: ECastType.BOOLEAN,
   FLAG: ECastType.FLAG,
@@ -15,5 +15,3 @@ const CAST_TYPE: {
   NUMERIC: ECastType.NUMERIC,
   STRING: ECastType.STRING,
 };
-
-export { CAST_TYPE };

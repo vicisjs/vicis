@@ -11,7 +11,7 @@ import { jsonStringify } from "../../util/json/stringify";
  * @param {Array.<string>} propertiesToPick
  * @returns {Array.<string>}
  */
-function pickConfig(propertiesToPick: IPick): IPick {
+export function pickConfig(propertiesToPick: IPick): IPick {
   if (!Array.isArray(propertiesToPick)) {
     throw new TypeError("'Pick' should be an array");
   }
@@ -27,5 +27,3 @@ function pickConfig(propertiesToPick: IPick): IPick {
     return value;
   });
 }
-
-export { pickConfig };

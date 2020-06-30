@@ -11,7 +11,7 @@ import { jsonStringify } from "../../util/json/stringify";
  * @param {Array.<string>} propertiesToStreamline
  * @returns {Array.<string>}
  */
-function orderConfig(propertiesToStreamline: IOrder): IOrder {
+export function orderConfig(propertiesToStreamline: IOrder): IOrder {
   if (!Array.isArray(propertiesToStreamline)) {
     throw new TypeError("'Order' should be an array");
   }
@@ -27,5 +27,3 @@ function orderConfig(propertiesToStreamline: IOrder): IOrder {
     return value;
   });
 }
-
-export { orderConfig };

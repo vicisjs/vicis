@@ -10,7 +10,7 @@ import { objectIsEmpty } from "../../util/object/is/empty";
  * @param {Object} dataToSerialize
  * @returns {Object}
  */
-function renameData(
+export function renameData(
   renamePropertyFromTo: IRename,
   dataToSerialize: IObject,
 ): IObject {
@@ -34,5 +34,3 @@ function renameData(
   Object.assign(data, renamedData);
   return data;
 }
-
-export { renameData };

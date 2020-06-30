@@ -11,7 +11,7 @@ import { definedData } from "./definedData";
  * @param {Array.<string>=} propertiesMustBeDefined
  * @returns {Object}
  */
-function defined(
+export function defined(
   data: IObject,
   propertiesMustBeDefined: IDefined = [],
 ): IObject {
@@ -20,5 +20,3 @@ function defined(
   }
   return definedData(propertiesMustBeDefined, data);
 }
-
-export { defined };

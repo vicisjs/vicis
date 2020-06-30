@@ -1,5 +1,3 @@
-interface IDefined extends Array<string> {
+export interface IDefined extends Array<string> {
   [index: number]: string;
 }
-
-export { IDefined };

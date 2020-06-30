@@ -6,11 +6,9 @@ import { jsonParse } from "../json/parse";
  * @param {string} value
  * @returns {*}
  */
-function objectDeserialize(value: string): any {
+export function objectDeserialize(value: string): any {
   if (isString(value)) {
     return jsonParse(value);
   }
   return value;
 }
-
-export { objectDeserialize };

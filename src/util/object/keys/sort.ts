@@ -6,7 +6,7 @@ import { IObject } from "../../../interface/common/IObject";
  * @param {boolean=true} isDeep
  * @returns {object}
  */
-function objectKeysSort<T extends { [key: string]: any }>(
+export function objectKeysSort<T extends { [key: string]: any }>(
   instance: T,
   isDeep = true,
 ): T {
@@ -29,5 +29,3 @@ function objectKeysSort<T extends { [key: string]: any }>(
     return sorted;
   }, Object.create(Object.getPrototypeOf(instance)) as IObject) as T;
 }
-
-export { objectKeysSort };

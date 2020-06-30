@@ -12,7 +12,7 @@ import { definedConfig } from "./definedConfig";
  * @param {Object} dataToSerialize
  * @returns {Object}
  */
-function definedData(
+export function definedData(
   propertiesMustBeDefined: IDefined,
   dataToSerialize: IObject,
 ): IObject {
@@ -30,5 +30,3 @@ function definedData(
   });
   return dataToSerialize;
 }
-
-export { definedData };

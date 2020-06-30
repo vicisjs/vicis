@@ -6,7 +6,7 @@
  * @example
  * arrayGetUnique([NaN, NaN, 0, -0, +0, "\u0065\u0301", "\u00e9"]) -> [ NaN, 0, 'é', -0 ]
  */
-function arrayGetUnique(array: any[], sort = true): any[] {
+export function arrayGetUnique(array: any[], sort = true): any[] {
   if (array.length < 2) {
     return array;
   }
@@ -43,5 +43,3 @@ function arrayGetUnique(array: any[], sort = true): any[] {
   }
   return unique;
 }
-
-export { arrayGetUnique };

@@ -14,7 +14,7 @@ import { sortAsBoolean } from "../../../core/config/sortAsBoolean";
  * @param {boolean=} sort
  * @returns {*}
  */
-function castToJson(
+export function castToJson(
   value: any,
   sort: boolean | ESort = ESort.Default,
 ): IObject {
@@ -24,5 +24,3 @@ function castToJson(
     return jsonParse(jsonStringify(value));
   }
 }
-
-export { castToJson };

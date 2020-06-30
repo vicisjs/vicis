@@ -12,7 +12,7 @@ import { jsonStringify } from "../../util/json/stringify";
  * @param {Array.<string|RegExp>} propertiesToExclude
  * @returns {Array.<string|RegExp>}
  */
-function excludeConfig(propertiesToExclude: IExclude): IExclude {
+export function excludeConfig(propertiesToExclude: IExclude): IExclude {
   if (!Array.isArray(propertiesToExclude)) {
     throw new TypeError("'Exclude' should be an array");
   }
@@ -30,5 +30,3 @@ function excludeConfig(propertiesToExclude: IExclude): IExclude {
     return value;
   });
 }
-
-export { excludeConfig };

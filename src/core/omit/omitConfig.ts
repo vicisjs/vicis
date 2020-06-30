@@ -11,7 +11,7 @@ import { jsonStringify } from "../../util/json/stringify";
  * @param {Array.<string>} propertiesToOmit
  * @returns {Array.<string>}
  */
-function omitConfig(propertiesToOmit: IOmit): IOmit {
+export function omitConfig(propertiesToOmit: IOmit): IOmit {
   if (!Array.isArray(propertiesToOmit)) {
     throw new TypeError("'Omit' should be an array");
   }
@@ -27,5 +27,3 @@ function omitConfig(propertiesToOmit: IOmit): IOmit {
     return value;
   });
 }
-
-export { omitConfig };

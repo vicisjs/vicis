@@ -10,7 +10,9 @@ import { isFunction } from "../../util/is/function";
 
 import { VicisParameter } from "../class/VicisParameter";
 
-function convertFunctionToConfig(callable: IFunction): IConfigObjectFull {
+export function convertFunctionToConfig(
+  callable: IFunction,
+): IConfigObjectFull {
   if (!isFunction(callable)) {
     throw new TypeError("Callable must be a function");
   }
@@ -79,5 +81,3 @@ function convertFunctionToConfig(callable: IFunction): IConfigObjectFull {
   }
   return config;
 }
-
-export { convertFunctionToConfig };

@@ -12,7 +12,7 @@ import { transformData } from "./transformData";
  * @param {Object.<string, function>=} propertyValueTransformWith
  * @returns {Object}
  */
-function transform(
+export function transform(
   data: IObject,
   propertyValueTransformWith: ITransform = {},
 ): IObject {
@@ -22,5 +22,3 @@ function transform(
   }
   return transformData(config, data);
 }
-
-export { transform };

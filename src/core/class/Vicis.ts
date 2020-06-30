@@ -62,7 +62,7 @@ import { convertFunctionToConfig } from "../config/functionToConfig";
 import { objectCreateEmpty } from "../../util/object/createEmpty";
 import { sortAsBoolean } from "../config/sortAsBoolean";
 
-class Vicis {
+export class Vicis {
   //#region Config Fields
   /**
    * @name cast
@@ -792,7 +792,10 @@ class Vicis {
    * @returns {Vicis}
    */
   sort(sortProperties: boolean | ESort = ESort.Default): Vicis {
-    if (typeof sortProperties !== "boolean" && !(Object.values(ESort).includes(sortProperties as ESort))) {
+    if (
+      typeof sortProperties !== "boolean" &&
+      !(Object.values(ESort).includes(sortProperties as ESort))
+    ) {
       throw new TypeError("'sort' should be a boolean");
     }
     if (sortAsBoolean(sortProperties)) {
@@ -891,5 +894,3 @@ class Vicis {
 
   //#endregion
 }
-
-export { Vicis };
