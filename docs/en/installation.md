@@ -15,7 +15,7 @@ yarn add vicis
 ## TypeScript definitions
 
 ```typescript
-enum TYPES_ENUM {
+enum CAST_TYPE {
   BOOLEAN = "boolean",
   NUMERIC = "numeric", // Only finite numbers
   INTEGER = "integer",
@@ -23,7 +23,7 @@ enum TYPES_ENUM {
   JSON = "json", // Call JSON.stringify on value
 }
 interface IVicisConfig {
-  cast?: { [prop: string]: TYPES_ENUM };
+  cast?: { [prop: string]: CAST_TYPE };
   defaults?: { [prop: string]: any };
   defined?: string[];
   exclude?: Array<string|RegExp>;

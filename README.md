@@ -1,6 +1,6 @@
 ![Vicis](.github/assets/banner.webp?raw=true "Vicis")
 
-# 〰️ Vicis 〰️
+# Vicis
 
 Presentation and transformation layer for data output in RESTful APIs.
 
