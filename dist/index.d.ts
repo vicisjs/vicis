@@ -1,3 +1,9 @@
+export interface IFunction {
+  (...args: unknown[]): unknown;
+}
+export interface IObject extends Object {
+  [key: string]: any;
+}
 export enum ECastType {
   BOOLEAN = "boolean",
   FLAG = "flag",
@@ -6,7 +12,76 @@ export enum ECastType {
   NUMERIC = "numeric",
   STRING = "string",
 }
-
+export interface ICast {
+  [key: string]: ECastType;
+}
+export interface IConfigCallback {
+  (model: IObject): IObject;
+}
+export interface IDefaults {
+  [key: string]: unknown;
+}
+export interface IDefined extends Array<string> {
+  [index: number]: string;
+}
+export interface IExclude extends Array<string | RegExp> {
+  [index: number]: string | RegExp;
+}
+export interface IOmit extends Array<string> {
+  [index: number]: string;
+}
+export interface IOrder extends Array<string> {
+  [index: number]: string;
+}
+export interface IPick extends Array<string> {
+  [index: number]: string;
+}
+export interface IRename {
+  [key: string]: string;
+}
+export interface IReplace {
+  [key: string]: unknown;
+}
+export interface IRequired extends Array<string> {
+  [index: number]: string;
+}
+export interface ITransform {
+  [key: string]: (value: unknown, key: string, data: IObject) => unknown;
+}
+export enum ESort {
+  Default = "asc",
+  No = "no",
+  Yes = "asc",
+}
+export interface IConfigObject {
+  cast?: ICast;
+  defaults?: IDefaults;
+  defined?: IDefined;
+  exclude?: IExclude;
+  omit?: IOmit;
+  order?: IOrder;
+  pick?: IPick;
+  sort?: ESort;
+  rename?: IRename;
+  replace?: IReplace;
+  required?: IRequired;
+  transform?: ITransform;
+}
+export type IConfig = IConfigObject | IConfigCallback;
+export interface IConfigObjectFull {
+  cast: ICast;
+  defaults: IDefaults;
+  defined: IDefined;
+  exclude: IExclude;
+  omit: IOmit;
+  order: IOrder;
+  pick: IPick;
+  sort: ESort;
+  rename: IRename;
+  replace: IReplace;
+  required: IRequired;
+  transform: ITransform;
+}
 export const CAST_TYPE: {
   BOOLEAN: string;
   FLAG: string;
@@ -15,38 +90,124 @@ export const CAST_TYPE: {
   NUMERIC: string;
   STRING: string;
 };
-
-declare enum TYPES_ENUM {
-  BOOLEAN = "boolean",
-  FLAG = "flag",
-  NUMERIC = "numeric",
-  INTEGER = "integer",
-  STRING = "string",
-  JSON = "json",
+/**
+ * @name cast
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Object.<string, string>=} propertyToType
+ * @returns {Object}
+ */
+export function cast(data: IObject, propertyToType: ICast): IObject;
+/**
+ * @name defaults
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Object.<string, *>=} propertyDefaultValues
+ * @returns {Object}
+ */
+export function defaults(data: IObject, propertyDefaultValues?: IDefaults): IObject;
+/**
+ * @name defined
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Array.<string>=} propertiesMustBeDefined
+ * @returns {Object}
+ */
+export function defined(data: IObject, propertiesMustBeDefined?: IDefined): IObject;
+/**
+ * @name exclude
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Array.<string|RegExp>=} propertiesToExclude
+ * @returns {Object}
+ */
+export function exclude(data: IObject, propertiesToExclude?: IExclude): IObject;
+/**
+ * @name omit
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Array.<string>=} propertiesToOmit
+ * @returns {Object}
+ */
+export function omit(data: IObject, propertiesToOmit?: IOmit): IObject;
+/**
+ * @name order
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Array.<string>=} propertiesToStreamline
+ * @param {boolean=} sort
+ * @returns {Object}
+ */
+export function order(data: IObject, propertiesToStreamline?: IOrder, sort?: boolean | ESort): IObject;
+/**
+ * @name pick
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Array.<string>=} propertiesToPick
+ * @returns {Object}
+ */
+export function pick(data: IObject, propertiesToPick?: IPick): IObject;
+/**
+ * @name rename
+ * @param {Object} data
+ * @param {Object.<string, string>=} renamePropertyFromTo
+ * @returns {Object}
+ */
+export function rename(data: IObject, renamePropertyFromTo?: IRename): IObject;
+/**
+ * @name replace
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Object.<string, *>=} replacePropertyValues
+ * @returns {Object}
+ */
+export function replace(data: IObject, replacePropertyValues?: IReplace): IObject;
+/**
+ * @name required
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Array.<string>=} propertiesRequired
+ * @returns {Object}
+ */
+export function required(data: IObject, propertiesRequired?: IRequired): IObject;
+/**
+ * @name transform
+ * @param {Object} data
+ * @param {Object.<string, function>=} propertyValueTransformWith
+ * @returns {Object}
+ */
+export function transform(data: IObject, propertyValueTransformWith?: ITransform): IObject;
+export const CONFIG_FIELDS: string[];
+export class AggregateError extends Error {
+  readonly name = "AggregateError";
+  errors: Error[];
+  /**
+   * @param {Array<Error>} errors
+   * @param {String} message
+   */
+  constructor(errors: Error[], message?: string);
 }
-
-export interface IVicisConfigObject {
-  cast?: { [prop: string]: TYPES_ENUM };
-  defaults?: { [prop: string]: any };
-  defined?: string[];
-  exclude?: Array<string | RegExp>;
-  omit?: string[];
-  order?: string[];
-  pick?: string[];
-  sort?: boolean;
-  rename?: { [prop: string]: string };
-  replace?: { [prop: string]: any };
-  required?: string[];
-  transform?: { [prop: string]: (value: any, key: string, data: object) => any };
+export class ValidationError extends Error {
+  constructor(message: string);
 }
-
-export interface IVicisConfigCallback {
-  (model: object): { [key: string]: any };
-}
-
-export type IVicisConfig = IVicisConfigObject | IVicisConfigCallback;
-
-declare class Vicis {
+export class Vicis {
+  #private;
+  /**
+   * @name validateConfig
+   * @protected
+   * @method
+   * @throws Error
+   * @returns {Vicis}
+   */
+  protected validateConfig(): this;
+  /**
+   * @name validateData
+   * @private
+   * @method
+   * @throws Error
+   * @returns {Vicis}
+   */
+  protected validateData(): this;
   /**
    * @name constructor
    * @public
@@ -55,180 +216,7 @@ declare class Vicis {
    * @param {Object=} data
    * @throws AggregateError
    */
-  public constructor(config?: IVicisConfig, data?: object);
-  /**
-   * @name getConfig
-   * @public
-   * @returns {Object}
-   */
-  public getConfig(): IVicisConfig;
-  /**
-   * @name resetConfig
-   * @public
-   * @returns {Vicis}
-   */
-  public resetConfig(): void;
-  /**
-   * @name testConfig
-   * @public
-   * @static
-   * @throws AggregateError
-   * @param {Function|Object=} config
-   * @returns {Object}
-   */
-  public static testConfig(config?: IVicisConfig);
-  /**
-   * @name config
-   * @public
-   * @throws TypeError
-   * @param {Function|Object=} config
-   * @returns {Vicis}
-   */
-  public config(config: IVicisConfig): Vicis;
-  /**
-   * @name cast
-   * @public
-   * @throws TypeError
-   * @param {Object=} propertyToType
-   * @returns {Vicis}
-   */
-  public cast(propertyToType: { [prop: string]: TYPES_ENUM }): Vicis;
-  /**
-   * @name defaults
-   * @public
-   * @throws TypeError
-   * @param {Object=} propertyDefaultValues
-   * @returns {Vicis}
-   */
-  public defaults(propertyDefaultValues: { [prop: string]: any }): Vicis;
-  /**
-   * @name defined
-   * @public
-   * @throws TypeError
-   * @param {Array.<string>=} propertiesMustBeDefined
-   * @returns {Vicis}
-   */
-  public defined(propertiesMustBeDefined: string[]): Vicis;
-  /**
-   * @name exclude
-   * @public
-   * @throws TypeError
-   * @param {Array.<string|RegExp>=} propertiesToExclude
-   * @returns {Vicis}
-   */
-  public exclude(propertiesToExclude: string[] | RegExp[]): Vicis;
-  /**
-   * @name omit
-   * @public
-   * @throws TypeError
-   * @param {Array.<string>=} propertiesToOmit
-   * @returns {Vicis}
-   */
-  public omit(propertiesToOmit: string[]): Vicis;
-  /**
-   * @name pick
-   * @public
-   * @throws TypeError
-   * @param {Array.<string>=} propertiesToPick
-   * @returns {Vicis}
-   */
-  public pick(propertiesToPick: string[]): Vicis;
-  /**
-   * @name rename
-   * @public
-   * @throws TypeError
-   * @param {Object=} renamePropertyFromTo
-   * @returns {Vicis}
-   */
-  public rename(renamePropertyFromTo: { [prop: string]: string }): Vicis;
-  /**
-   * @name replace
-   * @public
-   * @throws TypeError
-   * @param {Object=} replacePropertyValues
-   * @returns {Vicis}
-   */
-  public replace(replacePropertyValues: { [prop: string]: any }): Vicis;
-  /**
-   * @name required
-   * @public
-   * @throws TypeError
-   * @param {Array.<string>=} propertiesRequired
-   * @returns {Vicis}
-   */
-  public required(propertiesRequired: string[]): Vicis;
-  /**
-   * @name sort
-   * @public
-   * @throws TypeError
-   * @param {boolean=} sortProperties
-   * @returns {Vicis}
-   */
-  public sort(sortProperties: boolean): Vicis;
-  /**
-   * @name transform
-   * @public
-   * @throws TypeError
-   * @param {Object=} propertyValueTransformWith
-   * @returns {Vicis}
-   */
-  public transform(propertyValueTransformWith: {
-    [prop: string]: ((value: any, key: string, data: object) => any) | Function;
-  }): Vicis;
-  /**
-   * @name validateConfig
-   * @private
-   * @throws Error
-   * @returns {Vicis}
-   */
-  private validateConfig(): Vicis;
-  /**
-   * @name clear
-   * @description Clear any data references and cached values
-   * @public
-   * @returns {Vicis}
-   */
-  public clear(): Vicis;
-  /**
-   * @name getData
-   * @public
-   * @returns {Object}
-   */
-  public getData(): object;
-  /**
-   * @name data
-   * @public
-   * @throws TypeError
-   * @param {Object} dataToSerialize
-   * @returns {Vicis}
-   */
-  public data(dataToSerialize): Vicis;
-  /**
-   * @name validateData
-   * @private
-   * @throws Error
-   * @returns {Vicis}
-   */
-  private validateData(): Vicis;
-  /**
-   * @name toJSON
-   * @public
-   * @returns {Object}
-   */
-  public toJSON(): object;
-  /**
-   * @name toString
-   * @public
-   * @returns {string}
-   */
-  public toString(): string;
-  /**
-   * @name fromArray
-   * @public
-   * @param {Array.<Object>} collection
-   * @returns {Array.<Object>}
-   */
-  public fromArray(collection): object[];
+  constructor(config?: IConfig, data?: IObject);
   /**
    * @name factory
    * @public
@@ -238,7 +226,7 @@ declare class Vicis {
    * @param {Object=} data
    * @returns {Vicis}
    */
-  public static factory(config?: IVicisConfig, data?: object): Vicis;
+  static factory(config?: IConfig, data?: IObject): Vicis;
   /**
    * @name from
    * @public
@@ -248,7 +236,7 @@ declare class Vicis {
    * @param {Object=} config
    * @returns {Object}
    */
-  static from(data: object, config?: IVicisConfig): object;
+  static from(data: IObject, config?: IConfig): IObject;
   /**
    * @name fromArray
    * @static
@@ -257,152 +245,226 @@ declare class Vicis {
    * @param {Object=} config
    * @returns {Array.<Object>}
    */
-  static fromArray(collection: object[], config?: IVicisConfig): object[];
+  static fromArray(collection: IObject[], config?: IConfig): IObject[];
   /**
    * @name BOOLEAN
    * @public
    * @static
    * @type {String}
    */
-  public static get BOOLEAN();
+  static get BOOLEAN(): ECastType;
   /**
    * @name FLAG
    * @public
    * @static
-   * @type {boolean}
+   * @type {String}
    */
-  public static get FLAG();
+  static get FLAG(): ECastType;
   /**
    * @name NUMERIC
    * @public
    * @static
    * @type {String}
    */
-  public static get NUMERIC();
+  static get NUMERIC(): ECastType;
   /**
    * @name INTEGER
    * @public
    * @static
    * @type {String}
    */
-  public static get INTEGER();
+  static get INTEGER(): ECastType;
   /**
    * @name STRING
    * @public
    * @static
    * @type {String}
    */
-  public static get STRING();
+  static get STRING(): ECastType;
   /**
    * @name JSON
    * @public
    * @static
    * @type {String}
    */
-  public static get JSON();
+  static get JSON(): ECastType;
+  /**
+   * @name getConfig
+   * @public
+   * @returns {Object}
+   */
+  getConfig(): {
+    cast: ICast;
+    defaults: IDefaults;
+    defined: IDefined;
+    exclude: IExclude;
+    omit: IOmit;
+    order: IOrder;
+    pick: IPick;
+    sort: ESort;
+    rename: IRename;
+    replace: IReplace;
+    required: IRequired;
+    transform: ITransform;
+  };
+  /**
+   * @name resetConfig
+   * @public
+   * @returns {Vicis}
+   */
+  resetConfig(): this;
+  /**
+   * @name testConfig
+   * @public
+   * @static
+   * @throws AggregateError
+   * @param {Function|Object=} config
+   * @returns {Object}
+   * @since 1.6.0
+   */
+  static testConfig(config: IConfig): IConfigObject;
+  /**
+   * @name config
+   * @public
+   * @throws AggregateError|TypeError
+   * @param {Function|Object=} config
+   * @returns {Vicis}
+   */
+  config(config?: IConfig): this;
+  /**
+   * @name cast
+   * @public
+   * @throws TypeError
+   * @param {Object=} propertyToType
+   * @returns {Vicis}
+   */
+  cast(propertyToType?: ICast): this;
+  /**
+   * @name defaults
+   * @public
+   * @throws TypeError
+   * @param {Object=} propertyDefaultValues
+   * @returns {Vicis}
+   */
+  defaults(propertyDefaultValues?: IDefaults): this;
+  /**
+   * @name defined
+   * @public
+   * @throws TypeError
+   * @param {Array.<string>=} propertiesMustBeDefined
+   * @returns {Vicis}
+   */
+  defined(propertiesMustBeDefined?: IDefined): this;
+  /**
+   * @name exclude
+   * @public
+   * @throws TypeError
+   * @param {Array.<string|RegExp>=} propertiesToExclude
+   * @returns {Vicis}
+   */
+  exclude(propertiesToExclude?: IExclude): this;
+  /**
+   * @name omit
+   * @public
+   * @throws TypeError
+   * @param {Array.<string>=} propertiesToOmit
+   * @returns {Vicis}
+   */
+  omit(propertiesToOmit?: IOmit): this;
+  /**
+   * @name order
+   * @public
+   * @throws TypeError
+   * @param {Array.<string>=} propertiesToStreamline
+   * @returns {Vicis}
+   */
+  order(propertiesToStreamline?: IOrder): this;
+  /**
+   * @name pick
+   * @public
+   * @throws TypeError
+   * @param {Array.<string>=} propertiesToPick
+   * @returns {Vicis}
+   */
+  pick(propertiesToPick?: IPick): this;
+  /**
+   * @name rename
+   * @public
+   * @throws TypeError
+   * @param {Object=} renamePropertyFromTo
+   * @returns {Vicis}
+   */
+  rename(renamePropertyFromTo?: IRename): this;
+  /**
+   * @name replace
+   * @public
+   * @throws TypeError
+   * @param {Object=} replacePropertyValues
+   * @returns {Vicis}
+   */
+  replace(replacePropertyValues?: IReplace): this;
+  /**
+   * @name required
+   * @public
+   * @throws TypeError
+   * @param {Array.<string>=} propertiesRequired
+   * @returns {Vicis}
+   */
+  required(propertiesRequired?: IRequired): this;
+  /**
+   * @name sort
+   * @public
+   * @throws TypeError
+   * @param {boolean=} sortProperties
+   * @returns {Vicis}
+   */
+  sort(sortProperties?: boolean | ESort): Vicis;
+  /**
+   * @name transform
+   * @public
+   * @throws TypeError
+   * @param {Object=} propertyValueTransformWith
+   * @returns {Vicis}
+   */
+  transform(propertyValueTransformWith?: ITransform): Vicis;
+  /**
+   * @name getData
+   * @public
+   * @returns {Object}
+   */
+  getData(): IObject;
+  /**
+   * @name data
+   * @public
+   * @throws TypeError
+   * @param {Object} dataToSerialize
+   * @returns {Vicis}
+   */
+  data(dataToSerialize: IObject): Vicis;
+  /**
+   * @name clear
+   * @description Clear any data references and cached values
+   * @public
+   * @returns {Vicis}
+   */
+  clear(): Vicis;
+  /**
+   * @name toJSON
+   * @public
+   * @returns {Object}
+   */
+  toJSON(): IObject;
+  /**
+   * @name toString
+   * @public
+   * @returns {string}
+   */
+  toString(): string;
+  /**
+   * @name fromArray
+   * @public
+   * @param {Array.<Object>} collection
+   * @returns {Array.<Object>}
+   */
+  fromArray(collection: IObject[]): IObject[];
 }
-
-/**
- * @name cast
- * @throws TypeError
- * @param {Object} data
- * @param {Object.<string, string>=} propertyToType
- * @returns {Object}
- */
-declare function cast(data: object, propertyToType: { [prop: string]: TYPES_ENUM }): object;
-
-/**
- * @name defaults
- * @throws TypeError
- * @param {Object} data
- * @param {Object.<string, *>=} propertyDefaultValues
- * @returns {Object}
- */
-declare function defaults(data: object, propertyDefaultValues: { [prop: string]: any }): object;
-
-/**
- * @name defined
- * @throws TypeError
- * @param {Object} data
- * @param {Array.<string>=} propertiesMustBeDefined
- * @returns {Object}
- */
-declare function defined(data: object, propertiesMustBeDefined: string[]): object;
-
-/**
- * @name exclude
- * @throws TypeError
- * @param {Object} data
- * @param {Array.<string|RegExp>=} propertiesToExclude
- * @returns {Object}
- */
-declare function exclude(data: object, propertiesToExclude: string[] | RegExp[]): object;
-
-/**
- * @name omit
- * @throws TypeError
- * @param {Object} data
- * @param {Array.<string>=} propertiesToOmit
- * @returns {Object}
- */
-declare function omit(data: object, propertiesToOmit: string[]): object;
-
-/**
- * @name order
- * @throws TypeError
- * @param {Object} data
- * @param {Array.<string>=} propertiesToStreamline
- * @param {boolean=} sort
- * @returns {Object}
- */
-declare function order(data: object, propertiesToStreamline: string[], sort: boolean): object;
-
-/**
- * @name pick
- * @throws TypeError
- * @param {Object} data
- * @param {Array.<string>=} propertiesToPick
- * @returns {Object}
- */
-declare function pick(data: object, propertiesToPick: string[]): object;
-
-/**
- * @name rename
- * @param {Object} data
- * @param {Object.<string, string>=} renamePropertyFromTo
- * @returns {Object}
- */
-declare function rename(data: object, renamePropertyFromTo: { [prop: string]: string }): object;
-
-/**
- * @name replace
- * @throws TypeError
- * @param {Object} data
- * @param {Object.<string, *>=} replacePropertyValues
- * @returns {Object}
- */
-declare function replace(data: object, replacePropertyValues: { [prop: string]: any }): object;
-
-/**
- * @name required
- * @throws TypeError
- * @param {Object} data
- * @param {Array.<string>=} propertiesRequired
- * @returns {Object}
- */
-declare function required(data: object, propertiesRequired: string[]): object;
-
-/**
- * @name transform
- * @param {Object} data
- * @param {Object.<string, function>=} propertyValueTransformWith
- * @returns {Object}
- */
-declare function transform(
-  data: object,
-  propertyValueTransformWith: {
-    [prop: string]: ((value: any, key: string, data: object) => any) | Function;
-  },
-): object;
-
-export { TYPES_ENUM, Vicis, cast, defaults, defined, exclude, omit, order, pick, rename, replace, required, transform };

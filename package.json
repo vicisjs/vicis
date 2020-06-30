@@ -81,7 +81,7 @@
   "scripts": {
     "build": "rollup --config rollup.config.mjs",
     "build:dev": "rollup --config rollup.config.mjs --config-dev",
-    "build:definitions": "dts-generator --project . --out ./dist/vicis.d.ts",
+    "build:definitions": "dts-generator --project . --out ./dist/index.d.ts",
     "docs:serve": "docsify serve docs",
     "lint": "eslint ./src/**/*.ts",
     "lint:md": "remark .",
