@@ -2,6 +2,16 @@
 
 ---
 
+## 2.0.0
+
+-   ♻️ Rewritten from JavaScript to TypeScript
+
+-   ♻️ Rename `TYPES_ENUM` to `CAST_TYPE`
+
+-   ⬆️ Dependencies updated
+
+---
+
 ## 1.6.1
 
 -   ⬆️ Dependencies updated
