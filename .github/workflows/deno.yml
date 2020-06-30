@@ -1,0 +1,34 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        deno: [1.1.2]
+    name: Test with Deno ${{ matrix.deno }}
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Setup Deno
+        uses: denolib/setup-deno@master
+        with:
+          deno-version: ${{ matrix.deno }}
+
+      - name: Setup Node
+        uses: actions/setup-node@master
+        with:
+          node-version: 14.4.0
+
+      - name: Print deno version
+        run: deno --version
+
+      - name: Check format
+        run: deno fmt ./src --check
+
+      - name: Run tests
+        run: deno test ./test.ts

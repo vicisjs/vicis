@@ -6,24 +6,21 @@
 npm install vicis
 ```
 
-```bash
-yarn add vicis
-```
-
 ---
 
 ## TypeScript definitions
 
 ```typescript
-enum TYPES_ENUM {
+enum CAST_TYPE {
   BOOLEAN = "boolean",
+  FLAG = "flag",
   NUMERIC = "numeric", // Only finite numbers
   INTEGER = "integer",
   STRING = "string",
   JSON = "json", // Call JSON.stringify on value
 }
 interface IVicisConfig {
-  cast?: { [prop: string]: TYPES_ENUM };
+  cast?: { [prop: string]: CAST_TYPE };
   defaults?: { [prop: string]: any };
   defined?: string[];
   exclude?: Array<string|RegExp>;

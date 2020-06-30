@@ -1,10 +1,13 @@
-![Vicis](docs/_media/128.png?raw=true "Vicis")
+![Vicis](.github/assets/banner.webp?raw=true "Vicis")
 
-# Vicis
+# « Vicis »
 
 Presentation and transformation layer for data output in RESTful APIs.
 
-[Vicis Documentation](https://vicis.js.org)
+•• [Vicis Documentation](https://vicis.js.org) •• [JavaScript Repository](https://github.com/r37r0m0d3l/vicis) •• [Deno Repository](https://github.com/r37r0m0d3l/deno-vicis) ••
+
+[![Buy Me A Coffee][buymeacoffee-img]][buymeacoffee-url]
+![Tests](https://github.com/r37r0m0d3l/denof/workflows/Tests/badge.svg)
 
 [![npm](https://badgen.net/npm/v/vicis?&icon=npm&label=npm&color=DD3636)](https://www.npmjs.com/package/vicis)
 [![downloads](https://badgen.net/npm/dt/vicis?&icon=terminal&label=downloads&color=009688)](https://www.npmjs.com/package/vicis)
@@ -13,17 +16,11 @@ Presentation and transformation layer for data output in RESTful APIs.
 [![build](https://badgen.net/travis/r37r0m0d3l/vicis?&icon=travis&label=build)](https://travis-ci.org/r37r0m0d3l/vicis)
 [![lgtm](https://badgen.net/lgtm/grade/g/r37r0m0d3l/vicis?&icon=lgtm&label=lgtm:js/ts&color=00C853)](https://lgtm.com/projects/g/r37r0m0d3l/vicis/alerts/)
 
-This is Node.js analogue to these libraries:
-
--   🐘 [Fractal](https://fractal.thephpleague.com/) for PHP
-
--   💎 [Roar](https://github.com/trailblazer/roar) for Ruby
-
--   🍢 [Marshmallow](https://marshmallow.readthedocs.io/en/stable/) for Python
+This is Node.js analogue to these libraries: 🐘 [Fractal](https://fractal.thephpleague.com/) for PHP, 💎 [Roar](https://github.com/trailblazer/roar) for Ruby, 🍢 [Marshmallow](https://marshmallow.readthedocs.io/en/stable/) for Python.
 
 ---
 
-## Tl;dr
+## 💬 Tl;dr
 
 Code:
 
@@ -63,13 +60,13 @@ Output:
 }
 ```
 
----
+## 🗺️ My other projects
 
-*If you use this project don't forget to give a ⭐
-[star](https://github.com/r37r0m0d3l/vicis) ⭐ to it on GitHub!*
-
----
-
-[My other projects](https://r37r0m0d3l.icu/open_source_map)
+[Full list here](https://r37r0m0d3l.icu/open_source_map)
 
 <img src="https://raw.githubusercontent.com/r37r0m0d3l/r37r0m0d3l/master/osmap.svg" width="960" height="520" style="display:block;height:auto;margin-left:auto;margin-right:auto;min-height:520px;min-width:960px;width:100%;">
+
+<!-- Badges -->
+
+[buymeacoffee-url]: https://buymeacoffee.com/r37r0m0d3l
+[buymeacoffee-img]: https://img.shields.io/badge/support-buymeacoffee-1E90FF.svg?&logo=buy-me-a-coffee&label=support

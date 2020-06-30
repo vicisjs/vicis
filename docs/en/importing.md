@@ -12,7 +12,7 @@ Require multiple items
 
 ```js
 const {
-  Vicis, TYPES_ENUM,
+  Vicis, CAST_TYPE,
   cast, defaults, defined, exclude, omit,
   pick, rename, replace, required, transform,
 } = require("vicis");
@@ -30,7 +30,7 @@ Require multiple items
 
 ```js
 import {
-  Vicis, TYPES_ENUM,
+  Vicis, CAST_TYPE,
   cast, defaults, defined, omit, exclude,
   pick, rename, replace, required, transform,
 } from "vicis";

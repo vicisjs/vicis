@@ -25,7 +25,7 @@ import { cast } from "vicis";
 
 ```js
 cast({ registered: null }, { registered: "boolean" });
-cast({ registered: null }, { registered: TYPES_ENUM.BOOLEAN });
+cast({ registered: null }, { registered: CAST_TYPE.BOOLEAN });
 cast({ registered: null }, { registered: Vicis.BOOLEAN });
 ```
 
@@ -59,7 +59,7 @@ cast({ registered: null }, { registered: Vicis.BOOLEAN });
 
 ```js
 cast({ check: null }, { check: "flag" });
-cast({ check: null }, { check: TYPES_ENUM.FLAG });
+cast({ check: null }, { check: CAST_TYPE.FLAG });
 cast({ check: null }, { check: Vicis.FLAG });
 //
 cast({ check: undefined }, { check: "flag" });
@@ -140,10 +140,10 @@ cast({ check: true }, { check: "flag" });
 
 ```js
 cast({ id: "12345" }, { id: "integer" });
-cast({ id: "12345" }, { id: TYPES_ENUM.INTEGER });
+cast({ id: "12345" }, { id: CAST_TYPE.INTEGER });
 cast({ id: "12345" }, { id: Vicis.INTEGER });
 cast({ id: "12345" }, { id: "numeric" });
-cast({ id: "12345" }, { id: TYPES_ENUM.NUMERIC });
+cast({ id: "12345" }, { id: CAST_TYPE.NUMERIC });
 cast({ id: "12345" }, { id: Vicis.NUMERIC });
 ```
 
@@ -175,7 +175,7 @@ cast({ id: "12345" }, { id: Vicis.NUMERIC });
 
 ```js
 cast({ active: true }, { active: "string" });
-cast({ active: true }, { active: TYPES_ENUM.STRING });
+cast({ active: true }, { active: CAST_TYPE.STRING });
 cast({ active: true }, { active: Vicis.STRING });
 ```
 
@@ -216,7 +216,7 @@ cast(
   new (function () {
     this.createdAt = new Date;
   }),
-  { createdAt: TYPES_ENUM.JSON }
+  { createdAt: CAST_TYPE.JSON }
 );
 cast(
   new (function () {
