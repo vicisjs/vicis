@@ -2,8 +2,24 @@
 
 ---
 
+## NPM
+
 ```bash
 npm install vicis
+```
+
+## Deno `importmap.json`
+
+```json
+{
+  "imports": {
+    "vicis": "https://raw.githubusercontent.com/r37r0m0d3l/deno-vicis/master/mod.ts"
+  }
+}
+```
+
+```bash
+deno run --importmap=importmap.json --unstable your-script.js
 ```
 
 ---
