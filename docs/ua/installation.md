@@ -10,10 +10,30 @@ npm install vicis
 
 ## Deno `importmap.json`
 
+### Inline
+
+```javascript
+import { Vicis } from "https://deno.land/x/vicis/mod.ts";
+```
+
+### "importmap.json"
+
+#### GitHub
+
 ```json
 {
   "imports": {
     "vicis": "https://raw.githubusercontent.com/r37r0m0d3l/deno-vicis/master/mod.ts"
+  }
+}
+```
+
+#### DenoLand
+
+```json
+{
+  "imports": {
+    "vicis": "https://deno.land/x/vicis/mod.ts"
   }
 }
 ```
