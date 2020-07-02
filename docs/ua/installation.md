@@ -10,25 +10,16 @@ npm install vicis
 
 ## Deno `importmap.json`
 
-### Inline
+Import from URL.
 
-```javascript
+```typescript
+// From URL
 import { Vicis } from "https://deno.land/x/vicis/mod.ts";
+// Bundled from URL
+import { Vicis } from "https://deno.land/x/vicis/vicis.bundle.js";
 ```
 
-### "importmap.json"
-
-#### GitHub
-
-```json
-{
-  "imports": {
-    "vicis": "https://raw.githubusercontent.com/r37r0m0d3l/deno-vicis/master/mod.ts"
-  }
-}
-```
-
-#### DenoLand
+Import from "importmap.json"
 
 ```json
 {
@@ -36,6 +27,10 @@ import { Vicis } from "https://deno.land/x/vicis/mod.ts";
     "vicis": "https://deno.land/x/vicis/mod.ts"
   }
 }
+```
+
+```typescript
+import { Vicis } from "vicis";
 ```
 
 ```bash
