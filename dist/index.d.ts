@@ -13,7 +13,7 @@ export enum ECastType {
   STRING = "string",
 }
 export interface ICast {
-  [key: string]: ECastType;
+  [key: string]: string | ECastType;
 }
 export interface IConfigCallback {
   (model: IObject): IObject;
@@ -61,7 +61,7 @@ export interface IConfigObject {
   omit?: IOmit;
   order?: IOrder;
   pick?: IPick;
-  sort?: ESort;
+  sort?: boolean | ESort;
   rename?: IRename;
   replace?: IReplace;
   required?: IRequired;
@@ -76,7 +76,7 @@ export interface IConfigObjectFull {
   omit: IOmit;
   order: IOrder;
   pick: IPick;
-  sort: ESort;
+  sort: boolean | ESort;
   rename: IRename;
   replace: IReplace;
   required: IRequired;
@@ -301,7 +301,7 @@ export class Vicis {
     omit: IOmit;
     order: IOrder;
     pick: IPick;
-    sort: ESort;
+    sort: boolean | ESort;
     rename: IRename;
     replace: IReplace;
     required: IRequired;

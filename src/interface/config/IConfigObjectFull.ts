@@ -20,7 +20,7 @@ export interface IConfigObjectFull {
   omit: IOmit;
   order: IOrder;
   pick: IPick;
-  sort: ESort;
+  sort: boolean | ESort;
   rename: IRename;
   replace: IReplace;
   required: IRequired;

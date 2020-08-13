@@ -2,26 +2,27 @@
   "compilerOptions": {
     "allowJs": false,
     "declaration": false,
-    "module": "ESNext",
-    "resolveJsonModule": false,
-    "target": "ES2020",
-    "experimentalDecorators": false,
     "emitDecoratorMetadata": false,
+    "experimentalDecorators": false,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["es2017.object"],
+    "module": "ESNext",
     "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
     "plugins": [
       {
-        "name": "typescript-deno-plugin",
         "enable": true,
-        "importmap": "import_map.json"
+        "importmap": "import_map.json",
+        "name": "typescript-deno-plugin"
       }
     ],
-    "types": ["node"],
-    "typeRoots": ["node_modules/@types"],
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
+    "resolveJsonModule": false,
     "strict": true,
-    "noUnusedLocals": true
+    "target": "ES2020",
+    "typeRoots": ["node_modules/@types"],
+    "types": ["node"]
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "build", "dist", "example", "docs", "test", "rollup.config.js"]
+  "exclude": ["node_modules", "build", "dist", "example", "docs", "test", "rollup.config.js"],
+  "include": ["src"]
 }

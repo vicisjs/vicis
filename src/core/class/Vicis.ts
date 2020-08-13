@@ -111,7 +111,7 @@ export class Vicis {
    * @private
    * @type {boolean|string}
    */
-  #sort: ESort;
+  #sort: boolean | ESort;
   /**
    * @name rename
    * @private

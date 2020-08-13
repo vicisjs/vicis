@@ -2,6 +2,12 @@
 
 ---
 
+## 2.0.1
+
+-   🐛 Fix minor warnings
+
+---
+
 ## 2.0.0
 
 -   ♻️ Rewritten from JavaScript to TypeScript

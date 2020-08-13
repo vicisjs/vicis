@@ -28,7 +28,7 @@ export function castConfig(propertyToType: ICast): ICast {
         }'.`,
       );
     }
-    if (!Object.values(ECastType).includes(propertyToType[key])) {
+    if (!Object.values(ECastType as {[key: string]: string }).includes(propertyToType[key])) {
       throw new TypeError(
         `'Cast' has unknown type in {${key}: "${propertyToType[key]}"}.`,
       );
