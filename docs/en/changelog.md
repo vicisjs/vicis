@@ -2,6 +2,12 @@
 
 ---
 
+## 2.0.2
+
+-   ⬆️ Typings updated
+
+---
+
 ## 2.0.1
 
 -   🐛 Fix minor warnings

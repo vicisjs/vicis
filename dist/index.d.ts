@@ -216,7 +216,7 @@ export class Vicis {
    * @param {Object=} data
    * @throws AggregateError
    */
-  constructor(config?: IConfig, data?: IObject);
+  public constructor(config?: IConfig, data?: IObject);
   /**
    * @name factory
    * @public
@@ -226,7 +226,7 @@ export class Vicis {
    * @param {Object=} data
    * @returns {Vicis}
    */
-  static factory(config?: IConfig, data?: IObject): Vicis;
+  public static factory(config?: IConfig, data?: IObject): Vicis;
   /**
    * @name from
    * @public
@@ -236,7 +236,7 @@ export class Vicis {
    * @param {Object=} config
    * @returns {Object}
    */
-  static from(data: IObject, config?: IConfig): IObject;
+  public static from(data: IObject, config?: IConfig): IObject;
   /**
    * @name fromArray
    * @static
@@ -245,55 +245,55 @@ export class Vicis {
    * @param {Object=} config
    * @returns {Array.<Object>}
    */
-  static fromArray(collection: IObject[], config?: IConfig): IObject[];
+  public static fromArray(collection: IObject[], config?: IConfig): IObject[];
   /**
    * @name BOOLEAN
    * @public
    * @static
    * @type {String}
    */
-  static get BOOLEAN(): ECastType;
+  public static get BOOLEAN(): ECastType;
   /**
    * @name FLAG
    * @public
    * @static
    * @type {String}
    */
-  static get FLAG(): ECastType;
+  public static get FLAG(): ECastType;
   /**
    * @name NUMERIC
    * @public
    * @static
    * @type {String}
    */
-  static get NUMERIC(): ECastType;
+  public static get NUMERIC(): ECastType;
   /**
    * @name INTEGER
    * @public
    * @static
    * @type {String}
    */
-  static get INTEGER(): ECastType;
+  public static get INTEGER(): ECastType;
   /**
    * @name STRING
    * @public
    * @static
    * @type {String}
    */
-  static get STRING(): ECastType;
+  public static get STRING(): ECastType;
   /**
    * @name JSON
    * @public
    * @static
    * @type {String}
    */
-  static get JSON(): ECastType;
+  public static get JSON(): ECastType;
   /**
    * @name getConfig
    * @public
    * @returns {Object}
    */
-  getConfig(): {
+  public getConfig(): {
     cast: ICast;
     defaults: IDefaults;
     defined: IDefined;
@@ -312,7 +312,7 @@ export class Vicis {
    * @public
    * @returns {Vicis}
    */
-  resetConfig(): this;
+  public resetConfig(): this;
   /**
    * @name testConfig
    * @public
@@ -322,7 +322,7 @@ export class Vicis {
    * @returns {Object}
    * @since 1.6.0
    */
-  static testConfig(config: IConfig): IConfigObject;
+  public static testConfig(config: IConfig): IConfigObject;
   /**
    * @name config
    * @public
@@ -330,7 +330,7 @@ export class Vicis {
    * @param {Function|Object=} config
    * @returns {Vicis}
    */
-  config(config?: IConfig): this;
+  public config(config?: IConfig): this;
   /**
    * @name cast
    * @public
@@ -338,7 +338,7 @@ export class Vicis {
    * @param {Object=} propertyToType
    * @returns {Vicis}
    */
-  cast(propertyToType?: ICast): this;
+  public cast(propertyToType?: ICast): this;
   /**
    * @name defaults
    * @public
@@ -346,7 +346,7 @@ export class Vicis {
    * @param {Object=} propertyDefaultValues
    * @returns {Vicis}
    */
-  defaults(propertyDefaultValues?: IDefaults): this;
+  public defaults(propertyDefaultValues?: IDefaults): this;
   /**
    * @name defined
    * @public
@@ -354,7 +354,7 @@ export class Vicis {
    * @param {Array.<string>=} propertiesMustBeDefined
    * @returns {Vicis}
    */
-  defined(propertiesMustBeDefined?: IDefined): this;
+  public defined(propertiesMustBeDefined?: IDefined): this;
   /**
    * @name exclude
    * @public
@@ -362,7 +362,7 @@ export class Vicis {
    * @param {Array.<string|RegExp>=} propertiesToExclude
    * @returns {Vicis}
    */
-  exclude(propertiesToExclude?: IExclude): this;
+  public exclude(propertiesToExclude?: IExclude): this;
   /**
    * @name omit
    * @public
@@ -370,7 +370,7 @@ export class Vicis {
    * @param {Array.<string>=} propertiesToOmit
    * @returns {Vicis}
    */
-  omit(propertiesToOmit?: IOmit): this;
+  public omit(propertiesToOmit?: IOmit): this;
   /**
    * @name order
    * @public
@@ -378,7 +378,7 @@ export class Vicis {
    * @param {Array.<string>=} propertiesToStreamline
    * @returns {Vicis}
    */
-  order(propertiesToStreamline?: IOrder): this;
+  public order(propertiesToStreamline?: IOrder): this;
   /**
    * @name pick
    * @public
@@ -386,7 +386,7 @@ export class Vicis {
    * @param {Array.<string>=} propertiesToPick
    * @returns {Vicis}
    */
-  pick(propertiesToPick?: IPick): this;
+  public pick(propertiesToPick?: IPick): this;
   /**
    * @name rename
    * @public
@@ -394,7 +394,7 @@ export class Vicis {
    * @param {Object=} renamePropertyFromTo
    * @returns {Vicis}
    */
-  rename(renamePropertyFromTo?: IRename): this;
+  public rename(renamePropertyFromTo?: IRename): this;
   /**
    * @name replace
    * @public
@@ -402,7 +402,7 @@ export class Vicis {
    * @param {Object=} replacePropertyValues
    * @returns {Vicis}
    */
-  replace(replacePropertyValues?: IReplace): this;
+  public replace(replacePropertyValues?: IReplace): this;
   /**
    * @name required
    * @public
@@ -410,7 +410,7 @@ export class Vicis {
    * @param {Array.<string>=} propertiesRequired
    * @returns {Vicis}
    */
-  required(propertiesRequired?: IRequired): this;
+  public required(propertiesRequired?: IRequired): this;
   /**
    * @name sort
    * @public
@@ -418,7 +418,7 @@ export class Vicis {
    * @param {boolean=} sortProperties
    * @returns {Vicis}
    */
-  sort(sortProperties?: boolean | ESort): Vicis;
+  public sort(sortProperties?: boolean | ESort): Vicis;
   /**
    * @name transform
    * @public
@@ -426,13 +426,13 @@ export class Vicis {
    * @param {Object=} propertyValueTransformWith
    * @returns {Vicis}
    */
-  transform(propertyValueTransformWith?: ITransform): Vicis;
+  public transform(propertyValueTransformWith?: ITransform): Vicis;
   /**
    * @name getData
    * @public
    * @returns {Object}
    */
-  getData(): IObject;
+  public getData(): IObject;
   /**
    * @name data
    * @public
@@ -440,31 +440,31 @@ export class Vicis {
    * @param {Object} dataToSerialize
    * @returns {Vicis}
    */
-  data(dataToSerialize: IObject): Vicis;
+  public data(dataToSerialize: IObject): Vicis;
   /**
    * @name clear
    * @description Clear any data references and cached values
    * @public
    * @returns {Vicis}
    */
-  clear(): Vicis;
+  public clear(): Vicis;
   /**
    * @name toJSON
    * @public
    * @returns {Object}
    */
-  toJSON(): IObject;
+  public toJSON(): IObject;
   /**
    * @name toString
    * @public
    * @returns {string}
    */
-  toString(): string;
+  public toString(): string;
   /**
    * @name fromArray
    * @public
    * @param {Array.<Object>} collection
    * @returns {Array.<Object>}
    */
-  fromArray(collection: IObject[]): IObject[];
+  public fromArray(collection: IObject[]): IObject[];
 }
