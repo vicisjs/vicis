@@ -6,9 +6,6 @@ Presentation and transformation layer for data output in RESTful APIs.
 
 •• [Vicis Documentation](https://vicis.js.org) •• [JavaScript Repository](https://github.com/r37r0m0d3l/vicis) •• [Deno Repository](https://github.com/r37r0m0d3l/deno-vicis) ••
 
-[![Buy Me A Coffee][buymeacoffee-img]][buymeacoffee-url]
-![Tests](https://github.com/r37r0m0d3l/denof/workflows/Tests/badge.svg)
-
 [![npm](https://badgen.net/npm/v/vicis?&icon=npm&label=npm&color=DD3636)](https://www.npmjs.com/package/vicis)
 [![downloads](https://badgen.net/npm/dt/vicis?&icon=terminal&label=downloads&color=009688)](https://www.npmjs.com/package/vicis)
 [![stars](https://badgen.net/github/stars/r37r0m0d3l/vicis?&icon=github&label=stars&color=ffcc33)](https://github.com/r37r0m0d3l/vicis)
