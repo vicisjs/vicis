@@ -14,16 +14,16 @@
   },
   "description": "Presentation and transformation layer for data output in RESTful APIs.",
   "devDependencies": {
-    "@corefunc/corefunc": "0.0.74",
+    "@corefunc/corefunc": "0.0.76",
     "@r37r0m0d3l/rollup-config-pkg": "git+https://github.com/r37r0m0d3l/rollup-config-pkg.git",
     "argh": "1.0.0",
     "babel-eslint": "10.1.0",
     "dts-generator": "3.0.0",
-    "eslint": "7.6.0",
+    "eslint": "7.8.1",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-prettier": "3.1.4",
-    "jest": "26.4.0",
-    "prettier": "2.0.5",
+    "jest": "26.4.2",
+    "prettier": "2.1.1",
     "remark-cli": "8.0.1",
     "remark-lint": "7.0.1",
     "remark-preset-lint-consistent": "3.0.1",
@@ -91,5 +91,5 @@
   },
   "type": "module",
   "types": "./dist/index.d.ts",
-  "version": "2.0.2"
+  "version": "2.0.3"
 }

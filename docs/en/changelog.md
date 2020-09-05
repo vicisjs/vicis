@@ -2,6 +2,12 @@
 
 ---
 
+## 2.0.3
+
+-   ⬆️ Dependencies updated
+
+---
+
 ## 2.0.2
 
 -   ⬆️ Typings updated
