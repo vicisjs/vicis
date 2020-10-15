@@ -42,6 +42,10 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/r37r0m0d3l/vicis.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/r37r0m0d3l/vicis/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/r37r0m0d3l/vicis.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/r37r0m0d3l/vicis/context:javascript)
 
+#### OpenBase
+
+[![Rate on Openbase](https://badges.openbase.io/js/rating/vicis.svg)](https://openbase.io/js/vicis?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
+
 #### Sonar Cloud
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=r37r0m0d3l_vicis&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=r37r0m0d3l_vicis)
