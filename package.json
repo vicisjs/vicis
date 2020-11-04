@@ -14,7 +14,7 @@
   },
   "description": "Presentation and transformation layer for data output in RESTful APIs.",
   "devDependencies": {
-    "@corefunc/corefunc": "0.0.76",
+    "@corefunc/corefunc": "0.0.80",
     "@r37r0m0d3l/rollup-config-pkg": "git+https://github.com/r37r0m0d3l/rollup-config-pkg.git",
     "argh": "1.0.0",
     "babel-eslint": "10.1.0",
