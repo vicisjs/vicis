@@ -24,7 +24,7 @@
     "eslint-plugin-prettier": "3.1.4",
     "jest": "26.6.3",
     "prettier": "2.1.1",
-    "remark-cli": "8.0.1",
+    "remark-cli": "9.0.0",
     "remark-lint": "8.0.0",
     "remark-preset-lint-consistent": "3.0.1",
     "remark-preset-lint-markdown-style-guide": "3.0.1",
