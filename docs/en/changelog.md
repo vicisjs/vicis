@@ -2,6 +2,18 @@
 
 ---
 
+## 2.0.5
+
+-   ♻️ All private fields now are public
+
+---
+
+## 2.0.4
+
+-   ⬆️ Dependencies updated
+
+---
+
 ## 2.0.3
 
 -   ⬆️ Dependencies updated

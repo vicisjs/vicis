@@ -13,16 +13,16 @@ import { ITransform } from "./ITransform";
 import { ESort } from "../../const/ESort";
 
 export interface IConfigObjectFull {
-  cast: ICast;
-  defaults: IDefaults;
-  defined: IDefined;
-  exclude: IExclude;
-  omit: IOmit;
-  order: IOrder;
-  pick: IPick;
-  sort: boolean | ESort;
-  rename: IRename;
-  replace: IReplace;
-  required: IRequired;
-  transform: ITransform;
+  cast?: ICast;
+  defaults?: IDefaults;
+  defined?: IDefined;
+  exclude?: IExclude;
+  omit?: IOmit;
+  order?: IOrder;
+  pick?: IPick;
+  sort?: boolean | ESort;
+  rename?: IRename;
+  replace?: IReplace;
+  required?: IRequired;
+  transform?: ITransform;
 }

@@ -3,58 +3,58 @@ import { IFunction } from "../../interface/common/IFunction";
 import { ECastType } from "../../const/ECastType";
 
 export class VicisParameter {
-  #cast?: string;
-  #defaults?: any;
-  #defined?: boolean;
-  #hasDefaults = false;
-  #hasValue = false;
-  #required?: boolean;
-  #transform?: IFunction;
-  #value = undefined;
+  __cast?: string;
+  __defaults?: any;
+  __defined?: boolean;
+  __hasDefaults = false;
+  __hasValue = false;
+  __required?: boolean;
+  __transform?: IFunction;
+  __value = undefined;
   get boolean(): VicisParameter {
-    this.#cast = ECastType.BOOLEAN;
+    this.__cast = ECastType.BOOLEAN;
     return this;
   }
   get flag(): VicisParameter {
-    this.#cast = ECastType.FLAG;
+    this.__cast = ECastType.FLAG;
     return this;
   }
   get integer(): VicisParameter {
-    this.#cast = ECastType.INTEGER;
+    this.__cast = ECastType.INTEGER;
     return this;
   }
   get numeric(): VicisParameter {
-    this.#cast = ECastType.NUMERIC;
+    this.__cast = ECastType.NUMERIC;
     return this;
   }
   get string(): VicisParameter {
-    this.#cast = ECastType.STRING;
+    this.__cast = ECastType.STRING;
     return this;
   }
   get json(): VicisParameter {
-    this.#cast = ECastType.JSON;
+    this.__cast = ECastType.JSON;
     return this;
   }
   get defined(): VicisParameter {
-    this.#defined = true;
+    this.__defined = true;
     return this;
   }
   get required(): VicisParameter {
-    this.#required = true;
+    this.__required = true;
     return this;
   }
   replace(value: any): VicisParameter {
-    this.#value = value;
-    this.#hasValue = true;
+    this.__value = value;
+    this.__hasValue = true;
     return this;
   }
   defaults(value: any): VicisParameter {
-    this.#defaults = value;
-    this.#hasDefaults = true;
+    this.__defaults = value;
+    this.__hasDefaults = true;
     return this;
   }
   transform(callable: IFunction): VicisParameter {
-    this.#transform = callable;
+    this.__transform = callable;
     return this;
   }
   toObject(): {
@@ -68,14 +68,14 @@ export class VicisParameter {
     required: boolean | undefined;
   } {
     return {
-      cast: this.#cast,
-      defaults: this.#defaults,
-      defined: this.#defined,
-      hasDefaults: this.#hasDefaults,
-      hasValue: this.#hasValue,
-      required: this.#required,
-      transform: this.#transform,
-      value: this.#value,
+      cast: this.__cast,
+      defaults: this.__defaults,
+      defined: this.__defined,
+      hasDefaults: this.__hasDefaults,
+      hasValue: this.__hasValue,
+      required: this.__required,
+      transform: this.__transform,
+      value: this.__value,
     };
   }
 }

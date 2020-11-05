@@ -9,6 +9,13 @@ import { createConfig } from "./createConfig";
 import { isFunction } from "../../util/is/function";
 
 import { VicisParameter } from "../class/VicisParameter";
+import { IPick } from "../../interface/config/IPick";
+import { IDefined } from "../../interface/config/IDefined";
+import { ICast } from "../../interface/config/ICast";
+import { IRequired } from "../../interface/config/IRequired";
+import { ITransform } from "../../interface/config/ITransform";
+import { IDefaults } from "../../interface/config/IDefaults";
+import { IReplace } from "../../interface/config/IReplace";
 
 export function convertFunctionToConfig(
   callable: IFunction,
@@ -29,7 +36,7 @@ export function convertFunctionToConfig(
   const config: IConfigObjectFull = createConfig();
   Object.keys(model).forEach((keyOfConfig: string) => {
     const key = keyOfConfig as keyof IConfigObject;
-    config.pick.push(key);
+    (config.pick as IPick).push(key);
     const data: IObject = {};
     if (model[key] instanceof VicisParameter) {
       data[key] = ((model[key] as unknown) as VicisParameter).toObject();
@@ -40,43 +47,43 @@ export function convertFunctionToConfig(
     }
     delete model[key];
     if (data[key].cast) {
-      config.cast[key] = data[key].cast;
+      (config.cast as ICast)[key] = data[key].cast;
     }
     if (data[key].defined) {
-      config.defined.push(key);
+      (config.defined as IDefined).push(key);
     }
     if (data[key].required) {
-      config.required.push(key);
+      (config.required as IRequired).push(key);
     }
     if (data[key].transform) {
-      config.transform[key] = data[key].transform;
+      (config.transform as ITransform)[key] = data[key].transform;
     }
     if (data[key].hasDefaults) {
-      config.defaults[key] = data[key].defaults;
+      (config.defaults as IDefaults)[key] = data[key].defaults;
     }
     if (data[key].hasValue) {
-      config.replace[key] = data[key].value;
+      (config.replace as IReplace)[key] = data[key].value;
     }
   });
-  if (!Object.keys(config.cast).length) {
+  if (!Object.keys(config.cast as ICast).length) {
     delete config.cast;
   }
-  if (!Object.keys(config.defaults).length) {
+  if (!Object.keys(config.defaults as IDefaults).length) {
     delete config.defaults;
   }
-  if (!config.defined.length) {
+  if (!(config.defined as IDefined).length) {
     delete config.defined;
   }
-  if (!config.pick.length) {
+  if (!(config.pick as IPick).length) {
     delete config.pick;
   }
-  if (!config.required.length) {
+  if (!(config.required as IRequired).length) {
     delete config.required;
   }
-  if (!Object.keys(config.replace).length) {
+  if (!Object.keys(config.replace as IReplace).length) {
     delete config.replace;
   }
-  if (!Object.keys(config.transform).length) {
+  if (!Object.keys(config.transform as ITransform).length) {
     delete config.transform;
   }
   return config;

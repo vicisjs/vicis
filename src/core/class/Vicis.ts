@@ -69,88 +69,88 @@ export class Vicis {
    * @private
    * @type {Object}
    */
-  #cast: ICast;
+  __cast: ICast;
   /**
    * @name defaults
    * @private
    * @type {Object}
    */
-  #defaults: IDefaults;
+  __defaults: IDefaults;
   /**
    * @name defined
    * @private
    * @type {Array.<string>}
    */
-  #defined: IDefined;
+  __defined: IDefined;
   /**
    * @name exclude
    * @private
    * @type {Array.<string|RegExp>}
    */
-  #exclude: IExclude;
+  __exclude: IExclude;
   /**
    * @name omit
    * @private
    * @type {Array.<string>}
    */
-  #omit: IOmit;
+  __omit: IOmit;
   /**
    * @name order
    * @private
    * @type {Array.<string>}
    */
-  #order: IOrder;
+  __order: IOrder;
   /**
    * @name pick
    * @private
    * @type {Array.<string>}
    */
-  #pick: IPick;
+  __pick: IPick;
   /**
    * @name sort
    * @private
    * @type {boolean|string}
    */
-  #sort: boolean | ESort;
+  __sort: boolean | ESort;
   /**
    * @name rename
    * @private
    * @type {Object}
    */
-  #rename: IRename;
+  __rename: IRename;
   /**
    * @name replace
    * @private
    * @type {Object}
    */
-  #replace: IReplace;
+  __replace: IReplace;
   /**
    * @name required
    * @private
    * @type {Array.<string>}
    */
-  #required: IRequired;
+  __required: IRequired;
   /**
    * @name transform
    * @private
    * @type {Object}
    */
-  #transform: ITransform;
+  __transform: ITransform;
   //#endregion
 
   //#region Data Fields
   /**
-   * @name dataCache
+   * @name __dataCache
    * @private
    * @type {Object}
    */
-  #dataCache: IObject;
+  __dataCache: IObject;
   /**
-   * @name dataOriginal
+   * @name __dataOriginal
    * @private
    * @type {Object}
    */
-  #dataOriginal?: IObject;
+  __dataOriginal?: IObject;
   //#endregion
 
   //#region Private Methods
@@ -161,57 +161,57 @@ export class Vicis {
    * @throws Error
    * @returns {Vicis}
    */
-  protected validateConfig() {
-    const cast = objectGetKeys(this.#cast);
-    const rename = objectGetKeys(this.#rename);
-    const replace = objectGetKeys(this.#replace);
-    const transform = objectGetKeys(this.#transform);
-    if (arrayHasSame(this.#omit, cast)) {
+  public validateConfig() {
+    const cast = objectGetKeys(this.__cast);
+    const rename = objectGetKeys(this.__rename);
+    const replace = objectGetKeys(this.__replace);
+    const transform = objectGetKeys(this.__transform);
+    if (arrayHasSame(this.__omit, cast)) {
       throw new ValidationError(
         `'omit' has same keys as 'cast': ${
-          arrayBasicIntersect(this.#omit, cast)
+          arrayBasicIntersect(this.__omit, cast)
         }.`,
       );
     }
-    if (arrayHasSame(this.#omit, this.#defined)) {
+    if (arrayHasSame(this.__omit, this.__defined)) {
       throw new ValidationError(
         `'omit' has same keys as 'defined': ${
-          arrayBasicIntersect(this.#omit, this.#defined)
+          arrayBasicIntersect(this.__omit, this.__defined)
         }.`,
       );
     }
-    if (arrayHasSame(this.#omit, this.#pick)) {
+    if (arrayHasSame(this.__omit, this.__pick)) {
       throw new ValidationError(
         `'omit' has same keys as 'pick': ${
-          arrayBasicIntersect(this.#omit, this.#pick)
+          arrayBasicIntersect(this.__omit, this.__pick)
         }.`,
       );
     }
-    if (arrayHasSame(this.#omit, rename)) {
+    if (arrayHasSame(this.__omit, rename)) {
       throw new ValidationError(
         `'omit' has same keys as 'rename': ${
-          arrayBasicIntersect(this.#omit, rename)
+          arrayBasicIntersect(this.__omit, rename)
         }.`,
       );
     }
-    if (arrayHasSame(this.#omit, replace)) {
+    if (arrayHasSame(this.__omit, replace)) {
       throw new ValidationError(
         `'omit' has same keys as 'replace': ${
-          arrayBasicIntersect(this.#omit, replace)
+          arrayBasicIntersect(this.__omit, replace)
         }.`,
       );
     }
-    if (arrayHasSame(this.#omit, this.#required)) {
+    if (arrayHasSame(this.__omit, this.__required)) {
       throw new ValidationError(
         `'omit' has same keys as 'required': ${
-          arrayBasicIntersect(this.#omit, this.#required)
+          arrayBasicIntersect(this.__omit, this.__required)
         }.`,
       );
     }
-    if (arrayHasSame(this.#omit, transform)) {
+    if (arrayHasSame(this.__omit, transform)) {
       throw new ValidationError(
         `'omit' has same keys as 'transform': ${
-          arrayBasicIntersect(this.#omit, transform)
+          arrayBasicIntersect(this.__omit, transform)
         }.`,
       );
     }
@@ -245,34 +245,34 @@ export class Vicis {
    * @throws Error
    * @returns {Vicis}
    */
-  protected validateData() {
-    if (this.#dataOriginal === undefined) {
+  public validateData() {
+    if (this.__dataOriginal === undefined) {
       return this;
     }
     if (
-      "toObject" in this.#dataOriginal &&
-      isFunction(this.#dataOriginal.toObject)
+      "toObject" in this.__dataOriginal &&
+      isFunction(this.__dataOriginal.toObject)
     ) {
-      this.#dataCache = (this.#dataOriginal.toObject as () => IObject)();
+      this.__dataCache = (this.__dataOriginal.toObject as () => IObject)();
     } else if (
-      "toJSON" in this.#dataOriginal && isFunction(this.#dataOriginal.toJSON)
+      "toJSON" in this.__dataOriginal && isFunction(this.__dataOriginal.toJSON)
     ) {
-      this.#dataCache = (this.#dataOriginal.toJSON as () => IObject)();
+      this.__dataCache = (this.__dataOriginal.toJSON as () => IObject)();
     } else {
-      this.#dataCache = this.#dataOriginal;
+      this.__dataCache = this.__dataOriginal;
     }
-    this.#dataCache = omitData(this.#omit, this.#dataCache);
-    this.#dataCache = requiredData(this.#required, this.#dataCache);
-    this.#dataCache = definedData(this.#defined, this.#dataCache);
-    this.#dataCache = castData(this.#cast, this.#dataCache);
-    this.#dataCache = transformData(this.#transform, this.#dataCache);
-    this.#dataCache = replaceData(this.#replace, this.#dataCache);
-    this.#dataCache = renameData(this.#rename, this.#dataCache);
-    this.#dataCache = defaultsData(this.#defaults, this.#dataCache);
-    this.#dataCache = pickData(this.#pick, this.#dataCache);
-    this.#dataCache = excludeData(this.#exclude, this.#dataCache);
-    this.#dataCache = castToJson(this.#dataCache, this.#sort);
-    this.#dataCache = orderData(this.#order, this.#dataCache, this.#sort);
+    this.__dataCache = omitData(this.__omit, this.__dataCache);
+    this.__dataCache = requiredData(this.__required, this.__dataCache);
+    this.__dataCache = definedData(this.__defined, this.__dataCache);
+    this.__dataCache = castData(this.__cast, this.__dataCache);
+    this.__dataCache = transformData(this.__transform, this.__dataCache);
+    this.__dataCache = replaceData(this.__replace, this.__dataCache);
+    this.__dataCache = renameData(this.__rename, this.__dataCache);
+    this.__dataCache = defaultsData(this.__defaults, this.__dataCache);
+    this.__dataCache = pickData(this.__pick, this.__dataCache);
+    this.__dataCache = excludeData(this.__exclude, this.__dataCache);
+    this.__dataCache = castToJson(this.__dataCache, this.__sort);
+    this.__dataCache = orderData(this.__order, this.__dataCache, this.__sort);
     return this;
   }
   //#endregion
@@ -287,20 +287,20 @@ export class Vicis {
    * @throws AggregateError
    */
   constructor(config: IConfig = {}, data?: IObject) {
-    this.#cast = objectCreateEmpty() as unknown as ICast;
-    this.#defaults = objectCreateEmpty() as unknown as IDefaults;
-    this.#defined = [];
-    this.#exclude = [];
-    this.#omit = [];
-    this.#order = [];
-    this.#pick = [];
-    this.#rename = objectCreateEmpty() as unknown as IRename;
-    this.#replace = <IReplace> objectCreateEmpty();
-    this.#required = [];
-    this.#sort = ESort.Default;
-    this.#transform = objectCreateEmpty() as unknown as ITransform;
-    this.#dataCache = objectCreateEmpty() as unknown as IObject;
-    this.#dataOriginal = undefined;
+    this.__cast = objectCreateEmpty() as unknown as ICast;
+    this.__defaults = objectCreateEmpty() as unknown as IDefaults;
+    this.__defined = [];
+    this.__exclude = [];
+    this.__omit = [];
+    this.__order = [];
+    this.__pick = [];
+    this.__rename = objectCreateEmpty() as unknown as IRename;
+    this.__replace = <IReplace> objectCreateEmpty();
+    this.__required = [];
+    this.__sort = ESort.Default;
+    this.__transform = objectCreateEmpty() as unknown as ITransform;
+    this.__dataCache = objectCreateEmpty() as unknown as IObject;
+    this.__dataOriginal = undefined;
     this.config(config);
     if (data !== undefined) {
       this.data(data);
@@ -421,18 +421,18 @@ export class Vicis {
    */
   getConfig() {
     return clone({
-      cast: this.#cast,
-      defaults: this.#defaults,
-      defined: this.#defined,
-      exclude: this.#exclude,
-      omit: this.#omit,
-      order: this.#order,
-      pick: this.#pick,
-      sort: this.#sort,
-      rename: this.#rename,
-      replace: this.#replace,
-      required: this.#required,
-      transform: this.#transform,
+      cast: this.__cast,
+      defaults: this.__defaults,
+      defined: this.__defined,
+      exclude: this.__exclude,
+      omit: this.__omit,
+      order: this.__order,
+      pick: this.__pick,
+      sort: this.__sort,
+      rename: this.__rename,
+      replace: this.__replace,
+      required: this.__required,
+      transform: this.__transform,
     });
   }
 
@@ -442,18 +442,18 @@ export class Vicis {
    * @returns {Vicis}
    */
   resetConfig() {
-    this.#cast = {};
-    this.#defaults = {};
-    this.#defined = [];
-    this.#exclude = [];
-    this.#omit = [];
-    this.#order = [];
-    this.#pick = [];
-    this.#sort = ESort.Default;
-    this.#rename = {};
-    this.#replace = {};
-    this.#required = [];
-    this.#transform = {};
+    this.__cast = {};
+    this.__defaults = {};
+    this.__defined = [];
+    this.__exclude = [];
+    this.__omit = [];
+    this.__order = [];
+    this.__pick = [];
+    this.__sort = ESort.Default;
+    this.__rename = {};
+    this.__replace = {};
+    this.__required = [];
+    this.__transform = {};
     return this;
   }
 
@@ -493,74 +493,74 @@ export class Vicis {
       objectGetProperty(configFull, "transform", {}),
     );
     const errors = [];
-    if ("omit" in configFull && arrayHasSame(configFull.omit, cast)) {
+    if ("omit" in configFull && arrayHasSame(configFull.omit as IOmit, cast)) {
       errors.push(
         new ValidationError(
           `'omit' has same keys as 'cast': ${
-            arrayBasicIntersect(configFull.omit, cast)
+            arrayBasicIntersect(configFull.omit as IOmit, cast)
           }.`,
         ),
       );
     }
     if (
       "omit" in configFull && "defined" in configFull &&
-      arrayHasSame(configFull.omit, configFull.defined)
+      arrayHasSame(configFull.omit as IOmit, configFull.defined as IDefined)
     ) {
       errors.push(
         new ValidationError(
           `'omit' has same keys as 'defined': ${
-            arrayBasicIntersect(configFull.omit, configFull.defined)
+            arrayBasicIntersect(configFull.omit as IOmit, configFull.defined as IDefined)
           }.`,
         ),
       );
     }
     if (
       "omit" in configFull && "pick" in configFull &&
-      arrayHasSame(configFull.omit, configFull.pick)
+      arrayHasSame(configFull.omit as IOmit, configFull.pick as IPick)
     ) {
       errors.push(
         new ValidationError(
           `'omit' has same keys as 'pick': ${
-            arrayBasicIntersect(configFull.omit, configFull.pick)
+            arrayBasicIntersect(configFull.omit as IOmit, configFull.pick as IPick)
           }.`,
         ),
       );
     }
-    if ("omit" in configFull && arrayHasSame(configFull.omit, rename)) {
+    if ("omit" in configFull && arrayHasSame(configFull.omit as IOmit, rename)) {
       errors.push(
         new ValidationError(
           `'omit' has same keys as 'rename': ${
-            arrayBasicIntersect(configFull.omit, rename)
+            arrayBasicIntersect(configFull.omit as IOmit, rename)
           }.`,
         ),
       );
     }
-    if ("omit" in configFull && arrayHasSame(configFull.omit, replace)) {
+    if ("omit" in configFull && arrayHasSame(configFull.omit as IOmit, replace)) {
       errors.push(
         new ValidationError(
           `'omit' has same keys as 'replace': ${
-            arrayBasicIntersect(configFull.omit, replace)
+            arrayBasicIntersect(configFull.omit as IOmit, replace)
           }.`,
         ),
       );
     }
     if (
       "omit" in configFull && "required" in configFull &&
-      arrayHasSame(configFull.omit, configFull.required)
+      arrayHasSame(configFull.omit as IOmit, configFull.required as IRequired)
     ) {
       errors.push(
         new ValidationError(
           `'omit' has same keys as 'required': ${
-            arrayBasicIntersect(configFull.omit, configFull.required)
+            arrayBasicIntersect(configFull.omit as IOmit, configFull.required as IRequired)
           }.`,
         ),
       );
     }
-    if ("omit" in configFull && arrayHasSame(configFull.omit, transform)) {
+    if ("omit" in configFull && arrayHasSame(configFull.omit as IOmit, transform)) {
       errors.push(
         new ValidationError(
           `'omit' has same keys as 'transform': ${
-            arrayBasicIntersect(configFull.omit, transform)
+            arrayBasicIntersect(configFull.omit as IOmit, transform)
           }.`,
         ),
       );
@@ -652,7 +652,7 @@ export class Vicis {
    * @returns {Vicis}
    */
   cast(propertyToType: ICast = {}) {
-    this.#cast = castConfig(propertyToType);
+    this.__cast = castConfig(propertyToType);
     this.validateConfig();
     this.validateData();
     return this;
@@ -666,7 +666,7 @@ export class Vicis {
    * @returns {Vicis}
    */
   defaults(propertyDefaultValues: IDefaults = {}) {
-    this.#defaults = defaultsConfig(propertyDefaultValues); // do not deep clone!
+    this.__defaults = defaultsConfig(propertyDefaultValues); // do not deep clone!
     this.validateConfig();
     this.validateData();
     return this;
@@ -680,7 +680,7 @@ export class Vicis {
    * @returns {Vicis}
    */
   defined(propertiesMustBeDefined: IDefined = []) {
-    this.#defined = definedConfig(propertiesMustBeDefined);
+    this.__defined = definedConfig(propertiesMustBeDefined);
     this.validateConfig();
     this.validateData();
     return this;
@@ -694,7 +694,7 @@ export class Vicis {
    * @returns {Vicis}
    */
   exclude(propertiesToExclude: IExclude = []) {
-    this.#exclude = excludeConfig(propertiesToExclude);
+    this.__exclude = excludeConfig(propertiesToExclude);
     this.validateConfig();
     this.validateData();
     return this;
@@ -708,7 +708,7 @@ export class Vicis {
    * @returns {Vicis}
    */
   omit(propertiesToOmit: IOmit = []) {
-    this.#omit = omitConfig(propertiesToOmit);
+    this.__omit = omitConfig(propertiesToOmit);
     this.validateConfig();
     this.validateData();
     return this;
@@ -722,7 +722,7 @@ export class Vicis {
    * @returns {Vicis}
    */
   order(propertiesToStreamline: IOrder = []) {
-    this.#order = orderConfig(propertiesToStreamline);
+    this.__order = orderConfig(propertiesToStreamline);
     this.validateConfig();
     this.validateData();
     return this;
@@ -736,7 +736,7 @@ export class Vicis {
    * @returns {Vicis}
    */
   pick(propertiesToPick: IPick = []) {
-    this.#pick = pickConfig(propertiesToPick);
+    this.__pick = pickConfig(propertiesToPick);
     this.validateConfig();
     this.validateData();
     return this;
@@ -750,7 +750,7 @@ export class Vicis {
    * @returns {Vicis}
    */
   rename(renamePropertyFromTo: IRename = {}) {
-    this.#rename = renameConfig(renamePropertyFromTo);
+    this.__rename = renameConfig(renamePropertyFromTo);
     this.validateConfig();
     this.validateData();
     return this;
@@ -764,7 +764,7 @@ export class Vicis {
    * @returns {Vicis}
    */
   replace(replacePropertyValues: IReplace = {}) {
-    this.#replace = replaceConfig(replacePropertyValues); // do not deep clone!
+    this.__replace = replaceConfig(replacePropertyValues); // do not deep clone!
     this.validateConfig();
     this.validateData();
     return this;
@@ -778,7 +778,7 @@ export class Vicis {
    * @returns {Vicis}
    */
   required(propertiesRequired: IRequired = []) {
-    this.#required = requiredConfig(propertiesRequired);
+    this.__required = requiredConfig(propertiesRequired);
     this.validateConfig();
     this.validateData();
     return this;
@@ -799,9 +799,9 @@ export class Vicis {
       throw new TypeError("'sort' should be a boolean");
     }
     if (sortAsBoolean(sortProperties)) {
-      this.#sort = ESort.Yes;
+      this.__sort = ESort.Yes;
     } else {
-      this.#sort = ESort.No;
+      this.__sort = ESort.No;
     }
     this.validateData();
     return this;
@@ -815,7 +815,7 @@ export class Vicis {
    * @returns {Vicis}
    */
   transform(propertyValueTransformWith: ITransform = {}): Vicis {
-    this.#transform = transformConfig(propertyValueTransformWith); // do not deep clone!
+    this.__transform = transformConfig(propertyValueTransformWith); // do not deep clone!
     this.validateConfig();
     this.validateData();
     return this;
@@ -830,7 +830,7 @@ export class Vicis {
    * @returns {Object}
    */
   getData(): IObject {
-    return <IObject> clone(this.#dataCache);
+    return <IObject> clone(this.__dataCache);
   }
 
   /**
@@ -844,7 +844,7 @@ export class Vicis {
     if (!checkIsObjectLike(dataToSerialize)) {
       throw new TypeError("Data should be an object");
     }
-    this.#dataOriginal = dataToSerialize; // keep reference
+    this.__dataOriginal = dataToSerialize; // keep reference
     this.validateData();
     return this;
   }
@@ -856,8 +856,8 @@ export class Vicis {
    * @returns {Vicis}
    */
   clear(): Vicis {
-    this.#dataCache = objectCreateEmpty();
-    this.#dataOriginal = undefined;
+    this.__dataCache = objectCreateEmpty();
+    this.__dataOriginal = undefined;
     return this;
   }
 

@@ -69,18 +69,18 @@ export interface IConfigObject {
 }
 export type IConfig = IConfigObject | IConfigCallback;
 export interface IConfigObjectFull {
-  cast: ICast;
-  defaults: IDefaults;
-  defined: IDefined;
-  exclude: IExclude;
-  omit: IOmit;
-  order: IOrder;
-  pick: IPick;
-  sort: boolean | ESort;
-  rename: IRename;
-  replace: IReplace;
-  required: IRequired;
-  transform: ITransform;
+  cast?: ICast;
+  defaults?: IDefaults;
+  defined?: IDefined;
+  exclude?: IExclude;
+  omit?: IOmit;
+  order?: IOrder;
+  pick?: IPick;
+  sort?: boolean | ESort;
+  rename?: IRename;
+  replace?: IReplace;
+  required?: IRequired;
+  transform?: ITransform;
 }
 export const CAST_TYPE: {
   BOOLEAN: string;
@@ -191,7 +191,7 @@ export class ValidationError extends Error {
   constructor(message: string);
 }
 export class Vicis {
-  #private;
+  // #private;
   /**
    * @name validateConfig
    * @protected
@@ -199,15 +199,15 @@ export class Vicis {
    * @throws Error
    * @returns {Vicis}
    */
-  protected validateConfig(): this;
+  public validateConfig(): this;
   /**
    * @name validateData
-   * @private
+   * @protected
    * @method
    * @throws Error
    * @returns {Vicis}
    */
-  protected validateData(): this;
+  public validateData(): this;
   /**
    * @name constructor
    * @public
