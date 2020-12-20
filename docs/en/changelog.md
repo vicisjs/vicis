@@ -2,6 +2,12 @@
 
 ---
 
+## 2.0.6
+
+-   🚚 Move git repository to another organization
+
+---
+
 ## 2.0.5
 
 -   ♻️ All private fields now are public
