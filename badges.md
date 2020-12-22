@@ -20,7 +20,7 @@
 
 [![Combined Checks](https://badgen.net/github/checks/vicisjs/vicis?&icon=github)](https://github.com/vicisjs/vicis)
 [![Combined Status](https://badgen.net/github/status/vicisjs/vicis?&icon=github)](https://github.com/vicisjs/vicis)
-[![Types](https://badgen.net/npm/types/vicis?&icon=typescript)](https://github.com/vicisjs/vicis/blob/master/dist/vicis.d.ts)
+[![Types](https://badgen.net/npm/types/vicis?&icon=typescript)](https://github.com/vicisjs/vicis/blob/master/dist/index.d.ts)
 [![Stars](https://badgen.net/github/stars/vicisjs/vicis?&icon=github&label=stars&color=ffcc33)](https://github.com/vicisjs/vicis)
 
 [![GitHub stars](https://img.shields.io/github/stars/vicisjs/vicis.svg?style=social&label=Star)](https://github.com/vicisjs/vicis)
