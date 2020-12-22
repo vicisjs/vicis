@@ -1,12 +1,12 @@
 #### Codacy
 
-[![codacy](https://badgen.net/codacy/grade/e4e2ebf8e0914668866536a898370ad2)](https://github.com/r37r0m0d3l/vicis)
+[![codacy](https://badgen.net/codacy/grade/e4e2ebf8e0914668866536a898370ad2)](https://github.com/vicisjs/vicis)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e4e2ebf8e0914668866536a898370ad2)](https://www.codacy.com/manual/r37r0m0d3l/vicis?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=r37r0m0d3l/vicis&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e4e2ebf8e0914668866536a898370ad2)](https://www.codacy.com/manual/vicisjs/vicis?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vicisjs/vicis&amp;utm_campaign=Badge_Grade)
 
 #### Code Climate
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/44f9b7b63ec7fab977bd/maintainability)](https://codeclimate.com/github/r37r0m0d3l/vicis/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/44f9b7b63ec7fab977bd/maintainability)](https://codeclimate.com/github/vicisjs/vicis/maintainability)
 
 #### DeepScan
 
@@ -14,16 +14,16 @@
 
 #### Dependabot
 
-[![Dependabot](https://badgen.net/dependabot/r37r0m0d3l/vicis?&icon=dependabot)](https://github.com/r37r0m0d3l/vicis)
+[![Dependabot](https://badgen.net/dependabot/vicisjs/vicis?&icon=dependabot)](https://github.com/vicisjs/vicis)
 
 #### GitHub
 
-[![Combined Checks](https://badgen.net/github/checks/r37r0m0d3l/vicis?&icon=github)](https://github.com/r37r0m0d3l/vicis)
-[![Combined Status](https://badgen.net/github/status/r37r0m0d3l/vicis?&icon=github)](https://github.com/r37r0m0d3l/vicis)
-[![Types](https://badgen.net/npm/types/vicis?&icon=typescript)](https://github.com/r37r0m0d3l/vicis/blob/master/dist/vicis.d.ts)
-[![Stars](https://badgen.net/github/stars/r37r0m0d3l/vicis?&icon=github&label=stars&color=ffcc33)](https://github.com/r37r0m0d3l/vicis)
+[![Combined Checks](https://badgen.net/github/checks/vicisjs/vicis?&icon=github)](https://github.com/vicisjs/vicis)
+[![Combined Status](https://badgen.net/github/status/vicisjs/vicis?&icon=github)](https://github.com/vicisjs/vicis)
+[![Types](https://badgen.net/npm/types/vicis?&icon=typescript)](https://github.com/vicisjs/vicis/blob/master/dist/vicis.d.ts)
+[![Stars](https://badgen.net/github/stars/vicisjs/vicis?&icon=github&label=stars&color=ffcc33)](https://github.com/vicisjs/vicis)
 
-[![GitHub stars](https://img.shields.io/github/stars/r37r0m0d3l/vicis.svg?style=social&label=Star)](https://github.com/r37r0m0d3l/vicis)
+[![GitHub stars](https://img.shields.io/github/stars/vicisjs/vicis.svg?style=social&label=Star)](https://github.com/vicisjs/vicis)
 [![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l)
 
 #### NPM
@@ -36,11 +36,11 @@
 
 #### LGTM
 
-[![lgtm](https://badgen.net/lgtm/langs/g/r37r0m0d3l/vicis?&icon=lgtm)](https://lgtm.com/projects/g/r37r0m0d3l/vicis/alerts/)
-[![lgtm](https://badgen.net/lgtm/grade/g/r37r0m0d3l/vicis?&icon=lgtm)](https://lgtm.com/projects/g/r37r0m0d3l/vicis/context:javascript)
+[![lgtm](https://badgen.net/lgtm/langs/g/vicisjs/vicis?&icon=lgtm)](https://lgtm.com/projects/g/vicisjs/vicis/alerts/)
+[![lgtm](https://badgen.net/lgtm/grade/g/vicisjs/vicis?&icon=lgtm)](https://lgtm.com/projects/g/vicisjs/vicis/context:javascript)
 
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/r37r0m0d3l/vicis.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/r37r0m0d3l/vicis/alerts/)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/r37r0m0d3l/vicis.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/r37r0m0d3l/vicis/context:javascript)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/vicisjs/vicis.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/vicisjs/vicis/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/vicisjs/vicis.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/vicisjs/vicis/context:javascript)
 
 #### OpenBase
 
@@ -53,10 +53,10 @@
 
 #### Snyk
 
-[![Known Vulnerabilities](https://snyk.io/test/github/r37r0m0d3l/vicis/badge.svg)](https://snyk.io/test/github/r37r0m0d3l/vicis)
+[![Known Vulnerabilities](https://snyk.io/test/github/vicisjs/vicis/badge.svg)](https://snyk.io/test/github/vicisjs/vicis)
 
 #### Travis CI
 
-[![Build Status](https://badgen.net/travis/r37r0m0d3l/vicis?&icon=travis)](https://travis-ci.org/r37r0m0d3l/vicis)
+[![Build Status](https://badgen.net/travis/vicisjs/vicis?&icon=travis)](https://travis-ci.org/vicisjs/vicis)
 
-[![Build Status](https://travis-ci.org/r37r0m0d3l/vicis.svg?branch=master)](https://travis-ci.org/r37r0m0d3l/vicis)
+[![Build Status](https://travis-ci.org/vicisjs/vicis.svg?branch=master)](https://travis-ci.org/vicisjs/vicis)

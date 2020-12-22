@@ -31,7 +31,7 @@ const response = Vicis.factory(/* ...configuration, ...data */)
 
 Decorators
 
-[Vicis Decorators Plugin repository](https://github.com/r37r0m0d3l/vicis-decorators)
+[Vicis Decorators Plugin repository](https://github.com/vicisjs/vicis-decorators)
 
 ```typescript
 import { Vicis } from "vicis";
