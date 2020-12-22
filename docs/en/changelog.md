@@ -2,6 +2,12 @@
 
 ---
 
+## 2.0.7
+
+-   ⬆️ Dependencies updated
+
+---
+
 ## 2.0.6
 
 -   🚚 Move git repository to another organization
