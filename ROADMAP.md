@@ -19,3 +19,7 @@
 -   [ ] Generate TypeScript interface from config
 
 -   [ ] Generate Swagger/Postman/OpenAPI configuration
+
+-   [ ] automatic data validation, conversion, and filtering  https://twitter.com/tiangolo/status/1344033270699347969
+
+-   [ ] Republish into `@vicis/vicis` https://stackoverflow.com/questions/28371669/renaming-a-published-npm-module
