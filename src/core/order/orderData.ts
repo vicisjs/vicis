@@ -21,6 +21,10 @@ export function orderData(
   sort: boolean | ESort = ESort.Default,
 ): IObject {
   if (arrayIsEmpty(propertiesToStreamline)) {
+    if (sortAsBoolean(sort)) {
+      const keys = Object.keys(data).sort((alpha, beta) => alpha.localeCompare(beta));
+      return objectKeysOrder(data, keys, true);
+    }
     return data;
   }
   return objectKeysOrder(data, propertiesToStreamline, sortAsBoolean(sort));

@@ -2,6 +2,12 @@
 
 ---
 
+## 2.0.8
+
+-   🐛 Fix key sorting
+
+---
+
 ## 2.0.7
 
 -   ⬆️ Dependencies updated
