@@ -2,7 +2,7 @@
 
 ---
 
-◀ [Конфігурація](/ua/configuration.md)
+◀ [Конфігурація](/ua/configuration_object.md)
 
 Перевизначає властивості об'єкта
 

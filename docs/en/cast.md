@@ -2,7 +2,7 @@
 
 ---
 
-◀ [Configuration](/en/configuration.md)
+◀ [Configuration](/en/configuration_object.md)
 
 Typecast object value to BOOLEAN, NUMERIC, INTEGER, STRING, JSON
 

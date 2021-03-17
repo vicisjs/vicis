@@ -13,7 +13,7 @@ const { Vicis } = require("vicis");
 ```js
 const {
   Vicis, CAST_TYPE,
-  cast, defaults, defined, exclude, omit,
+  cast, defaults, defined, exclude, nullish, omit,
   pick, rename, replace, required, transform,
 } = require("vicis");
 ```
@@ -31,7 +31,7 @@ import Vicis from "vicis";
 ```js
 import {
   Vicis, CAST_TYPE,
-  cast, defaults, defined, omit, exclude,
+  cast, defaults, defined, omit, nullish, exclude,
   pick, rename, replace, required, transform,
 } from "vicis";
 ```

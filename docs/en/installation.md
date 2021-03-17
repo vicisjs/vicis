@@ -50,11 +50,12 @@ enum CAST_TYPE {
   STRING = "string",
   JSON = "json", // Call JSON.stringify on value
 }
-interface IVicisConfig {
+interface IConfig {
   cast?: { [prop: string]: CAST_TYPE };
   defaults?: { [prop: string]: any };
   defined?: string[];
   exclude?: Array<string|RegExp>;
+  nullish?: { [prop: string]: any };
   omit?: string;
   order?: string[];
   pick?: string[];

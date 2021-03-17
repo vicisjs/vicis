@@ -56,15 +56,6 @@ describe("calling and printing", () => {
       done: "yes",
     });
   });
-  it("Vicis.nullish()", () => {
-    expect(
-      Vicis.from({ login: "guest", active: null, done: undefined }, { nullish: { active: true, done: "yes" } }),
-    ).toEqual({
-      login: "guest",
-      active: true,
-      done: "yes",
-    });
-  });
   it("omit()", () => {
     expect(omit({ login: "guest", password: "secret" }, ["password"])).toEqual({ login: "guest" });
   });

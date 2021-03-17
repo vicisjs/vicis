@@ -2,7 +2,7 @@
 
 ---
 
-◀ [Configuration](/en/configuration.md)
+◀ [Configuration](/en/configuration_object.md)
 
 Renames properties to another name and remove original
 

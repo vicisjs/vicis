@@ -2,7 +2,7 @@
 
 ---
 
-◀ [Configuration](/en/configuration.md)
+◀ [Configuration](/en/configuration_object.md)
 
 If value is defined in object - no error thrown
 

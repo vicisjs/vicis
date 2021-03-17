@@ -4,7 +4,7 @@
 
 ## Configuration object properties
 
-[Cast](/en/cast.md) [Defaults](/en/defaults.md) [Defined](/en/defined.md) [Exclude](/en/exclude.md) [Omit](/en/omit.md) [Order](/en/order.md) [Pick](/en/pick.md) [Rename](/en/rename.md) [Replace](/en/replace.md) [Required](/en/required.md) [Transform](/en/transform.md)
+[Cast](/en/cast.md) [Defaults](/en/defaults.md) [Defined](/en/defined.md) [Exclude](/en/exclude.md) [Nullish](/en/nullish.md) [Omit](/en/omit.md) [Order](/en/order.md) [Pick](/en/pick.md) [Rename](/en/rename.md) [Replace](/en/replace.md) [Required](/en/required.md) [Transform](/en/transform.md)
 
 ```js
 const configuration = {
@@ -18,6 +18,8 @@ const configuration = {
   // Applies after all other transformations.
   // Overrides `pick` configuration.
   exclude: [],
+  // In case of property has undefined or null value it will be replaced with value from configuration
+  nullish: {},
   // Remove from object listed properties.
   // Applies before all other transformations.
   omit: [],

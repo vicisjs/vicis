@@ -2,7 +2,7 @@
 
 ---
 
-◀ [Configuration](/en/configuration.md)
+◀ [Configuration](/en/configuration_object.md)
 
 Transform property value with function
 

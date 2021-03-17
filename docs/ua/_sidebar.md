@@ -12,6 +12,7 @@
     -   [Defaults - За Замовчуванням](/ua/defaults.md)
     -   [Defined - Існує](/ua/defined.md)
     -   [Exclude - Виключити](/ua/exclude.md)
+    -   [Nullish - Нульовий](/ru/nullish.md)
     -   [Omit - Прибрати](/ua/omit.md)
     -   [Order - Порядок](/ua/order.md)
     -   [Pick - Вибрати](/ua/pick.md)

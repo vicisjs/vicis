@@ -271,14 +271,14 @@ export class Vicis {
       this.__dataCache = this.__dataOriginal;
     }
     this.__dataCache = omitData(this.__omit, this.__dataCache);
+    this.__dataCache = defaultsData(this.__defaults, this.__dataCache);
+    this.__dataCache = nullishData(this.__nullish, this.__dataCache);
     this.__dataCache = requiredData(this.__required, this.__dataCache);
     this.__dataCache = definedData(this.__defined, this.__dataCache);
     this.__dataCache = castData(this.__cast, this.__dataCache);
     this.__dataCache = transformData(this.__transform, this.__dataCache);
     this.__dataCache = replaceData(this.__replace, this.__dataCache);
     this.__dataCache = renameData(this.__rename, this.__dataCache);
-    this.__dataCache = defaultsData(this.__defaults, this.__dataCache);
-    this.__dataCache = nullishData(this.__nullish, this.__dataCache);
     this.__dataCache = pickData(this.__pick, this.__dataCache);
     this.__dataCache = excludeData(this.__exclude, this.__dataCache);
     this.__dataCache = castToJson(this.__dataCache, this.__sort);
@@ -299,9 +299,9 @@ export class Vicis {
   constructor(config: IConfig = {}, data?: IObject) {
     this.__cast = objectCreateEmpty() as unknown as ICast;
     this.__defaults = objectCreateEmpty() as unknown as IDefaults;
+    this.__nullish = objectCreateEmpty() as unknown as INullish;
     this.__defined = [];
     this.__exclude = [];
-    this.__nullish = objectCreateEmpty() as unknown as INullish;
     this.__omit = [];
     this.__order = [];
     this.__pick = [];
@@ -641,6 +641,8 @@ export class Vicis {
     this.resetConfig();
     this.sort(configFull.sort);
     this.omit(configFull.omit);
+    this.defaults(configFull.defaults);
+    this.nullish(configFull.nullish);
     this.cast(configFull.cast);
     this.defined(configFull.defined);
     this.pick(configFull.pick);
@@ -648,8 +650,6 @@ export class Vicis {
     this.replace(configFull.replace);
     this.required(configFull.required);
     this.transform(configFull.transform);
-    this.defaults(configFull.defaults);
-    this.nullish(configFull.nullish);
     this.exclude(configFull.exclude);
     this.order(configFull.order);
     this.validateConfig();

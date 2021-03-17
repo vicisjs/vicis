@@ -4,7 +4,7 @@
 
 ## Конфигурационный объект
 
-[Cast](/ru/cast.md) [Defaults](/ru/defaults.md) [Defined](/ru/defined.md) [Exclude](/ru/exclude.md) [Omit](/ru/omit.md) [Order](/ru/order.md) [Pick](/ru/pick.md) [Rename](/ru/rename.md) [Replace](/ru/replace.md) [Required](/ru/required.md) [Transform](/ru/transform.md)
+[Cast](/ru/cast.md) [Defaults](/ru/defaults.md) [Defined](/ru/defined.md) [Exclude](/ru/exclude.md) [Nullish](/ru/nullish.md) [Omit](/ru/omit.md) [Order](/ru/order.md) [Pick](/ru/pick.md) [Rename](/ru/rename.md) [Replace](/ru/replace.md) [Required](/ru/required.md) [Transform](/ru/transform.md)
 
 ```js
 const configuration = {
@@ -18,6 +18,8 @@ const configuration = {
   // Применяется после всех других преобразований.
   // Переопределяет `pick`.
   exclude: [],
+  // Если свойство имеет неопределенное значение или null, оно будет заменено значением из конфигурации
+  nullish: {},
   // Удалить из объекта перечисленные свойства.
   // Применяется перед всеми другими преобразованиями.
   omit: [],

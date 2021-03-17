@@ -2,7 +2,7 @@
 
 ---
 
-◀ [Конфігурація](/ua/configuration.md)
+◀ [Конфігурація](/ua/configuration_object.md)
 
 Приведення типу об'єкта до BOOLEAN, NUMERIC, INTEGER, STRING, JSON
 

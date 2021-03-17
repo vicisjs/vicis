@@ -2,6 +2,12 @@
 
 ---
 
+## 2.1.0
+
+-   ♻️ Изменен порядок применения функций: omit, defaults, nullish, required, defined, cast, transform, replace, rename, pick, exclude
+
+---
+
 ## 2.0.9
 
 -   ➕ Добавлен экспериментальный `nullish`

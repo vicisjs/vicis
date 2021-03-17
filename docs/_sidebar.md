@@ -12,6 +12,7 @@
     -   [Defaults](/en/defaults.md)
     -   [Defined](/en/defined.md)
     -   [Exclude](/en/exclude.md)
+    -   [Nullish](/en/nullish.md)
     -   [Omit](/en/omit.md)
     -   [Order](/en/order.md)
     -   [Pick](/en/pick.md)

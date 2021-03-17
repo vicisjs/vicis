@@ -1,17 +1,17 @@
-# Pick
+# Nullish
 
 ---
 
 ◀ [Configuration](/en/configuration_object.md)
 
-Picks from object only listed properties and ignore all other properties
+In case of property has undefined or null value it will be replaced with value from configuration
 
 ```js
-const { pick } = require("vicis");
+const { nullish } = require("vicis");
 ```
 
 ```js
-import { pick } from "vicis";
+import { nullish } from "vicis";
 ```
 
 <table><thead><tr><td colspan="3">
@@ -19,13 +19,14 @@ import { pick } from "vicis";
 <tr><td>
 
 ```js
-pick(
+nullish(
   {
-    id: 12345,
     login: "guest",
-    active: true,
+    active: null,
   },
-  ["id", "login"],
+  {
+    active: true,
+  }
 );
 ```
 
@@ -38,12 +39,13 @@ pick(
 <strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
 <strong>&#x21E5;</strong><br>
+<strong>&#x21E5;</strong><br>
 </td>
 <td>
 
 ```json
 {
-  "id": 12345,
+  "active": true,
   "login": "guest"
 }
 ```
