@@ -2,6 +2,12 @@
 
 ---
 
+## 2.0.9
+
+-   ➕ Added experimentally `nullish`
+
+---
+
 ## 2.0.8
 
 -   🐛 Fix key sorting

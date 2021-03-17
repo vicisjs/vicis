@@ -8,6 +8,7 @@ import { IConfigObjectFull } from "../../interface/config/IConfigObjectFull";
 import { IDefaults } from "../../interface/config/IDefaults";
 import { IDefined } from "../../interface/config/IDefined";
 import { IExclude } from "../../interface/config/IExclude";
+import { INullish } from "../../interface/config/INullish";
 import { IOmit } from "../../interface/config/IOmit";
 import { IOrder } from "../../interface/config/IOrder";
 import { IPick } from "../../interface/config/IPick";
@@ -42,6 +43,8 @@ import { definedConfig } from "../defined/definedConfig";
 import { definedData } from "../defined/definedData";
 import { excludeConfig } from "../exclude/excludeConfig";
 import { excludeData } from "../exclude/excludeData";
+import { nullishConfig } from "../nullish/nullishConfig";
+import { nullishData } from "../nullish/nullishData";
 import { omitConfig } from "../omit/omitConfig";
 import { omitData } from "../omit/omitData";
 import { orderConfig } from "../order/orderConfig";
@@ -88,6 +91,12 @@ export class Vicis {
    * @type {Array.<string|RegExp>}
    */
   __exclude: IExclude;
+  /**
+   * @name nullish
+   * @private
+   * @type {Object}
+   */
+  __nullish: INullish;
   /**
    * @name omit
    * @private
@@ -269,6 +278,7 @@ export class Vicis {
     this.__dataCache = replaceData(this.__replace, this.__dataCache);
     this.__dataCache = renameData(this.__rename, this.__dataCache);
     this.__dataCache = defaultsData(this.__defaults, this.__dataCache);
+    this.__dataCache = nullishData(this.__nullish, this.__dataCache);
     this.__dataCache = pickData(this.__pick, this.__dataCache);
     this.__dataCache = excludeData(this.__exclude, this.__dataCache);
     this.__dataCache = castToJson(this.__dataCache, this.__sort);
@@ -291,6 +301,7 @@ export class Vicis {
     this.__defaults = objectCreateEmpty() as unknown as IDefaults;
     this.__defined = [];
     this.__exclude = [];
+    this.__nullish = objectCreateEmpty() as unknown as INullish;
     this.__omit = [];
     this.__order = [];
     this.__pick = [];
@@ -425,6 +436,7 @@ export class Vicis {
       defaults: this.__defaults,
       defined: this.__defined,
       exclude: this.__exclude,
+      nullish: this.__nullish,
       omit: this.__omit,
       order: this.__order,
       pick: this.__pick,
@@ -637,6 +649,7 @@ export class Vicis {
     this.required(configFull.required);
     this.transform(configFull.transform);
     this.defaults(configFull.defaults);
+    this.nullish(configFull.nullish);
     this.exclude(configFull.exclude);
     this.order(configFull.order);
     this.validateConfig();
@@ -695,6 +708,20 @@ export class Vicis {
    */
   exclude(propertiesToExclude: IExclude = []) {
     this.__exclude = excludeConfig(propertiesToExclude);
+    this.validateConfig();
+    this.validateData();
+    return this;
+  }
+
+  /**
+   * @name nullish
+   * @public
+   * @throws TypeError
+   * @param {Object=} propertyNullishValues
+   * @returns {Vicis}
+   */
+  nullish(propertyNullishValues: INullish = {}) {
+    this.__nullish = nullishConfig(propertyNullishValues); // do not deep clone!
     this.validateConfig();
     this.validateData();
     return this;

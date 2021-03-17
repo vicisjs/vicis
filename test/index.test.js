@@ -4,6 +4,7 @@ const {
   defaults,
   defined,
   exclude,
+  nullish,
   omit,
   order,
   pick,
@@ -46,6 +47,22 @@ describe("calling and printing", () => {
       ),
     ).toEqual({
       login: "guest",
+    });
+  });
+  it("nullish()", () => {
+    expect(nullish({ login: "guest", active: null, done: undefined }, { active: true, done: "yes" })).toEqual({
+      login: "guest",
+      active: true,
+      done: "yes",
+    });
+  });
+  it("Vicis.nullish()", () => {
+    expect(
+      Vicis.from({ login: "guest", active: null, done: undefined }, { nullish: { active: true, done: "yes" } }),
+    ).toEqual({
+      login: "guest",
+      active: true,
+      done: "yes",
     });
   });
   it("omit()", () => {

@@ -16,6 +16,7 @@ import { IRequired } from "../../interface/config/IRequired";
 import { ITransform } from "../../interface/config/ITransform";
 import { IDefaults } from "../../interface/config/IDefaults";
 import { IReplace } from "../../interface/config/IReplace";
+import { INullish } from "../../interface/config/INullish";
 
 export function convertFunctionToConfig(
   callable: IFunction,
@@ -61,6 +62,9 @@ export function convertFunctionToConfig(
     if (data[key].hasDefaults) {
       (config.defaults as IDefaults)[key] = data[key].defaults;
     }
+    if (data[key].hasNullish) {
+      (config.nullish as INullish)[key] = data[key].nullish;
+    }
     if (data[key].hasValue) {
       (config.replace as IReplace)[key] = data[key].value;
     }
@@ -70,6 +74,9 @@ export function convertFunctionToConfig(
   }
   if (!Object.keys(config.defaults as IDefaults).length) {
     delete config.defaults;
+  }
+  if (!Object.keys(config.nullish as INullish).length) {
+    delete config.nullish;
   }
   if (!(config.defined as IDefined).length) {
     delete config.defined;

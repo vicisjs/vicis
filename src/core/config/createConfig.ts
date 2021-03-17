@@ -1,6 +1,7 @@
 import { ICast } from "../../interface/config/ICast";
 import { IConfigObjectFull } from "../../interface/config/IConfigObjectFull";
 import { IDefaults } from "../../interface/config/IDefaults";
+import { INullish } from "../../interface/config/INullish";
 import { IRename } from "../../interface/config/IRename";
 import { IReplace } from "../../interface/config/IReplace";
 import { ITransform } from "../../interface/config/ITransform";
@@ -15,6 +16,7 @@ export function createConfig(): IConfigObjectFull {
     defaults: objectCreateEmpty() as IDefaults,
     defined: [],
     exclude: [],
+    nullish: objectCreateEmpty() as INullish,
     omit: [],
     order: [],
     pick: [],

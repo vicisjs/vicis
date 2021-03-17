@@ -1,3 +1,7 @@
+import { nullishConfig } from "../src/core/nullish/nullishConfig";
+import { objectIsEmpty } from "../src/util/object/is/empty";
+import { nullishData } from "../src/core/nullish/nullishData";
+
 export interface IFunction {
   (...args: unknown[]): unknown;
 }
@@ -26,6 +30,9 @@ export interface IDefined extends Array<string> {
 }
 export interface IExclude extends Array<string | RegExp> {
   [index: number]: string | RegExp;
+}
+export interface INullish {
+  [key: string]: unknown;
 }
 export interface IOmit extends Array<string> {
   [index: number]: string;
@@ -58,6 +65,7 @@ export interface IConfigObject {
   defaults?: IDefaults;
   defined?: IDefined;
   exclude?: IExclude;
+  nullish?: INullish;
   omit?: IOmit;
   order?: IOrder;
   pick?: IPick;
@@ -73,6 +81,7 @@ export interface IConfigObjectFull {
   defaults?: IDefaults;
   defined?: IDefined;
   exclude?: IExclude;
+  nullish?: INullish;
   omit?: IOmit;
   order?: IOrder;
   pick?: IPick;
@@ -122,6 +131,14 @@ export function defined(data: IObject, propertiesMustBeDefined?: IDefined): IObj
  * @returns {Object}
  */
 export function exclude(data: IObject, propertiesToExclude?: IExclude): IObject;
+/**
+ * @name nullish
+ * @throws TypeError
+ * @param {Object} data
+ * @param {Object.<string, *>=} propertyNullishValues
+ * @returns {Object}
+ */
+export function nullish(data: IObject, propertyNullishValues: INullish): IObject;
 /**
  * @name omit
  * @throws TypeError
@@ -298,6 +315,7 @@ export class Vicis {
     defaults: IDefaults;
     defined: IDefined;
     exclude: IExclude;
+    nullish: INullish;
     omit: IOmit;
     order: IOrder;
     pick: IPick;
@@ -363,6 +381,14 @@ export class Vicis {
    * @returns {Vicis}
    */
   public exclude(propertiesToExclude?: IExclude): this;
+  /**
+   * @name nullish
+   * @public
+   * @throws TypeError
+   * @param {Object=} propertyNullishValues
+   * @returns {Vicis}
+   */
+  public nullish(propertyNullishValues?: INullish): this;
   /**
    * @name omit
    * @public

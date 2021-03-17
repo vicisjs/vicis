@@ -2,6 +2,7 @@ import { ICast } from "./ICast";
 import { IDefaults } from "./IDefaults";
 import { IDefined } from "./IDefined";
 import { IExclude } from "./IExclude";
+import { INullish } from "./INullish";
 import { IOmit } from "./IOmit";
 import { IOrder } from "./IOrder";
 import { IPick } from "./IPick";
@@ -17,6 +18,7 @@ export interface IConfigObject {
   defaults?: IDefaults;
   defined?: IDefined;
   exclude?: IExclude;
+  nullish?: INullish;
   omit?: IOmit;
   order?: IOrder;
   pick?: IPick;

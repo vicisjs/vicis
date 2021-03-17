@@ -7,7 +7,9 @@ export class VicisParameter {
   __defaults?: any;
   __defined?: boolean;
   __hasDefaults = false;
+  __hasNullish = false;
   __hasValue = false;
+  __nullish?: any;
   __required?: boolean;
   __transform?: IFunction;
   __value = undefined;
@@ -53,26 +55,35 @@ export class VicisParameter {
     this.__hasDefaults = true;
     return this;
   }
+  nullish(value: any): VicisParameter {
+    this.__nullish = value;
+    this.__hasNullish = true;
+    return this;
+  }
   transform(callable: IFunction): VicisParameter {
     this.__transform = callable;
     return this;
   }
   toObject(): {
     cast: string | undefined;
-    transform: ((...args: unknown[]) => unknown) | undefined;
     defaults: any;
-    hasDefaults: boolean;
-    hasValue: boolean;
-    value: any;
     defined: boolean | undefined;
+    hasDefaults: boolean;
+    hasNullish: boolean;
+    hasValue: boolean;
+    nullish: any;
     required: boolean | undefined;
+    transform: ((...args: unknown[]) => unknown) | undefined;
+    value: any;
   } {
     return {
       cast: this.__cast,
       defaults: this.__defaults,
       defined: this.__defined,
       hasDefaults: this.__hasDefaults,
+      hasNullish: this.__hasNullish,
       hasValue: this.__hasValue,
+      nullish: this.__nullish,
       required: this.__required,
       transform: this.__transform,
       value: this.__value,
