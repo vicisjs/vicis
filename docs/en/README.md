@@ -1,4 +1,4 @@
-![Vicis](../_media/banner.webp?raw=true#center "Vicis")
+![Vicis](https://raw.githubusercontent.com/vicisjs/vicis/master/.github/assets/banner.webp?raw=true#center "Vicis")
 
 Presentation and transformation layer for data output in RESTful APIs.
 

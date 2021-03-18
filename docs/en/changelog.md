@@ -2,6 +2,14 @@
 
 ---
 
+## 2.1.1
+
+-   📚 Documentation updated
+
+-   🔨 Cleanup typings
+
+---
+
 ## 2.1.0
 
 -   ♻️ Changed applying function order: omit, defaults, nullish, required, defined, cast, transform, replace, rename, pick, exclude

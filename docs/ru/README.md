@@ -1,4 +1,4 @@
-![Vicis](../_media/banner.webp?raw=true#center "Vicis")
+![Vicis](https://raw.githubusercontent.com/vicisjs/vicis/master/.github/assets/banner.webp?raw=true#center "Vicis")
 
 Сериализация данных для REST API.
 

@@ -1,7 +1,3 @@
-import { nullishConfig } from "../src/core/nullish/nullishConfig";
-import { objectIsEmpty } from "../src/util/object/is/empty";
-import { nullishData } from "../src/core/nullish/nullishData";
-
 export interface IFunction {
   (...args: unknown[]): unknown;
 }

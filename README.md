@@ -13,7 +13,15 @@ Presentation and transformation layer for data output in RESTful APIs.
 [![build](https://badgen.net/travis/vicisjs/vicis?&label=build)](https://travis-ci.org/vicisjs/vicis)
 [![lgtm](https://badgen.net/lgtm/grade/g/vicisjs/vicis?&icon=lgtm&label=lgtm:js/ts&color=00C853)](https://lgtm.com/projects/g/vicisjs/vicis/alerts/)
 
-This is Node.js analogue to these libraries: 🐘 [Fractal](https://fractal.thephpleague.com/) for PHP, 💎 [Roar](https://github.com/trailblazer/roar) for Ruby, 🍢 [Marshmallow](https://marshmallow.readthedocs.io/en/stable/) for Python.
+This is Node.js analogue to these libraries:
+
+-   🐘 [Fractal](https://fractal.thephpleague.com/) for PHP
+
+-   💎 [Roar](https://github.com/trailblazer/roar) for Ruby
+
+-   🍢 [Marshmallow](https://marshmallow.readthedocs.io/en/stable/) for Python
+
+-   ⚡ [FastAPI - Response Model](https://fastapi.tiangolo.com/tutorial/response-model/) for Python FastAPI framework.
 
 ---
 
@@ -24,12 +32,38 @@ Code:
 ```js
 import { Vicis } from "vicis";
 const configuration = {
-  cast: { _id: Vicis.INTEGER, registered: Vicis.FLAG },
-  defaults: { confirmed: false },
-  exclude: [/(?:password)/gi, /^(?:_)(?:_)?/],
-  omit: ["createdAt", "updatedAt", "deletedAt"],
-  rename: { _id: "id", email: "login" },
-  replace: { url: null }
+  cast: {
+    // convert `_id` to integer
+    _id: Vicis.INTEGER,
+    // convert `registered` to boolean
+    registered: Vicis.FLAG,
+  },
+  nullish: {
+    // if not set `confirmed` set to `false`
+    confirmed: false,
+  },
+  exclude: [
+    // exclude fields with names like `password`
+    /(?:password)/gi, /^(?:_)(?:_)?/,
+  ],
+  omit: [
+    // remove fields that may be personal
+    "createdAt", "updatedAt", "deletedAt",
+  ],
+  rename: {
+    // rename `_id` to `id`
+    _id: "id",
+    // rename `email` to `login`
+    email: "login",
+  },
+  replace: {
+    // always replace field value with `null`
+    url: null,
+  },
+  order: [
+    // `id` and `login` goes first, then everyone else
+    "id", "login",
+  ],
 };
 const model = {
   _id: "54759309034942804",
@@ -49,12 +83,13 @@ Output:
 
 ```json
 {
-  "confirmed": false,
-  "id": 54759309034942804,
+  "id": 54759309034942800,
   "login": "johnwick@gmail.com",
+  "confirmed": false,
   "registered": true,
   "url": null
 }
+
 ```
 
 ## 🗺️ My other projects
