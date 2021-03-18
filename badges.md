@@ -57,6 +57,6 @@
 
 #### Travis CI
 
-[![Build Status](https://badgen.net/travis/vicisjs/vicis?&icon=travis)](https://travis-ci.org/vicisjs/vicis)
+[![Build Status](https://badgen.net/travis/vicisjs/vicis)](https://travis-ci.org/vicisjs/vicis)
 
 [![Build Status](https://travis-ci.org/vicisjs/vicis.svg?branch=master)](https://travis-ci.org/vicisjs/vicis)

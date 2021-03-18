@@ -10,7 +10,7 @@ Presentation and transformation layer for data output in RESTful APIs.
 [![downloads](https://badgen.net/npm/dt/vicis?&icon=terminal&label=downloads&color=009688)](https://www.npmjs.com/package/vicis)
 [![stars](https://badgen.net/github/stars/vicisjs/vicis?&icon=github&label=stars&color=ffcc33)](https://github.com/vicisjs/vicis)
 [![types](https://badgen.net/npm/types/vicis?&icon=typescript&label=types&color=1E90FF)](https://github.com/vicisjs/vicis/blob/master/dist/index.d.ts)
-[![build](https://badgen.net/travis/vicisjs/vicis?&icon=travis&label=build)](https://travis-ci.org/vicisjs/vicis)
+[![build](https://badgen.net/travis/vicisjs/vicis?&label=build)](https://travis-ci.org/vicisjs/vicis)
 [![lgtm](https://badgen.net/lgtm/grade/g/vicisjs/vicis?&icon=lgtm&label=lgtm:js/ts&color=00C853)](https://lgtm.com/projects/g/vicisjs/vicis/alerts/)
 
 This is Node.js analogue to these libraries: 🐘 [Fractal](https://fractal.thephpleague.com/) for PHP, 💎 [Roar](https://github.com/trailblazer/roar) for Ruby, 🍢 [Marshmallow](https://marshmallow.readthedocs.io/en/stable/) for Python.
