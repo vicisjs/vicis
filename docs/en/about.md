@@ -10,4 +10,6 @@ This is Node.js analogue to this libraries:
 
 -   🍢 [Marshmallow](https://marshmallow.readthedocs.io/en/stable/) for Python
 
+-   ⚡ [FastAPI - Response Model](https://fastapi.tiangolo.com/tutorial/response-model/) for Python *FastAPI* framework
+
 ---

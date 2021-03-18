@@ -10,4 +10,6 @@
 
 -   🍢 [Marshmallow](https://marshmallow.readthedocs.io/en/stable/) для Python
 
+-   ⚡ [FastAPI - Response Model](https://fastapi.tiangolo.com/tutorial/response-model/) для Python фреймворка *FastAPI*
+
 ---
