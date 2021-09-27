@@ -1,5 +1,9 @@
 # RoadMap
 
+-   [ ] Add definitions for everything, even enternal
+
+-   [ ] 'replace' alias with 'override', 'change' become 'replace' if exist
+
 -   [ ] Advanced chained calls for collections.
 
 -   [ ] Async transformations.
