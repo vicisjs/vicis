@@ -48,8 +48,17 @@ export interface IReplace {
 export interface IRequired extends Array<string> {
   [index: number]: string;
 }
+export interface TransformFunctionInterface {
+  (value: unknown, key: string, data: Record<string, any>): unknown;
+}
+/**
+ * @deprecated
+ */
 export interface ITransform {
-  [key: string]: (value: unknown, key: string, data: IObject) => unknown;
+  [key: string]: TransformFunctionInterface;
+}
+export interface ConfigTransformInterface {
+  [key: string]: TransformFunctionInterface;
 }
 export enum ESort {
   Default = "asc",
@@ -71,7 +80,11 @@ export interface IConfigObject {
   required?: IRequired;
   transform?: ITransform;
 }
+/**
+ * @deprecated
+ */
 export type IConfig = IConfigObject | IConfigCallback;
+export type ConfigInterface = IConfigObject | IConfigCallback;
 export interface IConfigObjectFull {
   cast?: ICast;
   defaults?: IDefaults;
@@ -95,6 +108,7 @@ export const CAST_TYPE: {
   NUMERIC: string;
   STRING: string;
 };
+export type CastType = typeof CAST_TYPE[keyof typeof CAST_TYPE];
 /**
  * @name cast
  * @throws TypeError
@@ -490,3 +504,30 @@ export class Vicis {
    */
   public fromArray(collection: IObject[]): IObject[];
 }
+/**
+ * @name transformToStringIfNotNil
+ * @param {unknown} value
+ * @param {string} key
+ * @param {Record<string, any>} data
+ * @returns {*}
+ * @since 2.2.0
+ */
+export function transformToStringIfNotNil(value: unknown, key: string, data: Record<string, any>): unknown;
+/**
+ * @name transformToStringIfNotNull
+ * @param {unknown} value
+ * @param {string} key
+ * @param {Record<string, any>} data
+ * @returns {*}
+ * @since 2.2.0
+ */
+export function transformToStringIfNotNull(value: unknown, key: string, data: Record<string, any>): unknown;
+/**
+ * @name transformToStringIfNotVoid
+ * @param {unknown} value
+ * @param {string} key
+ * @param {Record<string, any>} data
+ * @returns {*}
+ * @since 2.2.0
+ */
+export function transformToStringIfNotVoid(value: unknown, key: string, data: Record<string, any>): unknown;

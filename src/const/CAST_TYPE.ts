@@ -15,3 +15,5 @@ export const CAST_TYPE: {
   NUMERIC: ECastType.NUMERIC,
   STRING: ECastType.STRING,
 };
+
+export type CastType = typeof CAST_TYPE[keyof typeof CAST_TYPE];

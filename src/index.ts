@@ -4,7 +4,6 @@ export { IFunction } from "./interface/common/IFunction";
 export { IObject } from "./interface/common/IObject";
 
 export { ICast } from "./interface/config/ICast";
-export { IConfig } from "./interface/config/IConfig";
 export { IConfigCallback } from "./interface/config/IConfigCallback";
 export { IConfigObject } from "./interface/config/IConfigObject";
 export { IConfigObjectFull } from "./interface/config/IConfigObjectFull";
@@ -18,13 +17,21 @@ export { IPick } from "./interface/config/IPick";
 export { IRename } from "./interface/config/IRename";
 export { IReplace } from "./interface/config/IReplace";
 export { IRequired } from "./interface/config/IRequired";
-export { ITransform } from "./interface/config/ITransform";
+export {
+  IConfig,
+  ConfigInterface,
+} from "./interface/config/IConfig";
+export {
+  ConfigTransformInterface,
+  ITransform,
+  TransformFunctionInterface,
+} from "./interface/config/ITransform";
 
 //#endregion
 
 //#region Constants
 
-export { CAST_TYPE } from "./const/CAST_TYPE";
+export { CAST_TYPE, CastType } from "./const/CAST_TYPE";
 
 //#endregion
 
@@ -48,5 +55,13 @@ export { transform } from "./core/transform/transform";
 //#region Classes
 
 export { Vicis } from "./core/class/Vicis";
+
+//#endregion
+
+//#region Utilities
+
+export { transformToStringIfNotNil } from "./util/transform-to-string-if-not-nil";
+export { transformToStringIfNotNull } from "./util/transform-to-string-if-not-null";
+export { transformToStringIfNotVoid } from "./util/transform-to-string-if-not-void";
 
 //#endregion
